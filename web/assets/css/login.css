@@ -1,0 +1,58 @@
+  * {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 100;
+  }
+  html, body{
+    height: 100%;
+  }
+  .grid {
+      height: 100%;
+  }
+  .ui.form input:not([type]), .ui.form input[type=text], .ui.form input[type=password]{
+      border-bottom: solid 2px #979797;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 0px;
+      width: 235px;
+  }
+  .ui.form input[type=text]:focus,.ui.form input[type=tel], .ui.form input[type=password]:focus{
+      border-radius: 0px;
+      width: 235px;
+  }
+  #botaoSubmit{
+    color:white;
+    background-color: #9288c8;
+    width: 277px;
+    height: 42.3px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .row{
+    margin:25px;
+  }
+  #rowLogo{
+    margin-top: 168px;
+    margin-bottom: 40px;
+  }
+  #resetSenha{
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    color: #747474;
+    margin-top: 30px;
+  }
+
+  .Person-Roxo, .Hand {
+    object-fit: contain;
+    position: relative;
+    top: 25px;
+    left:-15px;
+  }
+  .Person-Roxo{
+    margin-left: 10px;
+  }

@@ -1,0 +1,50 @@
+<style>
+  .bodyMenu {
+      height: 100%;
+      width: 230px;
+      position: fixed;
+      z-index: 1; /* Stay on top */
+      top: 0;
+      left: 0;
+      background-color: #6b6b6b;
+      overflow-x: hidden;
+      padding-top: 60px; /* Place content 60px from the top */
+      padding-left: 32px;
+  }
+
+  /* Menu links */
+  .bodyMenu a {
+      padding: 8px 8px 8px 0px;
+      text-decoration: none;
+      display: block;
+      font-size: 20px;
+      font-weight: 100;
+      color: #ffffff;
+      margin-bottom: 25px;
+  }
+
+  /* When you mouse over the navigation links */
+  .bodyMenu a:hover, .offcanvas a:focus{
+      font-weight: 300;
+  }
+
+  #logo{
+    margin-bottom: 50px;
+  }
+</style>
+
+<div class="bodyMenu">
+  <img  id="logo" src="/webfolioAdmin/assets/img/LogoFolio.png">
+  <a class="item" href="#">
+      início
+  </a>
+  <a class="item" href="#">
+      usuários
+  </a>
+  <a class="item" href="#">
+      portfólios
+  </a>
+  <a class="item" href="#">
+      turmas
+  </a>
+</div>
