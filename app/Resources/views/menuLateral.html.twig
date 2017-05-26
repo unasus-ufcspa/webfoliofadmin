@@ -12,22 +12,35 @@
       padding-left: 32px;
   }
 
-  /* Menu links */
-  .bodyMenu a {
-      padding: 8px 8px 8px 0px;
-      text-decoration: none;
-      display: block;
-      font-size: 20px;
-      font-weight: 100;
-      color: #ffffff;
-      margin-bottom: 25px;
-  }
-
   /* When you mouse over the navigation links */
   .bodyMenu a:hover, .offcanvas a:focus{
       font-weight: 300;
+      color: #FFF;
   }
 
+  .item, .subitem{
+    font-family: Roboto;
+    text-decoration: none;
+    display: block;
+    font-weight: 100;
+    color: #d8d8d8;
+    cursor: pointer;
+  }
+  /* Menu links */
+  .item {
+    padding: 8px 8px 8px 0px;
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  .subitem{
+    padding: 8px 8px 8px 25px;
+    margin-bottom: 13px;
+    font-size: 15px;
+    font-style: italic;
+  }
+  #submenuUsuario{
+    display: none;
+  }
   #logo{
     margin-bottom: 50px;
   }
@@ -38,9 +51,13 @@
   <a class="item" href="#">
       início
   </a>
-  <a class="item" href="#">
-      usuários
-  </a>
+  <a class="item" onclick="submenu()">usuários</a>
+  <div id="submenuUsuario">
+    <a href="#" class="subitem">administradores</a>
+    <a href="#" class="subitem">propositores</a>
+    <a href="#" class="subitem">tutores</a>
+    <a href="#" class="subitem">alunos</a>
+  </div>
   <a class="item" href="#">
       portfólios
   </a>
@@ -48,3 +65,14 @@
       turmas
   </a>
 </div>
+
+<script>
+  function submenu() {
+      var x = document.getElementById("submenuUsuario");
+      if (x.style.display == "none") {
+          x.style.display="block";
+      } else {
+          x.style.display="none";
+      }
+  }
+</script>
