@@ -48,20 +48,20 @@
 
 <div class="bodyMenu">
   <img  id="logo" src="/webfolioAdmin/assets/img/LogoFolio.png">
-  <a class="item" href="#">
+  <a class="item" href="#">                             <!--ToDo: adicionar link aqui-->
       início
   </a>
   <a class="item" onclick="submenu()">usuários</a>
   <div id="submenuUsuario">
-    <a href="#" class="subitem">administradores</a>
-    <a href="#" class="subitem">propositores</a>
-    <a href="#" class="subitem">tutores</a>
-    <a href="#" class="subitem">alunos</a>
+    <a href="#" class="subitem">administradores</a>     <!--ToDo: adicionar link aqui -->
+    <a href="#" class="subitem">propositores</a>        <!--ToDo: adicionar link aqui-->
+    <a href="#" class="subitem">tutores</a>             <!--ToDo: adicionar link aqui-->
+    <a href="#" class="subitem">alunos</a>              <!--ToDo: adicionar link aqui-->
   </div>
-  <a class="item" href="#">
+  <a class="item" href="#">                             <!--ToDo: adicionar link aqui-->
       portfólios
   </a>
-  <a class="item" href="#">
+  <a class="item" href="#">                             <!--ToDo: adicionar link aqui-->
       turmas
   </a>
 </div>
@@ -69,7 +69,7 @@
 <script>
   function submenu() {
       var x = document.getElementById("submenuUsuario");
-      if (x.style.display == "none") {
+      if (x.style.display != "block") {
           x.style.display="block";
       } else {
           x.style.display="none";

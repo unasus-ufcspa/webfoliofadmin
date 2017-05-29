@@ -1,0 +1,68 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+html, body{
+  height: 100%;
+}
+
+.grid {
+    height: 100%;
+}
+.row{
+  margin:25px;
+}
+
+.label{
+ font-size: 20px;
+ font-weight: bold;
+ text-align: center;
+ color: #747474;
+}
+
+.icone{
+  margin-top: 100px;
+  cursor: pointer;
+}
+
+#legendaUsuarios{
+  width: 50px;
+  height: 38px;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+  color: #747474;
+}
+
+#divSubmenuUsuarios{
+  width: 275px;
+  height: 345px;
+  background-color: #f0f0f0;
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#botaoSubmenu{
+  width: 156px;
+  height: 42.3px;
+  border-radius: 100px;
+  background-color: #9187c7;
+  margin-top: 35px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+#seta{
+  width: 34px;
+  height: 34px;
+  transform: rotate(-315deg);
+  background-color: #f0f0f0;
+  position: relative;
+  left: calc(50% - 17px);
+  margin-bottom: -20px;
+
+}
