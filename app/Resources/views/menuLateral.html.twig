@@ -44,6 +44,18 @@
   #logo{
     margin-bottom: 50px;
   }
+  .arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #d8d8d8;
+  float: right;
+  position: relative;
+  left:-85px;
+  top: 10px;
+  display: none;
+}
 </style>
 
 <div class="bodyMenu">
@@ -51,7 +63,7 @@
   <a class="item" href="#">                             <!--ToDo: adicionar link aqui-->
       início
   </a>
-  <a class="item" onclick="submenu()">usuários</a>
+  <a class="item" onclick="submenu()">usuários<div class="arrow"></div></a>
   <div id="submenuUsuario">
     <a href="#" class="subitem">administradores</a>     <!--ToDo: adicionar link aqui -->
     <a href="#" class="subitem">propositores</a>        <!--ToDo: adicionar link aqui-->
@@ -69,10 +81,13 @@
 <script>
   function submenu() {
       var x = document.getElementById("submenuUsuario");
+      var y = document.getElementsByClassName("arrow")[0];
       if (x.style.display != "block") {
           x.style.display="block";
+          y.style.display="block";
       } else {
           x.style.display="none";
+          y.style.display="none";
       }
   }
 </script>
