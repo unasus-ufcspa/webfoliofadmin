@@ -1,0 +1,83 @@
+AppBundle\Entity\TbNotice:
+    type: entity
+    table: tb_notice
+    indexes:
+        IDX_F5DA5C8E9B986D25:
+            columns:
+                - id_author
+        IDX_F5DA5C8E26D4F35D:
+            columns:
+                - id_destination
+        IDX_F5DA5C8E54FB8C02:
+            columns:
+                - id_activity_student
+    id:
+        idNotice:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_notice
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nmTable:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: nm_table
+        coIdTable:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: co_id_table
+        coIdTableSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: co_id_table_srv
+        dtNotice:
+            type: datetimetz
+            nullable: true
+            column: dt_notice
+        dtRead:
+            type: datetimetz
+            nullable: true
+            column: dt_read
+    manyToOne:
+        idAuthor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_author:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idDestination:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_destination:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idActivityStudent:
+            targetEntity: TbActivityStudent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_activity_student:
+                    referencedColumnName: id_activity_student
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

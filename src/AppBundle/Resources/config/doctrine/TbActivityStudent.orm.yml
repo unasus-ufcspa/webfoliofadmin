@@ -1,0 +1,61 @@
+AppBundle\Entity\TbActivityStudent:
+    type: entity
+    table: tb_activity_student
+    indexes:
+        fk_tb_activity_student_tb_activity1_idx:
+            columns:
+                - id_activity
+        fk_tb_activity_student_tb_portfolio_student1_idx:
+            columns:
+                - id_portfolio_student
+    uniqueConstraints:
+        tb_activity_student_id_activity_student_idx:
+            columns:
+                - id_activity_student
+    id:
+        idActivityStudent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_activity_student
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dtConclusion:
+            type: datetime
+            nullable: true
+            column: dt_conclusion
+        dtFirstSync:
+            type: datetime
+            nullable: true
+            column: dt_first_sync
+        idActivityStudentSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_activity_student_srv
+    manyToOne:
+        idPortfolioStudent:
+            targetEntity: TbPortfolioStudent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_portfolio_student:
+                    referencedColumnName: id_portfolio_student
+            orphanRemoval: false
+        idActivity:
+            targetEntity: TbActivity
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_activity:
+                    referencedColumnName: id_activity
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

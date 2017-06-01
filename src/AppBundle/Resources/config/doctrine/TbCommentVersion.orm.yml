@@ -1,0 +1,67 @@
+AppBundle\Entity\TbCommentVersion:
+    type: entity
+    table: tb_comment_version
+    indexes:
+        IDX_DF0D56A023040083:
+            columns:
+                - id_version_activity
+    id:
+        idCommentVersion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_comment_version
+            generator:
+                strategy: SEQUENCE
+    fields:
+        txReference:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: tx_reference
+        nuCommentActivity:
+            type: smallint
+            nullable: true
+            options:
+                unsigned: false
+            column: nu_comment_activity
+        nuInitialPos:
+            type: smallint
+            nullable: true
+            options:
+                unsigned: false
+            column: nu_initial_pos
+        nuSize:
+            type: smallint
+            nullable: true
+            options:
+                unsigned: false
+            column: nu_size
+        idCommentVersionSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_comment_version_srv
+        flSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: fl_srv
+    manyToOne:
+        idVersionActivity:
+            targetEntity: TbVersionActivity
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_version_activity:
+                    referencedColumnName: id_version_activity
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

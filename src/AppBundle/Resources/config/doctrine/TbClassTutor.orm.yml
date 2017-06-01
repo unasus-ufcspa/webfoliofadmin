@@ -1,0 +1,46 @@
+AppBundle\Entity\TbClassTutor:
+    type: entity
+    table: tb_class_tutor
+    indexes:
+        fk_tb_class_tutor_tb_class1_idx:
+            columns:
+                - id_class
+        IDX_166F396377820778:
+            columns:
+                - id_tutor
+    uniqueConstraints:
+        tb_class_tutor_id_class_tutor_idx:
+            columns:
+                - id_class_tutor
+    id:
+        idClassTutor:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_class_tutor
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idClass:
+            targetEntity: TbClass
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_class:
+                    referencedColumnName: id_class
+            orphanRemoval: false
+        idTutor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tutor:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

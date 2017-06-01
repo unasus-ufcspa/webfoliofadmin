@@ -1,0 +1,71 @@
+AppBundle\Entity\TbPortfolioStudent:
+    type: entity
+    table: tb_portfolio_student
+    indexes:
+        fk_tb_portfolio_student_tb_user1_idx:
+            columns:
+                - id_student
+        fk_tb_portfolio_student_tb_portfolio_class1_idx:
+            columns:
+                - id_portfolio_class
+        IDX_DBEA4E7177820778:
+            columns:
+                - id_tutor
+    uniqueConstraints:
+        tb_portfolio_student_id_portfolio_student_idx:
+            columns:
+                - id_portfolio_student
+    id:
+        idPortfolioStudent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_portfolio_student
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dtFirstSync:
+            type: datetime
+            nullable: true
+            column: dt_first_sync
+        nuPortfolioVersion:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+            column: nu_portfolio_version
+    manyToOne:
+        idPortfolioClass:
+            targetEntity: TbPortfolioClass
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_portfolio_class:
+                    referencedColumnName: id_portfolio_class
+            orphanRemoval: false
+        idStudent:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_student:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idTutor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tutor:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

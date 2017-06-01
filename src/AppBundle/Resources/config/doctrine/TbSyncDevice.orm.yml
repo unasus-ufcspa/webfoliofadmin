@@ -1,0 +1,54 @@
+AppBundle\Entity\TbSyncDevice:
+    type: entity
+    table: tb_sync_device
+    indexes:
+        IDX_C811064C2F180363:
+            columns:
+                - id_device
+        IDX_C811064CA70BE978:
+            columns:
+                - id_sync
+    id:
+        idSyncDevice:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_sync_device
+            generator:
+                strategy: SEQUENCE
+    fields:
+        tpSync:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: tp_sync
+        dtDevice:
+            type: datetime
+            nullable: true
+            column: dt_device
+    manyToOne:
+        idDevice:
+            targetEntity: TbDevice
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_device:
+                    referencedColumnName: id_device
+            orphanRemoval: false
+        idSync:
+            targetEntity: TbSync
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_sync:
+                    referencedColumnName: id_sync
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

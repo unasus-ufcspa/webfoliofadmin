@@ -1,0 +1,75 @@
+AppBundle\Entity\TbUser:
+    type: entity
+    table: tb_user
+    uniqueConstraints:
+        tb_user_id_user_idx:
+            columns:
+                - id_user
+    id:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_user
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nmUser:
+            type: string
+            nullable: true
+            length: 80
+            options:
+                fixed: false
+            column: nm_user
+        nuIdentification:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: nu_identification
+        dsEmail:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: ds_email
+        dsPassword:
+            type: string
+            nullable: true
+            length: 64
+            options:
+                fixed: false
+            column: ds_password
+        nuCellphone:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+            column: nu_cellphone
+        imPhoto:
+            type: blob
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: im_photo
+        flAdmin:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: fl_admin
+        flProposer:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: fl_proposer
+    lifecycleCallbacks: {  }

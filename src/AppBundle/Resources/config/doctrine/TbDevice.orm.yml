@@ -1,0 +1,56 @@
+AppBundle\Entity\TbDevice:
+    type: entity
+    table: tb_device
+    indexes:
+        IDX_B4F8AFC26B3CA4B:
+            columns:
+                - id_user
+    id:
+        idDevice:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_device
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dsHash:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+            column: ds_hash
+        tpDevice:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: tp_device
+        dtFirstLogin:
+            type: datetime
+            nullable: true
+            column: dt_first_login
+        dtBasicData:
+            type: datetime
+            nullable: true
+            column: dt_basic_data
+        dtLogout:
+            type: datetime
+            nullable: true
+            column: dt_logout
+    manyToOne:
+        idUser:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

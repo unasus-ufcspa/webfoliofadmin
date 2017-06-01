@@ -1,0 +1,88 @@
+AppBundle\Entity\TbComment:
+    type: entity
+    table: tb_comment
+    indexes:
+        fk_tb_comment_tb_activity_student1_idx:
+            columns:
+                - id_activity_student
+        IDX_EBA388CE9B986D25:
+            columns:
+                - id_author
+        IDX_EBA388CEA531725B:
+            columns:
+                - id_comment_version
+    uniqueConstraints:
+        tb_comment_id_comment_idx:
+            columns:
+                - id_comment
+    id:
+        idComment:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_comment
+            generator:
+                strategy: SEQUENCE
+    fields:
+        txComment:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: tx_comment
+        tpComment:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: tp_comment
+        idCommentSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_comment_srv
+        dtComment:
+            type: datetime
+            nullable: true
+            column: dt_comment
+        dtSend:
+            type: datetime
+            nullable: true
+            column: dt_send
+    manyToOne:
+        idActivityStudent:
+            targetEntity: TbActivityStudent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_activity_student:
+                    referencedColumnName: id_activity_student
+            orphanRemoval: false
+        idAuthor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_author:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idCommentVersion:
+            targetEntity: TbCommentVersion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_comment_version:
+                    referencedColumnName: id_comment_version
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

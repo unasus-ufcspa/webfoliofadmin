@@ -1,0 +1,61 @@
+AppBundle\Entity\TbAttachment:
+    type: entity
+    table: tb_attachment
+    indexes:
+        IDX_C0C33A289B986D25:
+            columns:
+                - id_author
+    uniqueConstraints:
+        tb_attachment_id_attachment_idx:
+            columns:
+                - id_attachment
+    id:
+        idAttachment:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_attachment
+            generator:
+                strategy: SEQUENCE
+    fields:
+        tpAttachment:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: tp_attachment
+        nmFile:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: nm_file
+        nmSystem:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: nm_system
+        idAttachmentSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_attachment_srv
+    manyToOne:
+        idAuthor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_author:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

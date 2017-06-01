@@ -1,0 +1,22 @@
+AppBundle\Entity\TbPolicy:
+    type: entity
+    table: tb_policy
+    id:
+        idPolicy:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_policy
+            generator:
+                strategy: SEQUENCE
+    fields:
+        txPolicy:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: tx_policy
+    lifecycleCallbacks: {  }

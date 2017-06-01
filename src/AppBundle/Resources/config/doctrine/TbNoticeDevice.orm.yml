@@ -1,0 +1,42 @@
+AppBundle\Entity\TbNoticeDevice:
+    type: entity
+    table: tb_notice_device
+    indexes:
+        IDX_218489436E3AF02F:
+            columns:
+                - id_notice
+        IDX_218489432F180363:
+            columns:
+                - id_device
+    id:
+        idNoticeDevice:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_notice_device
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idNotice:
+            targetEntity: TbNotice
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_notice:
+                    referencedColumnName: id_notice
+            orphanRemoval: false
+        idDevice:
+            targetEntity: TbDevice
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_device:
+                    referencedColumnName: id_device
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
