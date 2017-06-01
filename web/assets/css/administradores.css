@@ -1,0 +1,114 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+html, body{
+  height: 100%;
+}
+
+#delete{
+  height: 75px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-top: solid 2px #c6c6c6;
+}
+
+#iconDelete{
+  float:right;
+  position: relative;
+  right: 105px;
+  top: 20px;
+  cursor: pointer;
+}
+
+#header {
+  width: 100%;
+  height: 60px;
+  background-color: #9187c7;
+  border: solid 1px #979797;
+}
+
+#titulo{
+  position: absolute;
+  left:350px;
+  top: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+#pesquisa{
+  width: 100%;
+  height: 100px;
+  background-color: #ededed;
+}
+
+#iconLupa{
+  position: relative;
+  left:290px;
+  top: 35px;
+  width: 30px;
+  height: 31px;
+  cursor: pointer;
+}
+
+#inputPesquisa{
+  position: relative;
+  left:310px;
+  top: 23px;
+  outline: none;
+  border: none;
+  width: 60%;
+  height: 40px;
+  border-radius: 25px;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+@media screen and (max-width: 1500px){
+  #inputPesquisa{
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1200px){
+  #inputPesquisa{
+    width:30%;
+  }
+}
+#inputPesquisa::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 16px;
+  font-weight: 300;
+  color: #6b6b6b;
+}
+#inputPesquisa::-moz-placeholder { /* Firefox 19+ */
+  font-size: 18px;
+  font-weight: 300;
+  color: #6b6b6b;
+}
+#inputPesquisa:-ms-input-placeholder { /* IE 10+ */
+  font-size: 18px;
+  font-weight: 300;
+  color: #6b6b6b;
+}
+#inputPesquisa:-moz-placeholder { /* Firefox 18- */
+  font-size: 18px;
+  font-weight: 300;
+  color: #6b6b6b;
+}
+
+#addAdmin{
+  margin-right: 50px;
+  margin-top: 30px;
+  float: right;
+  width: 176px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: #9187c7;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
