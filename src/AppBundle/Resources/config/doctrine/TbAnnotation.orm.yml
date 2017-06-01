@@ -1,0 +1,43 @@
+AppBundle\Entity\TbAnnotation:
+    type: entity
+    table: tb_annotation
+    indexes:
+        IDX_97D8DD616B3CA4B:
+            columns:
+                - id_user
+    id:
+        idAnnotation:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_annotation
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dsAnnotation:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: ds_annotation
+        idAnnotationSrv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_annotation_srv
+    manyToOne:
+        idUser:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,54 @@
+AppBundle\Entity\TbGuest:
+    type: entity
+    table: tb_guest
+    indexes:
+        tb_visitor_id_class1_idx:
+            columns:
+                - id_class
+        tb_visitor_id_user1_idx:
+            columns:
+                - id_user
+    uniqueConstraints:
+        tb_guest_id_guest_idx:
+            columns:
+                - id_guest
+    id:
+        idGuest:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_guest
+            generator:
+                strategy: SEQUENCE
+    fields:
+        flComments:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: fl_comments
+    manyToOne:
+        idClass:
+            targetEntity: TbClass
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_class:
+                    referencedColumnName: id_class
+            orphanRemoval: false
+        idUser:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

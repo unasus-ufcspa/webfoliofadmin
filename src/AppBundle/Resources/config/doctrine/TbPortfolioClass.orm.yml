@@ -1,0 +1,46 @@
+AppBundle\Entity\TbPortfolioClass:
+    type: entity
+    table: tb_portfolio_class
+    indexes:
+        fk_tb_portfolio_class_id_class_idx:
+            columns:
+                - id_class
+        fk_tb_portfolio_class_id_portfolio_idx:
+            columns:
+                - id_portfolio
+    uniqueConstraints:
+        tb_portfolio_class_id_portfolio_class_idx:
+            columns:
+                - id_portfolio_class
+    id:
+        idPortfolioClass:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_portfolio_class
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idClass:
+            targetEntity: TbClass
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_class:
+                    referencedColumnName: id_class
+            orphanRemoval: false
+        idPortfolio:
+            targetEntity: TbPortfolio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_portfolio:
+                    referencedColumnName: id_portfolio
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

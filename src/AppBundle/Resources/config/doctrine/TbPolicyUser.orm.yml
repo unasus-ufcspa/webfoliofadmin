@@ -1,0 +1,50 @@
+AppBundle\Entity\TbPolicyUser:
+    type: entity
+    table: tb_policy_user
+    indexes:
+        IDX_29E270E1D64AB0FB:
+            columns:
+                - id_policy
+        IDX_29E270E16B3CA4B:
+            columns:
+                - id_user
+    id:
+        idPolicyUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_policy_user
+            generator:
+                strategy: SEQUENCE
+    fields:
+        flAccept:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: fl_accept
+    manyToOne:
+        idPolicy:
+            targetEntity: TbPolicy
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_policy:
+                    referencedColumnName: id_policy
+            orphanRemoval: false
+        idUser:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

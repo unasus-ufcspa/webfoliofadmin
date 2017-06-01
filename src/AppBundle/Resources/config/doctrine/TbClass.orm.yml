@@ -1,0 +1,63 @@
+AppBundle\Entity\TbClass:
+    type: entity
+    table: tb_class
+    indexes:
+        fk_tb_class_id_proposer1_idx:
+            columns:
+                - id_proposer
+    uniqueConstraints:
+        tb_class_id_class_idx:
+            columns:
+                - id_class
+    id:
+        idClass:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_class
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dsCode:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: ds_code
+        dsDescription:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: ds_description
+        stStatus:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: true
+            column: st_status
+        dtStart:
+            type: datetime
+            nullable: true
+            column: dt_start
+        dtFinish:
+            type: datetime
+            nullable: true
+            column: dt_finish
+    manyToOne:
+        idProposer:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_proposer:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

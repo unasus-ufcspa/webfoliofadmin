@@ -1,0 +1,46 @@
+AppBundle\Entity\TbClassStudent:
+    type: entity
+    table: tb_class_student
+    indexes:
+        fk_tb_class_student_tb_class1_idx:
+            columns:
+                - id_class
+        IDX_1E9B19F69BE0643:
+            columns:
+                - id_student
+    uniqueConstraints:
+        tb_class_student_id_class_student_idx:
+            columns:
+                - id_class_student
+    id:
+        idClassStudent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_class_student
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idClass:
+            targetEntity: TbClass
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_class:
+                    referencedColumnName: id_class
+            orphanRemoval: false
+        idStudent:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_student:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,40 @@
+AppBundle\Entity\TbPortfolio:
+    type: entity
+    table: tb_portfolio
+    uniqueConstraints:
+        tb_portfolio_id_portfolio_idx:
+            columns:
+                - id_portfolio
+    id:
+        idPortfolio:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_portfolio
+            generator:
+                strategy: SEQUENCE
+    fields:
+        dsTitle:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: ds_title
+        dsDescription:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: ds_description
+        nuPortfolioVersion:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+            column: nu_portfolio_version
+    lifecycleCallbacks: {  }

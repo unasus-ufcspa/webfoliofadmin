@@ -1,0 +1,42 @@
+AppBundle\Entity\TbAttachComment:
+    type: entity
+    table: tb_attach_comment
+    indexes:
+        IDX_3F5FECC3DCD5596C:
+            columns:
+                - id_attachment
+        IDX_3F5FECC34AE9FB1C:
+            columns:
+                - id_comment
+    id:
+        idAttachComment:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_attach_comment
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idAttachment:
+            targetEntity: TbAttachment
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_attachment:
+                    referencedColumnName: id_attachment
+            orphanRemoval: false
+        idComment:
+            targetEntity: TbComment
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_comment:
+                    referencedColumnName: id_comment
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
