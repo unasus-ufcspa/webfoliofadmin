@@ -18,37 +18,43 @@
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
-          <img src="../assets/img/person-branco.png" id="iconPessoa">
-          <span id="titulo">ADMINISTRADORES</span>
+            <img src="../assets/img/person-branco.png" id="iconPessoa">
+            <span id="titulo">ADMINISTRADORES</span>
         </div>
         <div id="pesquisa">
-          <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-          <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
-          <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
+            <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+            <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
+            <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
         </div>
         <div id="listaAdmins">
-          {% for i in 0..9 %} <!--Aqui vai o For pra listar usuários-->
-            {% if i is even %} <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-              <div class="itemAdminA">
-                <input type="checkbox" name="Administrador" value="Admin" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                <div class="nomeTutor">Tony Drake</div> <!--ToDo: adicionar nome do usuário-->
-                <div class="emailTutor">jaiden_rath@hotmail.com</div> <!--ToDo: adicionar email-->
-                <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco - Gabriel -->
-              </div>
-            {% else %}
-              <div class="itemAdminB">
-                <input type="checkbox" name="Administrador" value="Admin" id="{{i}}" class="checkboxAdmin">
-                <label for="{{i}}"></label>
-                <div class="nomeTutor">Mamie Webster</div>
-                <div class="emailTutor">rice_alfonzo@hotmail.com</div>
-                <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco-->
-              </div>
-            {% endif %}
-          {% endfor %}
+            {% set i=0%}
+            {% for administrador in administradores %} <!--Aqui vai o For pra listar usuários-->
+
+                {% if i is even %} <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+                    <div class="itemAdminA">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                        <div class="nomeTutor">{{administrador.nmUser}}</div> <!--ToDo: adicionar nome do usuário-->
+                        <div class="emailTutor">{{administrador.dsEmail}}</div> <!--ToDo: adicionar email-->
+                        <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco - Gabriel -->
+                    </div>
+                {% else %}
+                    <div class="itemAdminB">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
+                        <label for="{{i}}"></label>
+                        <div class="nomeTutor">{{administrador.nmUser}}</div>
+                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco-->
+                    </div>
+                {% endif %}
+                {% set i = i+1 %}
+            {% endfor %}
+            {%if administradores is empty %}
+                {#TO-DO: Exibir mensagem quando não houverem administradores cadastrados#}
+            {%endif%}
         </div>
         <div id="delete">
-          <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
         </div>
     </body>
 </html>
