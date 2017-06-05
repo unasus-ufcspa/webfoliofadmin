@@ -4,7 +4,7 @@ namespace Sensio\Bundle\FrameworkExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler\AddExpressionLanguageProvidersPass;
+use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AddExpressionLanguageProvidersPass;
 use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler\AddParamConverterPass;
 use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler\LegacyPass;
 

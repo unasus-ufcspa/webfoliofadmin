@@ -17,27 +17,27 @@
 
     </head>
     <body>
-        
+
         {%if erro != ''%}
             {{dump(erro)}} {#TO-DO: Melhorar a forma de exibir o erro #}
         {%endif%}
-        
-      
+
+
         <div class="ui middle aligned center aligned grid">
             <div class="eight wide column grid">
-                <div class="row" id="rowLogo">
-                    <h2 class="ui teal large image">
-                        <img src="/webfolio/assets/folio_logo_final.png"> <!-- ToDo: MUDAR ESSA IMAGEM -->
-                    </h2>
-                </div>
-                <div class="row">
-                    <form class="ui form" {{ form_start(form) }}
-                          <div class="row">
-                            <img src="/webfolioAdmin/assets/img/person-roxo.png" class="Person-Roxo">
-                            <div class="ui input">
-                                {{form_row(form.DsEmail, { 'attr' : { 'placeholder' : 'usuário'   }})}}
-                            </div>
-                        </div>
+              <div class="row" id="rowLogo">
+                <h2 class="ui centered large image">
+                    <img src="../assets/img/Logo.png" class="ui centered medium image">
+                </h2>
+              </div>
+              <div class="row">
+                <form class="ui form" {{ form_start(form) }}
+                  <div class="row">
+                    <img src="/webfolioAdmin/assets/img/person-roxo.png" class="Person-Roxo">
+                      <div class="ui input">
+                       {{form_row(form.DsEmail, { 'attr' : { 'placeholder' : 'usuário'   }})}}
+                      </div>
+                  </div>
 
                         <div class="row">
                             <img src="/webfolioAdmin/assets/img/hand.png" class="Hand">
