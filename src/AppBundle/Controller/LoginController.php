@@ -22,29 +22,32 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class LoginController extends Controller {
 
+    public $formUserLogin;
+    public $error = null;
+
     /**
      * @Route("/login", name="login")
      */
     public function login(Request $request) {
         if ($this->get('session')->get('idUser')) {
 
-            return $this->redirectToRoute('portfolios');
+            return $this->redirectToRoute('home');
         } else {
+
             $user = new TbUser();
 
-            $formUserLogin = $this->createFormBuilder($user)
+            $this->formUserLogin = $this->createFormBuilder($user)
                     ->add('DsEmail', TextType::class, array('label' => false))
                     ->add('DsPassword', PasswordType::class, array('label' => false))
-                    
                     ->getForm();
 
-            $formUserLogin->handleRequest($request);
+            $this->formUserLogin->handleRequest($request);
         }
-        if ($formUserLogin->isSubmitted() && $formUserLogin->isValid()) {
+        if ($this->formUserLogin->isSubmitted() && $this->formUserLogin->isValid()) {
             $this->autenticacao($user->getDsEmail(), $user->getDsPassword());
         }
         return $this->render('login.html.twig', array(
-                    'form' => $formUserLogin->createView(),
+                    'form' => $this->formUserLogin->createView(), 'erro' => $this->error
         ));
     }
 
@@ -54,17 +57,28 @@ class LoginController extends Controller {
         $usuarioAutenticado = $this->getDoctrine()
                 ->getRepository('AppBundle:TbUser')
                 ->findBy(array('dsEmail' => $email, 'dsPassword' => $senha));
-        
+
 
         if (!$usuarioAutenticado) {
-            throw $this->createNotFoundException(
-                    'No product found for id ' . $productId
-            );
-        }else{
-            $idUser = $usuarioAutenticado[0]->getIdUser();
-             $this->get('session')->set('idUser',$idUser);
-                 return $this->redirectToRoute('home');
+            $this->error = "usuario nao encontrado";
+        } else {
+            if ($usuarioAutenticado[0]->getFlAdmin() == 'T' || $usuarioAutenticado[0]->getFlProposer() == 'T') {
+                $idUser = $usuarioAutenticado[0]->getIdUser();
+                $this->get('session')->set('idUser', $idUser);
+                return $this->redirectToRoute('home');
+            } else {
+                $this->error = "usuario sem permissao";
+            }
         }
+    }
+
+    /**
+     * @Route("/logoutAdmin")
+     */
+    public function logoutAdminAction() {
+
+        $this->get('session')->invalidate();
+        return $this->redirectToRoute('login');
     }
 
 }

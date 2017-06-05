@@ -17,6 +17,12 @@
 
     </head>
     <body>
+
+        {%if erro != ''%}
+            {{dump(erro)}} {#TO-DO: Melhorar a forma de exibir o erro #}
+        {%endif%}
+
+
         <div class="ui middle aligned center aligned grid">
             <div class="eight wide column grid">
               <div class="row" id="rowLogo">
@@ -33,21 +39,21 @@
                       </div>
                   </div>
 
-                  <div class="row">
-                    <img src="/webfolioAdmin/assets/img/hand.png" class="Hand">
-                      <div class="ui input">
-                       {{form_row(form.DsPassword, { 'attr' : {'placeholder' : 'senha' }})}}
-                      </div>
-                  </div>
-                  <div class="row">
-                      <input class="ui medium button" id="botaoSubmit" type="submit" value="ENTRAR">
-                  </div>
-                {{ form_end(form) }}
-              </div>
+                        <div class="row">
+                            <img src="/webfolioAdmin/assets/img/hand.png" class="Hand">
+                            <div class="ui input">
+                                {{form_row(form.DsPassword, { 'attr' : {'placeholder' : 'senha' }})}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input class="ui medium button" id="botaoSubmit" type="submit" value="ENTRAR">
+                        </div>
+                        {{ form_end(form) }}
+                </div>
 
-              <div class="row">
-                <a id="resetSenha" href="#">esqueceu sua senha?</a>
-              </div>
+                <div class="row">
+                    <a id="resetSenha" href="#">esqueceu sua senha?</a>
+                </div>
             </div>
         </div>
     </body>
