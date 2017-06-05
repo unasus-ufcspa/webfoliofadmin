@@ -19,11 +19,38 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AdministradorController extends Controller {
 
+    public $error;
     public $logControle;
     public $em;
 
     public function __construct() {
         $this->logControle = new LogController();
+    }
+ 
+    //TO-DO: https://stackoverflow.com/questions/19375349/how-to-make-a-post-ajax-request-with-symfony-and-jquery
+    /**
+     * @Route("/adicionarAdministrador", name="adicionarAdministrador")
+     */
+    function adicionarAdministradorAction(Request $request) {
+        $user = new TbUser();
+
+        $formNovoAdmin = $this->createFormBuilder($user)
+                ->add('NmUser', TextType::class, array('label' => false))
+                ->add('DsEmail', EmailType::class, array('label' => false))
+                ->add('DsPassword', PasswordType::class, array('label' => false))
+                ->add('DsPasswordConfirm', PasswordType::class, array('label' => false))
+                ->add('NuCellphone', NumberType::class, array('label' => false))
+                ->add('NuIdentification', NumberType::class, array('label' => false))
+                ->getForm();
+
+        $formNovoAdmin->handleRequest($request);
+
+        if ($formNovoAdmin->isSubmitted() && $formNovoAdmin->isValid()) {
+            $this->cadastrarAdministrador($user->getDsEmail(), $user->getDsPassword());
+        }
+        return $this->render('administradores.html.twig', array(
+                    'form' => $formNovoAdmin, 'erro' => $this->error
+        ));
     }
 
     /**
@@ -34,7 +61,7 @@ class AdministradorController extends Controller {
 
             return $this->redirectToRoute('login');
         } else {
-            $this->em = $this->getDoctrine()->getEntityManager();
+            $this->em = $this->getDoctrine()->getManager();
             $arrayAdministradores = $this->gerarArrayAdministradores();
 
 

@@ -32,7 +32,7 @@
 
                 {% if i is even %} <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemAdminA">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeTutor">{{administrador.nmUser}}</div> <!--ToDo: adicionar nome do usuário-->
                         <div class="emailTutor">{{administrador.dsEmail}}</div> <!--ToDo: adicionar email-->
@@ -40,7 +40,7 @@
                     </div>
                 {% else %}
                     <div class="itemAdminB">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
+                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
                         <label for="{{i}}"></label>
                         <div class="nomeTutor">{{administrador.nmUser}}</div>
                         <div class="emailTutor">{{administrador.dsEmail}}</div>
@@ -54,7 +54,7 @@
             {%endif%}
         </div>
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item"> 
         </div>
     </body>
 </html>
