@@ -23,32 +23,121 @@
         </div>
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-          <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
+          <input type="text" placeholder="Procurar Administrador" id="inputPesquisa"> <!-- ToDo: implmentar pesquisa - Gabriel -->
           <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
         </div>
+
+        <div id="editarAdmin">
+          <div id="closeEditar" onclick="closeEditar();">+</div>
+          <div class="rowEditar">
+            <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+            <input type="text" placeholder="Nome" class="formEditar">
+          </div>
+
+          <div class="rowEditar">
+            <img src="../assets/img/arroba.png" class="iconesFormEditar">
+            <input type="text" placeholder="E-mail" class="formEditar">
+          </div>
+
+          <div class="rowEditar">
+            <img src="../assets/img/lock.png" class="iconesFormEditar">
+            <input type="password" placeholder="Senha" class="formEditar">
+          </div>
+
+          <div class="rowEditar">
+            <img src="../assets/img/lock.png" class="iconesFormEditar">
+            <input type="password" placeholder="Confirmar senha" class="formEditar">
+          </div>
+
+          <div id="colunaDireita">
+            <div class="rowEditar">
+              <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+              <input type="text" placeholder="Celular" class="formEditarRight">
+            </div>
+            <div class="rowEditar">
+              <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+              <input type="text" placeholder="RG" class="formEditarRight">
+            </div>
+            <div id="salvarEdicao">SALVAR</div>
+          </div>
+        </div>
+        <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
         <div id="listaAdmins">
-          {% for i in 0..9 %} <!--Aqui vai o For pra listar usuários-->
+          {% for i in 0..20 %} <!--Aqui vai o For pra listar usuários-->
             {% if i is even %} <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-              <div class="itemAdminA">
+              <div class="itemAdminA itemUsuario">
                 <input type="checkbox" name="Administrador" value="Admin" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                 <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                 <div class="nomeTutor">Tony Drake</div> <!--ToDo: adicionar nome do usuário-->
                 <div class="emailTutor">jaiden_rath@hotmail.com</div> <!--ToDo: adicionar email-->
-                <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco - Gabriel -->
+                <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador();">
               </div>
             {% else %}
-              <div class="itemAdminB">
+              <div class="itemAdminB itemUsuario">
                 <input type="checkbox" name="Administrador" value="Admin" id="{{i}}" class="checkboxAdmin">
                 <label for="{{i}}"></label>
                 <div class="nomeTutor">Mamie Webster</div>
                 <div class="emailTutor">rice_alfonzo@hotmail.com</div>
-                <div class="editarAdmin" title="Editar administrador"><img src="../assets/img/pencil-grey.png" class="iconEditar"></div> <!--ToDo: mudar o pincel para o branco-->
+                <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador();">
               </div>
             {% endif %}
           {% endfor %}
         </div>
+
         <div id="delete">
           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
         </div>
     </body>
 </html>
+<script>
+  function editarAdministrador(){
+    var edit = document.getElementById("editarAdmin");
+    edit.style.display="block";
+  }
+  function closeEditar(){
+    var edit = document.getElementById("editarAdmin");
+    edit.style.display="none";
+  }
+
+  //FUNÇÕES DA BUSCA
+      var fazerBusca = function(){
+        var txt = $('#inputPesquisa').val();
+        $('.nomeTutor').each(function(){
+           if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) == -1){
+               $(this).closest('.itemUsuario').hide();
+           }
+        });
+        var itens = document.getElementsByClassName("itemUsuario");
+        var flagItens= true;
+        for(var i=0; i<itens.length; i++){
+          if(itens[i].style.display!="none"){
+            flagItens=false;
+          }
+        }
+        if(flagItens){
+          document.getElementById("naoEncontrado").style.visibility="visible";
+        }else{
+          document.getElementById("naoEncontrado").style.visibility="hidden";
+        }
+      };
+
+      var limparBusca = function(){
+        $('.nomeTutor').each(function(){
+           $(this).closest('.itemUsuario').show();
+        });
+      };
+
+      $("#inputPesquisa").keydown(function(e) {
+          limparBusca();
+          fazerBusca();
+      });
+
+      $('#iconLupa').click(function(){
+        if($('#inputPesquisa').val()!=""){
+          limparBusca();
+          fazerBusca();
+        }else{
+          limparBusca();
+        }
+      });
+</script>
