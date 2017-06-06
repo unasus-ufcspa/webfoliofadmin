@@ -27,7 +27,7 @@
           <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
         </div>
 
-        <div id="editarAdmin">
+        <!-- <div id="editarAdmin">
           <div id="closeEditar" onclick="closeEditar();">+</div>
           <div class="rowEditar">
             <img src="../assets/img/person-branco.png" class="iconesFormEditar">
@@ -60,19 +60,18 @@
             </div>
             <div id="salvarEdicao">SALVAR</div>
           </div>
-        </div>
+        </div> -->
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
         <div id="listaAdmins">
-            {% set i=0%}
-            {% for administrador in administradores %} <!--Aqui vai o For pra listar usuários-->
-
-                {% if i is even %} <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+            {% set i=0 %}
+            {% for administrador in administradores %}
+                {% if i is even %}  <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemAdminA itemUsuario">
                         <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeTutor">{{administrador.nmUser}}</div> <!--ToDo: adicionar nome do usuário-->
-                        <div class="emailTutor">{{administrador.dsEmail}}</div> <!--ToDo: adicionar email-->
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador();">
+                        <div class="nomeTutor">{{administrador.nmUser}}</div>
+                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
                     </div>
                 {% else %}
                     <div class="itemAdminB itemUsuario">
@@ -80,29 +79,74 @@
                         <label for="{{i}}"></label>
                         <div class="nomeTutor">{{administrador.nmUser}}</div>
                         <div class="emailTutor">{{administrador.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador();">
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
                     </div>
                 {% endif %}
+                <div class="editarAdmin" id="{{i}}">
+                  <div class="ui grid">
+                      <div class="twelve wide column grid">
+                        <div class="rowEditar">
+                          <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                          <input type="text" placeholder="Nome" value="{{administrador.nmUser}}" class="formEditar">
+                        </div>
+
+                        <div class="rowEditar">
+                          <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                          <input type="text" placeholder="E-mail" value="{{administrador.dsEmail}}" class="formEditar">
+                        </div>
+
+                        <div class="rowEditar">
+                          <img src="../assets/img/lock.png" class="iconesFormEditar">
+                          <input type="password" placeholder="Senha" class="formEditar">
+                        </div>
+
+                        <div class="rowEditar">
+                          <img src="../assets/img/lock.png" class="iconesFormEditar">
+                          <input type="password" placeholder="Confirmar senha" class="formEditar">
+                        </div>
+                      </div>
+
+                      <div class="four wide column grid"  id="colunaDireita">
+                        <div class="rowEditar">
+                          <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                          <input type="text" placeholder="Celular" class="formEditarRight">
+                        </div>
+                        <div class="rowEditar">
+                          <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                          <input type="text" placeholder="RG" class="formEditarRight">
+                        </div>
+                        <div id="salvarEdicao">SALVAR</div>
+                        <div id="closeEditar" onclick="closeEditar({{i}});">+</div>
+                      </div>
+                  </div>
+                </div>
                 {% set i = i+1 %}
             {% endfor %}
+
             {%if administradores is empty %}
-                {#TO-DO: Exibir mensagem quando não houverem administradores cadastrados#}
+                <h2 id="adminEmpty">Não há administradores cadastrados</h2>
             {%endif%}
         </div>
 
         <div id="delete">
-           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item"> 
+           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
         </div>
     </body>
 </html>
 <script>
-  function editarAdministrador(){
-    var edit = document.getElementById("editarAdmin");
-    edit.style.display="block";
+  function editarAdministrador(id){
+    $(".editarAdmin").each(function(){
+       if($(this).attr('id') == id){
+           $(this).show();
+       }
+    });
   }
-  function closeEditar(){
-    var edit = document.getElementById("editarAdmin");
-    edit.style.display="none";
+  function closeEditar(id){
+    $(".editarAdmin").each(function(){
+       if($(this).attr('id') == id){
+           $(this).hide();
+       }
+    });
   }
 
   //FUNÇÕES DA BUSCA
