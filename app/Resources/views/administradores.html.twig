@@ -29,37 +29,40 @@
 
         <div id="editarAdmin">
           <div id="closeEditar" onclick="closeEditar();">+</div>
+           {{ form_start(formAdmin) }}
           <div class="rowEditar">
-            <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-            <input type="text" placeholder="Nome" class="formEditar">
+            <img src="../assets/img/person-branco.png" class="iconesFormEditar">   {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+         
           </div>
 
           <div class="rowEditar">
             <img src="../assets/img/arroba.png" class="iconesFormEditar">
-            <input type="text" placeholder="E-mail" class="formEditar">
+            {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}} {#TO-DO: precisa de ajustes para o formulario do controller#}
           </div>
 
           <div class="rowEditar">
             <img src="../assets/img/lock.png" class="iconesFormEditar">
-            <input type="password" placeholder="Senha" class="formEditar">
+              {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
           </div>
 
           <div class="rowEditar">
             <img src="../assets/img/lock.png" class="iconesFormEditar">
-            <input type="password" placeholder="Confirmar senha" class="formEditar">
+             {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
           </div>
 
           <div id="colunaDireita">
             <div class="rowEditar">
               <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-              <input type="text" placeholder="Celular" class="formEditarRight">
+                 {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+           
             </div>
             <div class="rowEditar">
               <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-              <input type="text" placeholder="RG" class="formEditarRight">
+                {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
             </div>
-            <div id="salvarEdicao">SALVAR</div>
+          <input type="submit" id="salvarEdicao" value="SALVAR" > {#to-do: Era um div mas precisa ser um input, recoloquei a class para o input mas precisa de ajustes#}
           </div>
+            {{ form_end(formAdmin) }}
         </div>
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
         <div id="listaAdmins">

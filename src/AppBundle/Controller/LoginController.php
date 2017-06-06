@@ -24,6 +24,11 @@ class LoginController extends Controller {
 
     public $formUserLogin;
     public $error = null;
+    public $logControle;
+
+    public function __construct() {
+        $this->logControle = new LogController();
+    }
 
     /**
      * @Route("/login", name="login")
@@ -44,7 +49,13 @@ class LoginController extends Controller {
             $this->formUserLogin->handleRequest($request);
         }
         if ($this->formUserLogin->isSubmitted() && $this->formUserLogin->isValid()) {
-            $this->autenticacao($user->getDsEmail(), $user->getDsPassword());
+            if ($this->autenticacao($user->getDsEmail(), $user->getDsPassword())) {
+                return $this->redirectToRoute('home');
+            } else {
+                return $this->render('login.html.twig', array(
+                            'form' => $this->formUserLogin->createView(), 'erro' => $this->error
+                ));
+            }
         }
         return $this->render('login.html.twig', array(
                     'form' => $this->formUserLogin->createView(), 'erro' => $this->error
@@ -60,14 +71,20 @@ class LoginController extends Controller {
 
 
         if (!$usuarioAutenticado) {
+            $this->logControle->logAdmin("Usuario nao encontrado");
             $this->error = "usuario nao encontrado";
+            return false;
         } else {
             if ($usuarioAutenticado[0]->getFlAdmin() == 'T' || $usuarioAutenticado[0]->getFlProposer() == 'T') {
                 $idUser = $usuarioAutenticado[0]->getIdUser();
                 $this->get('session')->set('idUser', $idUser);
-                return $this->redirectToRoute('home');
+                $this->logControle->logAdmin("Usuario logado");
+
+                return true;
             } else {
+                $this->logControle->logAdmin("Usuario sem permissao ");
                 $this->error = "usuario sem permissao";
+                return false;
             }
         }
     }
