@@ -154,7 +154,7 @@ label {
   display: none;
 }
 input:checked + label {
-  background-color: #9187c7;
+  background-color: #747474;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, .1) inset;
 }
 
@@ -295,6 +295,7 @@ input:checked + label {
     text-align: center;
     font-weight: 300;
     visibility: hidden;
+    z-index: -1;
 }
 
 #adminEmpty{
@@ -306,4 +307,70 @@ input:checked + label {
   margin-left: -90px;
   font-weight: 300;
   text-align: center;
+  z-index: -1;
+}
+
+.divAddAdmin{
+  width: 100%;
+  height: 400px;
+  background-color: #9187c7;
+  display: none;
+  margin-top: 15px;
+}
+
+#excluirUsuario{
+  width: 430px;
+  height: 240px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: solid 1px #979797;
+
+  position: fixed;
+  left: 50%;
+  top:50%;
+  margin-top: -120px;
+  margin-left: -215px;
+  display: none;
+}
+#titleExcluir{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #747474;
+  margin: 25px;
+}
+#mensagemExcluir{
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #747474;
+  line-height: 30px;
+}
+#optionExcluir{
+  width: 100%;
+  height: 75px;
+  display: flex;
+  position: absolute;
+  bottom:0px;
+}
+#cancelarExcluir{
+  width: 50%;
+  height: 100%;
+  border-bottom-left-radius: 25px;
+  background-color: #979797;
+  border: solid 1px #979797;
+}
+#confirmarExcluir{
+  width: 50%;
+  height: 100%;
+  border-bottom-right-radius: 25px;
+  background-color: #9187c7;
+  border: solid 1px #979797;
+}
+#confirmarExcluir, #cancelarExcluir{
+  padding-top: 27px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
 }
