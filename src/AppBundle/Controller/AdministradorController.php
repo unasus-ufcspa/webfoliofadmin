@@ -17,7 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Description of AdministradorController
@@ -29,7 +30,7 @@ class AdministradorController extends Controller {
     public $error;
     public $logControle;
     public $em;
-    public $formAdministrador;
+    public $formEditarAdministrador;
     public $objetoUser;
 
     public function __construct() {
@@ -41,17 +42,19 @@ class AdministradorController extends Controller {
     function gerarFormularioAdministrador() {
         $this->objetoUser = new TbUser();
 
-        $this->formAdministrador = $this->createFormBuilder($this->objetoUser)
-        ->add('NmUser', TextType::class, array('label' => false,  'data' => 'abcdef',))
-        ->add('DsEmail', EmailType::class, array('label' => false))
-        ->add('DsPassword', RepeatedType::class, array(
-        'type' => PasswordType::class,
-        'first_options' => array('label' => false),
-        'second_options' => array('label' => false),
-        ))
-        ->add('NuCellphone', NumberType::class, array('label' => false))
+        $formularioTbUser = $this->createFormBuilder($this->objetoUser)
+                ->add('NmUser', TextType::class, array('label' => false))
+                ->add('IdUser', HiddenType::class, array('label' => false))
+                ->add('DsEmail', EmailType::class, array('label' => false))
+                ->add('DsPassword', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'first_options' => array('label' => false),
+                    'second_options' => array('label' => false),
+                ))
+                ->add('NuCellphone', NumberType::class, array('label' => false))
                 ->add('NuIdentification', NumberType::class, array('label' => false))
                 ->getForm();
+        return $formularioTbUser;
     }
 
     /**
@@ -64,14 +67,39 @@ class AdministradorController extends Controller {
         } else {
             $this->em = $this->getDoctrine()->getManager();
             $arrayAdministradores = $this->gerarArrayAdministradores();
-            $this->gerarFormularioAdministrador();
-            $this->formAdministrador->handleRequest($request);
-            if ($this->formAdministrador->isSubmitted() && $this->formAdministrador->isValid()) {
-                //    $this->cadastrarAdministrador($this->objetoUser->getDsEmail(), $user->getDsPassword());
-                $this->logControle->logAdmin("hty");
+            $this->formEditarAdministrador = $this->gerarFormularioAdministrador();
+
+            $this->formEditarAdministrador->handleRequest($request);
+
+            if ($this->formEditarAdministrador->isSubmitted()) {
+
+                $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
+                $this->editarAdministrador($dadosFormEditarAdministrador);
+
+
+                return new JsonResponse(array('data' => 'this is a json response'));
             }
-            return $this->render('administradores.html.twig', array('administradores' => $arrayAdministradores, 'formAdmin' => $this->formAdministrador->createView()));
+
+
+            return $this->render('administradores.html.twig', array('administradores' => $arrayAdministradores, 'formAdmin' => $this->formEditarAdministrador->createView()));
         }
+    }
+
+    function editarAdministrador($dadosFormEditarAdministrador) {
+        $this->logControle->logAdmin(print_r($dadosFormEditarAdministrador, true));
+       
+                 $this->logControle->logAdmin($dadosFormEditarAdministrador->getNmUser());
+    }
+
+    /**
+     * @Route("/ajax", name="_recherche_ajax")
+     */
+    public function ajaxAction(Request $request) {
+        if ($request->isXMLHttpRequest()) {
+            return new JsonResponse(array('data' => 'this is a json response'));
+        }
+
+        return new Response('This is not ajax!', 400);
     }
 
     public function gerarArrayAdministradores() {
@@ -100,7 +128,7 @@ class AdministradorController extends Controller {
                 ->getQuery()
                 ->execute();
         $administradores = $queryBuilderAdmin->getQuery()->getArrayResult();
-        $this->logControle->logAdmin(print_r($administradores, true));
+
         return $administradores;
     }
 
