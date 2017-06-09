@@ -1,0 +1,62 @@
+
+  .bodyMenu {
+      height: 100%;
+      width: 230px;
+      position: fixed;
+      z-index: 1; /* Stay on top */
+      top: 0;
+      left: 0;
+      background-color: #6b6b6b;
+      overflow-x: hidden;
+      padding-top: 60px; /* Place content 60px from the top */
+      padding-left: 32px;
+      -webkit-user-select: none;
+      -moz-user-select: none;    
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  /* When you mouse over the navigation links */
+  .bodyMenu a:hover, .offcanvas a:focus{
+      font-weight: 300;
+      color: #FFF;
+  }
+
+  .item, .subitem{
+    font-family: Roboto;
+    text-decoration: none;
+    display: block;
+    font-weight: 100;
+    color: #d8d8d8;
+    cursor: pointer;
+  }
+  /* Menu links */
+  .item {
+    padding: 8px 8px 8px 0px;
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  .subitem{
+    padding: 8px 8px 8px 25px;
+    margin-bottom: 13px;
+    font-size: 15px;
+    font-style: italic;
+  }
+  #submenuUsuario{
+    display: none;
+  }
+  #logo{
+    margin-bottom: 50px;
+  }
+  .arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #d8d8d8;
+  float: right;
+  position: relative;
+  left:-85px;
+  top: 10px;
+  display: none;
+}

@@ -187,11 +187,13 @@ input:checked + label {
   cursor: pointer;
 }
 
-.editarAdmin{
+.divAddAdmin, .editarAdmin{
   width: 100%;
   height: 400px;
   background-color: #9187c7;
   display: none;
+}
+.editarAdmin{
   margin-top: 15px;
 }
 
@@ -265,12 +267,12 @@ input:checked + label {
   text-align: center;
   color: #ffffff;
   cursor: pointer;
-  padding-top: 20px;
   margin-left: 130px;
   margin-top: 75px;
+  background-color: #9187c7;
 }
 
-#closeEditar{
+#closeEditar, #closeAdd{
   position: absolute;
   top: 15px;
   right: 20px;
@@ -282,6 +284,10 @@ input:checked + label {
   color: #ffffff;
   font-weight: 900;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /*BUSCA*/
@@ -310,15 +316,7 @@ input:checked + label {
   z-index: -1;
 }
 
-.divAddAdmin{
-  width: 100%;
-  height: 400px;
-  background-color: #9187c7;
-  display: none;
-  margin-top: 15px;
-}
-
-#excluirUsuario{
+#excluirUsuario, #alertEditar{
   width: 430px;
   height: 240px;
   border-radius: 30px;
@@ -332,42 +330,41 @@ input:checked + label {
   margin-left: -215px;
   display: none;
 }
-#titleExcluir{
+#titleExcluir, #titleAlert{
   font-size: 20px;
   font-weight: bold;
   text-align: center;
   color: #747474;
   margin: 25px;
 }
-#mensagemExcluir{
+#mensagemExcluir, #mensagemAlert{
   font-size: 20px;
   font-weight: 400;
   text-align: center;
   color: #747474;
   line-height: 30px;
 }
-#optionExcluir{
+#optionExcluir, #optionAlert{
   width: 100%;
   height: 75px;
   display: flex;
   position: absolute;
   bottom:0px;
 }
-#cancelarExcluir{
+#cancelarExcluir, #confirmarExcluir, #sairEditar, #voltarEditar{
   width: 50%;
   height: 100%;
   border-bottom-left-radius: 25px;
   background-color: #979797;
   border: solid 1px #979797;
+  cursor: pointer;
 }
-#confirmarExcluir{
-  width: 50%;
-  height: 100%;
+#confirmarExcluir, #voltarEditar{
   border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 0px;
   background-color: #9187c7;
-  border: solid 1px #979797;
 }
-#confirmarExcluir, #cancelarExcluir{
+#confirmarExcluir, #cancelarExcluir, #voltarEditar, #sairEditar{
   padding-top: 27px;
   font-size: 20px;
   font-weight: bold;

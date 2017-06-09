@@ -1,71 +1,14 @@
-<style>
-  .bodyMenu {
-      height: 100%;
-      width: 230px;
-      position: fixed;
-      z-index: 1; /* Stay on top */
-      top: 0;
-      left: 0;
-      background-color: #6b6b6b;
-      overflow-x: hidden;
-      padding-top: 60px; /* Place content 60px from the top */
-      padding-left: 32px;
-  }
-
-  /* When you mouse over the navigation links */
-  .bodyMenu a:hover, .offcanvas a:focus{
-      font-weight: 300;
-      color: #FFF;
-  }
-
-  .item, .subitem{
-    font-family: Roboto;
-    text-decoration: none;
-    display: block;
-    font-weight: 100;
-    color: #d8d8d8;
-    cursor: pointer;
-  }
-  /* Menu links */
-  .item {
-    padding: 8px 8px 8px 0px;
-    font-size: 20px;
-    margin-bottom: 25px;
-  }
-  .subitem{
-    padding: 8px 8px 8px 25px;
-    margin-bottom: 13px;
-    font-size: 15px;
-    font-style: italic;
-  }
-  #submenuUsuario{
-    display: none;
-  }
-  #logo{
-    margin-bottom: 50px;
-  }
-  .arrow {
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #d8d8d8;
-  float: right;
-  position: relative;
-  left:-85px;
-  top: 10px;
-  display: none;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../assets/css/menuLateral.css">
+<script src="../assets/js/menuLateral.js"></script>
 
 <div class="bodyMenu">
   <img  id="logo" src="/webfolioAdmin/assets/img/LogoFolio.png">
-  <a class="item" href="{{web_dir}}home">                             
+  <a class="item" href="{{web_dir}}home">
       início
   </a>
   <a class="item" onclick="submenu()">usuários<div class="arrow"></div></a>
   <div id="submenuUsuario">
-    <a href="{{web_dir}}administradores" class="subitem">administradores</a>    
+    <a href="{{web_dir}}administradores" class="subitem">administradores</a>
     <a href="#" class="subitem">propositores</a>        <!--ToDo: adicionar link aqui-->
     <a href="#" class="subitem">tutores</a>             <!--ToDo: adicionar link aqui-->
     <a href="#" class="subitem">alunos</a>              <!--ToDo: adicionar link aqui-->
@@ -77,17 +20,3 @@
       turmas
   </a>
 </div>
-
-<script>
-  function submenu() {
-      var x = document.getElementById("submenuUsuario");
-      var y = document.getElementsByClassName("arrow")[0];
-      if (x.style.display != "block") {
-          x.style.display="block";
-          y.style.display="block";
-      } else {
-          x.style.display="none";
-          y.style.display="none";
-      }
-  }
-</script>
