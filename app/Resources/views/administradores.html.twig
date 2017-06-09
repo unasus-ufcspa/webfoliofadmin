@@ -22,6 +22,7 @@
             <span id="titulo">ADMINISTRADORES</span>
         </div>
         <div id="pesquisa">
+<<<<<<< HEAD
             <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
             <input type="text" placeholder="Procurar Administrador" id="inputPesquisa"> <!-- ToDo: implmentar pesquisa - Gabriel -->
             <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
@@ -54,6 +55,119 @@
                 <div class="ui grid">
 
                     <div class="twelve wide column grid">
+=======
+          <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+          <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
+          <div class="ui medium button" id="addAdmin" onclick="addAdmin();">NOVO ADMIN</div>
+        </div>
+
+        <!-- <div class="addAdmin">
+          {{ form_start(formAdmin) }}
+              <div class="ui grid">
+                  <div class="twelve wide column grid">
+                    <div class="rowEditar">
+                      <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                      {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                      <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                      {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
+                    </div>
+
+                    <div class="rowEditar">
+                      <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                      <img src="../assets/img/lock.png" class="iconesFormEditar">
+                      {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                    </div>
+                  </div>
+
+                  <div class="four wide column grid"  id="colunaDireita">
+                    <div class="rowEditar">
+                      <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                      {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                    </div>
+                    <div class="rowEditar">
+                      <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                      {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                    </div>
+                    <input type="submit" id="salvarEdicao" value="SALVAR" > {#to-do: Era um div mas precisa ser um input, recoloquei a class para o input mas precisa de ajustes#}
+                    <div id="closeEditar" onclick="closeAdd();">+</div>
+                  </div>
+              </div>
+          {{ form_end(formAdmin) }}
+        </div> -->
+
+
+        <div class="divAddAdmin">
+          <div class="ui grid">
+              <div class="twelve wide column grid">
+                <div class="rowEditar">
+                  <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                  <input type="text" placeholder="Nome" class="formEditar">
+                </div>
+
+                <div class="rowEditar">
+                  <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                  <input type="text" placeholder="E-mail" class="formEditar">
+                </div>
+
+                <div class="rowEditar">
+                  <img src="../assets/img/lock.png" class="iconesFormEditar">
+                  <input type="password" placeholder="Senha" class="formEditar">
+                </div>
+
+                <div class="rowEditar">
+                  <img src="../assets/img/lock.png" class="iconesFormEditar">
+                  <input type="password" placeholder="Confirmar senha" class="formEditar">
+                </div>
+              </div>
+
+              <div class="four wide column grid"  id="colunaDireita">
+                <div class="rowEditar">
+                  <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                  <input type="text" placeholder="Celular" class="formEditarRight">
+                </div>
+                <div class="rowEditar">
+                  <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                  <input type="text" placeholder="RG" class="formEditarRight">
+                </div>
+                <div id="salvarEdicao">SALVAR</div>
+                <div id="closeEditar" onclick="closeAddAdmin();">+</div>
+              </div>
+          </div>
+        </div>
+
+        <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
+
+        <div id="listaAdmins">
+            {% set i=0 %}
+            {% for administrador in administradores %}
+                {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+                    <div class="itemAdminA itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                        <div class="nomeTutor">{{administrador.nmUser}}</div>
+                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
+                    </div>
+                {% else %}
+                    <div class="itemAdminB itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
+                        <label for="{{i}}"></label>
+                        <div class="nomeTutor">{{administrador.nmUser}}</div>
+                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
+                    </div>
+                {% endif %}
+                <div class="editarAdmin" id="{{i}}">
+                  <div class="ui grid">
+                      <div class="twelve wide column grid">
+>>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
                         <div class="rowEditar">
                              {{form_row(formAdmin.IdUser, { 'attr' : { 'class': 'formEditar'}})}} 
                             <img src="../assets/img/person-branco.png" class="iconesFormEditar">
@@ -100,6 +214,7 @@
             {% set i = i+1 %}
         {% endfor %}
 
+<<<<<<< HEAD
 
         {%if administradores is empty %}
             <h2 id="adminEmpty">Não há administradores cadastrados</h2>
@@ -110,6 +225,24 @@
         <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
     </div>
 </body>
+=======
+            {%if administradores is empty %}
+                <h2 id="adminEmpty">Não há administradores cadastrados</h2>
+            {%endif%}
+        </div>
+        <div id="excluirUsuario">
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Tem certeza que deseja excluir esse administrador?</div>
+            <div id="optionExcluir">
+              <div id="cancelarExcluir">CANCELAR</div>
+              <div id="confirmarExcluir">SIM</div>
+            </div>
+        </div>
+        <div id="delete">
+           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+        </div>
+    </body>
+>>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
 </html>
 <script>
 $('form').on('submit', function(e) {
@@ -150,8 +283,17 @@ $('form').on('submit', function(e) {
         });
     }
 
+<<<<<<< HEAD
     //FUNÇÕES DA BUSCA
     var fazerBusca = function () {
+=======
+  //FUNÇÕES DA BUSCA
+      var fazerBusca = function(){
+        $(".editarAdmin").each(function(){
+            $(this).hide();
+        });
+        $(".divAddAdmin").hide();
+>>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
         var txt = $('#inputPesquisa').val();
         $('.nomeTutor').each(function () {
             if ($(this).text().toUpperCase().indexOf(txt.toUpperCase()) == -1) {
@@ -176,6 +318,7 @@ $('form').on('submit', function(e) {
         $('.nomeTutor').each(function () {
             $(this).closest('.itemUsuario').show();
         });
+<<<<<<< HEAD
     };
 
     $("#inputPesquisa").keydown(function (e) {
@@ -191,4 +334,29 @@ $('form').on('submit', function(e) {
             limparBusca();
         }
     });
+=======
+      };
+
+      $("#inputPesquisa").keydown(function(e) {
+          limparBusca();
+          fazerBusca();
+      });
+
+      $('#iconLupa').click(function(){
+        if($('#inputPesquisa').val()!=""){
+          limparBusca();
+          fazerBusca();
+        }else{
+          limparBusca();
+          document.getElementById("naoEncontrado").style.visibility="hidden";
+        }
+      });
+
+      function addAdmin(){
+        $(".divAddAdmin").show();
+      }
+      function closeAddAdmin(){
+        $(".divAddAdmin").hide();
+      }
+>>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
 </script>
