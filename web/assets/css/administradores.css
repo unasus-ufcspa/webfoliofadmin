@@ -265,12 +265,12 @@ input:checked + label {
   text-align: center;
   color: #ffffff;
   cursor: pointer;
-  padding-top: 20px;
   margin-left: 130px;
   margin-top: 75px;
+  background-color: #9187c7;
 }
 
-#closeEditar{
+#closeEditar, #closeAdd{
   position: absolute;
   top: 15px;
   right: 20px;
@@ -282,6 +282,10 @@ input:checked + label {
   color: #ffffff;
   font-weight: 900;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /*BUSCA*/
@@ -315,7 +319,6 @@ input:checked + label {
   height: 400px;
   background-color: #9187c7;
   display: none;
-  margin-top: 15px;
 }
 
 #excluirUsuario{

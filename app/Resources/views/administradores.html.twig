@@ -13,7 +13,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/administradores.css">
-
+        <script src="../assets/js/administradores.js"></script>
     </head>
     <body>
         {{ include('menuLateral.html.twig') }}
@@ -27,9 +27,9 @@
           <div class="ui medium button" id="addAdmin" onclick="addAdmin();">NOVO ADMIN</div>
         </div>
 
-        <!-- <div class="addAdmin">
+       <div id="formEditAdmin" style="display:none;">
           {{ form_start(formAdmin) }}
-              <div class="ui grid">
+              <div class="ui grid" >
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
                       <img src="../assets/img/person-branco.png" class="iconesFormEditar">
@@ -61,51 +61,53 @@
                       <img src="../assets/img/rg.png" class="iconesFormEditarRight">
                       {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
-                    <input type="submit" id="salvarEdicao" value="SALVAR" > {#to-do: Era um div mas precisa ser um input, recoloquei a class para o input mas precisa de ajustes#}
-                    <div id="closeEditar" onclick="closeAdd();">+</div>
+                    <input type="submit" id="salvarEdicao" value="SALVAR">
+                    <div id="closeEditar">+</div>
                   </div>
               </div>
           {{ form_end(formAdmin) }}
-        </div> -->
+        </div>
 
 
         <div class="divAddAdmin">
+          {{ form_start(formAdmin) }}
           <div class="ui grid">
               <div class="twelve wide column grid">
                 <div class="rowEditar">
                   <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                  <input type="text" placeholder="Nome" class="formEditar">
+                  {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
                 </div>
 
                 <div class="rowEditar">
                   <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                  <input type="text" placeholder="E-mail" class="formEditar">
+                  {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                 </div>
 
                 <div class="rowEditar">
                   <img src="../assets/img/lock.png" class="iconesFormEditar">
-                  <input type="password" placeholder="Senha" class="formEditar">
+                  {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                 </div>
 
                 <div class="rowEditar">
                   <img src="../assets/img/lock.png" class="iconesFormEditar">
-                  <input type="password" placeholder="Confirmar senha" class="formEditar">
+                  {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                 </div>
               </div>
 
               <div class="four wide column grid"  id="colunaDireita">
                 <div class="rowEditar">
                   <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                  <input type="text" placeholder="Celular" class="formEditarRight">
+                  {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                 </div>
                 <div class="rowEditar">
                   <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                  <input type="text" placeholder="RG" class="formEditarRight">
+                  {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                 </div>
-                <div id="salvarEdicao">SALVAR</div>
-                <div id="closeEditar" onclick="closeAddAdmin();">+</div>
+                <input type="submit" id="salvarEdicao" value="SALVAR" >
+                <div id="closeAdd" onclick="closeAddAdmin();">+</div>
               </div>
           </div>
+          {{ form_end(formAdmin) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -131,42 +133,6 @@
                     </div>
                 {% endif %}
                 <div class="editarAdmin" id="{{i}}">
-                  <div class="ui grid">
-                      <div class="twelve wide column grid">
-                        <div class="rowEditar">
-                          <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                          <input type="text" placeholder="Nome" value="{{administrador.nmUser}}" class="formEditar">
-                        </div>
-
-                        <div class="rowEditar">
-                          <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                          <input type="text" placeholder="E-mail" value="{{administrador.dsEmail}}" class="formEditar">
-                        </div>
-
-                        <div class="rowEditar">
-                          <img src="../assets/img/lock.png" class="iconesFormEditar">
-                          <input type="password" placeholder="Senha" class="formEditar">
-                        </div>
-
-                        <div class="rowEditar">
-                          <img src="../assets/img/lock.png" class="iconesFormEditar">
-                          <input type="password" placeholder="Confirmar senha" class="formEditar">
-                        </div>
-                      </div>
-
-                      <div class="four wide column grid"  id="colunaDireita">
-                        <div class="rowEditar">
-                          <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                          <input type="text" placeholder="Celular" class="formEditarRight">
-                        </div>
-                        <div class="rowEditar">
-                          <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                          <input type="text" placeholder="RG" class="formEditarRight">
-                        </div>
-                        <div id="salvarEdicao">SALVAR</div>
-                        <div id="closeEditar" onclick="closeEditar({{i}});">+</div>
-                      </div>
-                  </div>
                 </div>
                 {% set i = i+1 %}
             {% endfor %}
@@ -188,73 +154,4 @@
         </div>
     </body>
 </html>
-<script>
-  function editarAdministrador(id){
-    $(".editarAdmin").each(function(){
-       if($(this).attr('id') == id){
-           $(this).show();
-       }
-    });
-  }
-  function closeEditar(id){
-    $(".editarAdmin").each(function(){
-       if($(this).attr('id') == id){
-           $(this).hide();
-       }
-    });
-  }
-
-  //FUNÇÕES DA BUSCA
-      var fazerBusca = function(){
-        $(".editarAdmin").each(function(){
-            $(this).hide();
-        });
-        $(".divAddAdmin").hide();
-        var txt = $('#inputPesquisa').val();
-        $('.nomeTutor').each(function(){
-           if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) == -1){
-               $(this).closest('.itemUsuario').hide();
-           }
-        });
-        var itens = document.getElementsByClassName("itemUsuario");
-        var flagItens= true;
-        for(var i=0; i<itens.length; i++){
-          if(itens[i].style.display!="none"){
-            flagItens=false;
-          }
-        }
-        if(flagItens){
-          document.getElementById("naoEncontrado").style.visibility="visible";
-        }else{
-          document.getElementById("naoEncontrado").style.visibility="hidden";
-        }
-      };
-
-      var limparBusca = function(){
-        $('.nomeTutor').each(function(){
-           $(this).closest('.itemUsuario').show();
-        });
-      };
-
-      $("#inputPesquisa").keydown(function(e) {
-          limparBusca();
-          fazerBusca();
-      });
-
-      $('#iconLupa').click(function(){
-        if($('#inputPesquisa').val()!=""){
-          limparBusca();
-          fazerBusca();
-        }else{
-          limparBusca();
-          document.getElementById("naoEncontrado").style.visibility="hidden";
-        }
-      });
-
-      function addAdmin(){
-        $(".divAddAdmin").show();
-      }
-      function closeAddAdmin(){
-        $(".divAddAdmin").hide();
-      }
-</script>
+<script src="../assets/js/administradores.js"></script>
