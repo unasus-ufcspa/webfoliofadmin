@@ -1,6 +1,7 @@
 
-  function editarAdministrador(id){
+  function editarAdministrador(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser){
     //     ToDo: Perguntar se vai salvar as edições
+    //adicionar os parametros recebidos ao formulario 
     $(".editarAdmin").each(function(){
        if($(this).attr('id') == id){
            var $formulario = $("#formEditAdmin");
