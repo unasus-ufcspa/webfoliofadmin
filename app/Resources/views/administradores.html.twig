@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/administradores.css">
         <script src="../assets/js/administradores.js"></script>
     </head>
+
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
@@ -22,39 +23,6 @@
             <span id="titulo">ADMINISTRADORES</span>
         </div>
         <div id="pesquisa">
-            <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-            <input type="text" placeholder="Procurar Administrador" id="inputPesquisa"> <!-- ToDo: implmentar pesquisa - Gabriel -->
-            <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
-        </div>
-
-
-        {% set i=0 %}
-        {% for administrador in administradores %}
-
-            {% if i is even %}  <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-                <div class="itemAdminA itemUsuario">
-                    <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                    <label for="{{i}}"></label> <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                    <div class="nomeTutor">{{administrador.nmUser}}</div>
-                    <div class="emailTutor">{{administrador.dsEmail}}</div>
-                    <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
-                </div>
-            {% else %}
-                <div class="itemAdminB itemUsuario">
-                    <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
-                    <label for="{{i}}"></label>
-                    <div class="nomeTutor">{{administrador.nmUser}}</div>
-                    <div class="emailTutor">{{administrador.dsEmail}}</div>
-                    <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
-                </div>
-            {% endif %}
-              {{ form_start(formAdmin) }}
-            <div class="editarAdmin" id="{{i}}">
-              
-                <div class="ui grid">
-
-                    <div class="twelve wide column grid">
-
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
           <div class="ui medium button" id="addAdmin" onclick="addAdmin();">NOVO ADMIN</div>
@@ -165,68 +133,9 @@
                     </div>
                 {% endif %}
                 <div class="editarAdmin" id="{{i}}">
-
-                  <div class="ui grid">
-                      <div class="twelve wide column grid">
-
-                        <div class="rowEditar">
-                             {{form_row(formAdmin.IdUser, { 'attr' : { 'class': 'formEditar'}})}} 
-                            <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                            {{form_row(formAdmin.NmUser, { 'attr' : { 'class': 'formEditar'}})}} 
-
-
-                        </div>
-
-                        <div class="rowEditar">
-                            <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                            {{form_row(formAdmin.DsEmail, { 'attr' : { 'class': 'formEditar'}})}} 
-                        </div>
-
-                        <div class="rowEditar">
-                            <img src="../assets/img/lock.png" class="iconesFormEditar">
-                            {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'class': 'formEditar'}})}} 
-                        </div>
-
-                        <div class="rowEditar">
-                            <img src="../assets/img/lock.png" class="iconesFormEditar">
-                           {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'class': 'formEditar'}})}} 
-                        </div>
-                    </div>
-
-                    <div class="four wide column grid"  id="colunaDireita">
-                        <div class="rowEditar">
-                            <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                              {{form_row(formAdmin.NuCellphone, { 'attr' : { 'class': 'formEditarRight'}})}} 
-                          
-                        </div>
-                        <div class="rowEditar">
-                            <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                              {{form_row(formAdmin.NuIdentification, { 'attr' : { 'class': 'formEditarRight'}})}} 
-                        </div>
-                        <input id="salvarEdicao" value="SALVAR" type="submit">
-                        <div id="closeEditar" onclick="closeEditar({{i}});">+</div>
-                    </div>
-
-                  
-                        
-
                 </div>
-                {{ form_end(formAdmin) }}
-            </div>
-            {% set i = i+1 %}
-        {% endfor %}
-
-
-
-        {%if administradores is empty %}
-            <h2 id="adminEmpty">Não há administradores cadastrados</h2>
-        {%endif%}
-    </div>
-
-    <div id="delete">
-        <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
-    </div>
-</body>
+                {% set i = i+1 %}
+            {% endfor %}
 
             {%if administradores is empty %}
                 <h2 id="adminEmpty">Não há administradores cadastrados</h2>
@@ -237,7 +146,7 @@
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse administrador?</div>
             <div id="optionExcluir">
-              <div id="cancelarExcluir">CANCELAR</div>
+              <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
               <div id="confirmarExcluir">SIM</div>
             </div>
         </div>
@@ -246,132 +155,12 @@
             <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse administrador?</div>
             <div id="optionAlert">
               <div id="sairEditar">Sair</div>
-              <div id="voltarEditar">SIM</div>
+              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
             </div>
         </div>
         <div id="delete">
-           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser();">
         </div>
     </body>
->>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
 </html>
-<<<<<<< HEAD
-<script>
-$('form').on('submit', function(e) {
-    console.log("teste");
-    e.preventDefault();
-    var url = "{{ path('administradores') }}";
-    var formData = new FormData(this);
-
-     console.log(formData);
-        $.ajax({
-            type:       'POST',
-            url: url,
-            data: formData,
-            mimeType:"multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData:false,
-            success: function(data, textStatus, jqXHR){
-                 alert(textStatus);
-             },
-             error: function(jqXHR, textStatus, errorThrown){
-                 alert(textStatus);
-             }
-         });
-     });
-    function editarAdministrador(id) {
-        $(".editarAdmin").each(function () {
-            if ($(this).attr('id') == id) {
-                $(this).show();
-            }
-        });
-    }
-    function closeEditar(id) {
-        $(".editarAdmin").each(function () {
-            if ($(this).attr('id') == id) {
-                $(this).hide();
-            }
-        });
-    }
-
-<<<<<<< HEAD
-    //FUNÇÕES DA BUSCA
-    var fazerBusca = function () {
-=======
-  //FUNÇÕES DA BUSCA
-      var fazerBusca = function(){
-        $(".editarAdmin").each(function(){
-            $(this).hide();
-        });
-        $(".divAddAdmin").hide();
->>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
-        var txt = $('#inputPesquisa').val();
-        $('.nomeTutor').each(function () {
-            if ($(this).text().toUpperCase().indexOf(txt.toUpperCase()) == -1) {
-                $(this).closest('.itemUsuario').hide();
-            }
-        });
-        var itens = document.getElementsByClassName("itemUsuario");
-        var flagItens = true;
-        for (var i = 0; i < itens.length; i++) {
-            if (itens[i].style.display != "none") {
-                flagItens = false;
-            }
-        }
-        if (flagItens) {
-            document.getElementById("naoEncontrado").style.visibility = "visible";
-        } else {
-            document.getElementById("naoEncontrado").style.visibility = "hidden";
-        }
-    };
-
-    var limparBusca = function () {
-        $('.nomeTutor').each(function () {
-            $(this).closest('.itemUsuario').show();
-        });
-<<<<<<< HEAD
-    };
-
-    $("#inputPesquisa").keydown(function (e) {
-        limparBusca();
-        fazerBusca();
-    });
-
-    $('#iconLupa').click(function () {
-        if ($('#inputPesquisa').val() != "") {
-            limparBusca();
-            fazerBusca();
-        } else {
-            limparBusca();
-        }
-    });
-=======
-      };
-
-      $("#inputPesquisa").keydown(function(e) {
-          limparBusca();
-          fazerBusca();
-      });
-
-      $('#iconLupa').click(function(){
-        if($('#inputPesquisa').val()!=""){
-          limparBusca();
-          fazerBusca();
-        }else{
-          limparBusca();
-          document.getElementById("naoEncontrado").style.visibility="hidden";
-        }
-      });
-
-      function addAdmin(){
-        $(".divAddAdmin").show();
-      }
-      function closeAddAdmin(){
-        $(".divAddAdmin").hide();
-      }
->>>>>>> 3706dae6ed9429289508545e43cb7f39fbf60acc
-</script>
-=======
 <script src="../assets/js/administradores.js"></script>
->>>>>>> dc4215eb60e09c6869930e047b1a716ba6b9c534

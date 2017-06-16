@@ -1,29 +1,50 @@
-
+  var flagEditar=false;
+  var idAbrirEdicao;
   function editarAdministrador(id){
-    //     ToDo: Perguntar se vai salvar as edições
+    var idAberto;
     $(".editarAdmin").each(function(){
-       if($(this).attr('id') == id){
-           var $formulario = $("#formEditAdmin");
-          $('#closeEditar').click(function(){
-             closeEditar(id);
-          });
-           $(this).append( $formulario );
-           $formulario.css("display", "block");
-           $(this).show();
-       }else{
-         closeEditar($(this).attr('id'));
-       }
+      if($(this).is(':visible')){
+        flagEditar=true;
+        idAberto=$(this).attr('id');
+      }
     });
+    if(flagEditar==false){
+      openEditar(id);
+    }else{
+      idAbrirEdicao=id;
+      closeEditar(idAberto);
+    }
+  }
+
+  function openEditar(id){
+    var $formulario = $("#formEditAdmin");
+    $('#closeEditar').click(function(){
+       closeEditar(id);
+    });
+     $("#"+id+".editarAdmin").append( $formulario );
+     $formulario.css("display", "block");
+     $("#"+id+".editarAdmin").show();
   }
 
   function closeEditar(id){
-    $(".editarAdmin").each(function(){
-       if($(this).attr('id') == id){
-           $(this).hide();
-       }
+    $("#alertEditar").show();
+    $('#sairEditar').click(function(){
+       confirmarFechar(id);
     });
   }
 
+  function cancelarFechar(){
+    $("#alertEditar").hide();
+    flagEditar=true;
+  }
+  function confirmarFechar(id){
+    $("#alertEditar").hide();
+    $("#"+id+".editarAdmin").hide();
+    if(flagEditar){
+      flagEditar=false;
+      openEditar(idAbrirEdicao);
+    }
+  }
   //FUNÇÕES DA BUSCA
       var fazerBusca = function(){
         $(".editarAdmin").each(function(){
@@ -49,18 +70,15 @@
           document.getElementById("naoEncontrado").style.visibility="hidden";
         }
       };
-
       var limparBusca = function(){
         $('.nomeTutor').each(function(){
            $(this).closest('.itemUsuario').show();
         });
       };
-
       $("#inputPesquisa").keydown(function(e) {
           limparBusca();
           fazerBusca();
       });
-
       $('#iconLupa').click(function(){
         if($('#inputPesquisa').val()!=""){
           limparBusca();
@@ -77,4 +95,11 @@
       }
       function closeAddAdmin(){
         $(".divAddAdmin").hide();
+      }
+
+      function excluirUser(){
+        $("#excluirUsuario").show();
+      }
+      function cancelarExcluir(){
+        $("#excluirUsuario").hide();
       }
