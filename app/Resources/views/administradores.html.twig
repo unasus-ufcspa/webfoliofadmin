@@ -13,7 +13,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/administradores.css">
-        <script src="../assets/js/administradores.js"></script>
+
     </head>
 
     <body>
@@ -33,82 +33,85 @@
               <div class="ui grid" >
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
-                      <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                      {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                      <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                      {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
+                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
                     </div>
 
                     <div class="rowEditar">
-                      <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        <img src="../assets/img/lock.png" class="iconesFormEditar">
                         {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                      <img src="../assets/img/lock.png" class="iconesFormEditar">
-                      {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
-                  </div>
+                </div>
 
-                  <div class="four wide column grid"  id="colunaDireita">
+                <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
-                      <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                      {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
-                      <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                      {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
+                    {{form_row(formAdmin.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     <input type="submit" id="salvarEdicao" value="SALVAR">
                     <div id="closeEditar">+</div>
-                  </div>
-              </div>
-          {{ form_end(formAdmin) }}
+                </div>
+            </div>
+            {{ form_end(formAdmin) }}
         </div>
+
 
         <div class="divAddAdmin">
-          {{ form_start(formAdmin) }}
-          <div class="ui grid">
-              <div class="twelve wide column grid">
-                <div class="rowEditar">
-                  <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                  {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+            {{ form_start(formAdmin) }}
+            <div class="ui grid">
+                <div class="twelve wide column grid">
+                    <div class="rowEditar">
+                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                    </div>
                 </div>
 
-                <div class="rowEditar">
-                  <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                  {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                <div class="four wide column grid"  id="colunaDireita">
+                    <div class="rowEditar">
+                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                    </div>
+                    <div class="rowEditar">
+                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                    </div>
+                    <input type="submit" id="salvarEdicao" value="SALVAR" >
+                    <div id="closeAdd" onclick="closeAddAdmin();">+</div>
                 </div>
-
-                <div class="rowEditar">
-                  <img src="../assets/img/lock.png" class="iconesFormEditar">
-                  {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
-                </div>
-
-                <div class="rowEditar">
-                  <img src="../assets/img/lock.png" class="iconesFormEditar">
-                  {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
-                </div>
-              </div>
-
-              <div class="four wide column grid"  id="colunaDireita">
-                <div class="rowEditar">
-                  <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                  {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
-                </div>
-                <div class="rowEditar">
-                  <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                  {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                </div>
-                <input type="submit" id="salvarEdicao" value="SALVAR" >
-                <div id="closeAdd" onclick="closeAddAdmin();">+</div>
-              </div>
-          </div>
-          {{ form_end(formAdmin) }}
+            </div>
+            {{ form_end(formAdmin) }}
         </div>
+
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
@@ -121,7 +124,11 @@
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeTutor">{{administrador.nmUser}}</div>
                         <div class="emailTutor">{{administrador.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
+                              onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
+                                         "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
+                                         "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
+                                         "{{administrador.idUser}}")'>
                     </div>
                 {% else %}
                     <div class="itemAdminB itemUsuario">
@@ -129,7 +136,11 @@
                         <label for="{{i}}"></label>
                         <div class="nomeTutor">{{administrador.nmUser}}</div>
                         <div class="emailTutor">{{administrador.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" onclick="editarAdministrador({{i}});">
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
+                             onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
+                                         "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
+                                         "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
+                                         "{{administrador.idUser}}")'>
                     </div>
                 {% endif %}
                 <div class="editarAdmin" id="{{i}}">
@@ -141,7 +152,6 @@
                 <h2 id="adminEmpty">Não há administradores cadastrados</h2>
             {%endif%}
         </div>
-
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse administrador?</div>
@@ -154,13 +164,55 @@
             <div id="titleAlert">Descartar edição</div>
             <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse administrador?</div>
             <div id="optionAlert">
-              <div id="sairEditar">Sair</div>
-              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
+                <div id="sairEditar">Sair</div>
+                <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
             </div>
         </div>
         <div id="delete">
-           <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser();">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
         </div>
     </body>
+
+
 </html>
-<script src="../assets/js/administradores.js"></script>
+<script>
+
+    $('form').on('submit', function (e) {
+    console.log("teste");
+    e.preventDefault();
+    var url = "{{ path('administradores') }}";
+    var formData = new FormData(this);
+    console.log(formData);
+    $.ajax({
+    type: 'POST',
+            url: url,
+            data: formData,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+    })
+            .done(function (data) {
+            if (typeof data.message !== 'undefined') {
+            alert(data.message);
+            }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            if (typeof jqXHR.responseJSON !== 'undefined') {
+            if (jqXHR.responseJSON.hasOwnProperty('form')) {
+            $('#form_body').html(jqXHR.responseJSON.form);
+            }
+
+            $('.form_error').html(jqXHR.responseJSON.message);
+            } else {
+            console.log(errorThrown);
+            }
+
+            });
+    });</script>
+
+
+<script src="../assets/js/administradores.js">
+
+</script>

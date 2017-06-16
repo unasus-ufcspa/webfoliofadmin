@@ -1,6 +1,7 @@
-  var flagEditar=false;
-  var idAbrirEdicao;
-  function editarAdministrador(id){
+
+  function editarAdministrador(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser){
+    //     ToDo: Perguntar se vai salvar as edições
+    //adicionar os parametros recebidos ao formulario
     var idAberto;
     $(".editarAdmin").each(function(){
       if($(this).is(':visible')){
