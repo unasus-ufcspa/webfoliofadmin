@@ -1,8 +1,15 @@
-
+  var flagEditar=false;
+  var idAbrirEdicao;
+  var nomeForm;
+  var emailForm;
+  var rgForm;
+  var phoneForm;
   function editarAdministrador(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser){
-    //     ToDo: Perguntar se vai salvar as edições
-    //adicionar os parametros recebidos ao formulario
     var idAberto;
+    nomeForm=nmUser;
+    emailForm=dsEmail;
+    rgForm=nuIdentification;
+    phoneForm=nuCellphone;
     $(".editarAdmin").each(function(){
       if($(this).is(':visible')){
         flagEditar=true;
@@ -16,9 +23,12 @@
       closeEditar(idAberto);
     }
   }
-
   function openEditar(id){
     var $formulario = $("#formEditAdmin");
+    document.getElementById("form_NmUser").value = nomeForm;
+    document.getElementById("form_DsEmail").value = emailForm;
+    document.getElementById("form_NuIdentification").value = rgForm;
+    document.getElementById("form_NuCellphone").value = phoneForm;
     $('#closeEditar').click(function(){
        closeEditar(id);
     });
@@ -29,9 +39,8 @@
 
   function closeEditar(id){
     $("#alertEditar").show();
-    $('#sairEditar').click(function(){
-       confirmarFechar(id);
-    });
+    document.getElementById("sairEditar").onclick = "confirmarFechar("+id+")";
+    document.getElementById("sairEditar").onclick = function() { confirmarFechar(id); }
   }
 
   function cancelarFechar(){
@@ -98,6 +107,7 @@
         $(".divAddAdmin").hide();
       }
 
+  //EXCLUIR USER
       function excluirUser(){
         $("#excluirUsuario").show();
       }

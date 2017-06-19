@@ -172,47 +172,37 @@
             <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
         </div>
     </body>
-
-
 </html>
 <script>
 
     $('form').on('submit', function (e) {
-    console.log("teste");
-    e.preventDefault();
-    var url = "{{ path('administradores') }}";
-    var formData = new FormData(this);
-    console.log(formData);
-    $.ajax({
-    type: 'POST',
-            url: url,
-            data: formData,
-            mimeType: "multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData: false,
-    })
-            .done(function (data) {
-            if (typeof data.message !== 'undefined') {
-            alert(data.message);
-            }
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(errorThrown);
-            if (typeof jqXHR.responseJSON !== 'undefined') {
-            if (jqXHR.responseJSON.hasOwnProperty('form')) {
-            $('#form_body').html(jqXHR.responseJSON.form);
-            }
-
-            $('.form_error').html(jqXHR.responseJSON.message);
-            } else {
-            console.log(errorThrown);
-            }
-
-            });
+      e.preventDefault();
+      var url = "{{ path('administradores') }}";
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+                url: url,
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+      }).done(function (data) {
+                if (typeof data.message !== 'undefined') {
+                  alert(data.message);
+                }
+              })
+              .fail(function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                if (typeof jqXHR.responseJSON !== 'undefined') {
+                  if (jqXHR.responseJSON.hasOwnProperty('form')) {
+                    $('#form_body').html(jqXHR.responseJSON.form);
+                  }
+                  $('.form_error').html(jqXHR.responseJSON.message);
+                } else {
+                  console.log(errorThrown);
+                }
+              });
     });</script>
 
-
-<script src="../assets/js/administradores.js">
-
-</script>
+<script src="../assets/js/administradores.js"></script>
