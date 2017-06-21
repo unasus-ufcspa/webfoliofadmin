@@ -13,7 +13,6 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/administradores.css">
-
     </head>
 
     <body>
@@ -25,7 +24,7 @@
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
-          <div class="ui medium button" id="addAdmin" onclick="addAdmin();">NOVO ADMIN</div>
+          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO ADMIN</div>
         </div>
 
        <div id="formEditAdmin" style="display:none;">
@@ -71,7 +70,7 @@
         </div>
 
 
-        <div class="divAddAdmin">
+        <div class="divAddUser">
             {{ form_start(formAdmin) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
@@ -106,24 +105,23 @@
                         {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
-                    <div id="closeAdd" onclick="closeAddAdmin();">+</div>
+                    <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
             {{ form_end(formAdmin) }}
         </div>
 
-
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
-        <div id="listaAdmins">
+        <div id="listaUsers">
             {% set i=0 %}
             {% for administrador in administradores %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-                    <div class="itemAdminA itemUsuario">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                    <div class="itemUserA itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeTutor">{{administrador.nmUser}}</div>
-                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <div class="nomeUser">{{administrador.nmUser}}</div>
+                        <div class="emailUser">{{administrador.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
                               onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
                                          "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
@@ -131,11 +129,11 @@
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% else %}
-                    <div class="itemAdminB itemUsuario">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
+                    <div class="itemUserB itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
-                        <div class="nomeTutor">{{administrador.nmUser}}</div>
-                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <div class="nomeUser">{{administrador.nmUser}}</div>
+                        <div class="emailUser">{{administrador.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
                              onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
                                          "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
@@ -143,13 +141,13 @@
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% endif %}
-                <div class="editarAdmin" id="{{i}}">
+                <div class="editarUser" id="{{i}}">
                 </div>
                 {% set i = i+1 %}
             {% endfor %}
 
             {%if administradores is empty %}
-                <h2 id="adminEmpty">Não há administradores cadastrados</h2>
+                <h2 id="userEmpty">Não há administradores cadastrados</h2>
             {%endif%}
         </div>
         <div id="excluirUsuario">
@@ -164,17 +162,16 @@
             <div id="titleAlert">Descartar edição</div>
             <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse administrador?</div>
             <div id="optionAlert">
-                <div id="sairEditar">Sair</div>
-                <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
+              <div id="sairEditar">Sair</div>
+              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
             </div>
         </div>
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
         </div>
     </body>
 </html>
 <script>
-
     $('form').on('submit', function (e) {
       e.preventDefault();
       var url = "{{ path('administradores') }}";
