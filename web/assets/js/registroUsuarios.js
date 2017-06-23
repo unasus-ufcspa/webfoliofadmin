@@ -25,7 +25,7 @@
     }
   }
   function openEditar(id){
-    var $formulario = $("#formEditAdmin");
+    var $formulario = $("#formEditUser");
     document.getElementById("form_NmUser").value = nomeForm;
     document.getElementById("form_DsEmail").value = emailForm;
     document.getElementById("form_NuIdentification").value = rgForm;
