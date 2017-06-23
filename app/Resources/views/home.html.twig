@@ -19,7 +19,8 @@
         {{ include('menuLateral.html.twig') }}
 
         <div class="ui middle aligned center aligned grid">
-            <div class="three wide column grid">
+        <!-- <div class="ui grid"> -->
+            <div class="three wide column grid center aligned">
               <div class="row icone">
                 <img src="../assets/img/turma.svg">
               </div>
@@ -28,7 +29,7 @@
               </div>
             </div>
 
-            <div class="three wide column grid" >
+            <div class="three wide column grid center aligned" >
               <div class="row icone" onclick="submenuUsuario();">
                 <img src="../assets/img/user.svg">
               </div>
@@ -39,13 +40,13 @@
                 <span id="legendaUsuarios">alunos, tutores, preceptores ou administradores</span>
               </div>
 
-              <div class="row">
+              <div class="row" >
                 <div id="divSubmenuUsuarios">
                   <div id="seta"></div>
-                  <a href="{{web_dir}}administradores" >    
+                  <a href="{{web_dir}}administradores" >
                     <div class="ui medium button" id="botaoSubmenu">ADMIN</div>
                   </a>
-                  <a href="#">        <!--//TO DO: adicionar link aqui-->
+                  <a href="{{web_dir}}propositores">
                     <div class="ui medium button" id="botaoSubmenu">PROPOSITOR</div>
                   </a>
                   <a href="#">        <!--//TO DO: adicionar link aqui-->
@@ -58,7 +59,7 @@
               </div>
             </div>
 
-            <div class="three wide column grid">
+            <div class="three wide column grid center aligned">
               <div class="row icone">
                 <img src="../assets/img/portfolio.svg">
               </div>

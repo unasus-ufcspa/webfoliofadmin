@@ -17,5 +17,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @author Marilia
  */
 class PropositorController extends Controller {
-    //put your code here
+  /**
+   * @Route("/propositores", name="propositores")
+   */
+  function propositoresAction() {
+        return $this->render("propositores.html.twig");
+      }
 }

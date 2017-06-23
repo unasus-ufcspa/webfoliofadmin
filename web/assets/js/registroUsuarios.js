@@ -5,7 +5,7 @@
   var rgForm;
   var phoneForm;
 
-  function editarAdministrador(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser){
+  function editarUser(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser){
     var idAberto;
     nomeForm=nmUser;
     emailForm=dsEmail;
@@ -113,5 +113,5 @@
     $("#excluirUsuario").show();
   }
   function cancelarExcluir(){
-        $("#excluirUsuario").hide();
-      }
+    $("#excluirUsuario").hide();
+  }
