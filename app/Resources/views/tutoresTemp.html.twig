@@ -13,6 +13,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/registroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/Tutores.css">
     </head>
 
     <body>
@@ -27,7 +28,21 @@
           <div class="ui medium button" id="addUser" onclick="addUser();">NOVO TUTOR</div>
         </div>
 
-        
+        <div id="inputArquivos">
+          <form class="box" method="post" action="" enctype="multipart/form-data">
+            <div class="boxInput">
+              <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
+              <input class="selectArquivos" type="file" name="files[]" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
+              <span class="nomeArquivo"></span>
+              <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
+            </div>
+            <div class="boxUploading">Carregando&hellip;</div>
+            <div class="boxSuccess">Concluído!</div>
+            <div class="boxError">Erro!<span></span>.</div>
+          </form>
+      </div>
+
+
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
@@ -53,3 +68,27 @@
         </div>
     </body>
 </html>
+<script>
+
+var inputs = document.querySelectorAll( '.selectArquivos' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+		if( fileName ){
+			label.innerHTML = fileName;
+      $('.buttonCarregar').prop('disabled', false);
+		}else{
+			label.innerHTML = labelVal;
+    }
+	});
+});
+</script>

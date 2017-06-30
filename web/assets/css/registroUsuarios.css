@@ -125,7 +125,7 @@ input{
   background-color: #ededed;
 }
 
-label {
+.itemUsuario label {
   position: relative;
   left:290px;
   top: 35px;
@@ -139,7 +139,7 @@ label {
 .checkboxUser {
   display: none;
 }
-input:checked + label {
+input:checked +  label {
   background-color: #747474;
   box-shadow: 0px 0px 0px 5px #FFF inset;
 }
