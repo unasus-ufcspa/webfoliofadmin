@@ -11,6 +11,8 @@
            $(this).append( $formulario );
            $formulario.css("display", "block");
            $(this).show();
+//           $("input#form_NmUser").val(nmUser);
+            $("input#form__token").val(idUser);
        }else{
          closeEditar($(this).attr('id'));
        }

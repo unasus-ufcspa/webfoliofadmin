@@ -86,9 +86,18 @@ class AdministradorController extends Controller {
     }
 
     function editarAdministrador($dadosFormEditarAdministrador) {
+        $this->logControle->logAdmin("heheh");
         $this->logControle->logAdmin(print_r($dadosFormEditarAdministrador, true));
 
         $this->logControle->logAdmin($dadosFormEditarAdministrador->getNmUser());
+        
+//          $administradorEditavel = $this->getDoctrine()
+//                ->getRepository('AppBundle:TbUser')
+//                ->findBy(array('idUser' => $dadosFormEditarAdministrador['idUser']));
+
+          
+          
+          
     }
 
     public function gerarArrayAdministradores() {
