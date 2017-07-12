@@ -6,13 +6,21 @@ html, body{
   height: 100%;
 }
 
-.grid {
+.grid{
+    /*width: 80%;*/
     height: 100%;
 }
+/*.column{
+  margin-left: auto;
+  margin-right: auto;
+}*/
 .row{
   margin:25px;
 }
-
+/*.ui.middle.aligned.grid{
+  margin-left: auto;
+  margin-right: auto;
+}*/
 .label{
  font-size: 20px;
  font-weight: bold;
@@ -39,9 +47,9 @@ html, body{
   width: 275px;
   height: 345px;
   background-color: #f0f0f0;
-  display: none;
-  margin-left: auto;
-  margin-right: auto;
+  display:none;
+  margin-left: none;
+  margin-right: none;
 }
 
 #botaoSubmenu{
@@ -64,5 +72,4 @@ html, body{
   position: relative;
   left: calc(50% - 17px);
   margin-bottom: -20px;
-
 }

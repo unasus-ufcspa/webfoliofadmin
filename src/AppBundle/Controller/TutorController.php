@@ -11,16 +11,12 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-/**
- * Description of PropositorController
- *
- * @author Marilia
- */
-class PropositorController extends Controller {
+
+class TutorController extends Controller {
   /**
-   * @Route("/propositores", name="propositores")
+   * @Route("/tutores", name="tutores")
    */
-  function propositoresAction() {
-        return $this->render("propositores.html.twig");
+  function tutoresAction() {
+        return $this->render("tutoresTemp.html.twig");
       }
 }

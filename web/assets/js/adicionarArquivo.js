@@ -1,0 +1,62 @@
+var inputs = document.querySelectorAll( '.selectArquivos' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+		if( fileName ){
+			label.innerHTML = fileName;
+      $('.buttonCarregar').prop('disabled', false);
+		}else{
+			label.innerHTML = labelVal;
+    }
+	});
+});
+
+  function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    if(files.length>1){
+      output.push(files.length+" arquivos selecionados");
+    }else{
+       output.push(escape(files[0].name));
+    }
+    document.getElementsByClassName('nomeArquivo')[0].innerHTML = output.join('');
+    $('.buttonCarregar').prop('disabled', false);
+
+    $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
+    $('.box').css( "border", "dashed 3px rgba(255, 255, 255, 0.6)");
+  }
+
+  function handleDragOver(evt) {
+    $('.box').css( "background-color", "#9187c7");
+    $('.box').css( "border", "dashed 3px rgb(255, 255, 255)");
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
+
+  function handleDragLeave(evt) {
+    $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
+    $('.box').css( "border", "dashed 3px rgba(255, 255, 255, 0.6)");
+    evt.stopPropagation();
+    evt.preventDefault();
+  }
+
+  // Setup the dnd listeners.
+  var dropZone = document.getElementsByClassName('boxInput')[0];
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('dragleave', handleDragLeave, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);

@@ -12,9 +12,9 @@
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/administradores.css">
-
+        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/registroUsuarios.css">
     </head>
+
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
@@ -22,15 +22,15 @@
             <span id="titulo">ADMINISTRADORES</span>
         </div>
         <div id="pesquisa">
-            <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-            <input type="text" placeholder="Procurar Administrador" id="inputPesquisa"> <!-- ToDo: implmentar pesquisa - Gabriel -->
-            <div class="ui medium button" id="addAdmin">NOVO ADMIN</div>
+          <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+          <input type="text" placeholder="Procurar Administrador" id="inputPesquisa">
+          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO ADMIN</div>
         </div>
 
-        <div id="formEditAdmin" style="display:none;">
-            {{ form_start(formAdmin) }}
-            <div class="ui grid" >
-                <div class="twelve wide column grid">
+       <div id="formEditAdmin" style="display:none;">
+          {{ form_start(formAdmin) }}
+              <div class="ui grid" >
+                  <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
                         {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
@@ -70,7 +70,7 @@
         </div>
 
 
-        <div class="divAddAdmin">
+        <div class="divAddUser">
             {{ form_start(formAdmin) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
@@ -105,118 +105,101 @@
                         {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
-                    <div id="closeAdd" onclick="closeAddAdmin();">+</div>
+                    <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
             {{ form_end(formAdmin) }}
         </div>
 
-
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
-        <div id="listaAdmins">
+        <div id="listaUsers">
             {% set i=0 %}
             {% for administrador in administradores %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-                    <div class="itemAdminA itemUsuario">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                    <div class="itemUserA itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeTutor">{{administrador.nmUser}}</div>
-                        <div class="emailTutor">{{administrador.dsEmail}}</div>
+                        <div class="nomeUser">{{administrador.nmUser}}</div>
+                        <div class="emailUser">{{administrador.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
-                              onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
+                              onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
                                          "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
                                          "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% else %}
-                    <div class="itemAdminB itemUsuario">
-                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxAdmin">
+                    <div class="itemUserB itemUsuario">
+                        <input type="checkbox" name="Administrador" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
-                        <div class="nomeTutor">{{administrador.nmUser}}</div>
-                        <div class="emailTutor">{{administrador.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador" 
-                             onclick='editarAdministrador("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
+                        <div class="nomeUser">{{administrador.nmUser}}</div>
+                        <div class="emailUser">{{administrador.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
+                             onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
                                          "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
                                          "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% endif %}
-                <div class="editarAdmin" id="{{i}}">
-
-
+                <div class="editarUser" id="{{i}}">
                 </div>
                 {% set i = i+1 %}
             {% endfor %}
 
-
-
             {%if administradores is empty %}
-                <h2 id="adminEmpty">Não há administradores cadastrados</h2>
+                <h2 id="userEmpty">Não há administradores cadastrados</h2>
             {%endif%}
         </div>
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse administrador?</div>
             <div id="optionExcluir">
-                <div id="cancelarExcluir">CANCELAR</div>
-                <div id="confirmarExcluir">SIM</div>
+              <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
+              <div id="confirmarExcluir">SIM</div>
             </div>
         </div>
         <div id="alertEditar">
             <div id="titleAlert">Descartar edição</div>
             <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse administrador?</div>
             <div id="optionAlert">
-                <div id="sairEditar">Sair</div>
-                <div id="voltarEditar">SIM</div>
+              <div id="sairEditar">Sair</div>
+              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
             </div>
         </div>
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
         </div>
     </body>
-
-
 </html>
 <script>
-
     $('form').on('submit', function (e) {
-    console.log("teste");
-    e.preventDefault();
-    var url = "{{ path('administradores') }}";
-    var formData = new FormData(this);
-    console.log(formData);
-    $.ajax({
-    type: 'POST',
-            url: url,
-            data: formData,
-            mimeType: "multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData: false,
-    })
-            .done(function (data) {
-            if (typeof data.message !== 'undefined') {
-            alert(data.message);
-            }
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(errorThrown);
-            if (typeof jqXHR.responseJSON !== 'undefined') {
-            if (jqXHR.responseJSON.hasOwnProperty('form')) {
-            $('#form_body').html(jqXHR.responseJSON.form);
-            }
-
-            $('.form_error').html(jqXHR.responseJSON.message);
-            } else {
-            console.log(errorThrown);
-            }
-
-            });
+      e.preventDefault();
+      var url = "{{ path('administradores') }}";
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+                url: url,
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+      }).done(function (data) {
+                if (typeof data.message !== 'undefined') {
+                  alert(data.message);
+                }
+              })
+              .fail(function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                if (typeof jqXHR.responseJSON !== 'undefined') {
+                  if (jqXHR.responseJSON.hasOwnProperty('form')) {
+                    $('#form_body').html(jqXHR.responseJSON.form);
+                  }
+                  $('.form_error').html(jqXHR.responseJSON.message);
+                } else {
+                  console.log(errorThrown);
+                }
+              });
     });</script>
 
-
-<script src="../assets/js/administradores.js">
-
-</script>
-
+<script src="../assets/js/registroUsuarios.js"></script>

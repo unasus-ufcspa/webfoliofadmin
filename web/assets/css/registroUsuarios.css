@@ -15,7 +15,6 @@ html, body{
   overflow-x: hidden;
   border-top: solid 2px #c6c6c6;
 }
-
 #iconDelete{
   float:right;
   position: relative;
@@ -30,7 +29,6 @@ html, body{
   background-color: #9187c7;
   border: solid 1px #979797;
 }
-
 #titulo{
   position: absolute;
   left:350px;
@@ -46,12 +44,12 @@ html, body{
   width: 20px;
   height: 25px;
 }
+
 #pesquisa{
   width: 100%;
   height: 100px;
   background-color: #ededed;
 }
-
 #iconLupa{
   position: relative;
   left:290px;
@@ -60,7 +58,6 @@ html, body{
   height: 31px;
   cursor: pointer;
 }
-
 #inputPesquisa{
   position: relative;
   left:310px;
@@ -77,16 +74,6 @@ input{
   font-size: 16px;
   font-weight: 300;
   color: #6b6b6b;
-}
-@media screen and (max-width: 1500px){
-  #inputPesquisa{
-    width: 50%;
-  }
-}
-@media screen and (max-width: 1200px){
-  #inputPesquisa{
-    width:30%;
-  }
 }
 #inputPesquisa::-webkit-input-placeholder, .formEditar::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-size: 16px;
@@ -109,7 +96,7 @@ input{
   color: #6b6b6b;
 }
 
-#addAdmin{
+#addUser{
   margin-right: 50px;
   margin-top: 30px;
   float: right;
@@ -123,23 +110,22 @@ input{
   text-align: center;
 }
 
-#listaAdmins{
+#listaUsers{
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 100%;
   padding-bottom: 100px;
 }
-
-.itemAdminA, .itemAdminB{
+.itemUserA, .itemUserB{
   width: 100%;
   height: 100px;
   background-color: #f9f9f9;
 }
-.itemAdminB{
+.itemUserB{
   background-color: #ededed;
 }
 
-label {
+.itemUsuario label {
   position: relative;
   left:290px;
   top: 35px;
@@ -150,16 +136,15 @@ label {
   background-color: #ffffff;
   border: solid 3px #d8d8d8;
 }
-.checkboxAdmin {
+.checkboxUser {
   display: none;
 }
-input:checked + label {
+input:checked +  label {
   background-color: #747474;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, .1) inset;
+  box-shadow: 0px 0px 0px 5px #FFF inset;
 }
-
-.nomeTutor{
-  width: 20%;
+.nomeUser{
+  width: 40%;
   font-size: 20px;
   font-weight: bold;
   color: #747474;
@@ -167,7 +152,7 @@ input:checked + label {
   left:350px;
   top: -10px;
 }
-.emailTutor{
+.emailUser{
   width: 20%;
   position: relative;
   left:350px;
@@ -177,7 +162,6 @@ input:checked + label {
   line-height: 1.44;
   color: #7b7b7b;
 }
-
 .iconEditar{
   margin-right: 107px;
   margin-top: -62px;
@@ -187,13 +171,13 @@ input:checked + label {
   cursor: pointer;
 }
 
-.divAddAdmin, .editarAdmin{
+.divAddUser, .editarUser{
   width: 100%;
   height: 400px;
   background-color: #9187c7;
   display: none;
 }
-.editarAdmin{
+.editarUser{
   margin-top: 15px;
 }
 
@@ -205,58 +189,40 @@ input:checked + label {
   width: 30px;
   height: 35px;
 }
-
-.formEditar{
-  position: relative;
-  left:310px;
-  top: 20px;
-  outline: none;
-  border: none;
-  width: 70%;
-  height: 40px;
-  border-radius: 25px;
-  background-color: #ffffff;
-  padding: 20px;
-  overflow-x: hidden;
-}
-
-.rowEditar{
-  margin-bottom: 30px;
-}
-
 .iconesFormEditarRight{
   position: relative;
   top: 15px;
   left: -20px;
 }
 
+.rowEditar{
+  margin-bottom: 30px;
+}
+
+.formEditar{
+  position: relative;
+  left:310px;
+  top: 20px;
+  width: 70%;
+  overflow-x: hidden;
+}
 .formEditarRight{
-  outline: none;
-  border: none;
   width: 80%;
-  height: 40px;
-  border-radius: 25px;
-  background-color: #ffffff;
-  padding: 20px;
   margin-top: 19px;
 }
+.formEditarRight, .formEditar{
+  outline: none;
+  background-color: #ffffff;
+  padding: 20px;
+  height: 40px;
+  border-radius: 25px;
+  border: none;
+}
+
 #colunaDireita{
   width:500px;
   padding-top: 35px;
 }
-
-@media screen and (max-width: 1500px){
-  .formEditar{
-    width: 50%;
-  }
-  .formEditarRight{
-    width: 50%;
-  }
-  .iconesFormEditarRight{
-    margin-left: 40%;
-  }
-}
-
 #salvarEdicao{
   width: 170px;
   height: 65px;
@@ -290,30 +256,19 @@ input:checked + label {
   user-select: none;
 }
 
-/*BUSCA*/
-#naoEncontrado{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    color: #808080;
-    margin-left: -90px;
-    text-align: center;
-    font-weight: 300;
-    visibility: hidden;
-    z-index: -1;
-}
-
-#adminEmpty{
+#naoEncontrado, #userEmpty{
   position: absolute;
   top: 50%;
   left: 50%;
   width: 400px;
   color: #808080;
   margin-left: -90px;
-  font-weight: 300;
   text-align: center;
+  font-weight: 300;
   z-index: -1;
+}
+#naoEncontrado{
+  visibility: hidden;
 }
 
 #excluirUsuario, #alertEditar{
@@ -322,7 +277,6 @@ input:checked + label {
   border-radius: 30px;
   background-color: #ffffff;
   border: solid 1px #979797;
-
   position: fixed;
   left: 50%;
   top:50%;
@@ -358,16 +312,34 @@ input:checked + label {
   background-color: #979797;
   border: solid 1px #979797;
   cursor: pointer;
+  padding-top: 27px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
 }
 #confirmarExcluir, #voltarEditar{
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 0px;
   background-color: #9187c7;
 }
-#confirmarExcluir, #cancelarExcluir, #voltarEditar, #sairEditar{
-  padding-top: 27px;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
+
+@media screen and (max-width: 1500px){
+  .formEditar{
+    width: 50%;
+  }
+  .formEditarRight{
+    width: 65%;
+  }
+  #salvarEdicao{
+    margin-left: 40px;
+  }
+  #inputPesquisa{
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1200px){
+  #inputPesquisa{
+    width:30%;
+  }
 }
