@@ -11,18 +11,13 @@
         <script src="../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
         <script src="../semantic/dist/components/form.js"></script>
+        <script src="../semantic/dist/components/popup.js"></script>
+
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../assets/css/login.css">
-
     </head>
     <body>
-
-        {%if erro != ''%}
-            {{dump(erro)}} {#TO-DO: Melhorar a forma de exibir o erro #}
-        {%endif%}
-
-
         <div class="ui middle aligned center aligned grid">
             <div class="eight wide column grid">
               <div class="row" id="rowLogo">
@@ -38,17 +33,16 @@
                        {{form_row(form.DsEmail, { 'attr' : { 'placeholder' : 'usuário'   }})}}
                       </div>
                   </div>
-
-                        <div class="row">
-                            <img src="/webfolioAdmin/assets/img/hand.png" class="Hand">
-                            <div class="ui input">
-                                {{form_row(form.DsPassword, { 'attr' : {'placeholder' : 'senha' }})}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <input class="ui medium button" id="botaoSubmit" type="submit" value="ENTRAR">
-                        </div>
-                        {{ form_end(form) }}
+                  <div class="row">
+                      <img src="/webfolioAdmin/assets/img/hand.png" class="Hand">
+                      <div class="ui input">
+                          {{form_row(form.DsPassword, { 'attr' : {'placeholder' : 'senha' }})}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <input class="ui medium button" id="botaoSubmit" type="submit" value="ENTRAR">
+                  </div>
+                  {{ form_end(form) }}
                 </div>
 
                 <div class="row">
@@ -58,3 +52,9 @@
         </div>
     </body>
 </html>
+{% if erro != '' %}
+    <script>
+      var row = document.getElementsByClassName("row");
+      $(row[1]).append("<div class='ui medium error message'><div class='header'>" + "{{erro}}" + "</div></div>");
+    </script>
+{% endif %}

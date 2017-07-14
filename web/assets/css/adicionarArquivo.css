@@ -66,11 +66,18 @@ label img#iconArrastar{
 }
 .nomeArquivo{
   position: relative;
-  left: 40%;
+  left: 30%;
   top: 30px;
   font-size: 20px;
   color: #ffffff;
   font-weight: 300;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 35px;
+  max-width: 500px;
+  padding-left: 15px;
+
+
 }
 
 @media screen and (max-width: 1500px){
