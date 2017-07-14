@@ -28,6 +28,7 @@
         </div>
 
        <div id="formEditAdmin" style="display:none;">
+           
           {{ form_start(formAdmin) }}
               <div class="ui grid" >
                   <div class="twelve wide column grid">
@@ -71,44 +72,44 @@
 
 
         <div class="divAddUser">
-            {{ form_start(formAdmin) }}
+            {{ form_start(formAddAmin) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAmin.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAddAmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAddAmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
-            {{ form_end(formAdmin) }}
+            {{ form_end(formAddAmin) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>

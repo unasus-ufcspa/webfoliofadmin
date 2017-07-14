@@ -31,6 +31,7 @@ class AdministradorController extends Controller {
     public $logControle;
     public $em;
     public $formEditarAdministrador;
+    public $formAdicionarAdministrador;
     public $objetoUser;
 
     public function __construct() {
@@ -68,21 +69,39 @@ class AdministradorController extends Controller {
             $this->em = $this->getDoctrine()->getManager();
             $arrayAdministradores = $this->gerarArrayAdministradores();
             $this->formEditarAdministrador = $this->gerarFormularioAdministrador();
-
+            $this->formAdicionarAdministrador = $this->gerarFormularioAdministrador();
             $this->formEditarAdministrador->handleRequest($request);
+            $this->formAdicionarAdministrador->handleRequest($request);
 
-            if ($this->formEditarAdministrador->isSubmitted()) {
-
-                $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
-                $this->editarAdministrador($dadosFormEditarAdministrador);
-
-
+            if ($this->formAdicionarAdministrador->isSubmitted()) {
+                $dadosFormAdicionarAdministrador = $this->formAdicionarAdministrador->getData();
+                $this->adicionarAdministrador($dadosFormAdicionarAdministrador);
                 return new JsonResponse(array('data' => 'this is a json response'));
             }
-
-
-            return $this->render('administradores.html.twig', array('administradores' => $arrayAdministradores, 'formAdmin' => $this->formEditarAdministrador->createView()));
+            if ($this->formEditarAdministrador->isSubmitted()) {
+                $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
+                $this->editarAdministrador($dadosFormEditarAdministrador);
+                return new JsonResponse(array('data' => 'this is a json response'));
+            }
+            return $this->render('administradores.html.twig', array('administradores' => $arrayAdministradores, 'formAdmin' => $this->formEditarAdministrador->createView(), 'formAddAmin' => $this->formAdicionarAdministrador->createView()));
         }
+    }
+
+    function adicionarAdministrador($dadosFormAdicionarAdministrador) {
+        $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
+        $novoAdministrador = new TbUser();
+        //TO-DO: Validar as senhas, sha2565 e pegar dados pelo  Repeated Type 
+
+        $novoAdministrador->setDsEmail($dadosFormAdicionarAdministrador->getDsEmail());
+        $novoAdministrador->setNmUser($dadosFormAdicionarAdministrador->getNmUser());
+        $novoAdministrador->setDsPassword($dadosFormAdicionarAdministrador->getDsPassword());
+        $novoAdministrador->setNuCellphone($dadosFormAdicionarAdministrador->getNuCellphone());
+        $novoAdministrador->setNuIdentification($dadosFormAdicionarAdministrador->getNuIdentification());
+        $novoAdministrador->setFlAdmin('T');
+        $this->em->persist($novoAdministrador);
+        $idUser = $novoAdministrador->getIdUser();
+
+        $this->em->flush();
     }
 
     function editarAdministrador($dadosFormEditarAdministrador) {
@@ -90,14 +109,10 @@ class AdministradorController extends Controller {
         $this->logControle->logAdmin(print_r($dadosFormEditarAdministrador, true));
 
         $this->logControle->logAdmin($dadosFormEditarAdministrador->getNmUser());
-        
+
 //          $administradorEditavel = $this->getDoctrine()
 //                ->getRepository('AppBundle:TbUser')
 //                ->findBy(array('idUser' => $dadosFormEditarAdministrador['idUser']));
-
-          
-          
-          
     }
 
     public function gerarArrayAdministradores() {
