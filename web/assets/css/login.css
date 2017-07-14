@@ -56,3 +56,15 @@
   .Person-Roxo{
     margin-left: 10px;
   }
+
+  .ui.error.message{
+    background-color: rgba(146, 136, 200, 0.6);
+    color: white;
+    width: 277px;
+    box-shadow: none;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .ui.error.message .header{
+    color: white;
+  }

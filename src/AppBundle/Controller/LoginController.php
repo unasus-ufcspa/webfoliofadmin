@@ -72,7 +72,7 @@ class LoginController extends Controller {
 
         if (!$usuarioAutenticado) {
             $this->logControle->logAdmin("Usuario nao encontrado");
-            $this->error = "usuario nao encontrado";
+            $this->error = "Usuário ou senha inválidos!";
             return false;
         } else {
             if ($usuarioAutenticado[0]->getFlAdmin() == 'T' || $usuarioAutenticado[0]->getFlProposer() == 'T') {
@@ -83,7 +83,7 @@ class LoginController extends Controller {
                 return true;
             } else {
                 $this->logControle->logAdmin("Usuario sem permissao ");
-                $this->error = "usuario sem permissao";
+                $this->error = "Usuário sem permissão!";
                 return false;
             }
         }
