@@ -4,7 +4,6 @@ app:
 home:
     path:     /home
     defaults: { _controller: 'TelaPrincipal::home' }
-ajax:
-    path:     /ajax
-    defaults: { _controller: 'Administrador::ajax' }
-    
+administradores:
+    path:     /administradores
+    defaults: { _controller: 'Administrador::administradores' }       
