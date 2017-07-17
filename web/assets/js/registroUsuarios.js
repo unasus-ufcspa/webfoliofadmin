@@ -163,3 +163,33 @@ function confirmarExcluirExcecao(caminho) {
 
 }
    
+  
+
+  function validatePassword(){
+    var pass = document.getElementById("form_DsPassword_first");
+    var conf = document.getElementById("form_DsPassword_second");
+
+    if(pass.value != "" && pass.value == conf.value) {
+      flagValidate=true;
+      alert("Válido");
+      $(confirm).off( "focusout" );
+      return true;
+    }else{
+      $('#salvarEdicao').attr('disabled',true);
+      alert("Senhas diferentes");
+      return false;
+    }
+  }
+
+  var flagValidate= true;
+
+  function validateFunction(){
+    var confirm = document.getElementById("form_DsPassword_second");
+    if(flagValidate){
+      $( confirm ).focusout(function() {
+        validatePassword();
+      });
+      flagValidate=false;
+    }
+  }
+

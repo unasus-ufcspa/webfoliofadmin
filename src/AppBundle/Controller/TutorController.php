@@ -17,6 +17,6 @@ class TutorController extends Controller {
    * @Route("/tutores", name="tutores")
    */
   function tutoresAction() {
-        return $this->render("tutoresTemp.html.twig");
+        return $this->render("tutores.html.twig");
       }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Turma<!DOCTYPE html>
 <html>
     <head>
         <!-- Standard Meta -->
@@ -6,154 +6,139 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        <title>Tutores</title>
+        <title>Turmas</title>
 
         <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/registroUsuarios.css">
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/adicionarArquivo.css">
     </head>
 
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
             <img src="../assets/img/person-branco.png" id="iconPessoa">
-            <span id="titulo">TUTORES</span>
+            <span id="titulo">TURMAS</span>
         </div>
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-          <input type="text" placeholder="Procurar Tutor" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO TUTOR</div>
-        </div>
-
-        <div id="inputArquivos">
-          <form class="box" method="post" action="" enctype="multipart/form-data">
-            <div class="boxInput">
-              <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
-              <input class="selectArquivos" type="file" name="files[]" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
-              <div class="nomeArquivo"></div>
-              <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
-            </div>
-            <div class="boxUploading">Carregando&hellip;</div>
-            <div class="boxSuccess">Concluído!</div>
-            <div class="boxError">Erro!<span></span>.</div>
-          </form>
+          <input type="text" placeholder="Procurar Turma" id="inputPesquisa">
+          <div class="ui medium button" id="addUser" onclick="addUser();">NOVA TURMA</div>
         </div>
 
        <div id="formEditUser" style="display:none;">
-          {{ form_start(formTutor) }}
+          {{ form_start(formAdmin) }}
               <div class="ui grid" >
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formTutor.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
+                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
-                    {{form_row(formTutor.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                    {{form_row(formAdmin.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     <input type="submit" id="salvarEdicao" value="SALVAR">
                     <div id="closeEditar">+</div>
                 </div>
             </div>
-            {{ form_end(formTutor) }}
+            {{ form_end(formAdmin) }}
         </div>
 
 
         <div class="divAddUser">
-            {{ form_start(formTutor) }}
+            {{ form_start(formAdmin) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formTutor.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
-                <div class="four wide column grid" id="colunaDireita">
+                <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
-            {{ form_end(formTutor) }}
+            {{ form_end(formAdmin) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
         <div id="listaUsers">
             {% set i=0 %}
-            {% for tutor in tutores %}
+            {% for turma in turmas %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Turma" value="{{turma.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeUser">{{tutor.nmUser}}</div>
-                        <div class="emailUser">{{tutor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                              onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                         "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                         "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
-                                         "{{tutor.idUser}}")'>
+                        <div class="nomeUser">{{turma.nmUser}}</div>
+                        <div class="emailUser">{{turma.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma"
+                              onclick='editarUser("{{i}}", "{{turma.nmUser}}", "{{turma.dsEmail}}",
+                                         "{{turma.nuIdentification  is empty ? 'null' :  turma.nuIdentification}}",
+                                         "{{turma.nuCellphone is empty ? 'null' :  turma.nuCellphone}}",
+                                         "{{turma.idUser}}")'>
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser">
+                        <input type="checkbox" name="Turma" value="{{turma.idUser}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
-                        <div class="nomeUser">{{tutor.nmUser}}</div>
-                        <div class="emailUser">{{tutor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                             onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                         "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                         "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
-                                         "{{tutor.idUser}}")'>
+                        <div class="nomeUser">{{turma.nmUser}}</div>
+                        <div class="emailUser">{{turma.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma"
+                             onclick='editarUser("{{i}}", "{{turma.nmUser}}", "{{turma.dsEmail}}",
+                                         "{{turma.nuIdentification  is empty ? 'null' :  turma.nuIdentification}}",
+                                         "{{turma.nuCellphone is empty ? 'null' :  turma.nuCellphone}}",
+                                         "{{turma.idUser}}")'>
                     </div>
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
@@ -161,13 +146,13 @@
                 {% set i = i+1 %}
             {% endfor %}
 
-            {%if tutores is empty %}
-                <h2 id="userEmpty">Não há tutores cadastrados</h2>
+            {%if turmas is empty %}
+                <h2 id="userEmpty">Não há turmas cadastradas</h2>
             {%endif%}
         </div>
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Tem certeza que deseja excluir esse tutor?</div>
+            <div id="mensagemExcluir">Tem certeza que deseja excluir essa turma?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
               <div id="confirmarExcluir">SIM</div>
@@ -175,7 +160,7 @@
         </div>
         <div id="alertEditar">
             <div id="titleAlert">Descartar edição</div>
-            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse tutor?</div>
+            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar essa turma?</div>
             <div id="optionAlert">
               <div id="sairEditar">Sair</div>
               <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
@@ -187,4 +172,3 @@
     </body>
 </html>
 <script src="../assets/js/registroUsuarios.js"></script>
-<script src="../assets/js/adicionarArquivo.js"></script>
