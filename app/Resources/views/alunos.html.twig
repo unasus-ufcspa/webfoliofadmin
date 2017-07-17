@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        <title>Tutores</title>
+        <title>Alunos</title>
 
         <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
@@ -20,12 +20,12 @@
         {{ include('menuLateral.html.twig') }}
         <div id="header">
             <img src="../assets/img/person-branco.png" id="iconPessoa">
-            <span id="titulo">TUTORES</span>
+            <span id="titulo">ALUNOS</span>
         </div>
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-          <input type="text" placeholder="Procurar Tutor" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO TUTOR</div>
+          <input type="text" placeholder="Procurar aluno" id="inputPesquisa">
+          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO ALUNO</div>
         </div>
 
         <div id="inputArquivos">
@@ -43,117 +43,117 @@
         </div>
 
        <div id="formEditUser" style="display:none;">
-          {{ form_start(formTutor) }}
+          {{ form_start(formAluno) }}
               <div class="ui grid" >
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formTutor.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
+                        {{form_row(formAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
-                    {{form_row(formTutor.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                    {{form_row(formAluno.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     <input type="submit" id="salvarEdicao" value="SALVAR">
                     <div id="closeEditar">+</div>
                 </div>
             </div>
-            {{ form_end(formTutor) }}
+            {{ form_end(formAluno) }}
         </div>
 
 
         <div class="divAddUser">
-            {{ form_start(formTutor) }}
+            {{ form_start(formAluno) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formTutor.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formTutor.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid" id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formTutor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
-            {{ form_end(formTutor) }}
+            {{ form_end(formAluno) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
         <div id="listaUsers">
             {% set i=0 %}
-            {% for tutor in tutores %}
+            {% for aluno in alunos %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeUser">{{tutor.nmUser}}</div>
-                        <div class="emailUser">{{tutor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                              onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                         "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                         "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
-                                         "{{tutor.idUser}}")'>
+                        <div class="nomeUser">{{aluno.nmUser}}</div>
+                        <div class="emailUser">{{aluno.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
+                              onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                         "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
+                                         "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                         "{{aluno.idUser}}")'>
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser">
+                        <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
-                        <div class="nomeUser">{{tutor.nmUser}}</div>
-                        <div class="emailUser">{{tutor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                             onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                         "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                         "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
-                                         "{{tutor.idUser}}")'>
+                        <div class="nomeUser">{{aluno.nmUser}}</div>
+                        <div class="emailUser">{{aluno.dsEmail}}</div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
+                             onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                         "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
+                                         "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                         "{{aluno.idUser}}")'>
                     </div>
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
@@ -161,13 +161,13 @@
                 {% set i = i+1 %}
             {% endfor %}
 
-            {%if tutores is empty %}
-                <h2 id="userEmpty">Não há tutores cadastrados</h2>
+            {%if alunos is empty %}
+                <h2 id="userEmpty">Não há alunos cadastrados</h2>
             {%endif%}
         </div>
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Tem certeza que deseja excluir esse tutor?</div>
+            <div id="mensagemExcluir">Tem certeza que deseja excluir esse aluno?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
               <div id="confirmarExcluir">SIM</div>
@@ -175,7 +175,7 @@
         </div>
         <div id="alertEditar">
             <div id="titleAlert">Descartar edição</div>
-            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse tutor?</div>
+            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse aluno?</div>
             <div id="optionAlert">
               <div id="sairEditar">Sair</div>
               <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
