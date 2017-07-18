@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use AppBundle\Controller\UsuarioController;
 
 /**
  * Description of AdministradorController
@@ -38,21 +39,6 @@ class AdministradorController extends Controller {
         $this->logControle = new LogController();
     }
 
-    function gerarFormularioAdministrador($nomeFormulario) {
-
-        $formularioTbUser = $this->get('form.factory')
-                ->createNamedBuilder($nomeFormulario, FormType::class)
-                ->add('NmUser', TextType::class, array('label' => false))
-                ->add('IdUser', HiddenType::class, array('label' => false))
-                ->add('DsEmail', EmailType::class, array('label' => false))
-                ->add('DsPassword', PasswordType::class, array('label' => false))
-                ->add('DsPasswordConfirm', PasswordType::class, array('label' => false))
-                ->add('NuCellphone', NumberType::class, array('label' => false))
-                ->add('NuIdentification', NumberType::class, array('label' => false))
-                ->getForm();
-        return $formularioTbUser;
-    }
-
     /**
      * @Route("/administradores")
      */
@@ -62,9 +48,10 @@ class AdministradorController extends Controller {
             return $this->redirectToRoute('login');
         } else {
             $this->em = $this->getDoctrine()->getManager();
+
             $arrayAdministradores = $this->gerarArrayAdministradores();
-            $this->formEditarAdministrador = $this->gerarFormularioAdministrador("editar");
-            $this->formAdicionarAdministrador = $this->gerarFormularioAdministrador("adicionar");
+            $this->formEditarAdministrador = UsuarioController::gerarFormulario("editar");
+            $this->formAdicionarAdministrador = UsuarioController::gerarFormulario("adicionar");
             $this->formEditarAdministrador->handleRequest($request);
             $this->formAdicionarAdministrador->handleRequest($request);
 
@@ -192,6 +179,34 @@ class AdministradorController extends Controller {
             $retornoRequest = array(
                 "sucesso" => false,
                 "usuariosExcecao" => NULL
+            );
+        }
+        return new JsonResponse($retornoRequest);
+    }
+
+    function desativarAdministradorExcecao(Request $request) {
+        $this->em = $this->getDoctrine()->getEntityManager();
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+            $this->logControle->logAdmin("desativar admnistradores : " . print_r($data, true));
+            foreach ($data['arrayAdministradoresDesativar'] as $idsAdministradoresDesativar) {
+                $this->em = $this->getDoctrine()->resetManager();
+                $this->logControle->logAdmin("desativar  : " . print_r($idsAdministradoresDesativar, true));
+
+                $objetoUsuario = $this->em->getRepository('AppBundle:TbUser')
+                        ->findOneBy(array('idUser' => $idsAdministradoresDesativar));
+                if ($objetoUsuario != null) {
+                    $objetoUsuario->setFlAdmin('F');
+                    $this->em->flush();
+                }
+            }
+            $retornoRequest = array(
+                "sucesso" => true
+            );
+        } else {
+            $retornoRequest = array(
+                "sucesso" => false
             );
         }
         return new JsonResponse($retornoRequest);

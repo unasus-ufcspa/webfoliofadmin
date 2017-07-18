@@ -119,6 +119,7 @@ function excluirUser() {
 function cancelarExcluir() {
     $("#excluirUsuario").hide();
 }
+
 function confirmarExcluir(caminho) {
     $("#excluirUsuario").hide();
     var checkbox = document.getElementsByName('Administrador[]');
@@ -148,6 +149,7 @@ function confirmarExcluir(caminho) {
             console.log(response);
             if (response.usuariosExcecao.length > 0) {
                 console.log(response.usuariosExcecao);
+                
                 //TO-DO: exibir caixa de confirmação
                 //Um dos usuarios para deleção não pode ser excluido, pois esta relacionado à outros perfis. Você pode deletar apenas o perfil de administrador deste usuário.  
                 //Sim / Cancelar.
@@ -160,7 +162,19 @@ function confirmarExcluir(caminho) {
 }
 
 function confirmarExcluirExcecao(caminho) {
-
+     $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'desativarAdministradorExcecao',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+        }
+    });
 }
    
   
