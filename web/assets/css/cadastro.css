@@ -1,0 +1,50 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+html, body{
+  height: 100%;
+}
+
+.menuIcones{
+  position: fixed;
+  top: 70px;
+  left:50%;
+  width:700px;
+  height: 100px;
+  /*border: 1px pink dashed;*/
+  margin-left: -465px;
+}
+
+.line{
+  width: 575px;
+  height: 2px;
+  border: solid 1px #979797;
+  position: relative;
+  left: 50%;
+  top:50%;
+  margin-left: -287.5px;
+}
+
+.circle{
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  background-color: #9187c7;
+  border-radius: 50%;
+  position: relative;
+  top:50%;
+  margin-top: -45px;
+}
+
+.cadastroTurma{
+  position: fixed;
+  top: 300px;
+  left:50%;
+  width:1100px;
+  height: 500px;
+  border: 1px pink dashed;
+  margin-left: -615px;
+  /*margin-left: -550px;*/
+
+}
