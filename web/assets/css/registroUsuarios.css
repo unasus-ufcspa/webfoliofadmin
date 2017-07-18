@@ -271,7 +271,7 @@ input:checked +  label {
   visibility: hidden;
 }
 
-#excluirUsuario, #alertEditar{
+#excluirUsuario, #alertEditar, #alertExcluirUsuario{
   width: 430px;
   height: 240px;
   border-radius: 30px;
@@ -283,6 +283,12 @@ input:checked +  label {
   margin-top: -120px;
   margin-left: -215px;
   display: none;
+}
+#alertExcluirUsuario{
+  width: 470px;
+  margin-left: -235px;
+  height: 270px;
+  margin-top: -135px;
 }
 #titleExcluir, #titleAlert{
   font-size: 20px;
@@ -305,7 +311,7 @@ input:checked +  label {
   position: absolute;
   bottom:0px;
 }
-#cancelarExcluir, #confirmarExcluir, #sairEditar, #voltarEditar{
+#cancelarExcluir, #confirmarExcluir, #sairEditar, #voltarEditar, #alertCancelarExcluir, #alertConfirmarExcluir{
   width: 50%;
   height: 100%;
   border-bottom-left-radius: 25px;
@@ -318,7 +324,7 @@ input:checked +  label {
   text-align: center;
   color: #ffffff;
 }
-#confirmarExcluir, #voltarEditar{
+#confirmarExcluir, #voltarEditar, #alertConfirmarExcluir{
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 0px;
   background-color: #9187c7;

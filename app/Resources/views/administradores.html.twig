@@ -158,6 +158,14 @@
               <div id="confirmarExcluir" onclick='confirmarExcluir("{{web_dir}}");'>SIM</div>
             </div>
         </div>
+        <div id="alertExcluirUsuario">
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluido, pois está relacionado a outros perfis. Você pode deletar apenas o perfil de administrador deste usuário.</div>
+            <div id="optionExcluir">
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">CANCELAR</div>
+              <div id="alertConfirmarExcluir">SIM</div>
+            </div>
+        </div>
         <div id="alertEditar">
             <div id="titleAlert">Descartar edição</div>
             <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse administrador?</div>
