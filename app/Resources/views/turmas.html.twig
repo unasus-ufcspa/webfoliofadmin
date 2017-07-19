@@ -24,91 +24,7 @@ Turma<!DOCTYPE html>
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Turma" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();">NOVA TURMA</div>
-        </div>
-
-       <div id="formEditUser" style="display:none;">
-          {{ form_start(formAdmin) }}
-              <div class="ui grid" >
-                  <div class="twelve wide column grid">
-                    <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-                </div>
-
-                <div class="four wide column grid"  id="colunaDireita">
-                    <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    {{form_row(formAdmin.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                    <input type="submit" id="salvarEdicao" value="SALVAR">
-                    <div id="closeEditar">+</div>
-                </div>
-            </div>
-            {{ form_end(formAdmin) }}
-        </div>
-
-
-        <div class="divAddUser">
-            {{ form_start(formAdmin) }}
-            <div class="ui grid">
-                <div class="twelve wide column grid">
-                    <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-                </div>
-
-                <div class="four wide column grid"  id="colunaDireita">
-                    <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAdmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    <input type="submit" id="salvarEdicao" value="SALVAR" >
-                    <div id="closeAdd" onclick="closeaddUser();">+</div>
-                </div>
-            </div>
-            {{ form_end(formAdmin) }}
+          <div class="ui medium button" id="addUser" onclick="window.location='{{web_dir}}cadastroTurma';">NOVA TURMA</div>
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -122,11 +38,7 @@ Turma<!DOCTYPE html>
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{turma.nmUser}}</div>
                         <div class="emailUser">{{turma.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma"
-                              onclick='editarUser("{{i}}", "{{turma.nmUser}}", "{{turma.dsEmail}}",
-                                         "{{turma.nuIdentification  is empty ? 'null' :  turma.nuIdentification}}",
-                                         "{{turma.nuCellphone is empty ? 'null' :  turma.nuCellphone}}",
-                                         "{{turma.idUser}}")'>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location='{{web_dir}}cadastroTurma';"> <!-- AQUI TEMOS QUE ARRANJAR UMA FORMA DE CARREGAR COM AS INFORMÇÕES JÁ NA OUTRA PÁGINA -->
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
@@ -134,11 +46,7 @@ Turma<!DOCTYPE html>
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{turma.nmUser}}</div>
                         <div class="emailUser">{{turma.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma"
-                             onclick='editarUser("{{i}}", "{{turma.nmUser}}", "{{turma.dsEmail}}",
-                                         "{{turma.nuIdentification  is empty ? 'null' :  turma.nuIdentification}}",
-                                         "{{turma.nuCellphone is empty ? 'null' :  turma.nuCellphone}}",
-                                         "{{turma.idUser}}")'>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location='{{web_dir}}cadastroTurma';"> <!-- AQUI TEMOS QUE ARRANJAR UMA FORMA DE CARREGAR COM AS INFORMÇÕES JÁ NA OUTRA PÁGINA -->
                     </div>
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
@@ -156,14 +64,6 @@ Turma<!DOCTYPE html>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
               <div id="confirmarExcluir">SIM</div>
-            </div>
-        </div>
-        <div id="alertEditar">
-            <div id="titleAlert">Descartar edição</div>
-            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar essa turma?</div>
-            <div id="optionAlert">
-              <div id="sairEditar">Sair</div>
-              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
             </div>
         </div>
         <div id="delete">
