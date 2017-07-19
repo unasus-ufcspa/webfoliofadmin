@@ -58,7 +58,7 @@ class AdministradorController extends Controller {
             if ($request->request->has($this->formEditarAdministrador->getName())) {
                 if ($this->formEditarAdministrador->isSubmitted() && $this->formEditarAdministrador->isValid()) {
                     $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
-                    $this->editarAdministrador($dadosFormEditarAdministrador);
+                    UsuarioController::editarUsuario($dadosFormEditarAdministrador);
                 }
             } else {
                 if ($this->formAdicionarAdministrador->isSubmitted() && $this->formAdicionarAdministrador->isValid()) {
@@ -78,37 +78,10 @@ class AdministradorController extends Controller {
     function adicionarAdministrador($dadosFormAdicionarAdministrador) {
         $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
         $novoAdministrador = new TbUser();
-
         $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
-
-
         if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
-            $this->persistirObjetoAdministrador($novoAdministrador, $dadosFormAdicionarAdministrador);
+            UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
         }
-    }
-
-    function editarAdministrador($dadosFormEditarAdministrador) {
-        $this->logControle->logAdmin(print_r($dadosFormEditarAdministrador, true));
-
-        $administradorEditavel = $this->getDoctrine()
-                ->getRepository('AppBundle:TbUser')
-                ->findBy(array('idUser' => $dadosFormEditarAdministrador['IdUser']));
-        $this->logControle->logAdmin(print_r($administradorEditavel, true));
-        $this->persistirObjetoAdministrador($administradorEditavel, $dadosFormEditarAdministrador);
-    }
-
-    function persistirObjetoAdministrador($objetoUsuario, $dadosUsuario) {
-        $senhaFormatada = hash('sha256', $dadosUsuario['DsPassword']);
-        $objetoUsuario->setDsEmail($dadosUsuario['DsEmail']);
-        $objetoUsuario->setNmUser($dadosUsuario['NmUser']);
-        $objetoUsuario->setDsPassword($senhaFormatada);
-        $objetoUsuario->setNuCellphone($dadosUsuario['NuCellphone']);
-        $objetoUsuario->setNuIdentification($dadosUsuario['NuIdentification']);
-        $objetoUsuario->setFlAdmin('T');
-        $this->em->persist($objetoUsuario);
-        $idUser = $objetoUsuario->getIdUser();
-
-        $this->em->flush();
     }
 
     public function gerarArrayAdministradores() {
@@ -184,6 +157,9 @@ class AdministradorController extends Controller {
         return new JsonResponse($retornoRequest);
     }
 
+    /**
+     * @Route("/desativarAdministradorExcecao")
+     */
     function desativarAdministradorExcecao(Request $request) {
         $this->em = $this->getDoctrine()->getEntityManager();
         if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {

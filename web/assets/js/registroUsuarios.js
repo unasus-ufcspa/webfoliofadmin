@@ -119,6 +119,10 @@ function excluirUser() {
 function cancelarExcluir() {
     $("#excluirUsuario").hide();
 }
+function cancelarAlertExcluir() {
+    $("#alertExcluirUsuario").hide();
+    location.reload();
+}
 
 function confirmarExcluir(caminho) {
     $("#excluirUsuario").hide();
@@ -149,20 +153,23 @@ function confirmarExcluir(caminho) {
             console.log(response);
             if (response.usuariosExcecao.length > 0) {
                 console.log(response.usuariosExcecao);
-                
-                //TO-DO: exibir caixa de confirmação
-                //Um dos usuarios para deleção não pode ser excluido, pois esta relacionado à outros perfis. Você pode deletar apenas o perfil de administrador deste usuário.  
-                //Sim / Cancelar.
-                //Colocar um onclick no sim para a função confirmarExcluirExcecao abaixo com o caminho por parametro igual a confirmarExcluir
+
+                $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecao('" + caminho + "', " + JSON.stringify(response) + ")");
+                $("#alertExcluirUsuario").show();
             }
         }
+
     });
 
     return false;
 }
 
-function confirmarExcluirExcecao(caminho) {
-     $.ajax({
+function confirmarExcluirExcecao(caminho, usuariosExcecao) {
+    var dataString = {
+        arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao
+    };
+    console.log(dataString);
+    $.ajax({
         type: 'post',
         data: JSON.stringify(dataString),
         contentType: 'application/json',
@@ -173,37 +180,37 @@ function confirmarExcluirExcecao(caminho) {
         async: false,
         success: function (response) {
             console.log(response);
+            location.reload();
         }
     });
 }
-   
-  
 
-  function validatePassword(){
-    var pass = document.getElementById("form_DsPassword_first");
-    var conf = document.getElementById("form_DsPassword_second");
 
-    if(pass.value != "" && pass.value == conf.value) {
-      flagValidate=true;
-      alert("Válido");
-      $(confirm).off( "focusout" );
-      return true;
-    }else{
-      $('#salvarEdicao').attr('disabled',true);
-      alert("Senhas diferentes");
-      return false;
+
+function validatePassword() {
+    var pass = document.getElementById("adicionar_DsPassword");
+    var conf = document.getElementById("adicionar_DsPasswordConfirm");
+
+    if (pass.value != "" && pass.value == conf.value) {
+        flagValidate = true;
+        alert("Válido");
+        $(confirm).off("focusout");
+        return true;
+    } else {
+        $('#salvarEdicao').attr('disabled', true);
+        alert("Senhas diferentes");
+        return false;
     }
-  }
+}
 
-  var flagValidate= true;
+var flagValidate = true;
 
-  function validateFunction(){
-    var confirm = document.getElementById("form_DsPassword_second");
-    if(flagValidate){
-      $( confirm ).focusout(function() {
-        validatePassword();
-      });
-      flagValidate=false;
+function validateFunction() {
+    var confirm = document.getElementById("adicionar_DsPasswordConfirm");
+    if (flagValidate) {
+        $(confirm).focusout(function () {
+            validatePassword();
+        });
+        flagValidate = false;
     }
-  }
-
+}

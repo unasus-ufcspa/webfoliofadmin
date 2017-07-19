@@ -48,7 +48,7 @@
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAdmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar' }})}}
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAddAmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar','oninput' : 'validateFunction();'  }})}}
                     </div>
                 </div>
 
@@ -156,6 +156,14 @@
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
               <div id="confirmarExcluir" onclick='confirmarExcluir("{{web_dir}}");'>SIM</div>
+            </div>
+        </div>
+        <div id="alertExcluirUsuario">
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluido, pois está relacionado a outros perfis. Você pode deletar apenas o perfil de administrador deste usuário.</div>
+            <div id="optionExcluir">
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">CANCELAR</div>
+              <div id="alertConfirmarExcluir">SIM</div>
             </div>
         </div>
         <div id="alertEditar">

@@ -49,21 +49,19 @@ class PropositorController extends Controller {
 
             if ($request->request->has($this->formEditarPropositor->getName())) {
                 if ($this->formEditarPropositor->isSubmitted() && $this->formEditarPropositor->isValid()) {
-                    $dadosFormEditarAdministrador = $this->formEditarPropositor->getData();
-                    $this->editarAdministrador($dadosFormEditarAdministrador);
+                    $dadosFormEditarPropositor = $this->formEditarPropositor->getData();
+                    UsuarioController::editarUsuario($dadosFormEditarPropositor);
                 }
             } else {
                 if ($this->formAdicionarPropositor->isSubmitted() && $this->formAdicionarPropositor->isValid()) {
-                    $dadosFormAdicionarAdministrador = $this->formAdicionarPropositor->getData();
-                    $this->adicionarAdministrador($dadosFormAdicionarAdministrador);
-                    return $this->redirectToRoute('administradores');
+                    $dadosFormAdicionarPropositor = $this->formAdicionarPropositor->getData();
+                    $this->adicionarPropositor($dadosFormAdicionarPropositor);
+                  
                 }
             }
-
-
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,
-                        'formPropositor' => $this->formEditarAdministrador->createView(),
-                        'formAddPropositor' => $this->formAdicionarAdministrador->createView()));
+                        'formPropositor' => $this->formEditarPropositor->createView(),
+                        'formAddPropositor' => $this->formAdicionarPropositor->createView()));
         }
     }
 
@@ -96,5 +94,16 @@ class PropositorController extends Controller {
 
         return $propositores;
     }
+
+    function adicionarPropositor($dadosFormAdicionarPropositor) {
+        $this->logControle->logAdmin(print_r($dadosFormAdicionarPropositor, true));
+        $novoPropositor = new TbUser();
+        $this->logControle->logAdmin(($dadosFormAdicionarPropositor['DsPassword']));
+        if ($dadosFormAdicionarPropositor['DsPassword'] == $dadosFormAdicionarPropositor['DsPasswordConfirm']) {
+            UsuarioController::persistirObjetoUsuario($novoPropositor, $dadosFormAdicionarPropositor, 'flProposer', 'T');
+        }
+    }
+
+   
 
 }
