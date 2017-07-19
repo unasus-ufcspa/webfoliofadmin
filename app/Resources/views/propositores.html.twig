@@ -118,7 +118,7 @@
             {% for propositor in propositores %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Propositor" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
@@ -130,7 +130,7 @@
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Propositor" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser">
+                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
@@ -155,7 +155,7 @@
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse propositor?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir">SIM</div>
+              <div id="confirmarExcluir"  onclick='confirmarExcluirPropositor("{{web_dir}}");'>SIM</div>
             </div>
         </div>
         <div id="alertExcluirUsuario">
