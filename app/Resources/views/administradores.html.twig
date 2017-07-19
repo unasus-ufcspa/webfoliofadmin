@@ -48,7 +48,7 @@
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAdmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar' }})}}
+                        {{form_row(formAdmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar', 'oninput' : 'validateFunctionEdit();' }})}}
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAddAmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar','oninput' : 'validateFunction();'  }})}}
+                        {{form_row(formAddAmin.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar','oninput' : 'validateFunctionAdd();'  }})}}
                     </div>
                 </div>
 

@@ -187,13 +187,12 @@ function confirmarExcluirExcecao(caminho, usuariosExcecao) {
 
 
 
-function validatePassword() {
+function validatePasswordAdd() {
     var pass = document.getElementById("adicionar_DsPassword");
     var conf = document.getElementById("adicionar_DsPasswordConfirm");
 
     if (pass.value != "" && pass.value == conf.value) {
-        flagValidate = true;
-        alert("Válido");
+        flagValidateAdd = true;
         $(confirm).off("focusout");
         return true;
     } else {
@@ -203,14 +202,41 @@ function validatePassword() {
     }
 }
 
-var flagValidate = true;
+var flagValidateAdd = true;
 
-function validateFunction() {
+function validateFunctionAdd() {
     var confirm = document.getElementById("adicionar_DsPasswordConfirm");
-    if (flagValidate) {
+    if (flagValidateAdd) {
         $(confirm).focusout(function () {
-            validatePassword();
+            validatePasswordAdd();
         });
-        flagValidate = false;
+        flagValidateAdd = false;
+    }
+}
+
+function validatePasswordEdit() {
+    var pass = document.getElementById("editar_DsPassword");
+    var conf = document.getElementById("editar_DsPasswordConfirm");
+
+    if (pass.value != "" && pass.value == conf.value) {
+        flagValidateEdit = true;
+        $(confirm).off("focusout");
+        return true;
+    } else {
+        $('#salvarEdicao').attr('disabled', true);
+        alert("Senhas diferentes");
+        return false;
+    }
+}
+
+var flagValidateEdit = true;
+
+function validateFunctionEdit() {
+    var confirm = document.getElementById("editar_DsPasswordConfirm");
+    if (flagValidateEdit) {
+        $(confirm).focusout(function () {
+            validatePasswordEdit();
+        });
+        flagValidateEdit = false;
     }
 }

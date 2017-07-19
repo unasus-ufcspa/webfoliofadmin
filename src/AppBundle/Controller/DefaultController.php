@@ -25,4 +25,11 @@ class DefaultController extends Controller
     function cadastroTurmaAction() {
           return $this->render("cadastroTurma.html.twig");
         }
+
+    /**
+     * @Route("/portfolioPropositor", name="portfolioPropositor")
+     */
+    function portfolioPropositorAction() {
+          return $this->render("portfolioPropositor.html.twig");
+        }
 }
