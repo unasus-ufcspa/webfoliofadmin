@@ -124,7 +124,7 @@ function cancelarAlertExcluir() {
     location.reload();
 }
 
-function confirmarExcluir(caminho) {
+function confirmarExcluirAdministrador(caminho) {
     $("#excluirUsuario").hide();
     var checkbox = document.getElementsByName('Administrador[]');
     var arrayValuesChecked = [];
@@ -163,7 +163,47 @@ function confirmarExcluir(caminho) {
 
     return false;
 }
+function confirmarExcluirPropositor(caminho) {
+    $("#excluirUsuario").hide();
+    var checkbox = document.getElementsByName('Propositor[]');
+    var arrayValuesChecked = [];
+    var ln = 0;
+    for (var i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+            ln++;
+            arrayValuesChecked.push(checkbox[i].value);
+        }
+    }
 
+    var dataString = {
+        arrayPropositores: arrayValuesChecked
+    };
+    console.log(JSON.stringify(dataString));
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'excluirPropositores',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.debug(response);
+            if (response.usuariosExcecao.length > 0) {
+                console.log(response.usuariosExcecao);
+
+                $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecao('" + caminho + "', " + JSON.stringify(response) + ")");
+                $("#alertExcluirUsuario").show();
+            } else {
+                location.reload();
+            }
+        }
+
+    });
+
+    return false;
+}
 function confirmarExcluirExcecao(caminho, usuariosExcecao) {
     var dataString = {
         arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao

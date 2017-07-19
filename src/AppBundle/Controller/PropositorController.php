@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Description of PropositorController
  *
@@ -103,7 +103,79 @@ class PropositorController extends Controller {
             UsuarioController::persistirObjetoUsuario($novoPropositor, $dadosFormAdicionarPropositor, 'flProposer', 'T');
         }
     }
+ /**
+     * @Route("/excluirPropositores")
+     */
+    function excluirPropositores(Request $request) {
+        $this->em = $this->getDoctrine()->getEntityManager();
+        $flagGerouExcecao = false;
+        $usuariosExcecao = array();
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+            $this->logControle->logAdmin("Excluir propositores : " . print_r($data, true));
 
-   
+            foreach ($data['arrayPropositores'] as $idsAdministradoresExclusao) {
+                $this->em = $this->getDoctrine()->resetManager();
+                $this->logControle->logAdmin("Excluir  : " . print_r($idsAdministradoresExclusao, true));
+
+                try {
+                    $entity = $this->em->getRepository('AppBundle:TbUser')
+                            ->findOneBy(array('idUser' => $idsAdministradoresExclusao));
+                    if ($entity != null) {
+                        $this->em->remove($entity);
+                        $this->em->flush();
+                    }
+                } catch (\Exception $excpetion) {
+                    $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
+                    $flagGerouExcecao = true;
+                    $usuariosExcecao[] = $idsAdministradoresExclusao;
+                }
+            }
+
+            $retornoRequest = array(
+                "sucesso" => true,
+                "usuariosExcecao" => $usuariosExcecao
+            );
+        } else {
+            $retornoRequest = array(
+                "sucesso" => false,
+                "usuariosExcecao" => NULL
+            );
+        }
+        return new JsonResponse($retornoRequest);
+    }
+    
+    
+    /**
+     * @Route("/desativarPropositorExcecao")
+     */
+    function desativarPropositorExcecao(Request $request) {
+        $this->em = $this->getDoctrine()->getEntityManager();
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+            $this->logControle->logAdmin("desativar propositores : " . print_r($data, true));
+            foreach ($data['arrayPropositoresDesativar'] as $idsAdministradoresDesativar) {
+                $this->em = $this->getDoctrine()->resetManager();
+                $this->logControle->logAdmin("desativar  : " . print_r($idsAdministradoresDesativar, true));
+
+                $objetoUsuario = $this->em->getRepository('AppBundle:TbUser')
+                        ->findOneBy(array('idUser' => $idsAdministradoresDesativar));
+                if ($objetoUsuario != null) {
+                    $objetoUsuario->setFlProposer('F');
+                    $this->em->flush();
+                }
+            }
+            $retornoRequest = array(
+                "sucesso" => true
+            );
+        } else {
+            $retornoRequest = array(
+                "sucesso" => false
+            );
+        }
+        return new JsonResponse($retornoRequest);
+    }
 
 }
