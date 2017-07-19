@@ -24,13 +24,22 @@
           <div class="circle"></div><div class="legenda">TURMAS</div>
         <div>
         <div class="cadastroTurma">
-          <div class="tituloCadastro"></div>
+          <div class="tituloCadastro">Nova turma</div>
           <div class="campoCadastro">
-            <input type="text" placeholder="Nome da Turma:">
-            <textarea rows="20" cols="75" placeholder="Descrição:"></textarea>
-            <input type="text" placeholder="Código:">
-            <input type="datetime-local" placeholder="Data de Início:">
-            <input type="datetime-local" placeholder="Data de Término:">
+            <div class="colunaEsquerda">
+              <img  id="logoTurma" src="/webfolioAdmin/assets/img/Turma.png"><input type="text" placeholder="Nome da Turma:" class="inputNome"><br>
+              <textarea rows="15" cols="75" placeholder="Descrição:" class="inputDescricao"></textarea>
+            </div>
+            <div class="colunaDireita">
+              <img  id="logoCodTurma" src="/webfolioAdmin/assets/img/codTurma.png"><input type="text" placeholder="Código:" class="inputCod"><br>
+              <img  id="logoDtInicio" src="/webfolioAdmin/assets/img/dataInicio.png"><input type="date" placeholder="Data de Início:" class="inputDtInicio"><br>
+              <img  id="logoDtFim" src="/webfolioAdmin/assets/img/dataFim.png"><input type="date" placeholder="Data de Término:" class="inputDtFim"><br>
+              <span class="labelAtiva">Ativa:</span>
+              <div class="switch">
+                <input id="toggle" class="toggle toggle-round-flat" type="checkbox">
+                <label for="toggle"></label>
+              </div>
+            </div>
           </div>
         </div>
     </body>
