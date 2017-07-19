@@ -193,7 +193,7 @@ function confirmarExcluirPropositor(caminho) {
             if (response.usuariosExcecao.length > 0) {
                 console.log(response.usuariosExcecao);
 
-                $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecao('" + caminho + "', " + JSON.stringify(response) + ")");
+                $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecaoPropositor('" + caminho + "', " + JSON.stringify(response) + ")");
                 $("#alertExcluirUsuario").show();
             } else {
                 location.reload();
@@ -204,6 +204,27 @@ function confirmarExcluirPropositor(caminho) {
 
     return false;
 }
+function confirmarExcluirExcecaoPropositor(caminho, usuariosExcecao) {
+    var dataString = {
+        arrayPropositoresDesativar: usuariosExcecao.usuariosExcecao
+    };
+    console.log(dataString);
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'desativarPropositorExcecao',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+            location.reload();
+        }
+    });
+}
+
 function confirmarExcluirExcecao(caminho, usuariosExcecao) {
     var dataString = {
         arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao

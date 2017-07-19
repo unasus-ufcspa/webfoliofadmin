@@ -19,13 +19,7 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/cadastroTurma", name="cadastroTurma")
-     */
-    function cadastroTurmaAction() {
-          return $this->render("cadastroTurma.html.twig");
-        }
-
+ 
     /**
      * @Route("/portfolioPropositor", name="portfolioPropositor")
      */

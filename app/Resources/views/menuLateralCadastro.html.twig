@@ -2,36 +2,38 @@
 <script src="../assets/js/menuLateralCadastro.js"></script>
 
 <div class="bodyMenuCadastro">
-  <!-- <div id="pesquisa">
+    <!-- <div id="pesquisa">
     <!-- <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar"> 
     <input type="text" placeholder="conteúdo cadastrado" id="inputPesquisa">
   </div> -->
 
-  <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
-  <div class="submenuCadastro" id="subMPortfolios">
-    <a href="#" class="subitemCadastro">portfolios</a>
-    <a href="#" class="subitemCadastro">portfolios</a>
-    <a href="#" class="subitemCadastro">portfolios</a>
-  </div>
+   {# {{dump(dadosMenuLateralCadastro)}}#}
+    <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
+    <div class="submenuCadastro" id="subMPortfolios">
+        {% for portfolio in dadosMenuLateralCadastro.arrayDadosPortfolios %}
+            <a href="#" class="subitemCadastro">{{portfolio.dsTitle}}</a>
+        {%endfor%}
 
-  <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('prop')">Propositores<div class="arrow"></div></a>
-  <div class="submenuCadastro" id="subMPropositores">
-    <a href="#" class="subitemCadastro">propositores</a>
-    <a href="#" class="subitemCadastro">propositores</a>
-    <a href="#" class="subitemCadastro">propositores</a>
-  </div>
+    </div>
 
-  <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('tutor')">Tutores<div class="arrow"></div></a>
-  <div class="submenuCadastro" id="subMTutores">
-    <a href="#" class="subitemCadastro">tutores</a>
-    <a href="#" class="subitemCadastro">tutores</a>
-    <a href="#" class="subitemCadastro">tutores</a>
-  </div>
+    <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('prop')">Propositores<div class="arrow"></div></a>
+    <div class="submenuCadastro" id="subMPropositores">
+        {% for propositores in dadosMenuLateralCadastro.arrayDadosPropositores %}
+            <a href="#" class="subitemCadastro">{{propositores.nmUser}}</a>
+        {%endfor%}
+    </div>
 
-  <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
-  <div class="submenuCadastro" id="subMAlunos">
-    <a href="#" class="subitemCadastro">alunos</a>
-    <a href="#" class="subitemCadastro">alunos</a>
-    <a href="#" class="subitemCadastro">alunos</a>
-  </div>
+    <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('tutor')">Tutores<div class="arrow"></div></a>
+    <div class="submenuCadastro" id="subMTutores">
+        <a href="#" class="subitemCadastro">tutores</a>
+        <a href="#" class="subitemCadastro">tutores</a>
+        <a href="#" class="subitemCadastro">tutores</a>
+    </div>
+
+    <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
+    <div class="submenuCadastro" id="subMAlunos">
+        <a href="#" class="subitemCadastro">alunos</a>
+        <a href="#" class="subitemCadastro">alunos</a>
+        <a href="#" class="subitemCadastro">alunos</a>
+    </div>
 </div>
