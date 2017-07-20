@@ -204,6 +204,41 @@ function confirmarExcluirPropositor(caminho) {
 
     return false;
 }
+function confirmarRemoverTutoresTurma(caminho) {
+    $("#excluirUsuario").hide();
+    var checkbox = document.getElementsByName('Tutor');
+    var arrayValuesChecked = [];
+    var ln = 0;
+    for (var i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+            ln++;
+            arrayValuesChecked.push(checkbox[i].value);
+        }
+    }
+
+    var dataString = {
+        arrayTutores: arrayValuesChecked
+    };
+    console.log(JSON.stringify(dataString));
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'removerTutorTurma',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.debug(response);
+                location.reload();
+        }
+
+    });
+
+    return false;
+}
+
 function confirmarExcluirExcecaoPropositor(caminho, usuariosExcecao) {
     var dataString = {
         arrayPropositoresDesativar: usuariosExcecao.usuariosExcecao

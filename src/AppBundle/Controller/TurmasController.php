@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use AppBundle\Controller\UsuarioController;
+use AppBundle\Controller\TurmasController;
 
 /**
  * Description of TurmasController
@@ -102,18 +103,17 @@ class TurmasController extends Controller {
         return $arrayTurmas;
     }
 
-    /**
-     * @Route("/cadastroTurma", name="cadastroTurma")
+     /**
+     * @Route("/cadastroTurma/{idClass}")
      */
-    //adicionar parametros para a rota /cadastroTurma/{idClass}
-
-    function cadastroTurmaAction() {
+    function cadastroTurma($idClass) {
         $idClass = 1;
+        $this->get('session')->set('idTurmaEdicao', $idClass);
         $this->em = $this->getDoctrine()->getManager();
         if ($idClass > -1) {
             $dadosTurma = $this->carregarDadosTurma($idClass);
         }
-        $dadosMenuLateralCadastro = $this->carregarDadosMenuLateralCadastro($idClass);
+        $dadosMenuLateralCadastro = $this->carregarDadosMenuLateralCadastro();
         return $this->render("cadastroTurma.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'dadosTurma' => $dadosTurma));
     }
 
@@ -150,12 +150,15 @@ class TurmasController extends Controller {
         return $dadosTurma;
     }
 
-    function carregarDadosMenuLateralCadastro($idClass) {
+    function carregarDadosMenuLateralCadastro() {
         $arrayDadosPortfolios = $this->carregarPortfolios();
         $arrayDadosPropositores = $this->carregarPropositores();
+        $arrayDadosTutores = $this->carregarTutoresTurma();
+
         $arrayDadosMenuLateralCadastro = array(
             'arrayDadosPortfolios' => $arrayDadosPortfolios,
-            'arrayDadosPropositores' => $arrayDadosPropositores
+            'arrayDadosPropositores' => $arrayDadosPropositores,
+            'arrayDadosTutores' => $arrayDadosTutores
         );
         return $arrayDadosMenuLateralCadastro;
     }
@@ -200,7 +203,9 @@ class TurmasController extends Controller {
     }
 
     function carregarTutoresTurma() {
-        
+      
+        $arrayTutores = TutorController::gerarArrayTutores();
+        return $arrayTutores;
     }
 
     function carregarAlunosTurma() {

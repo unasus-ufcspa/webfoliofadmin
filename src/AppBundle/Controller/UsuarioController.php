@@ -68,6 +68,7 @@ class UsuarioController extends Controller {
                 $objetoUsuario->setFlProposer($valor);
             }
         }
+     
         $this->em->persist($objetoUsuario);
         $idUser = $objetoUsuario->getIdUser();
 

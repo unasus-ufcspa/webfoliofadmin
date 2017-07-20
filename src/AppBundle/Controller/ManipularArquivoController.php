@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Finder\Finder;
+use AppBundle\Entity\TbUser;
+use AppBundle\Entity\TbClassTutor;
 
 /**
  * Description of ManipularArquivoController
@@ -22,38 +24,96 @@ use Symfony\Component\Finder\Finder;
 class ManipularArquivoController extends Controller {
 
     public $logControle;
-    public $csvParsingOptions = array(
-        'finder_in' => 'C:/Apache24/htdocs_sfny/',
-        'finder_name' => 'teste.csv',
-        'ignoreFirstLine' => true
-    );
+    public $em;
 
     public function __construct() {
         $this->logControle = new LogController();
     }
 
-    /**
-     * @Route("/executar")
-     */
-    function executar() {
-        $csv = $this->parseCSV();
-    }
-//http://tlok.eu/fputcsv-in-php-and-writing-content-to-variable.html
-    function parseCSV() {
+    function persistirTutorTurmaArquivo($nomeArquivo) {
+        $idClass = $this->get('session')->get('idTurmaEdicao');
+        header('Content-type: text/html; charset=UTF-8');
         $row = 1;
-        if (($handle = fopen('C:\Apache24\htdocs_sfny\teste.csv', "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                $this->logControle->logAdmin("<p> $num campos na linha $row: <br /></p>\n");
+        $this->em = $this->getDoctrine()->getEntityManager();
+        if (($handle = fopen('../web/uploads/'.$nomeArquivo, "r")) !== FALSE) {
+
+            while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                $num = count($data) - 1;
                 $row++;
-                for ($c = 0; $c < $num; $c++) {
-                    (print_r($data[$c],true));
+                if ($row > 6) { //pular cabeçalho do arquivo
+                    $objetoUsuarioExistente = ManipularArquivoController::verificarUsuarioExistente($data[1]);
+                    if (!is_object($objetoUsuarioExistente)) {
+                        $objetoUsuario = new TbUser();
+
+                        $objetoUsuario->setNmUser($data[0]);
+
+                        $objetoUsuario->setDsEmail($data[1]);
+                        $objetoUsuario->setNuIdentification($data[2]);
+
+                        $objetoUsuario->setNuCellphone($data[3]);
+
+
+                        $this->em->persist($objetoUsuario);
+                        $this->em->flush();
+                        $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($objetoUsuario->getIdUser(), $idClass);
+
+                        if (!$validaTutorTurmaExistente) {
+                            $classTutor = new TbClassTutor();
+                            $objetoClass = $this->em->getRepository('AppBundle:TbClass')
+                                    ->findOneBy(array('idClass' => $idClass));
+                            $classTutor->setIdClass($objetoClass);
+                            $classTutor->setIdTutor($objetoUsuario);
+                            $this->em->persist($classTutor);
+                            $this->em->flush();
+                        }
+                    } else {
+                        $this->logControle->logAdmin("usuario existente");
+                        $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($objetoUsuarioExistente->getIdUser(), $idClass);
+                        if (!$validaTutorTurmaExistente) {
+                            $classTutor = new TbClassTutor();
+                            $objetoClass = $this->em->getRepository('AppBundle:TbClass')
+                                    ->findOneBy(array('idClass' => $idClass));
+                            $classTutor->setIdClass($objetoClass);
+                            $classTutor->setIdTutor($objetoUsuarioExistente);
+                            $this->em->persist($classTutor);
+                            $this->em->flush();
+                        }
+                    }
                 }
             }
-            fclose($handle);
         }
+        fclose($handle);
+    }
 
-        return $rows;
+    function verificarTutorTurmaExistente($idTutor, $idClass) {
+        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder
+                ->select('cp,u,c')
+                ->from('AppBundle:TbClassTutor', 'cp')
+                ->innerJoin('cp.idClass', 'c', 'WITH', 'c.idClass= cp.idClass')
+                ->innerJoin('cp.idTutor', 'u', 'WITH', 'cp.idTutor= u.idUser')
+                ->where($queryBuilder->expr()->eq('cp.idClass', $idClass))
+                ->where($queryBuilder->expr()->eq('cp.idTutor', $idTutor))
+                ->getQuery()
+                ->execute();
+        $portfolioClass = $queryBuilder->getQuery()->getArrayResult();
+        if (count($portfolioClass) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function verificarUsuarioExistente($dsEmail) {
+        $objetoUsuario = $this->em->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('dsEmail' => $dsEmail));
+        $this->logControle->logAdmin(print_r($objetoUsuario, true));
+        if ($objetoUsuario) {
+            $this->logControle->logAdmin("retorno existente" . $objetoUsuario->getIdUser());
+            return $objetoUsuario;
+        } else {
+            return -1;
+        }
     }
 
 }
