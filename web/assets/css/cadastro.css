@@ -114,7 +114,7 @@ html, body{
   color: #7c7c7c;
   font-weight: 300;
 }
-.inputDtInicio, .inputDtFim{
+.inputDtFim{
   margin-top: 0px;
 }
 input[type="date"]:before {
@@ -207,4 +207,20 @@ input.toggle-round-flat:checked + label:after {
   color: #7c7c7c;
   font-weight: 300;
   font-size: 18px;
+}
+
+#salvarEdicao{
+  width: 170px;
+  height: 65px;
+  border-radius: 100px;
+  border: solid 2px #e3e3e3;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #9187c7;
+  position: relative;
+  left: 200px;
+  top: 100px;
 }

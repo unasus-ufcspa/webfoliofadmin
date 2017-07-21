@@ -27,11 +27,10 @@
           <div class="tituloCadastro">Nova turma</div>
           <div class="campoCadastro">
             <div class="colunaEsquerda">
-                <img  id="logoTurma" src="/webfolioAdmin/assets/img/Turma.png"><input type="text" placeholder="Nome da Turma:" class="inputNome" value='{%if dadosTurma is not empty %} {{dadosTurma.dsCode}} {%endif%}' ><br>
+              <img  id="logoCodTurma" src="/webfolioAdmin/assets/img/codTurma.png"><input type="text"  class="inputCod" value='{%if dadosTurma is not empty %} {{dadosTurma.dsCode}} {%else%} placeholder="Código:"{%endif%}'><br>
               <textarea rows="15" cols="75" placeholder="Descrição:" class="inputDescricao">{%if dadosTurma is not empty %} {{dadosTurma.dsDescription}} {%endif%}</textarea>
             </div>
             <div class="colunaDireita">
-              <img  id="logoCodTurma" src="/webfolioAdmin/assets/img/codTurma.png"><input type="text"  class="inputCod" value='{%if dadosTurma is not empty %} {{dadosTurma.dsCode}} {%else%} placeholder="Código:"{%endif%}'><br>
               <img  id="logoDtInicio" src="/webfolioAdmin/assets/img/dataInicio.png"><input type="date" value='{%if dadosTurma is not empty %}{{dadosTurma.dtStart}}{%else%}placeholder="Data de Início:"{%endif%}' class="inputDtInicio"><br>
               <img  id="logoDtFim" src="/webfolioAdmin/assets/img/dataFim.png"><input type="date" value='{%if dadosTurma is not empty %}{{dadosTurma.dtFinish}}{%else%}placeholder="Data de Término:"{%endif%}' class="inputDtFim"><br>
               <span class="labelAtiva">Ativa:</span>
@@ -42,6 +41,7 @@
               </div>
             </div>
           </div>
+          <input type="submit" id="salvarEdicao" value="SALVAR">
         </div>
     </body>
 </html>
