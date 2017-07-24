@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="../assets/css/menuLateralCadastro.css">
 <script src="../assets/js/menuLateralCadastro.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/menuLateralCadastro.css">
-<script src="/webfolioAdmin/assets/js/menuLateralCadastro.js"></script>
+
 
 <div class="bodyMenuCadastro">
     <!-- <div id="pesquisa">
@@ -9,7 +9,7 @@
     <input type="text" placeholder="conteúdo cadastrado" id="inputPesquisa">
   </div> -->
 
-    {#   {{dump(dadosMenuLateralCadastro)}}#}
+    {#   {{dump(dadosMenuLateralCadastro)}}
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMPortfolios">
         {% for portfolio in dadosMenuLateralCadastro.arrayDadosPortfolios %}
@@ -30,12 +30,13 @@
         {% for tutores in dadosMenuLateralCadastro.arrayDadosTutores %}
             <a href="#" class="subitemCadastro">{{tutores.nmUser}}</a>
         {%endfor%}
-    </div>
+    </div> #}
 
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMAlunos">
-        <a href="#" class="subitemCadastro">alunos</a>
-        <a href="#" class="subitemCadastro">alunos</a>
-        <a href="#" class="subitemCadastro">alunos</a>
+        <a href="#" class="subitemCadastro" draggable="true">alunos</a>
+        <a href="#" class="subitemCadastro" draggable="true">alunos</a>
+        <a href="#" class="subitemCadastro" draggable="true">alunos</a>
     </div>
 </div>
+<script src="/webfolioAdmin/assets/js/menuLateralCadastro.js"></script>
