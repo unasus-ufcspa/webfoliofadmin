@@ -31,13 +31,18 @@
               Ex: Turma A > Preceptor B > Portfólio C
           </div>
           <div class="arrastePortfolio">
-            <div class="boxArrastar">
+            <div class="boxArrastar" id="boxArrastar" ondrop="drop(event)" ondragover="allowDrop(event)">
               <div class="textArrastar">arraste e solte um<br>PORTFÓLIO</div>
               <img  id="logoArrastar" src="/webfolioAdmin/assets/img/arraste.png">
             </div>
           </div>
-          <div>
+          <div class="arrastePropositor">
+            <div class="boxArrastar" id="boxArrastar" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div class="textArrastar">arraste e solte um<br>PROPOSITOR</div>
+              <img  id="logoArrastar" src="/webfolioAdmin/assets/img/arraste.png">
+            </div>
           </div>
+          <input type="submit" class="salvarPortfolioPropositor" value="SALVAR">
         </div>
     </body>
 </html>
