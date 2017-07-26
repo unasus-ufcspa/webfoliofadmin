@@ -237,12 +237,8 @@ input.toggle-round-flat:checked + label:after {
   cursor: pointer;
   background-color: #9187c7;
   margin: 50px;
-  /*position: absolute;
-  /*left: 10px;
-  top: 10px;
-  top: 50px;*/
   position: relative;
-  top: 50px;
+  top: 80px;
 }
 
 .titleBoxTitulo{
@@ -306,7 +302,7 @@ input.toggle-round-flat:checked + label:after {
   top: 60px;
 }
 
-#logoArrastar{
+.logoArrastar{
   width: 110px;
   height: 110px;
   position: relative;
@@ -321,4 +317,17 @@ input.toggle-round-flat:checked + label:after {
   user-select: none;\
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+}
+
+.boxArrastar > .subitemCadastro{
+  width: 354px;
+  height: 62px;
+  border-radius: 100px;
+  background-color: #717070;
+  border: solid 1px #979797;
+
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  margin:30px;
 }
