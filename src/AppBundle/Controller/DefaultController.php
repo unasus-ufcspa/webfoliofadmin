@@ -18,19 +18,4 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
-
-
-    /**
-     * @Route("/portfolioPropositor", name="portfolioPropositor")
-     */
-    function portfolioPropositorAction() {
-          return $this->render("portfolioPropositor.html.twig");
-        }
-
-    /**
-     * @Route("/cadastroTutor", name="cadastroTutor")
-     */
-    function cadastroTutorAction() {
-          return $this->render("cadastroTutores.html.twig");
-        }
 }

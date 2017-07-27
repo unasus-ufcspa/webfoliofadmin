@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Description of PropositorController
  *
@@ -56,7 +57,6 @@ class PropositorController extends Controller {
                 if ($this->formAdicionarPropositor->isSubmitted() && $this->formAdicionarPropositor->isValid()) {
                     $dadosFormAdicionarPropositor = $this->formAdicionarPropositor->getData();
                     $this->adicionarPropositor($dadosFormAdicionarPropositor);
-                  
                 }
             }
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,
@@ -103,7 +103,8 @@ class PropositorController extends Controller {
             UsuarioController::persistirObjetoUsuario($novoPropositor, $dadosFormAdicionarPropositor, 'flProposer', 'T');
         }
     }
- /**
+
+    /**
      * @Route("/excluirPropositores")
      */
     function excluirPropositores(Request $request) {
@@ -120,8 +121,11 @@ class PropositorController extends Controller {
                 $this->logControle->logAdmin("Excluir  : " . print_r($idsAdministradoresExclusao, true));
 
                 try {
+                    
                     $entity = $this->em->getRepository('AppBundle:TbUser')
                             ->findOneBy(array('idUser' => $idsAdministradoresExclusao));
+                    
+       
                     if ($entity != null) {
                         $this->em->remove($entity);
                         $this->em->flush();
@@ -145,8 +149,7 @@ class PropositorController extends Controller {
         }
         return new JsonResponse($retornoRequest);
     }
-    
-    
+
     /**
      * @Route("/desativarPropositorExcecao")
      */
@@ -176,6 +179,13 @@ class PropositorController extends Controller {
             );
         }
         return new JsonResponse($retornoRequest);
+    }
+
+    /**
+     * @Route("/portfolioPropositor", name="portfolioPropositor")
+     */
+    function portfolioPropositorAction() {
+        return $this->render("portfolioPropositor.html.twig");
     }
 
 }
