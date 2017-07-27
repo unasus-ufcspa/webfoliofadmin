@@ -73,6 +73,7 @@ class TutorController extends Controller {
         $novoTutor = new TbUser();
         $this->logControle->logAdmin(($dadosFormAdicionarTutor['DsPassword']));
         if ($dadosFormAdicionarTutor['DsPassword'] == $dadosFormAdicionarTutor['DsPasswordConfirm']) {
+            
             UsuarioController::persistirObjetoUsuario($novoTutor, $dadosFormAdicionarTutor, null, null);
             $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($novoTutor->getIdUser(), $idClass);
             if (!$validaTutorTurmaExistente) {

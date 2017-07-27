@@ -107,9 +107,10 @@ class TurmasController extends Controller {
      * @Route("/cadastroTurma/{idClass}")
      */
     function cadastroTurma($idClass) {
-        $idClass = 1;
+     
         $this->get('session')->set('idTurmaEdicao', $idClass);
         $this->em = $this->getDoctrine()->getManager();
+        $dadosTurma = array();
         if ($idClass > -1) {
             $dadosTurma = $this->carregarDadosTurma($idClass);
         }

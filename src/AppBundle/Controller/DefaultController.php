@@ -20,10 +20,5 @@ class DefaultController extends Controller
     }
 
  
-    /**
-     * @Route("/portfolioPropositor", name="portfolioPropositor")
-     */
-    function portfolioPropositorAction() {
-          return $this->render("portfolioPropositor.html.twig");
-        }
+  
 }

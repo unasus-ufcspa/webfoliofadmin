@@ -24,7 +24,7 @@
         <div id="pesquisa">
             <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
             <input type="text" placeholder="Procurar Turma" id="inputPesquisa">
-            <div class="ui medium button" id="addUser" onclick="window.location = '{{web_dir}}cadastroTurma';">NOVA TURMA</div>
+            <div class="ui medium button" id="addUser" onclick="window.location = '{{web_dir}}cadastroTurma/-1';">NOVA TURMA</div>
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -37,7 +37,7 @@
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser"> {%if turma.idPortfolio >-1 %} {{turma. dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';"> <!-- AQUI TEMOS QUE ARRANJAR UMA FORMA DE CARREGAR COM AS INFORMÇÕES JÁ NA OUTRA PÁGINA -->
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';"> 
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
@@ -45,8 +45,8 @@
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser">{%if turma.idPortfolio >-1 %} {{turma.dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';"> <!-- AQUI TEMOS QUE ARRANJAR UMA FORMA DE CARREGAR COM AS INFORMÇÕES JÁ NA OUTRA PÁGINA -->
-                    </div>
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';">
+                    </div>  
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
                 </div>

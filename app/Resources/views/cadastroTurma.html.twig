@@ -25,23 +25,25 @@
         <div>
         <div class="cadastroTurma">
           <div class="tituloCadastro">Nova turma</div>
+          <form id='formCadastroTurma'>
           <div class="campoCadastro">
             <div class="colunaEsquerda">
-              <img  id="logoCodTurma" src="/webfolioAdmin/assets/img/codTurma.png"><input type="text"  class="inputCod" value='{%if dadosTurma is not empty %} {{dadosTurma.dsCode}} {%else%} placeholder="Código:"{%endif%}'><br>
+              <img  id="logoCodTurma" src="/webfolioAdmin/assets/img/codTurma.png"><input type="text"  class="inputCod" {%if dadosTurma is not empty %}value='{{dadosTurma.dsCode}}'{%else%}placeholder="Código:"{%endif%}><br>
               <textarea rows="15" cols="75" placeholder="Descrição:" class="inputDescricao">{%if dadosTurma is not empty %} {{dadosTurma.dsDescription}} {%endif%}</textarea>
             </div>
             <div class="colunaDireita">
-              <img  id="logoDtInicio" src="/webfolioAdmin/assets/img/dataInicio.png"><input type="date" value='{%if dadosTurma is not empty %}{{dadosTurma.dtStart}}{%else%}placeholder="Data de Início:"{%endif%}' class="inputDtInicio"><br>
-              <img  id="logoDtFim" src="/webfolioAdmin/assets/img/dataFim.png"><input type="date" value='{%if dadosTurma is not empty %}{{dadosTurma.dtFinish}}{%else%}placeholder="Data de Término:"{%endif%}' class="inputDtFim"><br>
+              <img  id="logoDtInicio" src="/webfolioAdmin/assets/img/dataInicio.png"><input type="date"{%if dadosTurma is not empty %} value='{{dadosTurma.dtStart}}'{%else%}placeholder="Data de Início:"{%endif%} class="inputDtInicio"><br>
+              <img  id="logoDtFim" src="/webfolioAdmin/assets/img/dataFim.png"><input type="date" {%if dadosTurma is not empty %} value='{{dadosTurma.dtFinish}}'{%else%}placeholder="Data de Término:"{%endif%} class="inputDtFim"><br>
               <span class="labelAtiva">Ativa:</span>
-              {#TO-DO: ativar ou desativar conforme dadosTurma.stStatus#}
+            
               <div class="switch">
-                <input id="toggle" class="toggle toggle-round-flat" type="checkbox">
+                <input id="toggle" class="toggle toggle-round-flat" type="checkbox" {%if dadosTurma is not empty and dadosTurma.stStatus =='A' %} checked{%endif%}>
                 <label for="toggle"></label>
               </div>
             </div>
           </div>
-          <input type="submit" id="salvarEdicao" value="SALVAR">
+          <input type="submit" id="salvarEdicao" value="SALVAR" onClick='cadastroTurma("{{web_dir}}")'>
+          </form>
         </div>
     </body>
 </html>
