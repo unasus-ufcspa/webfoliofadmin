@@ -180,7 +180,7 @@ class TutorController extends Controller {
             // Não foi possível fazer o upload, provavelmente a pasta está incorreta
             echo "Não foi possível enviar o arquivo, tente novamente";
         }
-        ManipularArquivoController::persistirTutorTurmaArquivo($nome_final);
+        ManipularArquivoController::persistirTutorAlunoTurmaArquivo($nome_final, "tutor");
         return $this->redirectToRoute('tutores');
     }
 
@@ -195,7 +195,7 @@ class TutorController extends Controller {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
             $this->logControle->logAdmin("Excluir admnistradores : " . print_r($data, true));
-             $idClass = $this->redirectToRoute('idTurmaEdicao');
+             $idClass = $this->get('session')->get('idTurmaEdicao');
 
             foreach ($data['arrayTutores'] as $idTutorRemover) {
                 $this->em = $this->getDoctrine()->resetManager();
