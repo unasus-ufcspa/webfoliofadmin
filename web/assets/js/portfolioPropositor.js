@@ -17,16 +17,20 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
+    // ev.classList.add('itemAdicionado');
     ev.dataTransfer.effectAllowed = 'move';
     ev.dataTransfer.setData("text", ev.target.id);
     // dragSrcEl = this;
 }
 
-function drop(ev) {
+function dropPort(ev) {
     if (ev.stopPropagation) {
       ev.stopPropagation(); // Stops some browsers from redirecting.
     }
     // if (dragSrcEl != this) {
+
+      $( ".textArrastar:first" ).hide();
+      $( ".logoArrastar:eq(0)" ).hide();
       var data = ev.dataTransfer.getData("text");
       ev.target.appendChild(document.getElementById(data));
     // }
