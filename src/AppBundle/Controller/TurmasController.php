@@ -107,7 +107,7 @@ class TurmasController extends Controller {
      * @Route("/cadastroTurma/{idClass}")
      */
     function cadastroTurma($idClass) {
-     
+
         $this->get('session')->set('idTurmaEdicao', $idClass);
         $this->em = $this->getDoctrine()->getManager();
         $dadosTurma = array();
@@ -151,66 +151,5 @@ class TurmasController extends Controller {
         return $dadosTurma;
     }
 
-    function carregarDadosMenuLateralCadastro() {
-        $arrayDadosPortfolios = $this->carregarPortfolios();
-        $arrayDadosPropositores = $this->carregarPropositores();
-        $arrayDadosTutores = $this->carregarTutoresTurma();
-
-        $arrayDadosMenuLateralCadastro = array(
-            'arrayDadosPortfolios' => $arrayDadosPortfolios,
-            'arrayDadosPropositores' => $arrayDadosPropositores,
-            'arrayDadosTutores' => $arrayDadosTutores
-        );
-        return $arrayDadosMenuLateralCadastro;
-    }
-
-    function carregarPortfolios() {
-        $arrayDadosPortfolios = array();
-        $queryBuilder = $this->em->createQueryBuilder();
-        $queryBuilder
-                ->select('p')
-                ->from('AppBundle:TbPortfolio', 'p')
-                ->getQuery()
-                ->execute();
-        $portfolios = $queryBuilder->getQuery()->getArrayResult();
-        foreach ($portfolios as $arrayPortfolios) {
-            $arrayDadosPortfolios[] = array(
-                'idPortfolio' => $arrayPortfolios['idPortfolio'],
-                'dsTitle' => $arrayPortfolios['dsTitle'],
-            );
-        }
-        $this->logControle->logAdmin(print_r($arrayDadosPortfolios, true));
-        return $arrayDadosPortfolios;
-    }
-
-    function carregarPropositores() {
-        $arrayDadosPropositores = array();
-        $queryBuilder = $this->em->createQueryBuilder();
-        $queryBuilder
-                ->select('u')
-                ->from('AppBundle:TbUser', 'u')
-                ->where($queryBuilder->expr()->eq('u.flProposer', "'T'"))
-                ->getQuery()
-                ->execute();
-        $propositores = $queryBuilder->getQuery()->getArrayResult();
-        foreach ($propositores as $arrayPropositores) {
-            $arrayDadosPropositores[] = array(
-                'idUser' => $arrayPropositores['idUser'],
-                'nmUser' => $arrayPropositores['nmUser'],
-            );
-        }
-        $this->logControle->logAdmin(print_r($arrayDadosPropositores, true));
-        return $arrayDadosPropositores;
-    }
-
-    function carregarTutoresTurma() {
-      
-        $arrayTutores = TutorController::gerarArrayTutores();
-        return $arrayTutores;
-    }
-
-    function carregarAlunosTurma() {
-        
-    }
 
 }

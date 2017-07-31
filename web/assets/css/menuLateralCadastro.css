@@ -57,7 +57,7 @@
 }
 
 
-#pesquisa{
+/*#pesquisa{
   width: 100px;
   height: 30px;
   background-color: #ffffff;
@@ -68,7 +68,7 @@
 #iconLupa{
   /*position: relative;*/
   /*left:290px;*/
-  /*top: 35px;*/
+  /*top: 35px;
   width: 15px;
   height: 16px;
   cursor: pointer;
@@ -76,38 +76,19 @@
 #inputPesquisa{
   /*position: relative;
   left:310px;*/
-  /*top: 23px;*/
+  /*top: 23px;
   outline: none;
   border: none;
-  /*width: 60%;*/
+  /*width: 60%;
   width: 100px;
   height: 40px;
   border-radius: 25px;
   /*background-color: #ffffff;*/
-  /*padding: 20px;*/
+  /*padding: 20px;
 }
 input{
   font-size: 16px;
   font-weight: 300;
   color: white;
 }
-#inputPesquisa::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-size: 16px;
-  font-weight: 300;
-  color: white;
-}
-#inputPesquisa::-moz-placeholder{ /* Firefox 19+ */
-  font-size: 18px;
-  font-weight: 300;
-  color: white;
-}
-#inputPesquisa:-ms-input-placeholder{ /* IE 10+ */
-  font-size: 18px;
-  font-weight: 300;
-  color: white;
-}
-#inputPesquisa:-moz-placeholder{ /* Firefox 18- */
-  font-size: 18px;
-  font-weight: 300;
-  color: white;
-}
+*/

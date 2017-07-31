@@ -2,13 +2,16 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
 }
+/*
 html, body{
   height: 100%;
 }
-
+*/
 #delete{
   height: 75px;
   width: 100%;
+  max-width: 100%;
+  /*width: 100px;*/
   position: fixed;
   bottom: 0;
   background-color: #fff;
@@ -16,9 +19,9 @@ html, body{
   border-top: solid 2px #c6c6c6;
 }
 #iconDelete{
-  float:right;
+  /*float:right;*/
   position: relative;
-  right: 105px;
+  /*right: 105px;*/
   top: 20px;
   cursor: pointer;
 }
@@ -31,7 +34,7 @@ html, body{
 }
 #titulo{
   position: absolute;
-  left:350px;
+  left:100px;
   top: 20px;
   font-size: 20px;
   font-weight: 500;
@@ -39,7 +42,7 @@ html, body{
 }
 #iconPessoa{
   position: relative;
-  left:290px;
+  left:55px;
   top: 17px;
   width: 20px;
   height: 25px;
@@ -52,7 +55,7 @@ html, body{
 }
 #iconLupa{
   position: relative;
-  left:290px;
+  left:55px;
   top: 35px;
   width: 30px;
   height: 31px;
@@ -60,7 +63,7 @@ html, body{
 }
 #inputPesquisa{
   position: relative;
-  left:310px;
+  left:75px;
   top: 23px;
   outline: none;
   border: none;
@@ -80,17 +83,17 @@ input{
   font-weight: 300;
   color: #6b6b6b;
 }
-#inputPesquisa::-moz-placeholder, .formEditar::-moz-placeholder { /* Firefox 19+ */
+#inputPesquisa::-moz-placeholder, .formEditar::-moz-placeholder { /* Firefox 19+*/
   font-size: 18px;
   font-weight: 300;
   color: #6b6b6b;
 }
-#inputPesquisa:-ms-input-placeholder, .formEditar:-ms-input-placeholder { /* IE 10+ */
+#inputPesquisa:-ms-input-placeholder, .formEditar:-ms-input-placeholder { /* IE 10+*/
   font-size: 18px;
   font-weight: 300;
   color: #6b6b6b;
 }
-#inputPesquisa:-moz-placeholder, .formEditar:-moz-placeholder { /* Firefox 18- */
+#inputPesquisa:-moz-placeholder, .formEditar:-moz-placeholder { /* Firefox 18-*/
   font-size: 18px;
   font-weight: 300;
   color: #6b6b6b;
@@ -109,7 +112,7 @@ input{
   color: #ffffff;
   text-align: center;
 }
-
+/*
 #listaUsers{
   overflow-y: auto;
   overflow-x: hidden;
@@ -170,7 +173,7 @@ input:checked +  label {
   height: 62px;
   cursor: pointer;
 }
-
+*/
 .divAddUser, .editarUser{
   width: 100%;
   height: 400px;
@@ -183,7 +186,7 @@ input:checked +  label {
 
 .iconesFormEditar{
   position: relative;
-  left:290px;
+  left:55px;
   top: 30px;
   margin-top: 10px;
   width: 30px;
@@ -201,7 +204,7 @@ input:checked +  label {
 
 .formEditar{
   position: relative;
-  left:310px;
+  left:75px;
   top: 20px;
   width: 70%;
   overflow-x: hidden;
@@ -270,7 +273,7 @@ input:checked +  label {
 #naoEncontrado{
   visibility: hidden;
 }
-
+/*
 #excluirUsuario, #alertEditar, #alertExcluirUsuario{
   width: 430px;
   height: 240px;
@@ -348,4 +351,4 @@ input:checked +  label {
   #inputPesquisa{
     width:30%;
   }
-}
+}*/

@@ -9,7 +9,7 @@
     <input type="text" placeholder="conteúdo cadastrado" id="inputPesquisa">
   </div> -->
 
-      {{dump(dadosMenuLateralCadastro)}}
+      {#dump(dadosMenuLateralCadastro)#}
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMPortfolios">
         {% for portfolio in dadosMenuLateralCadastro.arrayDadosPortfolios %}
@@ -30,7 +30,7 @@
         {% for tutores in dadosMenuLateralCadastro.arrayDadosTutores %}
             <a href="#" class="subitemCadastro">{{tutores.nmUser}}</a>
         {%endfor%}
-    </div> 
+    </div>
 
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMAlunos">

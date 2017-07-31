@@ -59,11 +59,11 @@ class TutorController extends Controller {
                     return $this->redirectToRoute('tutores');
                 }
             }
-
+            $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
 
             return $this->render('tutores.html.twig', array('tutores' => $arrayTutores,
                         'formTutor' => $this->formEditarTutor->createView(),
-                        'formAddTutor' => $this->formAdicionarTutor->createView()));
+                        'formAddTutor' => $this->formAdicionarTutor->createView(), 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
         }
     }
 
@@ -73,7 +73,7 @@ class TutorController extends Controller {
         $novoTutor = new TbUser();
         $this->logControle->logAdmin(($dadosFormAdicionarTutor['DsPassword']));
         if ($dadosFormAdicionarTutor['DsPassword'] == $dadosFormAdicionarTutor['DsPasswordConfirm']) {
-            
+
             UsuarioController::persistirObjetoUsuario($novoTutor, $dadosFormAdicionarTutor, null, null);
             $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($novoTutor->getIdUser(), $idClass);
             if (!$validaTutorTurmaExistente) {
