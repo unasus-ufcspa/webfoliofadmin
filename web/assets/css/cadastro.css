@@ -42,7 +42,7 @@ html, body{
   top: 300px;
   left:50%;
   width:1100px;
-  height: 500px;
+  min-height: 500px;
   margin-left: -615px;
   background-color: #e3e3e3;
 

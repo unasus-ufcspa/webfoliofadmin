@@ -5,7 +5,7 @@ $("#formCadastroTurma").submit(function(e) {
     console.log(dataString);
     $.ajax({
         type: 'post',
-        data: JSON.stringify(dataString),
+        data: $("#formCadastroTurma").serialize(),
         contentType: 'application/json',
         dataType: 'json',
         url: '' + caminho + 'efetuarCadastroTurma',
