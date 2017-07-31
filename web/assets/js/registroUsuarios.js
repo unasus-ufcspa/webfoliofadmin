@@ -231,6 +231,40 @@ function confirmarRemoverTutoresTurma(caminho) {
         async: false,
         success: function (response) {
             console.debug(response);
+              
+        }
+
+    });
+
+    return false;
+}
+function confirmarRemoverAlunosTurma(caminho) {
+    $("#excluirUsuario").hide();
+    var checkbox = document.getElementsByName('Aluno');
+    var arrayValuesChecked = [];
+    var ln = 0;
+    for (var i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+            ln++;
+            arrayValuesChecked.push(checkbox[i].value);
+        }
+    }
+
+    var dataString = {
+        arrayAlunos: arrayValuesChecked
+    };
+    console.log(JSON.stringify(dataString));
+    $.ajax({
+        type: 'post',
+        data: JSON.stringify(dataString),
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '' + caminho + 'removerAlunoTurma',
+        cache: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.debug(response);
                 location.reload();
         }
 

@@ -29,10 +29,10 @@
         </div>
 
         <div id="inputArquivos">
-          <form class="box" method="post" action="" enctype="multipart/form-data">
+          <form class="box" method="post" action="{{web_dir}}carregarAlunosArquivo" enctype="multipart/form-data">
             <div class="boxInput">
               <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
-              <input class="selectArquivos" type="file" name="files[]" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
+              <input class="selectArquivos" type="file" name="alunos" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
               <div class="nomeArquivo"></div>
               <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
             </div>
@@ -58,12 +58,12 @@
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
@@ -86,44 +86,44 @@
 
 
         <div class="divAddUser">
-            {{ form_start(formAluno) }}
+            {{ form_start(formAddAluno) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
                         <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPassword.first, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
                         <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPassword.second, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        {{form_row(formAddAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid" id="colunaDireita">
                     <div class="rowEditar">
                         <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAddAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        {{form_row(formAddAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarEdicao" value="SALVAR" >
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
-            {{ form_end(formAluno) }}
+            {{ form_end(formAddAluno) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -170,7 +170,7 @@
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse aluno?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir">SIM</div>
+              <div id="confirmarExcluir" onClick ='confirmarRemoverAlunosTurma("{{web_dir}}");'>SIM</div>
             </div>
         </div>
         <div id="alertEditar">

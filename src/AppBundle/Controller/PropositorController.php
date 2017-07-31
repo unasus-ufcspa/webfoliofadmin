@@ -121,11 +121,10 @@ class PropositorController extends Controller {
                 $this->logControle->logAdmin("Excluir  : " . print_r($idsAdministradoresExclusao, true));
 
                 try {
-                    
+
                     $entity = $this->em->getRepository('AppBundle:TbUser')
                             ->findOneBy(array('idUser' => $idsAdministradoresExclusao));
-                    
-       
+
                     if ($entity != null) {
                         $this->em->remove($entity);
                         $this->em->flush();
@@ -185,7 +184,10 @@ class PropositorController extends Controller {
      * @Route("/portfolioPropositor", name="portfolioPropositor")
      */
     function portfolioPropositorAction() {
-        return $this->render("portfolioPropositor.html.twig");
+        $this->em = $this->getDoctrine()->getEntityManager();
+        $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro(); //carrega dados do menu lateral, chamar em todas as telas que necessario e enviar nos parametros do render
+
+        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
     }
 
 }

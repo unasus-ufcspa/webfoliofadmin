@@ -114,7 +114,7 @@ class TurmasController extends Controller {
         if ($idClass > -1) {
             $dadosTurma = $this->carregarDadosTurma($idClass);
         }
-        $dadosMenuLateralCadastro = $this->carregarDadosMenuLateralCadastro();
+        $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
         return $this->render("cadastroTurma.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'dadosTurma' => $dadosTurma));
     }
 

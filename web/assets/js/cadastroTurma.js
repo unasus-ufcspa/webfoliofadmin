@@ -1,6 +1,7 @@
 $("#formCadastroTurma").submit(function(e) {
     var dataString = {
-        arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao
+        arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao,
+        
     };
     console.log(dataString);
     $.ajax({

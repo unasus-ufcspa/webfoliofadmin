@@ -15,24 +15,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\ManipularArquivoController;
-use AppBundle\Entity\TbClassTutor;
+use AppBundle\Entity\TbClassStudent;
 
-class TutorController extends Controller {
+class AlunosController extends Controller {
 
     public $error;
     public $logControle;
     public $em;
-    public $formEditarTutor;
-    public $formAdicionarTutor;
+    public $formEditarAluno;
+    public $formAdicionarAluno;
 
     public function __construct() {
         $this->logControle = new LogController();
     }
 
     /**
-     * @Route("/tutores", name="tutores")
+     * @Route("/alunos", name="alunos")
      */
-    function tutoresAction(Request $request) {
+    function alunos(Request $request) {
 
         if (!$this->get('session')->get('idUser')) {
 
@@ -41,88 +41,88 @@ class TutorController extends Controller {
             $this->em = $this->getDoctrine()->getManager();
 
 
-            $arrayTutores = $this->gerarArrayTutores(); //$idClass da rota
-            $this->formEditarTutor = UsuarioController::gerarFormulario("editar");
-            $this->formAdicionarTutor = UsuarioController::gerarFormulario("adicionar");
-            $this->formEditarTutor->handleRequest($request);
-            $this->formAdicionarTutor->handleRequest($request);
+            $arrayAlunos = $this->gerarArrayAlunos(); //$idClass da rota
+            $this->formEditarAluno = UsuarioController::gerarFormulario("editar");
+            $this->formAdicionarAluno = UsuarioController::gerarFormulario("adicionar");
+            $this->formEditarAluno->handleRequest($request);
+            $this->formAdicionarAluno->handleRequest($request);
 
-            if ($request->request->has($this->formEditarTutor->getName())) {
-                if ($this->formEditarTutor->isSubmitted() && $this->formEditarTutor->isValid()) {
-                    $dadosFormEditarTutor = $this->formEditarTutor->getData();
-                    UsuarioController::editarUsuario($dadosFormEditarTutor);
+            if ($request->request->has($this->formEditarAluno->getName())) {
+                if ($this->formEditarAluno->isSubmitted() && $this->formEditarAluno->isValid()) {
+                    $dadosFormEditarAluno= $this->formEditarAluno->getData();
+                    UsuarioController::editarUsuario($dadosFormEditarAluno);
                 }
             } else {
-                if ($this->formAdicionarTutor->isSubmitted() && $this->formAdicionarTutor->isValid()) {
-                    $dadosFormAdicionarTutor = $this->formAdicionarTutor->getData();
-                    $this->adicionarTutorTurma($dadosFormAdicionarTutor);
-                    return $this->redirectToRoute('tutores');
+                if ($this->formAdicionarAluno->isSubmitted() && $this->formAdicionarAluno->isValid()) {
+                    $dadosFormAdicionarAluno = $this->formAdicionarAluno->getData();
+                    $this->adicionarAlunoTurma($dadosFormAdicionarAluno);
+                    return $this->redirectToRoute('alunos');
                 }
             }
 
 
-            return $this->render('tutores.html.twig', array('tutores' => $arrayTutores,
-                        'formTutor' => $this->formEditarTutor->createView(),
-                        'formAddTutor' => $this->formAdicionarTutor->createView()));
+            return $this->render('alunos.html.twig', array('alunos' => $arrayAlunos,
+                        'formAluno' => $this->formEditarAluno->createView(),
+                        'formAddAluno' => $this->formAdicionarAluno->createView()));
         }
     }
 
-    function adicionarTutorTurma($dadosFormAdicionarTutor) {
-         $idClass = $this->get('session')->get('idTurmaEdicao');
-        $this->logControle->logAdmin(print_r($dadosFormAdicionarTutor, true));
-        $novoTutor = new TbUser();
-        $this->logControle->logAdmin(($dadosFormAdicionarTutor['DsPassword']));
-        if ($dadosFormAdicionarTutor['DsPassword'] == $dadosFormAdicionarTutor['DsPasswordConfirm']) {
-            
-            UsuarioController::persistirObjetoUsuario($novoTutor, $dadosFormAdicionarTutor, null, null);
-            $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($novoTutor->getIdUser(), $idClass);
+    function adicionarAlunoTurma($dadosFormAdicionarAluno) {
+        $idClass = $this->get('session')->get('idTurmaEdicao');
+        $this->logControle->logAdmin(print_r($dadosFormAdicionarAluno, true));
+        $novoAluno = new TbUser();
+        $this->logControle->logAdmin(($dadosFormAdicionarAluno['DsPassword']));
+        if ($dadosFormAdicionarAluno['DsPassword'] == $dadosFormAdicionarAluno['DsPasswordConfirm']) {
+
+            UsuarioController::persistirObjetoUsuario($novoAluno, $dadosFormAdicionarAluno, null, null);
+            $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($novoAluno->getIdUser(), $idClass);
             if (!$validaTutorTurmaExistente) {
-                $classTutor = new TbClassTutor();
+                $classAluno = new TbClassStudent();
                 $objetoClass = $this->em->getRepository('AppBundle:TbClass')
                         ->findOneBy(array('idClass' => $idClass));
-                $classTutor->setIdClass($objetoClass);
-                $classTutor->setIdTutor($novoTutor);
-                $this->em->persist($classTutor);
+                $classAluno->setIdClass($objetoClass);
+                $classAluno->setIdStudent($novoAluno);
+                $this->em->persist($classAluno);
                 $this->em->flush();
             }
         }
     }
 
-    public function gerarArrayTutores() {
-        $arrayTutores = array();
-        $tutores = TutorController::selecionarTutoresTurma();
-        foreach ($tutores as $tutor) {
-            $arrayTutores[] = array(
-                'idUser' => $tutor['idTutor']['idUser'],
-                'nmUser' => $tutor['idTutor']['nmUser'],
-                'nuIdentification' => $tutor['idTutor']['nuIdentification'],
-                'dsEmail' => $tutor['idTutor']['dsEmail'],
-                'nuCellphone' => $tutor['idTutor']['nuCellphone']
+    public function gerarArrayAlunos() {
+        $arrayAlunos = array();
+        $alunos = AlunosController::selecionarAlunosTurma();
+        foreach ($alunos as $aluno) {
+            $arrayAlunos[] = array(
+                'idUser' => $aluno['idStudent']['idUser'],
+                'nmUser' => $aluno['idStudent']['nmUser'],
+                'nuIdentification' => $aluno['idStudent']['nuIdentification'],
+                'dsEmail' => $aluno['idStudent']['dsEmail'],
+                'nuCellphone' => $aluno['idStudent']['nuCellphone']
             );
         }
-        return $arrayTutores;
+        return $arrayAlunos;
     }
 
-    public function selecionarTutoresTurma() {
+    public function selecionarAlunosTurma() {
         $idClass = $this->get('session')->get('idTurmaEdicao');
-        $queryBuilderTutor = $this->em->createQueryBuilder();
-        $queryBuilderTutor
-                ->select('u,ct,c')
-                ->from('AppBundle:TbClassTutor', "ct")
-                ->innerJoin('ct.idTutor', 'u', 'WITH', 'u.idUser =  ct.idTutor')
-                ->innerJoin('ct.idClass', 'c', 'WITH', 'c.idClass =  ct.idClass')
-                ->where($queryBuilderTutor->expr()->eq('ct.idClass', $idClass))
+        $queryBuilderAluno = $this->em->createQueryBuilder();
+        $queryBuilderAluno
+                ->select('u,cs,c')
+                ->from('AppBundle:TbClassStudent', "cs")
+                ->innerJoin('cs.idStudent', 'u', 'WITH', 'u.idUser =  cs.idStudent')
+                ->innerJoin('cs.idClass', 'c', 'WITH', 'c.idClass =  cs.idClass')
+                ->where($queryBuilderAluno->expr()->eq('cs.idClass', $idClass))
                 ->getQuery()
                 ->execute();
-        $tutoresTurma = $queryBuilderTutor->getQuery()->getArrayResult();
-        $this->logControle->logAdmin(print_r($tutoresTurma, true));
-        return $tutoresTurma;
+        $alunosTurma = $queryBuilderAluno->getQuery()->getArrayResult();
+        $this->logControle->logAdmin(print_r($alunosTurma, true));
+        return $alunosTurma;
     }
 
     /**
-     * @Route("/carregarTutoresArquivo")
+     * @Route("/carregarAlunosArquivo")
      */
-    function carregarTutoresArquivo(Request $request) {
+    function carregarAlunosArquivo(Request $request) {
         $this->logControle->logAdmin("FILES: " . print_r($_FILES, true));
 
         // Pasta onde o arquivo vai ser salvo
@@ -144,14 +144,14 @@ class TutorController extends Controller {
         $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
         // Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
-        if ($_FILES['tutores']['error'] != 0) {
+        if ($_FILES['alunos']['error'] != 0) {
             $this->logControle->logAdmin('1');
-            die("Não foi possível fazer o upload, erro:" . $_UP['erros'][$_FILES['tutores']['error']]);
+            die("Não foi possível fazer o upload, erro:" . $_UP['erros'][$_FILES['alunos']['error']]);
             exit; // Para a execução do script
         }
 
         // Faz a verificação do tamanho do arquivo
-        if ($_UP['tamanho'] < $_FILES['tutores']['size']) {
+        if ($_UP['tamanho'] < $_FILES['alunos']['size']) {
             $this->logControle->logAdmin('3');
             echo "O arquivo enviado é muito grande, envie arquivos de até 2Mb.";
             exit;
@@ -166,11 +166,11 @@ class TutorController extends Controller {
         } else {
             $this->logControle->logAdmin('5');
             // Mantém o nome original do arquivo
-            $nome_final = $_FILES['tutores']['name'];
+            $nome_final = $_FILES['alunos']['name'];
         }
 
         // Depois verifica se é possível mover o arquivo para a pasta escolhida
-        if (move_uploaded_file($_FILES['tutores']['tmp_name'], $_UP['pasta'] . $nome_final)) {
+        if (move_uploaded_file($_FILES['alunos']['tmp_name'], $_UP['pasta'] . $nome_final)) {
             $this->logControle->logAdmin('6');
             // Upload efetuado com sucesso, exibe uma mensagem e um link para o arquivo
             echo "Upload efetuado com sucesso!";
@@ -180,30 +180,28 @@ class TutorController extends Controller {
             // Não foi possível fazer o upload, provavelmente a pasta está incorreta
             echo "Não foi possível enviar o arquivo, tente novamente";
         }
-        ManipularArquivoController::persistirTutorAlunoTurmaArquivo($nome_final, "tutor");
-        return $this->redirectToRoute('tutores');
+        ManipularArquivoController::persistirTutorAlunoTurmaArquivo($nome_final, "aluno");
+        return $this->redirectToRoute('alunos');
     }
 
     /**
-     * @Route("/removerTutorTurma")
+     * @Route("/removerAlunoTurma")
      */
-    function removerTutorTurma(Request $request) {
+    function removerAlunoTurma(Request $request) {
         $this->em = $this->getDoctrine()->getEntityManager();
-        $flagGerouExcecao = false;
-        $usuariosExcecao = array();
         if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
             $data = json_decode($request->getContent(), true);
             $request->request->replace(is_array($data) ? $data : array());
-            $this->logControle->logAdmin("Excluir admnistradores : " . print_r($data, true));
-             $idClass = $this->get('session')->get('idTurmaEdicao');
+            $this->logControle->logAdmin("Excluir alunos turma : " . print_r($data, true));
+            $idClass =  $this->get('session')->get('idTurmaEdicao');
 
-            foreach ($data['arrayTutores'] as $idTutorRemover) {
+            foreach ($data['arrayAlunos'] as $idTutorRemover) {
                 $this->em = $this->getDoctrine()->resetManager();
                 $this->logControle->logAdmin("Remover  : " . print_r($idTutorRemover, true));
 
                 try {
-                    $entity = $this->em->getRepository('AppBundle:TbClassTutor')
-                            ->findOneBy(array('idTutor' => $idTutorRemover));
+                    $entity = $this->em->getRepository('AppBundle:TbClassStudent')
+                            ->findOneBy(array('idStudent' => $idTutorRemover));
                     if ($entity != null) {
                         $this->em->remove($entity);
                         $this->em->flush();
