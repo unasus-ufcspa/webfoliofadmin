@@ -136,13 +136,13 @@
 
           <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
-          <!-- <div id="listaUsers">
+          <div id="listaUsers">
               {% set i=0 %}
               {% for tutor in tutores %}
-                  {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista
+                  {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                       <div class="itemUserA itemUsuario">
-                          <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione
-                          <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro
+                          <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                          <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                           <div class="nomeUser">{{tutor.nmUser}}</div>
                           <div class="emailUser">{{tutor.dsEmail}}</div>
                           <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
@@ -172,7 +172,7 @@
               {%if tutores is empty %}
                   <h2 id="userEmpty">Não há tutores cadastrados</h2>
               {%endif%}
-          </div> -->
+          </div>
           <!-- <div id="excluirUsuario">
               <div id="titleExcluir">Excluir</div>
               <div id="mensagemExcluir">Tem certeza que deseja remover esses tutores da turma?</div>

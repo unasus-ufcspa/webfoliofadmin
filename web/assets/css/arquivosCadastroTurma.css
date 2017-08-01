@@ -1,0 +1,116 @@
+#inputArquivos{
+  width: 100%;
+  height: 230px;
+  background-color:rgba(145, 135, 199, 0.6)
+}
+.box{
+  width: 83%;
+  height: 192px;
+  border-radius: 35px;
+  border: dashed 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+  /*left:55px;*/
+  top: 18px;
+  margin: auto;
+}
+
+label.labelArquivos, .dragndropSpan{
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#divLabelArquivos{
+  width: 176px;
+  text-align: right;
+  position: relative;
+  left: 20%;
+  margin-top: 73px;
+}
+
+.buttonCarregar{
+  width: 145px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #ffffff;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  color: #9187c7;
+  border: none;
+}
+.buttonCarregar:disabled {
+  opacity: 0.7;
+}
+#divButtonArquivos{
+  position: relative;
+  left: 60%;
+  margin-top: -7%;
+}
+.selectArquivos{
+  display: none;
+}
+
+label img#iconArrastar{
+  width: 92px;
+  height: 88px;
+  position: relative;
+  left: 45%;
+  margin-top: -6%;
+}
+/*.dragndropSpan,*/
+.boxUploading,
+.boxSuccess,
+.boxError {
+  display: none;
+}
+.nomeArquivo{
+  position: relative;
+  left: 30%;
+  top: 30px;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 300;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 35px;
+  max-width: 500px;
+  padding-left: 15px;
+}
+
+/*@media screen and (max-width: 1500px){
+  .box{
+    width:79%;
+  }
+  #divLabelArquivos{
+      left: 22%;
+  }
+  label img#iconArrastar{
+    margin-top: -8%;
+  }
+  #divButtonArquivos{
+    left: 61%;
+    margin-top: -5%;
+  }
+}
+@media screen and (max-width: 1300px){
+  .box{
+    width:75%;
+  }
+}
+@media screen and (max-width: 1000px){
+  .box{
+    width:70%;
+  }
+  #divLabelArquivos{
+      left: 12%;
+  }
+  label img#iconArrastar{
+    margin-top: -9%;
+  }
+  #divButtonArquivos{
+    left: 65%;
+    margin-top: -10%;
+  }
+}*/
