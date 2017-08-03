@@ -140,6 +140,7 @@ class TurmasController extends Controller {
                 $dtFinish = $arrayTurma['dtFinish']->format('Y-m-d');
             }
             $dadosTurma = array(
+                'id' => $idClass,
                 'dsCode' => $arrayTurma['dsCode'],
                 'dsDescription' => $arrayTurma['dsDescription'],
                 'stStatus' => $arrayTurma['stStatus'],

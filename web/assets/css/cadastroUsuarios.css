@@ -273,7 +273,7 @@ input:checked +  label {
 #naoEncontrado{
   visibility: hidden;
 }
-/*
+
 #excluirUsuario, #alertEditar, #alertExcluirUsuario{
   width: 430px;
   height: 240px;
@@ -284,7 +284,7 @@ input:checked +  label {
   left: 50%;
   top:50%;
   margin-top: -120px;
-  margin-left: -215px;
+  margin-left: -280px;
   display: none;
 }
 #alertExcluirUsuario{
@@ -332,7 +332,7 @@ input:checked +  label {
   border-bottom-left-radius: 0px;
   background-color: #9187c7;
 }
-
+/*
 @media screen and (max-width: 1500px){
   .formEditar{
     width: 50%;

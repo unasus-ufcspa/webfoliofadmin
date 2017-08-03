@@ -10,31 +10,77 @@ html, body{
   position: fixed;
   top: 70px;
   left:50%;
-  width:700px;
+  width:850px;
   height: 100px;
   /*border: 1px pink dashed;*/
   margin-left: -465px;
 }
 
 .line{
-  width: 575px;
+  width: 700px;
   height: 2px;
   border: solid 1px #979797;
   position: relative;
   left: 50%;
   top:50%;
-  margin-left: -287.5px;
+  margin-left: -350px;
 }
-
+.linkCircle{
+  position: relative;
+  top:50%;
+}
 .circle{
   width: 90px;
   height: 90px;
   object-fit: contain;
-  background-color: #9187c7;
+  background-color: #979797;
   border-radius: 50%;
   position: relative;
-  top:50%;
-  margin-top: -45px;
+  /*top:50%;*/
+  /*margin-top: -45px;*/
+  
+}
+#circleTurma{
+  display: inline-block;
+  float: left;
+}
+#circlePortProp, #circleTutores, #circleAlunos{
+  display: inline-block;
+  float: left;
+  margin-left: 12%;
+}
+#circleTutoresAlunos{
+  display: inline-block;
+  float: right;
+}
+.iconCircleMenu{
+  margin-left: 25%;
+  margin-top: 25%;
+}
+.legenda{
+  width: 115px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #717070;
+  display: inline-block;
+  float: left;
+  position: relative;
+  top: 25px;
+  margin-right: 9.5%;
+}
+#legendaTurmas{
+  margin-left: -15px;
+}
+#legendaTutores{
+  width:105px;
+}
+#legendaAlunos{
+  margin-right: 9%;
+}
+#legendaTutoresAlunos{
+  margin-right: 5px;
+  width:90px;
 }
 
 .cadastroTurma, .cadastroPortProp{
@@ -45,7 +91,6 @@ html, body{
   min-height: 500px;
   margin-left: -615px;
   background-color: #e3e3e3;
-
 }
 
 .tituloCadastro {
