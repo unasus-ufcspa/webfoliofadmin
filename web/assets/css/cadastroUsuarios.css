@@ -2,16 +2,9 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
 }
-/*
-html, body{
-  height: 100%;
-}
-*/
 #delete{
   height: 75px;
-  width: 100%;
-  max-width: 100%;
-  /*width: 100px;*/
+  width: 1100px;
   position: fixed;
   bottom: 0;
   background-color: #fff;
@@ -19,9 +12,9 @@ html, body{
   border-top: solid 2px #c6c6c6;
 }
 #iconDelete{
-  /*float:right;*/
+  float:right;
   position: relative;
-  /*right: 105px;*/
+  right: 105px;
   top: 20px;
   cursor: pointer;
 }

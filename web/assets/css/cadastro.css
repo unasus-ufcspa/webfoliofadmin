@@ -4,16 +4,16 @@
 }
 html, body{
   height: 100%;
+  overflow: auto;
 }
 
 .menuIcones{
-  position: fixed;
+  position: absolute;
   top: 70px;
   left:50%;
   width:850px;
   height: 100px;
-  /*border: 1px pink dashed;*/
-  margin-left: -465px;
+  margin-left: -475px;
 }
 
 .line{
@@ -36,9 +36,6 @@ html, body{
   background-color: #979797;
   border-radius: 50%;
   position: relative;
-  /*top:50%;*/
-  /*margin-top: -45px;*/
-  
 }
 #circleTurma{
   display: inline-block;
@@ -84,7 +81,7 @@ html, body{
 }
 
 .cadastroTurma, .cadastroPortProp{
-  position: fixed;
+  position: absolute;
   top: 300px;
   left:50%;
   width:1100px;

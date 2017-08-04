@@ -19,12 +19,22 @@
 
     <body>
         {{ include('menuLateral.html.twig') }}
-        {{ include('menuLateralCadastro.html.twig') }}
+          {% include 'menuLateralCadastro.html.twig' with {"dadosMenuLateralCadastro": dadosMenuLateralCadastro } only %}
 
         <div class="menuIcones">
           <div class="line"></div>
-          <div class="circle"></div><div class="legenda">TURMAS</div>
-        <div>
+          <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
+          <a href="{{web_dir}}portfolioPropositor" class="linkCircle"><div class="circle" id="circlePortProp"><img src="/webfolioAdmin/assets/img/Portfólio e Propositores.png" class="iconCircleMenu"></div></a>
+          <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores" style="background-color: #9187c7;"><img src="/webfolioAdmin/assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
+          <a href="{{web_dir}}alunos" class="linkCircle"><div class="circle" id="circleAlunos"><img src="/webfolioAdmin/assets/img/menuAlunos.png" width="90" height="90"></div></a>
+          <a href="#" class="linkCircle"><div class="circle" id="circleTutoresAlunos"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
+
+          <div class="legenda" id="legendaTurmas">TURMAS</div>
+          <div class="legenda">PORTFÓLIOS E PROPOSITORES</div>
+          <div class="legenda" id="legendaTutores">TUTORES</div>
+          <div class="legenda" id="legendaAlunos">ALUNOS</div>
+          <div class="legenda" id="legendaTutoresAlunos">TUTORES E ALUNOS</div>
+        </div>
         <div class="cadastroPortProp">
           <div id="header">
               <img src="../assets/img/person-branco.png" id="iconPessoa">
@@ -189,14 +199,12 @@
                 <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
               </div>
           </div>
-          <!-- <div id="delete">
+          <div id="delete">
               <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
-          </div> -->
+          </div>
 
           <!-- <input type="submit" class="salvarPortfolioPropositor" value="SALVAR"> -->
         </div>
-
-
     </body>
 </html>
 <script src="../assets/js/registroUsuarios.js"></script>
