@@ -60,10 +60,11 @@ class AlunosController extends Controller {
                 }
             }
 
+            $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
 
             return $this->render('alunos.html.twig', array('alunos' => $arrayAlunos,
                         'formAluno' => $this->formEditarAluno->createView(),
-                        'formAddAluno' => $this->formAdicionarAluno->createView()));
+                        'formAddAluno' => $this->formAdicionarAluno->createView(), 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
         }
     }
 

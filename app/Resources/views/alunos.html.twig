@@ -22,13 +22,13 @@
 
     <body>
         {{ include('menuLateral.html.twig') }}
-          {% include 'menuLateralCadastro.html.twig' with {"dadosMenuLateralCadastro": dadosMenuLateralCadastro } only %}
+        {{ include('menuLateralCadastro.html.twig') }}
 
           <div class="menuIcones">
             <div class="line"></div>
             <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
             <a href="{{web_dir}}portfolioPropositor" class="linkCircle"><div class="circle" id="circlePortProp"><img src="/webfolioAdmin/assets/img/Portfólio e Propositores.png" class="iconCircleMenu"></div></a>
-            <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores" style="background-color: #9187c7;"><img src="/webfolioAdmin/assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
+            <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores"><img src="/webfolioAdmin/assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
             <a href="{{web_dir}}alunos" class="linkCircle"><div class="circle" id="circleAlunos"><img src="/webfolioAdmin/assets/img/menuAlunos.png" width="90" height="90"></div></a>
             <a href="#" class="linkCircle"><div class="circle" id="circleTutoresAlunos"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
 
@@ -38,173 +38,175 @@
             <div class="legenda" id="legendaAlunos">ALUNOS</div>
             <div class="legenda" id="legendaTutoresAlunos">TUTORES E ALUNOS</div>
           </div>
-          
-        <div id="header">
-            <img src="../assets/img/person-branco.png" id="iconPessoa">
-            <span id="titulo">ALUNOS</span>
-        </div>
-        <div id="pesquisa">
-          <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
-          <input type="text" placeholder="Procurar aluno" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO ALUNO</div>
-        </div>
 
-        <div id="inputArquivos">
-          <form class="box" method="post" action="{{web_dir}}carregarAlunosArquivo" enctype="multipart/form-data">
-            <div class="boxInput">
-              <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
-              <input class="selectArquivos" type="file" name="alunos" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
-              <div class="nomeArquivo"></div>
-              <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
+          <div class="cadastroPortProp">
+            <div id="header">
+              <img src="../assets/img/person-branco.png" id="iconPessoa">
+              <span id="titulo">ALUNOS</span>
             </div>
-            <div class="boxUploading">Carregando&hellip;</div>
-            <div class="boxSuccess">Concluído!</div>
-            <div class="boxError">Erro!<span></span>.</div>
-          </form>
-        </div>
+            <div id="pesquisa">
+              <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+              <input type="text" placeholder="Procurar aluno" id="inputPesquisa">
+              <div class="ui medium button" id="addUser" onclick="addUser();">NOVO ALUNO</div>
+            </div>
 
-       <div id="formEditUser" style="display:none;">
-          {{ form_start(formAluno) }}
-              <div class="ui grid" >
-                  <div class="twelve wide column grid">
-                    <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+            <div id="inputArquivos">
+              <form class="box" method="post" action="{{web_dir}}carregarAlunosArquivo" enctype="multipart/form-data">
+                <div class="boxInput">
+                  <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
+                  <input class="selectArquivos" type="file" name="alunos" id="file" data-multiple-caption="{count} arquivos selecionados" multiple />
+                  <div class="nomeArquivo"></div>
+                  <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
+                </div>
+                <div class="boxUploading">Carregando&hellip;</div>
+                <div class="boxSuccess">Concluído!</div>
+                <div class="boxError">Erro!<span></span>.</div>
+              </form>
+            </div>
+
+           <div id="formEditUser" style="display:none;">
+              {{ form_start(formAluno) }}
+                  <div class="ui grid" >
+                      <div class="twelve wide column grid">
+                        <div class="rowEditar">
+                            <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                            {{form_row(formAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                            {{form_row(formAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/lock.png" class="iconesFormEditar">
+                            {{form_row(formAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/lock.png" class="iconesFormEditar">
+                            {{form_row(formAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        </div>
                     </div>
 
-                    <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                    <div class="four wide column grid"  id="colunaDireita">
+                        <div class="rowEditar">
+                            <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                            {{form_row(formAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        </div>
+                        <div class="rowEditar">
+                            <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                            {{form_row(formAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        </div>
+                        {{form_row(formAluno.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        <input type="submit" id="salvarEdicao" value="SALVAR">
+                        <div id="closeEditar">+</div>
                     </div>
                 </div>
+                {{ form_end(formAluno) }}
+            </div>
 
-                <div class="four wide column grid"  id="colunaDireita">
-                    <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+
+            <div class="divAddUser">
+                {{ form_start(formAddAluno) }}
+                <div class="ui grid">
+                    <div class="twelve wide column grid">
+                        <div class="rowEditar">
+                            <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                            {{form_row(formAddAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                            {{form_row(formAddAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/lock.png" class="iconesFormEditar">
+                            {{form_row(formAddAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            <img src="../assets/img/lock.png" class="iconesFormEditar">
+                            {{form_row(formAddAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
+                        </div>
                     </div>
-                    <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+
+                    <div class="four wide column grid" id="colunaDireita">
+                        <div class="rowEditar">
+                            <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                            {{form_row(formAddAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
+                        </div>
+                        <div class="rowEditar">
+                            <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                            {{form_row(formAddAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
+                        </div>
+                        <input type="submit" id="salvarEdicao" value="SALVAR" >
+                        <div id="closeAdd" onclick="closeaddUser();">+</div>
                     </div>
-                    {{form_row(formAluno.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                    <input type="submit" id="salvarEdicao" value="SALVAR">
-                    <div id="closeEditar">+</div>
+                </div>
+                {{ form_end(formAddAluno) }}
+            </div>
+
+            <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
+
+            <div id="listaUsers">
+                {% set i=0 %}
+                {% for aluno in alunos %}
+                    {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+                        <div class="itemUserA itemUsuario">
+                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                            <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                            <div class="nomeUser">{{aluno.nmUser}}</div>
+                            <div class="emailUser">{{aluno.dsEmail}}</div>
+                            <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
+                                  onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                             "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
+                                             "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                             "{{aluno.idUser}}")'>
+                        </div>
+                    {% else %}
+                        <div class="itemUserB itemUsuario">
+                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser">
+                            <label for="{{i}}"></label>
+                            <div class="nomeUser">{{aluno.nmUser}}</div>
+                            <div class="emailUser">{{aluno.dsEmail}}</div>
+                            <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
+                                 onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                             "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
+                                             "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                             "{{aluno.idUser}}")'>
+                        </div>
+                    {% endif %}
+                    <div class="editarUser" id="{{i}}">
+                    </div>
+                    {% set i = i+1 %}
+                {% endfor %}
+
+                {%if alunos is empty %}
+                    <h2 id="userEmpty">Não há alunos cadastrados</h2>
+                {%endif%}
+            </div>
+            <div id="excluirUsuario">
+                <div id="titleExcluir">Excluir</div>
+                <div id="mensagemExcluir">Tem certeza que deseja excluir esse aluno?</div>
+                <div id="optionExcluir">
+                  <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
+                  <div id="confirmarExcluir" onClick ='confirmarRemoverAlunosTurma("{{web_dir}}");'>SIM</div>
                 </div>
             </div>
-            {{ form_end(formAluno) }}
-        </div>
-
-
-        <div class="divAddUser">
-            {{ form_start(formAddAluno) }}
-            <div class="ui grid">
-                <div class="twelve wide column grid">
-                    <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
-                        {{form_row(formAddAluno.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
-                        {{form_row(formAddAluno.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAddAluno.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-
-                    <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
-                        {{form_row(formAddAluno.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar'  }})}}
-                    </div>
-                </div>
-
-                <div class="four wide column grid" id="colunaDireita">
-                    <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
-                        {{form_row(formAddAluno.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
-                        {{form_row(formAddAluno.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
-                    </div>
-                    <input type="submit" id="salvarEdicao" value="SALVAR" >
-                    <div id="closeAdd" onclick="closeaddUser();">+</div>
+            <div id="alertEditar">
+                <div id="titleAlert">Descartar edição</div>
+                <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse aluno?</div>
+                <div id="optionAlert">
+                  <div id="sairEditar">Sair</div>
+                  <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
                 </div>
             </div>
-            {{ form_end(formAddAluno) }}
-        </div>
-
-        <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
-
-        <div id="listaUsers">
-            {% set i=0 %}
-            {% for aluno in alunos %}
-                {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-                    <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                        <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeUser">{{aluno.nmUser}}</div>
-                        <div class="emailUser">{{aluno.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
-                              onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
-                                         "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
-                                         "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
-                                         "{{aluno.idUser}}")'>
-                    </div>
-                {% else %}
-                    <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser">
-                        <label for="{{i}}"></label>
-                        <div class="nomeUser">{{aluno.nmUser}}</div>
-                        <div class="emailUser">{{aluno.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
-                             onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
-                                         "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
-                                         "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
-                                         "{{aluno.idUser}}")'>
-                    </div>
-                {% endif %}
-                <div class="editarUser" id="{{i}}">
-                </div>
-                {% set i = i+1 %}
-            {% endfor %}
-
-            {%if alunos is empty %}
-                <h2 id="userEmpty">Não há alunos cadastrados</h2>
-            {%endif%}
-        </div>
-        <div id="excluirUsuario">
-            <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Tem certeza que deseja excluir esse aluno?</div>
-            <div id="optionExcluir">
-              <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir" onClick ='confirmarRemoverAlunosTurma("{{web_dir}}");'>SIM</div>
+            <div id="delete">
+                <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
             </div>
-        </div>
-        <div id="alertEditar">
-            <div id="titleAlert">Descartar edição</div>
-            <div id="mensagemAlert">As alterações feitas serão perdidas. Deseja voltar a editar esse aluno?</div>
-            <div id="optionAlert">
-              <div id="sairEditar">Sair</div>
-              <div id="voltarEditar" onclick="cancelarFechar();">SIM</div>
-            </div>
-        </div>
-        <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
-        </div>
+          </div>
     </body>
 </html>
 <script src="../assets/js/registroUsuarios.js"></script>
