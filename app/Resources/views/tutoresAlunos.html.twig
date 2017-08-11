@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <title>Tutores e Alunos</title>
+
+        <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/cadastroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/cadastro.css">
+
+        <style>
+          .arrastarAluno{
+            margin-top: 10px;
+            width: 100%;
+            height: 400px;
+            background-color: #d6d6d6;
+          }
+          .boxArrastarAluno{
+            width: 95%;
+            height: 70%;
+            border-radius: 45px;
+            border: dashed 3px rgba(255, 255, 255, 0.6);
+            position: relative;
+            top: 10%;
+            margin: auto;
+          }
+          .boxArrastarAluno.over{
+            border: 2px dashed #FFF;
+          }
+          .textArrastarAluno{
+            width: 350px;
+            height: 78px;
+            font-size: 30px;
+            text-align: right;
+            color: #ffffff;
+            line-height: 35px;
+            font-weight: 400;
+            position: relative;
+            left: 150px;
+            top: 90px;
+          }
+          #logoArrastarAluno{
+            margin-top:0%;
+          }
+          .nomeTutor{
+            width: 350px;
+            height: 65px;
+            border-radius: 100px;
+            background-color: #717070;
+            font-size: 20px;
+            font-weight: 400;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-top: 16px;
+            position: relative;
+            top: 20px;
+            left: 30px;
+          }
+          .salvarTutoresAlunos{
+            width: 170px;
+            height: 65px;
+            border-radius: 100px;
+            border: solid 2px #FFF;
+            font-size: 20px;
+            font-weight: 900;
+            text-align: center;
+            color: #ffffff;
+            cursor: pointer;
+            background-color: #9187c7;
+            position: relative;
+            float: right;
+          }
+        </style>
+    </head>
+    <body>
+      {{ include('menuLateral.html.twig') }}
+
+      <div class="menuIcones">
+        <div class="line"></div>
+        <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
+        <a href="{{web_dir}}portfolioPropositor" class="linkCircle"><div class="circle" id="circlePortProp"><img src="/webfolioAdmin/assets/img/Portfólio e Propositores.png" class="iconCircleMenu"></div></a>
+        <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores"><img src="/webfolioAdmin/assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
+        <a href="{{web_dir}}alunos" class="linkCircle"><div class="circle" id="circleAlunos"><img src="/webfolioAdmin/assets/img/menuAlunos.png" width="90" height="90"></div></a>
+        <a href="{{web_dir}}tutoresAlunos" class="linkCircle"><div class="circle" id="circleTutoresAlunos" style="background-color: #9187c7;"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
+
+        <div class="legenda" id="legendaTurmas">TURMAS</div>
+        <div class="legenda">PORTFÓLIOS E PROPOSITORES</div>
+        <div class="legenda" id="legendaTutores">TUTORES</div>
+        <div class="legenda" id="legendaAlunos">ALUNOS</div>
+        <div class="legenda" id="legendaTutoresAlunos">TUTORES E ALUNOS</div>
+      </div>
+
+      <div class="cadastroPortProp">
+        <div class="boxTitulo">
+          <span class="titleBoxTitulo">Alunos</span><br><br>
+          Aqui você adiciona os ALUNOS aos seus respectivos tutores.<br>
+          Ex: Turma A > Portfólio B > Tutor C > Aluno D e Aluna E
+        </div>
+
+        <div class="arrastarAluno">
+          <div class="nomeTutor">Roxxxy Andrews</div>
+          <div class="boxArrastarAluno" id="boxArrastarAluno" >
+            <div class="textArrastarAluno">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
+            <img class="logoArrastar" id="logoArrastarAluno" src="/webfolioAdmin/assets/img/arraste.png">
+          </div>
+        </div>
+        <div class="arrastarAluno">
+          <div class="nomeTutor">Roxxxy Andrews</div>
+          <div class="boxArrastarAluno" id="boxArrastarAluno" >
+            <div class="textArrastarAluno">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
+            <img class="logoArrastar" id="logoArrastarAluno" src="/webfolioAdmin/assets/img/arraste.png">
+          </div>
+        </div>
+        <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
+      </div>
+    </body>
+</html>
