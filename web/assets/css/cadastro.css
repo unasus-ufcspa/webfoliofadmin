@@ -278,9 +278,7 @@ input.toggle-round-flat:checked + label:after {
   color: #ffffff;
   cursor: pointer;
   background-color: #9187c7;
-  /*margin: 50px;*/
   position: relative;
-  /*top: 80px;*/
   float: right;
 }
 
@@ -373,4 +371,98 @@ input.toggle-round-flat:checked + label:after {
   font-weight: 400;
   color: #ffffff;
   margin:30px;
+}
+
+/*Alunos/Tutor*/
+
+.arrastarAluno{
+  margin-top: 10px;
+  width: 100%;
+  height: 400px;
+  background-color: #d6d6d6;
+}
+.boxArrastarAluno{
+  width: 95%;
+  height: 70%;
+  border-radius: 45px;
+  border: dashed 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+  top: 10%;
+  margin: auto;
+}
+.boxArrastarAluno.over{
+  border: 2px dashed #FFF;
+}
+.textArrastarAluno{
+  width: 350px;
+  height: 78px;
+  font-size: 30px;
+  text-align: right;
+  color: #ffffff;
+  line-height: 35px;
+  font-weight: 400;
+  position: relative;
+  left: 150px;
+  top: 90px;
+}
+#logoArrastarAluno{
+  margin-top:0%;
+}
+.nomeTutor, .itemAlunoTutor{
+  width: 300px;
+  height: 65px;
+  border-radius: 100px;
+  background-color: #717070;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 16px;
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+.salvarTutoresAlunos{
+  width: 170px;
+  height: 65px;
+  border-radius: 100px;
+  border: solid 2px #FFF;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #9187c7;
+  position: relative;
+  margin:50px;
+  float: right;
+}
+
+.itemAlunoTutor{
+  background-color: #ffffff;
+  color: #6b6b6b;
+  display: inline-block;
+  margin-right: 20px;
+  margin-left: 20px;
+  left: 15px;
+  margin-bottom: 20px;
+  width: 450px;
+}
+
+.removerAluno{
+  float: right;
+  font-weight: 300;
+  width: 5%;
+  height: 100%;
+  font-size:35px;
+  transform: rotate(-45deg);
+  color: solid 2px #9187c7;
+  cursor: pointer;
+  display: inline-block;
+}
+.infoAluno{
+  display: inline-block;
+  width: 85%;
+  font-weight: bold;
 }

@@ -18,24 +18,4 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
-
-
-    /**
-     * @Route("/tutoresAlunos", name="tutoresAlunos")
-     */
-    function tutoresAlunosAction(Request $request) {
-
-        if (!$this->get('session')->get('idUser')) {
-
-            return $this->redirectToRoute('login');
-        } else {
-            $this->em = $this->getDoctrine()->getManager();
-
-            // $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
-
-            // return $this->render('tutoresAlunos.html.twig', array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
-            return $this->render('tutoresAlunos.html.twig');
-
-        }
-    }
 }
