@@ -1,6 +1,6 @@
 * {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 html, body{
   height: 100%;
@@ -361,7 +361,7 @@ input.toggle-round-flat:checked + label:after {
 }
 
 .boxArrastar > .subitemCadastro{
-  width: 354px;
+  /*width: 354px;
   height: 62px;
   border-radius: 100px;
   background-color: #717070;
@@ -370,7 +370,33 @@ input.toggle-round-flat:checked + label:after {
   font-size: 20px;
   font-weight: 400;
   color: #ffffff;
-  margin:30px;
+  margin:30px;*/
+
+  height: 65px;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 16px;
+  position: relative;
+  top: 20px;
+
+  background-color: #ffffff;
+  color: #6b6b6b;
+  display: inline-block;
+  /*margin-right: 20px;*/
+  margin-left: 20px;
+  left: 15px;
+  margin-bottom: 20px;
+  width: 450px;
+}
+.subitemCadastro > a{
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b6b;
+  width: 80%;
 }
 
 /*Alunos/Tutor*/
@@ -450,7 +476,7 @@ input.toggle-round-flat:checked + label:after {
   width: 450px;
 }
 
-.removerAluno{
+.removerAluno, .removerPortfolio{
   float: right;
   font-weight: 300;
   width: 5%;

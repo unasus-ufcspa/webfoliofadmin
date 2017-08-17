@@ -43,36 +43,4 @@ class TutoresAlunosController extends Controller {
             return $this->render('tutoresAlunos.html.twig', array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
         }
     }
-
-    // public function gerarArrayAlunos() {
-    //     $arrayAlunos = array();
-    //     $alunos = AlunosController::selecionarAlunosTurma();
-    //     foreach ($alunos as $aluno) {
-    //         $arrayAlunos[] = array(
-    //             'idUser' => $aluno['idStudent']['idUser'],
-    //             'nmUser' => $aluno['idStudent']['nmUser'],
-    //             'nuIdentification' => $aluno['idStudent']['nuIdentification'],
-    //             'dsEmail' => $aluno['idStudent']['dsEmail'],
-    //             'nuCellphone' => $aluno['idStudent']['nuCellphone']
-    //         );
-    //     }
-    //     return $arrayAlunos;
-    // }
-    //
-    // public function selecionarAlunosTurma() {
-    //     $idClass = $this->get('session')->get('idTurmaEdicao');
-    //     $queryBuilderAluno = $this->em->createQueryBuilder();
-    //     $queryBuilderAluno
-    //             ->select('u,cs,c')
-    //             ->from('AppBundle:TbClassStudent', "cs")
-    //             ->innerJoin('cs.idStudent', 'u', 'WITH', 'u.idUser =  cs.idStudent')
-    //             ->innerJoin('cs.idClass', 'c', 'WITH', 'c.idClass =  cs.idClass')
-    //             ->where($queryBuilderAluno->expr()->eq('cs.idClass', $idClass))
-    //             ->getQuery()
-    //             ->execute();
-    //     $alunosTurma = $queryBuilderAluno->getQuery()->getArrayResult();
-    //     $this->logControle->logAdmin(print_r($alunosTurma, true));
-    //     return $alunosTurma;
-    // }
-
 }
