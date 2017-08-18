@@ -8,11 +8,11 @@
 
         <title>Turmas</title>
 
-        <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
+        <script src="../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/registroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/registroUsuarios.css">
     </head>
 
     <body>
@@ -37,7 +37,7 @@
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser"> {%if turma.idPortfolio >-1 %} {{turma. dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';"> 
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';">
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
@@ -46,7 +46,7 @@
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser">{%if turma.idPortfolio >-1 %} {{turma.dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';">
-                    </div>  
+                    </div>
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
                 </div>

@@ -11,11 +11,18 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
+    // public function indexAction(Request $request)
+    // {
+    //     return $this->render('default/index.html.twig', [
+    //         'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+    //     ]);
+    // }
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+      if (!$this->get('session')->get('idUser')) {
+          return $this->redirectToRoute('login');
+      } else {
+          return $this->redirectToRoute('home');
+      }
     }
 }

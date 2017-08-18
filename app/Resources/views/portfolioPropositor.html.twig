@@ -8,8 +8,8 @@
 
         <title>Portfólios e Propositor</title>
 
-        <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
+        <script src="../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../assets/css/cadastro.css">
@@ -22,11 +22,11 @@
 
         <div class="menuIcones">
           <div class="line"></div>
-          <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
-          <a href="{{web_dir}}portfolioPropositor" class="linkCircle"><div class="circle" style="background-color: #9187c7;" id="circlePortProp"><img src="/webfolioAdmin/assets/img/Portfólio e Propositores.png" class="iconCircleMenu"></div></a>
-          <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores"><img src="/webfolioAdmin/assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
-          <a href="{{web_dir}}alunos" class="linkCircle"><div class="circle" id="circleAlunos"><img src="/webfolioAdmin/assets/img/menuAlunos.png" width="90" height="90"></div></a>
-          <a href="{{web_dir}}tutoresAlunos" class="linkCircle"><div class="circle" id="circleTutoresAlunos"><img src="/webfolioAdmin/assets/img/Turma.png" class="iconCircleMenu"></div></a>
+          <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="../assets/img/Turma.png" class="iconCircleMenu"></div></a>
+          <a href="{{web_dir}}portfolioPropositor" class="linkCircle"><div class="circle" style="background-color: #9187c7;" id="circlePortProp"><img src="../assets/img/Portfólio e Propositores.png" class="iconCircleMenu"></div></a>
+          <a href="{{web_dir}}tutores" class="linkCircle"><div class="circle" id="circleTutores"><img src="../assets/img/Tutores.png" class="iconCircleMenu" width="35" height="45"></div></a>
+          <a href="{{web_dir}}alunos" class="linkCircle"><div class="circle" id="circleAlunos"><img src="../assets/img/menuAlunos.png" width="90" height="90"></div></a>
+          <a href="{{web_dir}}tutoresAlunos" class="linkCircle"><div class="circle" id="circleTutoresAlunos"><img src="../assets/img/Turma.png" class="iconCircleMenu"></div></a>
 
           <div class="legenda" id="legendaTurmas">TURMA</div>
           <div class="legenda">PORTFÓLIOS E PROPOSITORES</div>
@@ -44,17 +44,17 @@
           <div class="arrastePortfolio">
             <div class="boxArrastar boxPortfolio" id="boxArrastar" ondrop="dropPort(event)" ondragover="allowDrop(event)">
               <div class="textArrastar">arraste e solte um<br>PORTFÓLIO</div>
-              <img  class="logoArrastar" src="/webfolioAdmin/assets/img/arraste.png">
+              <img  class="logoArrastar" src="../assets/img/arraste.png">
             </div>
           </div>
           <div class="arrastePropositor">
             <div class="boxArrastar boxPropositor" id="boxArrastar" ondrop="dropProp(event)" ondragover="allowDrop(event)">
               <div class="textArrastar" >arraste e solte um<br>PROPOSITOR</div>
-              <img  class="logoArrastar" src="/webfolioAdmin/assets/img/arraste.png" >
+              <img  class="logoArrastar" src="../assets/img/arraste.png" >
             </div>
           </div>
           <input type="submit" class="salvarPortfolioPropositor" value="SALVAR">
         </div>
     </body>
 </html>
-<script src="/webfolioAdmin/assets/js/portfolioPropositor.js"></script>
+<script src="../assets/js/portfolioPropositor.js"></script>
