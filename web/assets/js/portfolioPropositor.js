@@ -1,4 +1,5 @@
 var dragSrcEl = null;
+var arrayIdPortfolio = [];
 
 function handleDragEnter(e) {
   this.classList.add('over');
@@ -20,21 +21,30 @@ function drag(ev) {
 }
 
 function dropPort(ev) {
-    if (ev.stopPropagation) {
-      ev.stopPropagation(); // Stops some browsers from redirecting.
+  if (ev.stopPropagation) {
+    ev.stopPropagation(); // Stops some browsers from redirecting.
+  }
+
+  $( ".textArrastar:first" ).hide();
+  $( ".logoArrastar:eq(0)" ).hide();
+
+  var node = document.createElement('div');
+  node.innerHTML = ev.dataTransfer.getData("text/html");
+
+  var flagItemPresente=false;
+  for(var i = 0; i<arrayIdPortfolio.length; i++){
+    if(arrayIdPortfolio[i]==node.childNodes[0].id){
+      flagItemPresente=true;
     }
+  }
 
-    $( ".textArrastar:first" ).hide();
-    $( ".logoArrastar:eq(0)" ).hide();
-
-    node = document.createElement('div');
-    node.innerHTML = ev.dataTransfer.getData("text/html");
-
-    nodeItem = document.createElement('div');
+  if(flagItemPresente!=true){
+    var nodeItem = document.createElement('div');
     nodeItem.className += "itemPortfolioPropositor";
     nodeItem.id = node.childNodes[0].id;
+    arrayIdPortfolio.push(node.childNodes[0].id);
 
-    nodeItemInfo = document.createElement('div');
+    var nodeItemInfo = document.createElement('div');
     nodeItemInfo.className += "infoPortfolio";
 
     if(node.textContent.length>35){
@@ -43,14 +53,16 @@ function dropPort(ev) {
       nodeItemInfo.textContent = node.textContent;
     }
 
-    nodeItemRemover = document.createElement('div');
+    var nodeItemRemover = document.createElement('div');
     nodeItemRemover.innerHTML = "+";
     nodeItemRemover.className = "removerItemPortfolio";
+    nodeItemRemover.onclick = function() { $("div#"+nodeItem.id+".itemPortfolioPropositor").remove();   arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(nodeItem.id), 1 );};
 
     nodeItem.appendChild(nodeItemInfo);
     nodeItem.appendChild(nodeItemRemover);
     document.getElementsByClassName("boxPortfolio")[0].appendChild(nodeItem);
-    return false;
+  }
+  return false;
 }
 
 function dropProp(ev) {
