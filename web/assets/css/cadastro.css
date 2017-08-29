@@ -307,9 +307,11 @@ input.toggle-round-flat:checked + label:after {
 .arrastePortfolio, .arrastePropositor{
   margin-top: 10px;
   width: 100%;
-  height: 230px;
+  /*height: 230px;*/
   min-height: 230px;
   background-color: #d6d6d6;
+  /*overflow-y: auto;*/
+  padding-bottom: 20px;
 }
 
 .arrastePropositor{
@@ -319,12 +321,17 @@ input.toggle-round-flat:checked + label:after {
 
 .boxArrastar{
   width: 95%;
-  min-height: 87%;
+  /*height: 87%;*/
+  /*height: 95%;*/
+  min-height: 210px;
   border-radius: 45px;
   border: dashed 3px rgba(255, 255, 255, 0.6);
   position: relative;
-  top: 6.5%;
+  /*top: 6.5%;*/
+  top:10px;
   margin: auto;
+  /*margin-top:6.5%;*/
+  padding-bottom: 15px;
 }
 
 .boxArrastar.over{
@@ -477,7 +484,7 @@ input.toggle-round-flat:checked + label:after {
   width: 450px;
 }
 
-.removerAluno, .removerItemPortfolio{
+.removerAluno, .removerItemPortProp{
   float: right;
   font-weight: 300;
   width: 5%;
@@ -487,9 +494,13 @@ input.toggle-round-flat:checked + label:after {
   color: solid 2px #9187c7;
   cursor: pointer;
   display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.infoAluno, .infoPortfolio{
+.infoAluno, .infoPortfolio, .infoPropositor{
   display: inline-block;
   width: 85%;
   font-weight: bold;

@@ -11,28 +11,28 @@
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMPortfolios">
         {% for portfolio in dadosMenuLateralCadastro.arrayDadosPortfolios %}
-            <a href="#" class="subitemCadastro" draggable="true"  ondragstart="drag(event)" id="{{ portfolio.idPortfolio}}">{{portfolio.dsTitle}}</a>
+            <a href="#" class="subitemCadastro subitemPortfolio" draggable="true"  ondragstart="drag(event)" id="{{ portfolio.idPortfolio}}">{{portfolio.dsTitle}}</a>
         {%endfor%}
     </div>
 
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('prop')">Propositores<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMPropositores">
         {% for propositores in dadosMenuLateralCadastro.arrayDadosPropositores %}
-            <a href="#" class="subitemCadastro" draggable="true"  ondragstart="drag(event)" id="{{ propositores.idUser }}">{{propositores.nmUser}}</a>
+            <a href="#" class="subitemCadastro subitemPropositor" draggable="true"  ondragstart="drag(event)" id="{{ propositores.idUser }}">{{propositores.nmUser}}</a>
         {%endfor%}
     </div>
 
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('tutor')">Tutores<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMTutores">
         {% for tutores in dadosMenuLateralCadastro.arrayDadosTutores %}
-            <a href="#" class="subitemCadastro" draggable="true"  ondragstart="drag(event)" id="{{ tutores.idUser }}">{{tutores.nmUser}}</a>
+            <a href="#" class="subitemCadastro subitemTutor" draggable="true"  ondragstart="drag(event)" id="{{ tutores.idUser }}">{{tutores.nmUser}}</a>
         {%endfor%}
     </div>
 
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMAlunos">
        {% for alunos in dadosMenuLateralCadastro.arrayDadosAlunos %}
-            <a href="#" class="subitemCadastro" draggable="true"  ondragstart="drag(event)">{{alunos.nmUser}}</a>
+            <a href="#" class="subitemCadastro subitemAluno" draggable="true"  ondragstart="drag(event)">{{alunos.nmUser}}</a>
         {%endfor%}
     </div>
 </div>
