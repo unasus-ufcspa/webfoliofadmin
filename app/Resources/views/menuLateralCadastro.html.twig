@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../assets/css/menuLateralCadastro.css">
+<link rel="stylesheet" type="text/css" href="/webfolioAdmin/assets/css/menuLateralCadastro.css">
 
 
 <div class="bodyMenuCadastro">
@@ -32,7 +32,7 @@
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('aluno')">Alunos<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMAlunos">
        {% for alunos in dadosMenuLateralCadastro.arrayDadosAlunos %}
-            <a href="#" class="subitemCadastro subitemAluno" draggable="true"  ondragstart="drag(event)">{{alunos.nmUser}}</a>
+            <a href="#" class="subitemCadastro subitemAluno" id="{{ alunos.idUser }}" draggable="true"  ondragstart="drag(event)" >{{alunos.nmUser}}</a>
         {%endfor%}
     </div>
 </div>

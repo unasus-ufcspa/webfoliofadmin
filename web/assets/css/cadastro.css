@@ -439,10 +439,8 @@ input.toggle-round-flat:checked + label:after {
   left: 150px;
   top: 90px;
 }
-#logoArrastarAluno{
-  margin-top:0%;
-}
-.nomeTutor, .itemAlunoTutor, .itemPortfolioPropositor{
+
+.nomeTutor, .itemAlunoTutor, .itemPortfolio, .itemPropositor{
   width: 300px;
   height: 65px;
   border-radius: 100px;
@@ -473,7 +471,7 @@ input.toggle-round-flat:checked + label:after {
   float: right;
 }
 
-.itemAlunoTutor, .itemPortfolioPropositor{
+.itemAlunoTutor, .itemPortfolio, .itemPropositor{
   background-color: #ffffff;
   color: #6b6b6b;
   display: inline-block;

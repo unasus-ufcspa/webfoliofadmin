@@ -43,7 +43,7 @@ function dropPort(ev) {
     if(flagItemPresente!=true){
 
       var nodeItem = document.createElement('div');
-      nodeItem.className += "itemPortfolioPropositor";
+      nodeItem.className += "itemPortfolio";
       nodeItem.id = node.childNodes[0].id;
       arrayIdPortfolio.push(node.childNodes[0].id);
 
@@ -62,7 +62,7 @@ function dropPort(ev) {
       nodeItemRemover.innerHTML = "+";
       nodeItemRemover.className = "removerItemPortProp";
       nodeItemRemover.onclick = function() {
-        $("div#"+nodeItem.id+".itemPortfolioPropositor").remove();
+        $("div#"+nodeItem.id+".itemPortfolio").remove();
         $("a#"+nodeItem.id+".subitemPortfolio").css("color", "white");
         arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(nodeItem.id), 1 );
         if(arrayIdPortfolio.length==0){
@@ -102,7 +102,7 @@ function dropProp(ev) {
 
     if(flagItemPresente!=true){
       var nodeItem = document.createElement('div');
-      nodeItem.className += "itemPortfolioPropositor";
+      nodeItem.className += "itemPropositor";
       nodeItem.id = node.childNodes[0].id;
       arrayIdPropositor.push(node.childNodes[0].id);
 
@@ -121,7 +121,7 @@ function dropProp(ev) {
       nodeItemRemover.innerHTML = "+";
       nodeItemRemover.className = "removerItemPortProp";
       nodeItemRemover.onclick = function() {
-        $("div#"+nodeItem.id+".itemPortfolioPropositor").remove();
+        $("div#"+nodeItem.id+".itemPropositor").remove();
         $("a#"+nodeItem.id+".subitemPropositor").css("color", "white");
         arrayIdPropositor.splice( arrayIdPropositor.indexOf(nodeItem.id), 1 );
         if(arrayIdPropositor.length==0){
@@ -141,7 +141,7 @@ function dropProp(ev) {
 
   return false;
 }
-  var area = document.getElementById("boxArrastar")
+  var area = document.getElementById("boxArrastar");
   area.addEventListener('dragenter', handleDragEnter, false);
   area.addEventListener('dragleave', handleDragLeave, false);
   area.addEventListener('dragend', handleDragEnd, false);
