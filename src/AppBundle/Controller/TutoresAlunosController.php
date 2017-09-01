@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\ManipularArquivoController;
 use AppBundle\Entity\TbClassStudent;
+// use AppBundle\Controller\UsuarioController;
 
 class TutoresAlunosController extends Controller {
 
@@ -38,9 +39,17 @@ class TutoresAlunosController extends Controller {
         } else {
             $this->em = $this->getDoctrine()->getManager();
 
+            $arrayTutores = TutoresAlunosController::carregarTutoresTurma();
+
             $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
 
-            return $this->render('tutoresAlunos.html.twig', array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
+            return $this->render('tutoresAlunos.html.twig', array('arrayTutores' => $arrayTutores, 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
         }
+    }
+
+    function carregarTutoresTurma() {
+
+        $arrayTutores = TutorController::gerarArrayTutores();
+        return $arrayTutores;
     }
 }

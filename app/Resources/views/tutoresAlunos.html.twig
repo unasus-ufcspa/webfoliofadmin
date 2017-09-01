@@ -19,7 +19,6 @@
       {{ include('menuLateral.html.twig') }}
       {% include 'menuLateralCadastro.html.twig' with {"dadosMenuLateralCadastro": dadosMenuLateralCadastro } only %}
 
-
       <div class="menuIcones">
         <div class="line"></div>
         <a href="#" class="linkCircle"><div class="circle" id="circleTurma"><img src="../assets/img/Turma.png" class="iconCircleMenu"></div></a>
@@ -41,25 +40,15 @@
           Aqui você adiciona os ALUNOS aos seus respectivos tutores.<br>
           Ex: Turma A > Portfólio B > Tutor C > Aluno D e Aluna E
         </div>
-
-        <div class="arrastarAluno">
-          <div class="nomeTutor" id="5">Roxxxy Andrews</div>
-          <div class="boxArrastarAluno" id="5" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
-            <!-- <div class="itemAlunoTutor"><div class="infoAluno">Katya Zamolodchikova</div><div class="removerAluno">+</div></div>
-            <div class="itemAlunoTutor"><div class="infoAluno">Alaska</div><div class="removerAluno">+</div></div>
-            <div class="itemAlunoTutor"><div class="infoAluno">PhiPhi O'Hara</div><div class="removerAluno">+</div></div>
-            <div class="itemAlunoTutor"><div class="infoAluno">Courtney Act</div><div class="removerAluno">+</div></div> -->
-            <div class="textArrastarAluno" id="5">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
-            <img class="logoArrastar" id="5" style="margin-top:0%;" src="../assets/img/arraste.png">
+        {% for tutores in arrayTutores %}
+          <div class="arrastarAluno">
+            <div class="nomeTutor" id="{{tutores.idUser}}">{{tutores.nmUser}}</div>
+            <div class="boxArrastarAluno" id="{{tutores.idUser}}" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
+              <div class="textArrastarAluno" id="{{tutores.idUser}}">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
+              <img class="logoArrastar" id="{{tutores.idUser}}" style="margin-top:0%;" src="../assets/img/arraste.png">
+            </div>
           </div>
-        </div>
-        <div class="arrastarAluno">
-          <div class="nomeTutor" id="7">Violet</div>
-          <div class="boxArrastarAluno" id="7" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
-            <div class="textArrastarAluno" id="7">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
-            <img class="logoArrastar" id="7" style="margin-top:0%;" src="../assets/img/arraste.png">
-          </div>
-        </div>
+        {% endfor %}
         <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
       </div>
     </body>

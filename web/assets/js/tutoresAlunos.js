@@ -5,11 +5,6 @@ var idTutores = document.getElementsByClassName("nomeTutor");
 for(var i=0; i<idTutores.length; i++){
   arrayIdTutorAluno.push([idTutores[i].id, ]);
 }
-// arrayIdTutorAluno[0].push(1);
-// arrayIdTutorAluno[0].push(2);
-// arrayIdTutorAluno[0].push(3);
-console.log(arrayIdTutorAluno);
-// console.log(arrayIdTutorAluno[0][1]);
 
 function handleDragEnter(e) {
   this.classList.add('over');
@@ -43,17 +38,14 @@ function dropAluno(ev) {
 
   if(hasClass(node.childNodes[0], 'subitemAluno')){
     var flagItemPresente=false;
-    // alert($(event.target).parent().attr('id'));
     var idBoxTutor = $(event.target).attr('id');
-    console.log("idBoxTutor "+idBoxTutor);
-console.log("Length Array antes do for "+arrayIdTutorAluno.length);
+
     for(var j = 0; j<arrayIdTutorAluno.length; j++){
       if(arrayIdTutorAluno[j][0]==idBoxTutor){
         var posicaoArrayTutor = j;
       }
     }
-    console.log("Posicao "+posicaoArrayTutor);
-    console.log("Length: "+arrayIdTutorAluno[posicaoArrayTutor].length);
+
     for(var i = 1; i<arrayIdTutorAluno[posicaoArrayTutor].length; i++){
       if(arrayIdTutorAluno[posicaoArrayTutor][i]==node.childNodes[0].id){
         flagItemPresente=true;
@@ -85,7 +77,7 @@ console.log("Length Array antes do for "+arrayIdTutorAluno.length);
         $("div#"+nodeItem.id+".itemAlunoTutor").remove();
         $("a#"+nodeItem.id+".subitemAluno").css("color", "white");
         arrayIdTutorAluno[posicaoArrayTutor].splice( arrayIdTutorAluno[posicaoArrayTutor].indexOf(nodeItem.id), 1 );
-        if(arrayIdTutorAluno[posicaoArrayTutor].length==0){
+        if(arrayIdTutorAluno[posicaoArrayTutor].length==1){
           $( ".textArrastarAluno:eq("+posicaoArrayTutor+")" ).show();
           $( ".logoArrastar:eq("+posicaoArrayTutor+")" ).show();
         }
