@@ -68,7 +68,7 @@ class TutorController extends Controller {
     }
 
     function adicionarTutorTurma($dadosFormAdicionarTutor) {
-         $idClass = $this->get('session')->get('idTurmaEdicao');
+        $idClass = $this->get('session')->get('idTurmaEdicao');
         $this->logControle->logAdmin(print_r($dadosFormAdicionarTutor, true));
         $novoTutor = new TbUser();
         $this->logControle->logAdmin(($dadosFormAdicionarTutor['DsPassword']));

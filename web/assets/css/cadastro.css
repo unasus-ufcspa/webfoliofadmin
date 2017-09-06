@@ -263,7 +263,7 @@ input.toggle-round-flat:checked + label:after {
   cursor: pointer;
   background-color: #9187c7;
   position: relative;
-  left: 200px;
+  /*left: 200px;*/
   top: 100px;
 }
 

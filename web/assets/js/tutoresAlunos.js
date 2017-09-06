@@ -59,8 +59,6 @@ function dropAluno(ev) {
       nodeItem.id = node.childNodes[0].id;
       arrayIdTutorAluno[posicaoArrayTutor].push(node.childNodes[0].id);
 
-      $("a#"+nodeItem.id+".subitemAluno").css("color", "gray");
-
       var nodeItemInfo = document.createElement('div');
       nodeItemInfo.className += "infoAluno";
 
@@ -74,8 +72,7 @@ function dropAluno(ev) {
       nodeItemRemover.innerHTML = "+";
       nodeItemRemover.className = "removerAluno";
       nodeItemRemover.onclick = function() {
-        $("div#"+nodeItem.id+".itemAlunoTutor").remove();
-        $("a#"+nodeItem.id+".subitemAluno").css("color", "white");
+        $(this).parent().remove();
         arrayIdTutorAluno[posicaoArrayTutor].splice( arrayIdTutorAluno[posicaoArrayTutor].indexOf(nodeItem.id), 1 );
         if(arrayIdTutorAluno[posicaoArrayTutor].length==1){
           $( ".textArrastarAluno:eq("+posicaoArrayTutor+")" ).show();

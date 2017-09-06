@@ -40,16 +40,20 @@
           Aqui você adiciona os ALUNOS aos seus respectivos tutores.<br>
           Ex: Turma A > Portfólio B > Tutor C > Aluno D e Aluna E
         </div>
-        {% for tutores in arrayTutores %}
-          <div class="arrastarAluno">
-            <div class="nomeTutor" id="{{tutores.idUser}}">{{tutores.nmUser}}</div>
-            <div class="boxArrastarAluno" id="{{tutores.idUser}}" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
-              <div class="textArrastarAluno" id="{{tutores.idUser}}">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
-              <img class="logoArrastar" id="{{tutores.idUser}}" style="margin-top:0%;" src="../assets/img/arraste.png">
+        {% if arrayTutores is empty %}
+          <h2 id="userEmpty" style="top: 55%;">Não há tutores cadastrados</h2>
+        {% else %}
+          {% for tutores in arrayTutores %}
+            <div class="arrastarAluno">
+              <div class="nomeTutor" id="{{tutores.idUser}}">{{tutores.nmUser}}</div>
+              <div class="boxArrastarAluno" id="{{tutores.idUser}}" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
+                <div class="textArrastarAluno" id="{{tutores.idUser}}">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
+                <img class="logoArrastar" id="{{tutores.idUser}}" style="margin-top:0%;" src="../assets/img/arraste.png">
+              </div>
             </div>
-          </div>
-        {% endfor %}
-        <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
+          {% endfor %}
+          <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
+        {% endif %}
       </div>
     </body>
 </html>
