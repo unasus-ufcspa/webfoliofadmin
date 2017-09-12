@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\ManipularArquivoController;
 use AppBundle\Entity\TbClassStudent;
-// use AppBundle\Controller\UsuarioController;
 
 class TutoresAlunosController extends Controller {
 

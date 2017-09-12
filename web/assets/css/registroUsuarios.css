@@ -213,7 +213,7 @@ input:checked +  label {
 .formEditarRight, .formEditar{
   outline: none;
   background-color: #ffffff;
-  padding: 20px;
+  padding-left: 20px;
   height: 40px;
   border-radius: 25px;
   border: none;
