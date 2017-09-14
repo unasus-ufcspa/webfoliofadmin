@@ -53,5 +53,7 @@ class TutoresAlunosController extends Controller {
 
     function registrarAlunosTutor(){
       $idClass = $this->get('session')->get('idTurmaEdicao');
+
+      // $newTutorPortfolio = Tb
     }
 }
