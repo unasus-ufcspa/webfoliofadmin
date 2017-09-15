@@ -158,11 +158,10 @@ function confirmarExcluirAdministrador(caminho) {
                 $("#alertExcluirUsuario").show();
             }
         }
-
     });
-
     return false;
 }
+
 function confirmarExcluirPropositor(caminho) {
     $("#excluirUsuario").hide();
     var checkbox = document.getElementsByName('Propositor[]');
@@ -204,6 +203,7 @@ function confirmarExcluirPropositor(caminho) {
 
     return false;
 }
+
 function confirmarRemoverTutoresTurma(caminho) {
     $("#excluirUsuario").hide();
     var checkbox = document.getElementsByName('Tutor');
@@ -231,7 +231,7 @@ function confirmarRemoverTutoresTurma(caminho) {
         async: false,
         success: function (response) {
             console.debug(response);
-              
+
         }
 
     });
@@ -314,8 +314,6 @@ function confirmarExcluirExcecao(caminho, usuariosExcecao) {
         }
     });
 }
-
-
 
 function validatePasswordAdd() {
     var pass = document.getElementById("adicionar_DsPassword");

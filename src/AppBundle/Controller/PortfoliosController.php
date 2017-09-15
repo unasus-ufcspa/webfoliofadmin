@@ -15,11 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 
-/**
- * Description of AdministradorController
- *
- * @author Marilia
- */
+
 class PortfolioController extends Controller {
 
     public $error;
@@ -46,7 +42,7 @@ class PortfolioController extends Controller {
         }
     }
 
-    public function gerarArrayAdministradores() {
+    public function gerarArrayPortfolios() {
         $arrayPortfolios = array();
         $portfolios = $this->selecionarPortfolios();
         foreach ($portfolios as $portfolio) {
@@ -63,10 +59,29 @@ class PortfolioController extends Controller {
         $idUser = $this->get('session')->get('idUser');
         $queryBuilderPort = $this->em->createQueryBuilder();
         $queryBuilderPort
-                ->select('u')
-                ->from('AppBundle:TbPortfolio', 'u')
-                ->where($queryBuilderPort->expr()->eq('u.flAdmin', "'T'"))
-                ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
+                ->select('p')
+                ->from('AppBundle:TbPortfolio', 'p')
+                ->getQuery()
+                ->execute();
+        $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
+
+        return $portfolios;
+    }
+
+    public function selecionarNumeroAtividades() {
+        $idUser = $this->get('session')->get('idUser');
+        $queryBuilderPort = $this->em->createQueryBuilder();
+        $queryBuilderPort
+                // ->select('u')
+                // ->from('AppBundle:TbPortfolio', 'u')
+                // ->where($queryBuilderPort->expr()->eq('u.flAdmin', "'T'"))
+                // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
+                // ->getQuery()
+                // ->execute();
+                ->select('count(a.idActivity)')
+                ->from('AppBundle:TbActivity', 'a')
+                ->where($queryBuilderPort->expr()->eq('a.idActivity', "ALGUMA COISA BEM LOUCA"))
+                // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
                 ->getQuery()
                 ->execute();
         $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
