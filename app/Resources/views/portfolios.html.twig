@@ -24,7 +24,7 @@
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Portfólio" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();">NOVO PORTFÓLIO</div>
+          <div class="ui medium button" id="addUser" onclick="addUser();" style="font-size: 14px;">NOVO PORTFÓLIO</div>
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -39,7 +39,7 @@
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
                         <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio"
-                              <!-- onclick='editarUser("{{i}}", "{{portfolio.nmUser}}", "{{administrador.dsEmail}}", "{{portfolio.idPortfolio}}")' -->
+                              {# onclick='editarUser("{{i}}", "{{portfolio.nmUser}}", "{{administrador.dsEmail}}", "{{portfolio.idPortfolio}}")' #}
                               >
                     </div>
                 {% else %}
@@ -47,9 +47,9 @@
                         <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser">
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
-                        <div class="emailUser">{{portfolio.nmAtividades}}</div>
+                        <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio"
-                             <!-- onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}", "{{administrador.idUser}}")' -->
+                             {# onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}", "{{administrador.idUser}}")' #}
                              >
                     </div>
                 {% endif %}

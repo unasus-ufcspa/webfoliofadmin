@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 
 
-class PortfolioController extends Controller {
+class PortfoliosController extends Controller {
 
     public $error;
     public $logControle;
@@ -42,50 +42,93 @@ class PortfolioController extends Controller {
         }
     }
 
-    public function gerarArrayPortfolios() {
-        $arrayPortfolios = array();
-        $portfolios = $this->selecionarPortfolios();
-        foreach ($portfolios as $portfolio) {
-            $arrayPortfolios[] = array(
-                'idPortfolio' => $portfolio['idPortfolio'],
-                'dsTitle' => $portfolio['dsTitle'],
-                'nmAtividades' => $portfolio['nmAtividades']
-            );
-        }
-        return $arrayPortfolios;
-    }
+    // public function gerarArrayPortfolios() {
+    //     $arrayPortfolios = array();
+    //     $portfolios = $this->selecionarPortfolios();
+    //     foreach ($portfolios as $portfolio) {
+    //         $arrayPortfolios[] = array(
+    //             'idPortfolio' => $portfolio['idPortfolio'],
+    //             'dsTitle' => $portfolio['dsTitle'],
+    //             'nmAtividades' => $portfolio['nmAtividades']
+    //         );
+    //     }
+    //     return $arrayPortfolios;
+    // }
+    //
+    // public function selecionarPortfolios() {
+    //     $idUser = $this->get('session')->get('idUser');
+    //     $queryBuilderPort = $this->em->createQueryBuilder();
+    //     $queryBuilderPort
+    //             ->select('p')
+    //             ->from('AppBundle:TbPortfolio', 'p')
+    //             ->getQuery()
+    //             ->execute();
+    //     $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
+    //
+    //     return $portfolios;
+    // }
+    //
+    // public function selecionarNumeroAtividades() {
+    //     $idUser = $this->get('session')->get('idUser');
+    //     $queryBuilderPort = $this->em->createQueryBuilder();
+    //     $queryBuilderPort
+    //             // ->select('u')
+    //             // ->from('AppBundle:TbPortfolio', 'u')
+    //             // ->where($queryBuilderPort->expr()->eq('u.flAdmin', "'T'"))
+    //             // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
+    //             // ->getQuery()
+    //             // ->execute();
+    //             ->select('count(a.idActivity)')
+    //             ->from('AppBundle:TbActivity', 'a')
+    //             ->where($queryBuilderPort->expr()->eq('a.idActivity', "ALGUMA COISA BEM LOUCA"))
+    //             // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
+    //             ->getQuery()
+    //             ->execute();
+    //     $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
+    //
+    //     return $portfolios;
+    // }
 
-    public function selecionarPortfolios() {
-        $idUser = $this->get('session')->get('idUser');
-        $queryBuilderPort = $this->em->createQueryBuilder();
-        $queryBuilderPort
+    public function gerarArrayPortfolios() {
+        $queryBuilderClass = $this->em->createQueryBuilder();
+        $queryBuilderClass
                 ->select('p')
                 ->from('AppBundle:TbPortfolio', 'p')
                 ->getQuery()
                 ->execute();
-        $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
+        $portfolios = $queryBuilderClass->getQuery()->getArrayResult();
+        foreach ($portfolios as $portfolio) {
 
-        return $portfolios;
+            $queryBuilder = $this->em->createQueryBuilder();
+            $queryBuilder
+                    ->select('count(a.idActivity)')
+                    ->from('AppBundle:TbActivity', 'a')
+                    ->where($queryBuilder->expr()->eq('a.idPortfolio', $portfolio['idPortfolio']))
+                    ->getQuery()
+                    ->execute();
+            $portfolio['nmAtividades'] = $queryBuilder->getQuery()->getSingleScalarResult();
+
+            $arrayPortfolios[] = array(
+              'idPortfolio' => $portfolio['idPortfolio'],
+              'dsTitle' => $portfolio['dsTitle'],
+              'nmAtividades' => $portfolio['nmAtividades']
+            );
+        }
+
+        return $arrayPortfolios;
     }
 
-    public function selecionarNumeroAtividades() {
-        $idUser = $this->get('session')->get('idUser');
-        $queryBuilderPort = $this->em->createQueryBuilder();
-        $queryBuilderPort
-                // ->select('u')
-                // ->from('AppBundle:TbPortfolio', 'u')
-                // ->where($queryBuilderPort->expr()->eq('u.flAdmin', "'T'"))
-                // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
-                // ->getQuery()
-                // ->execute();
-                ->select('count(a.idActivity)')
-                ->from('AppBundle:TbActivity', 'a')
-                ->where($queryBuilderPort->expr()->eq('a.idActivity', "ALGUMA COISA BEM LOUCA"))
-                // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
-                ->getQuery()
-                ->execute();
-        $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
+    /**
+     * @Route("/cadastroPortfolio")
+     */
+    function cadastroPortfolio(Request $request) {
+        if (!$this->get('session')->get('idUser')) {
 
-        return $portfolios;
+            return $this->redirectToRoute('login');
+        } else {
+            $this->em = $this->getDoctrine()->getManager();
+
+            return $this->render('cadastroPortfolio.html.twig');
+        }
     }
 }
