@@ -52,4 +52,3 @@ class TbPolicy
         return $this->txPolicy;
     }
 }
-

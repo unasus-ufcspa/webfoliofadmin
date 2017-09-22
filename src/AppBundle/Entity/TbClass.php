@@ -197,4 +197,3 @@ class TbClass
         return $this->idProposer;
     }
 }
-

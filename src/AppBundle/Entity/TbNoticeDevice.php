@@ -81,4 +81,3 @@ class TbNoticeDevice
         return $this->idDevice;
     }
 }
-

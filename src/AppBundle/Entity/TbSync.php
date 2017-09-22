@@ -197,4 +197,3 @@ class TbSync
         return $this->idDestination;
     }
 }
-

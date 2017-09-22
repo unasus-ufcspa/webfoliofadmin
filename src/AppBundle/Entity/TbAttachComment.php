@@ -81,4 +81,3 @@ class TbAttachComment
         return $this->idComment;
     }
 }
-

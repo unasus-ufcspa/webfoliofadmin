@@ -255,4 +255,3 @@ class TbComment
         return $this->idCommentVersion;
     }
 }
-

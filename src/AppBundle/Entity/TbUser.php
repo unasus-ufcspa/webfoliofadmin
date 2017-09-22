@@ -255,4 +255,3 @@ class TbUser
         return $this->flProposer;
     }
 }
-

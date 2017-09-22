@@ -81,4 +81,3 @@ class TbClassTutor
         return $this->idTutor;
     }
 }
-

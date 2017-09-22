@@ -110,4 +110,3 @@ class TbPortfolio
         return $this->nuPortfolioVersion;
     }
 }
-

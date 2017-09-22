@@ -8,9 +8,6 @@ AppBundle\Entity\TbPortfolioStudent:
         fk_tb_portfolio_student_tb_portfolio_class1_idx:
             columns:
                 - id_portfolio_class
-        IDX_DBEA4E7177820778:
-            columns:
-                - id_tutor
     uniqueConstraints:
         tb_portfolio_student_id_portfolio_student_idx:
             columns:
@@ -56,16 +53,6 @@ AppBundle\Entity\TbPortfolioStudent:
             inversedBy: null
             joinColumns:
                 id_student:
-                    referencedColumnName: id_user
-            orphanRemoval: false
-        idTutor:
-            targetEntity: TbUser
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id_tutor:
                     referencedColumnName: id_user
             orphanRemoval: false
     lifecycleCallbacks: {  }

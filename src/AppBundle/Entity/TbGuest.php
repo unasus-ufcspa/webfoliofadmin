@@ -110,4 +110,3 @@ class TbGuest
         return $this->idUser;
     }
 }
-

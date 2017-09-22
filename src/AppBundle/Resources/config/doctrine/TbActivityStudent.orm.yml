@@ -2,12 +2,12 @@ AppBundle\Entity\TbActivityStudent:
     type: entity
     table: tb_activity_student
     indexes:
-        fk_tb_activity_student_tb_activity1_idx:
-            columns:
-                - id_activity
         fk_tb_activity_student_tb_portfolio_student1_idx:
             columns:
                 - id_portfolio_student
+        fk_tb_activity_student_tb_activity1_idx:
+            columns:
+                - id_activity
     uniqueConstraints:
         tb_activity_student_id_activity_student_idx:
             columns:

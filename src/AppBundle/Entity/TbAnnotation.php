@@ -110,4 +110,3 @@ class TbAnnotation
         return $this->idUser;
     }
 }
-

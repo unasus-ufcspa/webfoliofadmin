@@ -81,4 +81,3 @@ class TbPortfolioClass
         return $this->idPortfolio;
     }
 }
-

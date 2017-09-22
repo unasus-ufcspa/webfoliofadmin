@@ -226,4 +226,3 @@ class TbCommentVersion
         return $this->idVersionActivity;
     }
 }
-

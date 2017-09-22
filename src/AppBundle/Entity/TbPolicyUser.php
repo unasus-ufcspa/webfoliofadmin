@@ -110,4 +110,3 @@ class TbPolicyUser
         return $this->idUser;
     }
 }
-

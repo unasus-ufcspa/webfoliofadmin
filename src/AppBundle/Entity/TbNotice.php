@@ -255,4 +255,3 @@ class TbNotice
         return $this->idActivityStudent;
     }
 }
-

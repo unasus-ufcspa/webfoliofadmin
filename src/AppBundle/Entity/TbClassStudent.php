@@ -81,4 +81,3 @@ class TbClassStudent
         return $this->idStudent;
     }
 }
-

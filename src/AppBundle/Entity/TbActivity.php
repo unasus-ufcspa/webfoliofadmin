@@ -139,4 +139,3 @@ class TbActivity
         return $this->idPortfolio;
     }
 }
-

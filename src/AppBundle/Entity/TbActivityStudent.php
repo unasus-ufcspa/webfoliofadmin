@@ -168,4 +168,3 @@ class TbActivityStudent
         return $this->idActivity;
     }
 }
-

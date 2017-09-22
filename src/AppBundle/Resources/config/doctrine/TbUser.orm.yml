@@ -2,6 +2,9 @@ AppBundle\Entity\TbUser:
     type: entity
     table: tb_user
     uniqueConstraints:
+        tb_user_ds_email_idx:
+            columns:
+                - ds_email
         tb_user_id_user_idx:
             columns:
                 - id_user

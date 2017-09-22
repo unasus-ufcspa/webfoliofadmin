@@ -197,4 +197,3 @@ class TbVersionActivity
         return $this->idActivityStudent;
     }
 }
-

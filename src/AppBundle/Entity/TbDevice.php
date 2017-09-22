@@ -197,4 +197,3 @@ class TbDevice
         return $this->idUser;
     }
 }
-

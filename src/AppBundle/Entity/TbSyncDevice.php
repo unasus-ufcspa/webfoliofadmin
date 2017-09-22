@@ -139,4 +139,3 @@ class TbSyncDevice
         return $this->idSync;
     }
 }
-
