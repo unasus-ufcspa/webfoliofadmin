@@ -1,0 +1,42 @@
+AppBundle\Entity\TbTutorPortfolio:
+    type: entity
+    table: tb_tutor_portfolio
+    indexes:
+        IDX_2763512377820778:
+            columns:
+                - id_tutor
+        IDX_2763512310A1E8EA:
+            columns:
+                - id_portfolio_student
+    id:
+        idTutorPortfolio:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_tutor_portfolio
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idTutor:
+            targetEntity: TbUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tutor:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idPortfolioStudent:
+            targetEntity: TbPortfolioStudent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_portfolio_student:
+                    referencedColumnName: id_portfolio_student
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

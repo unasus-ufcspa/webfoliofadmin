@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 
-
 class PortfoliosController extends Controller {
 
     public $error;
@@ -42,53 +41,6 @@ class PortfoliosController extends Controller {
         }
     }
 
-    // public function gerarArrayPortfolios() {
-    //     $arrayPortfolios = array();
-    //     $portfolios = $this->selecionarPortfolios();
-    //     foreach ($portfolios as $portfolio) {
-    //         $arrayPortfolios[] = array(
-    //             'idPortfolio' => $portfolio['idPortfolio'],
-    //             'dsTitle' => $portfolio['dsTitle'],
-    //             'nmAtividades' => $portfolio['nmAtividades']
-    //         );
-    //     }
-    //     return $arrayPortfolios;
-    // }
-    //
-    // public function selecionarPortfolios() {
-    //     $idUser = $this->get('session')->get('idUser');
-    //     $queryBuilderPort = $this->em->createQueryBuilder();
-    //     $queryBuilderPort
-    //             ->select('p')
-    //             ->from('AppBundle:TbPortfolio', 'p')
-    //             ->getQuery()
-    //             ->execute();
-    //     $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
-    //
-    //     return $portfolios;
-    // }
-    //
-    // public function selecionarNumeroAtividades() {
-    //     $idUser = $this->get('session')->get('idUser');
-    //     $queryBuilderPort = $this->em->createQueryBuilder();
-    //     $queryBuilderPort
-    //             // ->select('u')
-    //             // ->from('AppBundle:TbPortfolio', 'u')
-    //             // ->where($queryBuilderPort->expr()->eq('u.flAdmin', "'T'"))
-    //             // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
-    //             // ->getQuery()
-    //             // ->execute();
-    //             ->select('count(a.idActivity)')
-    //             ->from('AppBundle:TbActivity', 'a')
-    //             ->where($queryBuilderPort->expr()->eq('a.idActivity', "ALGUMA COISA BEM LOUCA"))
-    //             // ->andWhere($queryBuilderPort->expr()->neq('u.idUser', $idUser))
-    //             ->getQuery()
-    //             ->execute();
-    //     $portfolios = $queryBuilderPort->getQuery()->getArrayResult();
-    //
-    //     return $portfolios;
-    // }
-
     public function gerarArrayPortfolios() {
         $queryBuilderClass = $this->em->createQueryBuilder();
         $queryBuilderClass
@@ -114,7 +66,6 @@ class PortfoliosController extends Controller {
               'nmAtividades' => $portfolio['nmAtividades']
             );
         }
-
         return $arrayPortfolios;
     }
 
