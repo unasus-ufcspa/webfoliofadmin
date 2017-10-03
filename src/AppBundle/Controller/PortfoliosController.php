@@ -15,6 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 class PortfoliosController extends Controller {
 
     public $error;
@@ -79,7 +83,62 @@ class PortfoliosController extends Controller {
         } else {
             $this->em = $this->getDoctrine()->getManager();
 
-            return $this->render('cadastroPortfolio.html.twig');
+            $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionar");
+            $this->formAdicionarPortfolio->handleRequest($request);
+
+            if ($request->request->has($this->formAdicionarPortfolio->getName())) {
+                if ($this->formAdicionarPortfolio->isSubmitted() && $this->formAdicionarPortfolio->isValid()) {
+                    $dadosFormAdicionarPortfolio = $this->formAdicionarPortfolio->getData();
+                    $this->adicionarPortfolio($dadosFormAdicionarPortfolio);
+                    return $this->redirectToRoute('portfolios');
+                }
+            }
+
+            return $this->render('cadastroPortfolio.html.twig', array('formPort' => $this->formAdicionarPortfolio->createView(),));
         }
     }
+
+    function gerarFormularioPortfolio($nomeFormulario) {
+
+        $formularioTbPortfolio = $this->get('form.factory')
+                ->createNamedBuilder($nomeFormulario, FormType::class)
+                ->add('DsTitle', TextType::class, array('label' => false))
+                ->add('DsDescription', TextareaType ::class, array('label' => false))
+                ->getForm();
+        return $formularioTbPortfolio;
+    }
+
+    function adicionarPortfolio($dadosFormAdicionarPortfolio) {
+        // $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
+        $novoPortfolio = new TbPortfolio();
+        // $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
+        // if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
+            // UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
+            persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
+        // }
+    }
+
+    function persistirObjetoPortfolio($objetoPortfolio, $dadosPortfolio) {
+
+        $this->em = $this->getDoctrine()->getManager();
+        // $this->logControle->logAdmin(print_r($dadosUsuario, true));
+        $objetoPortfolio->setDsTitle($dadosPortfolio['DsTitle']);
+        $objetoPortfolio->setDsDescription($dadosPortfolio['DsDescription']);
+
+        $this->em->persist($objetoPortfolio);
+        $idPortfolio = $objetoPortfolio->getIdUser();
+
+        $this->em->flush();
+    }
+
+    // function editarUsuario($dadosFormEditar) {
+    //     $this->logControle->logAdmin(print_r($dadosFormEditar, true));
+    //
+    //     $usuarioEditavel = $this->getDoctrine()
+    //             ->getRepository('AppBundle:TbUser')
+    //             ->findOneBy(array('idUser' => $dadosFormEditar['IdUser']));
+    //      $this->logControle->logAdmin("editar usuario");
+    //     $this->logControle->logAdmin(print_r($usuarioEditavel, true));
+    //     UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'T', 'F');
+    // }
 }

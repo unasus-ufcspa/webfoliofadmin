@@ -21,12 +21,44 @@
         <div id="header">
             <img src="../assets/img/iconePortfolio.png" id="iconPortfolio">
             <span id="titulo">PORTFÓLIO:</span>
-            <form>
-              <input type="text" label="Título do portfólio">
-            </form>
-        </div>
 
-        <!-- <h2 id="naoEncontrado">Nenhum resultado encontrado</h2> -->
+            {#  {{ form_start(formPort) }}
+                <div class="formInfoPortfolio">
+                  <div class="ui grid" >
+                      <div class="twelve wide column grid">
+                        <div class="rowEditar">
+                            {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar'  }})}}
+                        </div>
+
+                        <div class="rowEditar">
+                            {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao'  }})}}
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                {{ form_end(formPort) }}#}
+        </div>
+        <div id="listaAtividades">
+{% for i in 0..10 %}
+            <div class="addAtividade">
+              {{ form_start(formPort) }}
+                  <div class="ui grid" >
+                    <input type="checkbox" name="Portfolios[]" value="234" id="{{i}}" class="checkboxUser">
+                    <label for="{{i}}"></label>
+                    <div class="twelve wide column grid">
+                      <div class="rowEditar">
+                          {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar formEditarAtividade'  }})}}
+                      </div>
+
+                      <div class="rowEditar">
+                          {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
+                      </div>
+                    </div>
+                  </div>
+              {{ form_end(formPort) }}
+            </div>
+          {% endfor %}
+        </div>
 
 
         <!-- <div id="excluirUsuario">
