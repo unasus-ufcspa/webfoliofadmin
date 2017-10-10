@@ -109,19 +109,13 @@ class PortfoliosController extends Controller {
     }
 
     function adicionarPortfolio($dadosFormAdicionarPortfolio) {
-        // $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
         $novoPortfolio = new TbPortfolio();
-        // $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
-        // if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
-            // UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
-            persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
-        // }
+        persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
     }
 
     function persistirObjetoPortfolio($objetoPortfolio, $dadosPortfolio) {
 
         $this->em = $this->getDoctrine()->getManager();
-        // $this->logControle->logAdmin(print_r($dadosUsuario, true));
         $objetoPortfolio->setDsTitle($dadosPortfolio['DsTitle']);
         $objetoPortfolio->setDsDescription($dadosPortfolio['DsDescription']);
 

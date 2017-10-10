@@ -13,7 +13,6 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../assets/css/editarPortfolio.css">
-
     </head>
 
     <body>
@@ -22,7 +21,7 @@
             <img src="../assets/img/iconePortfolio.png" id="iconPortfolio">
             <span id="titulo">PORTFÓLIO:</span>
 
-            {#  {{ form_start(formPort) }}
+             {{ form_start(formPort) }}
                 <div class="formInfoPortfolio">
                   <div class="ui grid" >
                       <div class="twelve wide column grid">
@@ -34,44 +33,62 @@
                             {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao'  }})}}
                         </div>
                     </div>
+                    <input type="submit" id="salvarEdicaoPortfolio" value="SALVAR">
                   </div>
                 </div>
-                {{ form_end(formPort) }}#}
+            {{ form_end(formPort) }}
         </div>
-        <div id="listaAtividades">
-{% for i in 0..10 %}
-            <div class="addAtividade">
-              {{ form_start(formPort) }}
-                  <div class="ui grid" >
-                    <input type="checkbox" name="Portfolios[]" value="234" id="{{i}}" class="checkboxUser">
-                    <label for="{{i}}"></label>
-                    <div class="twelve wide column grid">
-                      <div class="rowEditar">
-                          {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar formEditarAtividade'  }})}}
-                      </div>
 
-                      <div class="rowEditar">
-                          {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
-                      </div>
+        <div id="adicionarAtividade">
+          <div class="addAtividade">
+            {{ form_start(formPort) }}
+                <div class="ui grid">
+                  <div class="twelve wide column grid">
+                    <div class="rowEditar">
+                        {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar formEditarAtividade'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                        {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
                     </div>
                   </div>
-              {{ form_end(formPort) }}
+                  <input type="submit" id="salvarEdicao" value="SALVAR">
+                </div>
+            {{ form_end(formPort) }}
+          </div>
+        </div>
+
+{% set foo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus. A cras semper auctor neque vitae tempus quam pellentesque nec. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Aliquam ultrices sagittis orci a. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Neque vitae tempus quam' %}
+        <div id="listaAtividades">
+          {% for i in 0..10 %}
+            {% if i is odd %}
+              <div class="itemAtividadeA itemAtividade">
+                  <input type="checkbox" name="Atividade[]" value="{{i}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                  <div class="nomeAtividade">Teste</div>
+                  <div class="dsAtividade">Descrição da atividade</div>
+                  <div class="divEditarAtividade">
+                    <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
+                  </div>
+              </div>
+            {% else %}
+              <div class="itemAtividadeB itemAtividade">
+                  <input type="checkbox" name="Atividade[]" value="{{i}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                  <div class="nomeAtividade">Teste</div>
+                  <div class="dsAtividade">{{ foo }}</div>
+                  <div class="divEditarAtividade">
+                    <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
+                  </div>
+              </div>
+            {% endif %}
+            <div class="editarUser" id="{{i}}">
             </div>
           {% endfor %}
         </div>
 
-
-        <!-- <div id="excluirUsuario">
-            <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Tem certeza que deseja excluir esse portfólio?</div>
-            <div id="optionExcluir">
-              <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir" onclick='confirmarExcluirPortfolio("{{web_dir}}");'>SIM</div>
-            </div>
-        </div> -->
-
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirAtividade()">
         </div>
     </body>
 </html>

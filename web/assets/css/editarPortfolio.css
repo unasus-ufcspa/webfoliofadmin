@@ -65,7 +65,7 @@ input{
   position: relative;
   left:340px;
   top: 20px;
-  width: 95%;
+  width: 90%;
   overflow-x: hidden;
   outline: none;
   background-color: #ffffff;
@@ -85,13 +85,13 @@ input{
     background: transparent; /* make scrollbar transparent */
 }
 .formEditarAtividade{
-  left:390px;
+  left:350px;
 }
 .addAtividade{
   background-color: #ededed;
   width: 100%;
   height: 300px;
-  margin-bottom: 15px;
+  border-bottom: 2px solid #CCC;
 }
 .addAtividade .ui.grid label{
   position: relative;
@@ -105,18 +105,23 @@ input{
   border: solid 3px #d8d8d8;
 }
 
-.checkboxUser {
+.checkboxItem {
   display: none;
 }
 input:checked + label {
   background-color: #747474;
   box-shadow: 0px 0px 0px 5px #FFF inset;
 }
-#listaAtividades{
+#listaAtividades, #adicionarAtividade{
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 100%;
   padding-bottom: 100px;
+}
+#adicionarAtividade{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  overflow: hidden;
 }
 @media screen and (max-width: 1500px){
   .formEditar{
@@ -124,37 +129,17 @@ input:checked + label {
   }
 }
 
-
-/*#addUser{
-  margin-right: 50px;
-  margin-top: 30px;
-  float: right;
-  width: 176px;
-  height: 40px;
-  border-radius: 100px;
-  background-color: #9187c7;
-  font-size: 16px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-}*/
-
-/*#listaUsers{
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-width: 100%;
-  padding-bottom: 100px;
-}*/
-/*.itemUserA, .itemUserB{
+.itemAtividadeA, .itemAtividadeB{
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   background-color: #f9f9f9;
+  padding-bottom: 20px;
 }
-.itemUserB{
+.itemAtividadeB{
   background-color: #ededed;
-}*/
+}
 
-/*.itemUsuario label {
+.itemAtividade label {
   position: relative;
   left:290px;
   top: 35px;
@@ -164,103 +149,55 @@ input:checked + label {
   border-radius: 7px;
   background-color: #ffffff;
   border: solid 3px #d8d8d8;
-}*/
-/*.checkboxUser {
-  display: none;
 }
-input:checked +  label {
-  background-color: #747474;
-  box-shadow: 0px 0px 0px 5px #FFF inset;
-}*/
-
-/*#closeEditar, #closeAdd{
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  width: 30px;
-  height: 30px;
-  transform: rotate(-315deg);
-  font-family: material;
-  font-size: 35px;
-  color: #ffffff;
-  font-weight: 900;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}*/
-
-/*#naoEncontrado, #userEmpty{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  color: #808080;
-  margin-left: -90px;
-  text-align: center;
-  font-weight: 300;
-  z-index: -1;
-}
-#naoEncontrado{
-  visibility: hidden;
-}*/
-
-/*#excluirUsuario, #alertEditar, #alertExcluirUsuario{
-  width: 430px;
-  height: 240px;
-  border-radius: 30px;
-  background-color: #ffffff;
-  border: solid 1px #979797;
-  position: fixed;
-  left: 50%;
-  top:50%;
-  margin-top: -120px;
-  margin-left: -215px;
-  display: none;
-}
-#alertExcluirUsuario{
-  width: 470px;
-  margin-left: -235px;
-  height: 270px;
-  margin-top: -135px;
-}
-#titleExcluir, #titleAlert{
+.nomeAtividade{
+  width: 40%;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
   color: #747474;
-  margin: 25px;
+  position: relative;
+  left:350px;
+  top: -10px;
 }
-#mensagemExcluir, #mensagemAlert{
-  font-size: 20px;
-  font-weight: 400;
-  text-align: center;
-  color: #747474;
-  line-height: 30px;
-}
-#optionExcluir, #optionAlert{
-  width: 100%;
-  height: 75px;
-  display: flex;
-  position: absolute;
-  bottom:0px;
-}*/
-/*#cancelarExcluir, #confirmarExcluir, #sairEditar, #voltarEditar, #alertCancelarExcluir, #alertConfirmarExcluir{
+.dsAtividade{
   width: 50%;
-  height: 100%;
-  border-bottom-left-radius: 25px;
-  background-color: #979797;
-  border: solid 1px #979797;
+  position: relative;
+  left:350px;
+  top: 5px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.44;
+  color: #7b7b7b;
+}
+.iconEditar{
+  margin-right: 107px;
+  margin-top: -62px;
+  float: right;
+  width: 62px;
+  height: 62px;
   cursor: pointer;
-  padding-top: 27px;
+}
+.divEditarAtividade{
+  width: 25%;
+  height: 100%;
+  float: right;
+}
+
+#salvarEdicao, #salvarEdicaoPortfolio{
+  width: 170px;
+  height: 65px;
+  border-radius: 100px;
+  border: none;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 900;
   text-align: center;
   color: #ffffff;
-}
-#confirmarExcluir, #voltarEditar, #alertConfirmarExcluir{
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 0px;
+  cursor: pointer;
+  position: relative;
+  left: 240px;
+  top: 200px;
   background-color: #9187c7;
-}*/
+}
+#salvarEdicaoPortfolio{
+  border: 1px solid white;
+}
