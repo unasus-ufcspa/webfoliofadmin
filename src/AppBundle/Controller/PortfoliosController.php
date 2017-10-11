@@ -125,14 +125,32 @@ class PortfoliosController extends Controller {
         $this->em->flush();
     }
 
-    // function editarUsuario($dadosFormEditar) {
-    //     $this->logControle->logAdmin(print_r($dadosFormEditar, true));
+    // function gerarFormularioAddAtividade($nomeFormulario) {
     //
-    //     $usuarioEditavel = $this->getDoctrine()
-    //             ->getRepository('AppBundle:TbUser')
-    //             ->findOneBy(array('idUser' => $dadosFormEditar['IdUser']));
-    //      $this->logControle->logAdmin("editar usuario");
-    //     $this->logControle->logAdmin(print_r($usuarioEditavel, true));
-    //     UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'T', 'F');
+    //     $formularioTbActivity = $this->get('form.factory')
+    //             ->createNamedBuilder($nomeFormulario, FormType::class)
+    //             ->add('DsTitle', TextType::class, array('label' => false))
+    //             ->add('DsDescription', TextareaType ::class, array('label' => false))
+    //             ->getForm();
+    //     return $formularioTbPortfolio;
     // }
+
+    // function adicionarPortfolio($dadosFormAdicionarPortfolio) {
+    //     $novoPortfolio = new TbPortfolio();
+    //     persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
+    // }
+    //
+    // function persistirObjetoPortfolio($objetoPortfolio, $dadosPortfolio) {
+    //
+    //     $this->em = $this->getDoctrine()->getManager();
+    //     $objetoPortfolio->setDsTitle($dadosPortfolio['DsTitle']);
+    //     $objetoPortfolio->setDsDescription($dadosPortfolio['DsDescription']);
+    //
+    //     $this->em->persist($objetoPortfolio);
+    //     $idPortfolio = $objetoPortfolio->getIdUser();
+    //
+    //     $this->em->flush();
+    // }
+
+
 }
