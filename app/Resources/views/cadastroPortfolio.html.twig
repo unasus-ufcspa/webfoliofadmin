@@ -41,20 +41,20 @@
 
         <div id="adicionarAtividade">
           <div class="addAtividade">
-            {{ form_start(formPort) }}
+            {{ form_start(formAtiv) }}
                 <div class="ui grid">
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
-                        {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar formEditarAtividade'  }})}}
+                        {{form_row(formAtiv.DsTitle, { 'attr' : { 'placeholder' : 'Título da atividade' , 'class': 'formEditar formEditarAtividade'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
+                        {{form_row(formAtiv.DsDescription, { 'attr' : { 'placeholder' : 'Descrição da atividade' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
                     </div>
                   </div>
-                  <input type="submit" id="salvarEdicao" value="SALVAR">
+                  <input type="submit" id="salvarEdicao" value="Adicionar">
                 </div>
-            {{ form_end(formPort) }}
+            {{ form_end(formAtiv) }}
           </div>
         </div>
 

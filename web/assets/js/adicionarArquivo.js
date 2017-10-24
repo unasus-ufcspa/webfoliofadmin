@@ -1,4 +1,5 @@
 var inputs = document.querySelectorAll( '.selectArquivos' );
+var files = false;
 Array.prototype.forEach.call( inputs, function( input )
 {
 	var label	 = input.nextElementSibling,
@@ -25,7 +26,7 @@ Array.prototype.forEach.call( inputs, function( input )
     evt.preventDefault();
 
     var files = evt.dataTransfer.files; // FileList object.
-
+		files = evt.dataTransfer.files;
     // files is a FileList of File objects. List some properties.
     var output = [];
     if(files.length>1){
@@ -60,3 +61,69 @@ Array.prototype.forEach.call( inputs, function( input )
   dropZone.addEventListener('dragover', handleDragOver, false);
   dropZone.addEventListener('dragleave', handleDragLeave, false);
   dropZone.addEventListener('drop', handleFileSelect, false);
+
+	// $(".box").on('submit', function(e) {
+  //   // if ($form.hasClass('is-uploading')) return false;
+	//
+  //   // $form.addClass('is-uploading').removeClass('is-error');
+	//
+  //   e.preventDefault();
+  //   var ajaxData = new FormData($(".box").get(0));
+	//
+  //   if (files) {
+  //     $.each( files, function(i, file) {
+  //       ajaxData.append( $input.attr('name'), file );
+  //     });
+  //   }
+	//
+  //   $.ajax({
+  //     url: $(".box").attr('action'),
+  //     type: $(".box").attr('method'),
+  //     data: ajaxData,
+  //     dataType: 'json',
+  //     cache: false,
+  //     contentType: false,
+  //     processData: false,
+  //     // complete: function() {
+  //     //   $(".box").removeClass('is-uploading');
+  //     // },
+  //     success: function(data) {
+  //       // $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+  //       // if (!data.success) $errorMsg.text(data.error);
+  //       console.log("Sucesso");
+  //     },
+  //     error: function() {
+  //       // Log the error, show an alert, whatever works for you
+  //       console.log("Erro");
+  //     }
+  //   });
+  // });
+	// $(".box").on('submit', function(e) {
+	//
+	//
+	//     e.preventDefault();
+	//     var ajaxData = new FormData($(".box").get(0));
+	//
+	//     if (files) {
+	//       $.each( files, function(i, file) {
+	//         ajaxData.append( $input.attr('name'), file );
+	//       });
+	//     }
+	//
+	//     $.ajax({
+	//       url: "{{web_dir}}carregarTutoresArquivo",
+	//       type: $(".box").attr('method'),
+	//       data: ajaxData,
+	//       dataType: 'json',
+	//       cache: false,
+	//       contentType: false,
+	//       processData: false,
+	//
+	//       success: function(data) {
+	//         console.log("Sucesso");
+	//       },
+	//       error: function() {
+	//         console.log("Erro");
+	//       }
+	//     });
+	//   });
