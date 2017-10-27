@@ -126,7 +126,6 @@ class PortfoliosController extends Controller {
         $portfolio = $queryBuilder->getQuery()->getArrayResult();
 
         foreach ($portfolio as $arrayPortfolios) {
-
             $dadosPortfolio = array(
                 'id' => $idPortfolio,
                 'dsTitle' => $arrayPortfolios['dsTitle'],
@@ -137,58 +136,58 @@ class PortfoliosController extends Controller {
         return $dadosPortfolio;
     }
 
-    // public function carregarAtividadesPortfolio($idPortfolio) {
-    //     $queryBuilderClass = $this->em->createQueryBuilder();
-    //     $queryBuilderClass
-    //             ->select('p')
-    //             ->from('AppBundle:TbPortfolio', 'p')
-    //             ->getQuery()
-    //             ->execute();
-    //     $class = $queryBuilderClass->getQuery()->getArrayResult();
-    //     $this->logControle->logAdmin(print_r($class, true));
-    //     foreach ($class as $turma) {
-    //
-    //         $queryBuilder = $this->em->createQueryBuilder();
-    //         $queryBuilder
-    //                 ->select('pc, c, u,p')
-    //                 ->from('AppBundle:TbPortfolioClass', 'pc')
-    //                 ->innerJoin('pc.idClass', 'c', 'WITH', 'c.idClass= pc.idClass')
-    //                 ->innerJoin('c.idProposer', 'u', 'WITH', 'c.idProposer= u.idUser')
-    //                 ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
-    //                 ->where($queryBuilder->expr()->eq('c.idClass', $turma['idClass']))
-    //                 ->getQuery()
-    //                 ->execute();
-    //         $portfolioClass = $queryBuilder->getQuery()->getArrayResult();
-    //         $this->logControle->logAdmin(print_r($portfolioClass, true));
-    //
-    //         if (count($portfolioClass) > 0) {
-    //             foreach ($portfolioClass as $arrayPortfolioClass) {
-    //                 $arrayTurmas[] = array(
-    //                     'dsCode' => $turma["dsCode"],
-    //                     'dsDescription' => $turma['dsDescription'],
-    //                     'idClass' => $turma['idClass'],
-    //                     'stStatus' => $turma['stStatus'],
-    //                     'idPortfolio' => $arrayPortfolioClass['idPortfolio']['idPortfolio'],
-    //                     'dsTitlePortfolio' => $arrayPortfolioClass['idPortfolio']['dsTitle']
-    //                 );
-    //             }
-    //         } else {
-    //             $arrayTurmas[] = array(
-    //                 'dsCode' => $turma["dsCode"],
-    //                 'dsDescription' => $turma['dsDescription'],
-    //                 'idClass' => $turma['idClass'],
-    //                 'stStatus' => $turma['stStatus'],
-    //                 'idPortfolio' => -1,
-    //                 'dsTitlePortfolio' => -1
-    //             );
-    //         }
-    //     }
-    //     $this->logControle->logAdmin(print_r($arrayTurmas, true));
-    //     return $arrayAtvidades;
-    // }
+    public function carregarAtividadesPortfolio($idPortfolio) {
+        $queryBuilderClass = $this->em->createQueryBuilder();
+        $queryBuilderClass
+                ->select('a')
+                ->from('AppBundle:TbActivity', 'a')
+                ->where($queryBuilder->expr()->eq('a.idPortfolio', $idPortfolio))
+                ->getQuery()
+                ->execute();
+        $atividades = $queryBuilderClass->getQuery()->getArrayResult();
+
+        foreach ($atividades as $atividade) {
+
+            $queryBuilder = $this->em->createQueryBuilder();
+            $queryBuilder
+                    ->select('pc, c, u,p')
+                    ->from('AppBundle:TbPortfolioClass', 'pc')
+                    ->innerJoin('pc.idClass', 'c', 'WITH', 'c.idClass= pc.idClass')
+                    ->innerJoin('c.idProposer', 'u', 'WITH', 'c.idProposer= u.idUser')
+                    ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
+                    ->where($queryBuilder->expr()->eq('c.idClass', $turma['idClass']))
+                    ->getQuery()
+                    ->execute();
+            $portfolioClass = $queryBuilder->getQuery()->getArrayResult();
+            $this->logControle->logAdmin(print_r($portfolioClass, true));
+
+            if (count($portfolioClass) > 0) {
+                foreach ($portfolioClass as $arrayPortfolioClass) {
+                    $arrayTurmas[] = array(
+                        'dsCode' => $turma["dsCode"],
+                        'dsDescription' => $turma['dsDescription'],
+                        'idClass' => $turma['idClass'],
+                        'stStatus' => $turma['stStatus'],
+                        'idPortfolio' => $arrayPortfolioClass['idPortfolio']['idPortfolio'],
+                        'dsTitlePortfolio' => $arrayPortfolioClass['idPortfolio']['dsTitle']
+                    );
+                }
+            } else {
+                $arrayTurmas[] = array(
+                    'dsCode' => $turma["dsCode"],
+                    'dsDescription' => $turma['dsDescription'],
+                    'idClass' => $turma['idClass'],
+                    'stStatus' => $turma['stStatus'],
+                    'idPortfolio' => -1,
+                    'dsTitlePortfolio' => -1
+                );
+            }
+        }
+        $this->logControle->logAdmin(print_r($arrayTurmas, true));
+        return $arrayAtvidades;
+    }
 
     function gerarFormularioPortfolio($nomeFormulario) {
-
         $formularioTbPortfolio = $this->get('form.factory')
                 ->createNamedBuilder($nomeFormulario, FormType::class)
                 ->add('DsTitle', TextType::class, array('label' => false))
@@ -203,7 +202,6 @@ class PortfoliosController extends Controller {
     }
 
     function persistirObjetoPortfolio($objetoPortfolio, $dadosPortfolio) {
-
         $this->em = $this->getDoctrine()->getManager();
         $objetoPortfolio->setDsTitle($dadosPortfolio['DsTitle']);
         $objetoPortfolio->setDsDescription($dadosPortfolio['DsDescription']);

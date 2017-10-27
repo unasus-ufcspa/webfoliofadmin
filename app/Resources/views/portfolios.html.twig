@@ -32,15 +32,13 @@
         <div id="listaUsers">
             {% set i=0 %}
             {% for portfolio in portfolios %}
-                {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+                {% if i is even %}
                     <div class="itemUserA itemUsuario">
                         <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
                         <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio"
-                              {# onclick='editarUser("{{i}}", "{{portfolio.nmUser}}", "{{administrador.dsEmail}}", "{{portfolio.idPortfolio}}")' #}
-                              >
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio" onclick="window.location = '{{web_dir}}cadastroPortfolio/{{portfolio.idPortfolio}}';">
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
@@ -48,9 +46,7 @@
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
                         <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio"
-                             {# onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}", "{{administrador.idUser}}")' #}
-                             >
+                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar portfólio" onclick="window.location = '{{web_dir}}cadastroPortfolio/{{portfolio.idPortfolio}}';">
                     </div>
                 {% endif %}
                 {% set i = i+1 %}
