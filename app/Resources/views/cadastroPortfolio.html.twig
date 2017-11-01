@@ -59,25 +59,25 @@
           </div>
         </div>
 
-{% set foo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus. A cras semper auctor neque vitae tempus quam pellentesque nec. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Aliquam ultrices sagittis orci a. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Neque vitae tempus quam' %}
         <div id="listaAtividades">
-          {% for i in 0..10 %}
+          {% set i = 0 %}
+          {% for atividade in atividades %}
             {% if i is odd %}
               <div class="itemAtividadeA itemAtividade">
-                  <input type="checkbox" name="Atividade[]" value="{{i}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                  <div class="nomeAtividade">Teste</div>
-                  <div class="dsAtividade">Descrição da atividade</div>
+                  <div class="nomeAtividade">{{atividade.dsTitle}}</div>
+                  <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
                     <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
                   </div>
               </div>
             {% else %}
               <div class="itemAtividadeB itemAtividade">
-                  <input type="checkbox" name="Atividade[]" value="{{i}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                  <div class="nomeAtividade">Teste</div>
-                  <div class="dsAtividade">{{ foo }}</div>
+                  <div class="nomeAtividade">{{atividade.dsTitle}}</div>
+                  <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
                     <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
                   </div>
@@ -85,6 +85,7 @@
             {% endif %}
             <div class="editarUser" id="{{i}}">
             </div>
+            {% set i = i+1 %}
           {% endfor %}
         </div>
 

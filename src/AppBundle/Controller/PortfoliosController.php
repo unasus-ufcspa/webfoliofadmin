@@ -84,10 +84,10 @@ class PortfoliosController extends Controller {
             $this->em = $this->getDoctrine()->getManager();
 
             $dadosPortfolio = array();
-            $arrayAtvidades = array();
+            $arrayAtividades = array();
             if ($idPortfolio > -1) {
               $dadosPortfolio = $this->carregarDadosPortfolio($idPortfolio);
-              // $arrayAtvidades= $this->carregarAtividadesPortfolio($idPortfolio);
+              $arrayAtividades= $this->carregarAtividadesPortfolio($idPortfolio);
             }
 
             $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionar");
@@ -107,11 +107,10 @@ class PortfoliosController extends Controller {
                 if ($this->formAdicionarAtividade->isSubmitted() && $this->formAdicionarAtividade->isValid()) {
                     $dadosFormAdicionarAtividade = $this->formAdicionarAtividade->getData();
                     $this->adicionarAtividade($dadosFormAdicionarAtividade);
-                    // return $this->redirectToRoute('portfolios');
                 }
             }
 
-            return $this->render('cadastroPortfolio.html.twig', array('formPort' => $this->formAdicionarPortfolio->createView(), 'formAtiv' => $this->formAdicionarAtividade->createView()));
+            return $this->render('cadastroPortfolio.html.twig', array('atividades' => $arrayAtividades, 'portfolio' => $dadosPortfolio, 'formPort' => $this->formAdicionarPortfolio->createView(), 'formAtiv' => $this->formAdicionarAtividade->createView()));
         }
     }
 
@@ -132,59 +131,29 @@ class PortfoliosController extends Controller {
                 'dsDescription' => $arrayPortfolios['dsDescription']
             );
         }
-        $this->logControle->logAdmin(print_r($dadosPortfolio, true));
+        // $this->logControle->logAdmin(print_r($dadosPortfolio, true));
         return $dadosPortfolio;
     }
 
     public function carregarAtividadesPortfolio($idPortfolio) {
-        $queryBuilderClass = $this->em->createQueryBuilder();
-        $queryBuilderClass
+        $queryBuilderPort = $this->em->createQueryBuilder();
+        $queryBuilderPort
                 ->select('a')
                 ->from('AppBundle:TbActivity', 'a')
-                ->where($queryBuilder->expr()->eq('a.idPortfolio', $idPortfolio))
+                ->where($queryBuilderPort->expr()->eq('a.idPortfolio', $idPortfolio))
                 ->getQuery()
                 ->execute();
-        $atividades = $queryBuilderClass->getQuery()->getArrayResult();
+        $atividades = $queryBuilderPort->getQuery()->getArrayResult();
 
         foreach ($atividades as $atividade) {
-
-            $queryBuilder = $this->em->createQueryBuilder();
-            $queryBuilder
-                    ->select('pc, c, u,p')
-                    ->from('AppBundle:TbPortfolioClass', 'pc')
-                    ->innerJoin('pc.idClass', 'c', 'WITH', 'c.idClass= pc.idClass')
-                    ->innerJoin('c.idProposer', 'u', 'WITH', 'c.idProposer= u.idUser')
-                    ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
-                    ->where($queryBuilder->expr()->eq('c.idClass', $turma['idClass']))
-                    ->getQuery()
-                    ->execute();
-            $portfolioClass = $queryBuilder->getQuery()->getArrayResult();
-            $this->logControle->logAdmin(print_r($portfolioClass, true));
-
-            if (count($portfolioClass) > 0) {
-                foreach ($portfolioClass as $arrayPortfolioClass) {
-                    $arrayTurmas[] = array(
-                        'dsCode' => $turma["dsCode"],
-                        'dsDescription' => $turma['dsDescription'],
-                        'idClass' => $turma['idClass'],
-                        'stStatus' => $turma['stStatus'],
-                        'idPortfolio' => $arrayPortfolioClass['idPortfolio']['idPortfolio'],
-                        'dsTitlePortfolio' => $arrayPortfolioClass['idPortfolio']['dsTitle']
-                    );
-                }
-            } else {
-                $arrayTurmas[] = array(
-                    'dsCode' => $turma["dsCode"],
-                    'dsDescription' => $turma['dsDescription'],
-                    'idClass' => $turma['idClass'],
-                    'stStatus' => $turma['stStatus'],
-                    'idPortfolio' => -1,
-                    'dsTitlePortfolio' => -1
-                );
-            }
+            $dadosAtividades[] = array(
+                'id' => $atividade['idActivity'],
+                'dsTitle' => $atividade['dsTitle'],
+                'dsDescription' => $atividade['dsDescription'],
+                'nuOrder' => $atividade['nuOrder']
+            );
         }
-        $this->logControle->logAdmin(print_r($arrayTurmas, true));
-        return $arrayAtvidades;
+        return $dadosAtividades;
     }
 
     function gerarFormularioPortfolio($nomeFormulario) {
@@ -222,31 +191,4 @@ class PortfoliosController extends Controller {
         return $formularioTbActivity;
     }
 
-    // public function gerarArrayAtividades() {
-    //     $queryBuilderClass = $this->em->createQueryBuilder();
-    //     $queryBuilderClass
-    //             ->select('p')
-    //             ->from('AppBundle:TbPortfolio', 'p')
-    //             ->getQuery()
-    //             ->execute();
-    //     $portfolios = $queryBuilderClass->getQuery()->getArrayResult();
-    //     foreach ($portfolios as $portfolio) {
-    //
-    //         $queryBuilder = $this->em->createQueryBuilder();
-    //         $queryBuilder
-    //                 ->select('count(a.idActivity)')
-    //                 ->from('AppBundle:TbActivity', 'a')
-    //                 ->where($queryBuilder->expr()->eq('a.idPortfolio', $portfolio['idPortfolio']))
-    //                 ->getQuery()
-    //                 ->execute();
-    //         $portfolio['nmAtividades'] = $queryBuilder->getQuery()->getSingleScalarResult();
-    //
-    //         $arrayPortfolios[] = array(
-    //           'idPortfolio' => $portfolio['idPortfolio'],
-    //           'dsTitle' => $portfolio['dsTitle'],
-    //           'nmAtividades' => $portfolio['nmAtividades']
-    //         );
-    //     }
-    //     return $arrayAtvidades;
-    // }
 }
