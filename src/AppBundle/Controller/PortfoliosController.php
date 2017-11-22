@@ -14,6 +14,8 @@ use AppBundle\Entity\TbUser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
+use AppBundle\Entity\TbActivity;
+use AppBundle\Entity\TbPortfolio;
 
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -88,6 +90,12 @@ class PortfoliosController extends Controller {
             if ($idPortfolio > -1) {
               $dadosPortfolio = $this->carregarDadosPortfolio($idPortfolio);
               $arrayAtividades= $this->carregarAtividadesPortfolio($idPortfolio);
+            }else{
+              $dadosPortfolio = array(
+                  'dsTitle' => null,
+                  'dsDescription' => null
+              );
+              $arrayAtividades  = array();
             }
 
             $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionar");
@@ -131,7 +139,6 @@ class PortfoliosController extends Controller {
                 'dsDescription' => $arrayPortfolios['dsDescription']
             );
         }
-        // $this->logControle->logAdmin(print_r($dadosPortfolio, true));
         return $dadosPortfolio;
     }
 
@@ -179,6 +186,8 @@ class PortfoliosController extends Controller {
         $idPortfolio = $objetoPortfolio->getIdUser();
 
         $this->em->flush();
+
+        return $idPortfolio;
     }
 
     function gerarFormularioAddAtividade($nomeFormulario) {
@@ -189,6 +198,24 @@ class PortfoliosController extends Controller {
                 ->add('DsDescription', TextareaType ::class, array('label' => false))
                 ->getForm();
         return $formularioTbActivity;
+    }
+
+    function adicionarAtividade($dadosFormAdicionarAtividade) {
+        $novaAtividade = new TbActivity();
+        persistirObjetoAtividade($novaAtividade, $dadosFormAdicionarAtividade);
+    }
+
+    function persistirObjetoAtividade($objetoAtividade, $dadosAtividade) {
+        $this->em = $this->getDoctrine()->getManager();
+        $objetoAtividade->setDsTitle($dadosPortfolio['DsTitle']);
+        $objetoAtividade->setDsDescription($dadosPortfolio['DsDescription']);
+
+        $this->em->persist($objetoAtividade);
+        // $idPortfolio = $objetoPortfolio->getIdUser();
+
+        $this->em->flush();
+
+        // return $idPortfolio;
     }
 
 }

@@ -13,7 +13,6 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{web_dir}}../assets/css/editarPortfolio.css">
-
     </head>
 
     <body>
@@ -27,11 +26,15 @@
                   <div class="ui grid" >
                       <div class="twelve wide column grid">
                         <div class="rowEditar">
-                            {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar'  }})}}
+                            {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar', 'value' : portfolio.dsTitle  }})}}
                         </div>
 
                         <div class="rowEditar">
-                            {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao'  }})}}
+                            {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao' }})}}
+                            <script>
+                              var description = "{{ portfolio.dsDescription }}";
+                              $(".formEditar.textAreaDescricao").html(description);
+                            </script>
                         </div>
                     </div>
                     <input type="submit" id="salvarEdicaoPortfolio" value="SALVAR">
@@ -94,3 +97,4 @@
         </div>
     </body>
 </html>
+<script src="../assets/js/cadastroPortfolio.js"></script>
