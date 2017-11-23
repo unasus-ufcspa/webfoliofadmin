@@ -43,7 +43,18 @@ class PortfoliosController extends Controller {
 
             $arrayPortfolios = $this->gerarArrayPortfolios();
 
-            return $this->render('portfolios.html.twig', array('portfolios' => $arrayPortfolios));
+            $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionarPort");
+            $this->formAdicionarPortfolio->handleRequest($request);
+
+            if ($request->request->has($this->formAdicionarPortfolio->getName())) {
+                if ($this->formAdicionarPortfolio->isSubmitted() && $this->formAdicionarPortfolio->isValid()) {
+                    $dadosFormAdicionarPortfolio = $this->formAdicionarPortfolio->getData();
+                    $this->adicionarPortfolio($dadosFormAdicionarPortfolio);
+                    return $this->redirectToRoute('portfolios');
+                }
+            }
+
+            return $this->render('portfolios.html.twig', array('portfolios' => $arrayPortfolios,  'formPort' => $this->formAdicionarPortfolio->createView()));
         }
     }
 
@@ -98,23 +109,24 @@ class PortfoliosController extends Controller {
               $arrayAtividades  = array();
             }
 
-            $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionar");
+            $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionarPort");
             $this->formAdicionarPortfolio->handleRequest($request);
 
-            $this->formAdicionarAtividade = PortfoliosController::gerarFormularioAddAtividade("adicionar");
+            $this->formAdicionarAtividade = PortfoliosController::gerarFormularioAddAtividade("adicionarAtiv");
             $this->formAdicionarAtividade->handleRequest($request);
 
             if ($request->request->has($this->formAdicionarPortfolio->getName())) {
                 if ($this->formAdicionarPortfolio->isSubmitted() && $this->formAdicionarPortfolio->isValid()) {
                     $dadosFormAdicionarPortfolio = $this->formAdicionarPortfolio->getData();
                     $this->adicionarPortfolio($dadosFormAdicionarPortfolio);
-                    return $this->redirectToRoute('portfolios');
+                    // return $this->redirectToRoute('portfolios');
                 }
             }
             if ($request->request->has($this->formAdicionarAtividade->getName())) {
                 if ($this->formAdicionarAtividade->isSubmitted() && $this->formAdicionarAtividade->isValid()) {
                     $dadosFormAdicionarAtividade = $this->formAdicionarAtividade->getData();
-                    $this->adicionarAtividade($dadosFormAdicionarAtividade);
+                    $this->adicionarAtividade($dadosFormAdicionarAtividade, $idPortfolio);
+                    // return $this->redirectToRoute('portfolios');
                 }
             }
 
@@ -151,7 +163,7 @@ class PortfoliosController extends Controller {
                 ->getQuery()
                 ->execute();
         $atividades = $queryBuilderPort->getQuery()->getArrayResult();
-
+        $dadosAtividades=null;
         foreach ($atividades as $atividade) {
             $dadosAtividades[] = array(
                 'id' => $atividade['idActivity'],
@@ -174,7 +186,7 @@ class PortfoliosController extends Controller {
 
     function adicionarPortfolio($dadosFormAdicionarPortfolio) {
         $novoPortfolio = new TbPortfolio();
-        persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
+        $this->persistirObjetoPortfolio($novoPortfolio, $dadosFormAdicionarPortfolio);
     }
 
     function persistirObjetoPortfolio($objetoPortfolio, $dadosPortfolio) {
@@ -183,7 +195,7 @@ class PortfoliosController extends Controller {
         $objetoPortfolio->setDsDescription($dadosPortfolio['DsDescription']);
 
         $this->em->persist($objetoPortfolio);
-        $idPortfolio = $objetoPortfolio->getIdUser();
+        $idPortfolio = $objetoPortfolio->getIdPortfolio();
 
         $this->em->flush();
 
@@ -200,22 +212,22 @@ class PortfoliosController extends Controller {
         return $formularioTbActivity;
     }
 
-    function adicionarAtividade($dadosFormAdicionarAtividade) {
+    function adicionarAtividade($dadosFormAdicionarAtividade, $idPortfolio) {
         $novaAtividade = new TbActivity();
-        persistirObjetoAtividade($novaAtividade, $dadosFormAdicionarAtividade);
+        $this->persistirObjetoAtividade($novaAtividade, $dadosFormAdicionarAtividade, $idPortfolio);
     }
 
-    function persistirObjetoAtividade($objetoAtividade, $dadosAtividade) {
+    function persistirObjetoAtividade($objetoAtividade, $dadosAtividade, $idPortfolio) {
         $this->em = $this->getDoctrine()->getManager();
-        $objetoAtividade->setDsTitle($dadosPortfolio['DsTitle']);
-        $objetoAtividade->setDsDescription($dadosPortfolio['DsDescription']);
+
+        $objetoPort = $this->em->getRepository('AppBundle:TbPortfolio')
+                ->findOneBy(array('idPortfolio' => $idPortfolio));
+        $objetoAtividade->setIdPortfolio($objetoPort);
+        $objetoAtividade->setDsTitle($dadosAtividade['DsTitle']);
+        $objetoAtividade->setDsDescription($dadosAtividade['DsDescription']);
 
         $this->em->persist($objetoAtividade);
-        // $idPortfolio = $objetoPortfolio->getIdUser();
 
         $this->em->flush();
-
-        // return $idPortfolio;
     }
-
 }

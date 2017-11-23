@@ -13,6 +13,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../assets/css/registroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}../assets/css/editarPortfolio.css">
     </head>
 
     <body>
@@ -20,11 +21,31 @@
         <div id="header">
             <img src="../assets/img/iconePortfolio.png" id="iconPessoa">
             <span id="titulo">PORTFÓLIOS</span>
+
+            <div id="formAddPortfolio">
+              {{ form_start(formPort) }}
+                 <div class="formInfoPortfolio">
+                   <div class="ui grid" >
+                       <div class="twelve wide column grid">
+                         <div class="rowEditar">
+                             {{form_row(formPort.DsTitle, { 'attr' : { 'placeholder' : 'Título' , 'class': 'formEditar' }})}}
+                         </div>
+
+                         <div class="rowEditar">
+                             {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao' }})}}
+                         </div>
+                     </div>
+                     <input type="submit" id="salvarEdicaoPortfolio" value="SALVAR">
+                   </div>
+                 </div>
+             {{ form_end(formPort) }}
+            </div>
         </div>
+
         <div id="pesquisa">
           <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Portfólio" id="inputPesquisa">
-          <div class="ui medium button" id="addUser" onclick="addUser();" style="font-size: 14px;">NOVO PORTFÓLIO</div>
+          <div class="ui medium button" id="addUser" onclick="window.location = '{{web_dir}}cadastroPortfolio/-1';" style="font-size: 14px;">NOVO PORTFÓLIO</div>
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
