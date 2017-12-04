@@ -43,6 +43,25 @@
             {{ form_end(formPort) }}
         </div>
 
+        <div id="editarAtividade">
+          <div class="addAtividade">
+            {{ form_start(editAtiv) }}
+                <div class="ui grid">
+                  <div class="twelve wide column grid">
+                    <div class="rowEditar">
+                        {{form_row(editAtiv.DsTitle, { 'attr' : { 'placeholder' : 'Título da atividade' , 'class': 'formEditar formEditarAtividade'  }})}}
+                    </div>
+
+                    <div class="rowEditar">
+                        {{form_row(editAtiv.DsDescription, { 'attr' : { 'placeholder' : 'Descrição da atividade' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
+                    </div>
+                  </div>
+                  <input type="submit" id="salvarEdicao" value="Adicionar">
+                </div>
+            {{ form_end(editAtiv) }}
+          </div>
+        </div>
+
         <div id="adicionarAtividade">
           <div class="addAtividade">
             {{ form_start(formAtiv) }}
@@ -62,6 +81,7 @@
           </div>
         </div>
 
+
         <div id="listaAtividades">
           {% set i = 0 %}
           {% for atividade in atividades %}
@@ -72,7 +92,7 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
+                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}")'>
                   </div>
               </div>
             {% else %}
@@ -82,11 +102,11 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade">
+                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}")'>
                   </div>
               </div>
             {% endif %}
-            <div class="editarUser" id="{{i}}">
+            <div class="editarEachAtividade" id="{{i}}">
             </div>
             {% set i = i+1 %}
           {% endfor %}
@@ -97,4 +117,4 @@
         </div>
     </body>
 </html>
-<script src="../assets/js/cadastroPortfolio.js"></script>
+<script src="{{web_dir}}../assets/js/cadastroPortfolio.js"></script>

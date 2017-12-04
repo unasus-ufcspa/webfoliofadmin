@@ -112,16 +112,19 @@ input:checked + label {
   background-color: #747474;
   box-shadow: 0px 0px 0px 5px #FFF inset;
 }
-#listaAtividades, #adicionarAtividade{
+#listaAtividades, #adicionarAtividade, #editarAtividade{
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 100%;
   padding-bottom: 100px;
 }
-#adicionarAtividade{
+#adicionarAtividade, #editarAtividade{
   padding-bottom: 0px;
   margin-bottom: 0px;
   overflow: hidden;
+}
+#editarAtividade{
+  display: none;
 }
 @media screen and (max-width: 1500px){
   .formEditar{
