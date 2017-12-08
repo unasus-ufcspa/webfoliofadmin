@@ -56,7 +56,7 @@
                         {{form_row(editAtiv.DsDescription, { 'attr' : { 'placeholder' : 'Descrição da atividade' , 'class': 'formEditar formEditarAtividade textAreaDescricao' }})}}
                     </div>
                   </div>
-                  <input type="submit" id="salvarEdicao" value="Adicionar">
+                  <input type="submit" id="salvarEdicao" value="Salvar">
                 </div>
             {{ form_end(editAtiv) }}
           </div>
@@ -92,7 +92,7 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}")'>
+                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>
               </div>
             {% else %}
@@ -102,7 +102,7 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}")'>
+                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>
               </div>
             {% endif %}

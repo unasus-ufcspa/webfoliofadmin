@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\TbClass;
+
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * Description of PropositorController
@@ -187,7 +190,52 @@ class PropositorController extends Controller {
         $this->em = $this->getDoctrine()->getEntityManager();
         $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro(); //carrega dados do menu lateral, chamar em todas as telas que necessario e enviar nos parametros do render
 
-        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
+        $propositor = $this->selecionarPropositorSalvo();
+
+        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'propositor' => $propositor));
     }
 
+    function gerarFormPropositor(){
+      $formularioTbClass = $this->get('form.factory')
+              ->createNamedBuilder($nomeFormulario, FormType::class)
+              ->add('IdProposer', HiddenType::class, array('label' => false))
+              ->add('IdPortfolios', HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formularioTbClass;
+    }
+
+    function selecionarPropositorSalvo(){
+        $idClass = $this->get('session')->get('idTurmaEdicao');
+
+        $turma = $this->getDoctrine()
+                ->getRepository('AppBundle:TbClass')
+                ->findOneBy(array('idClass' => $idClass));
+
+        $propositor = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('idUser' => $turma['idProposer']));
+
+        $arrayPropositor[] = array(
+          'idPropositor' => $portfolio['idPortfolio'],
+          'nmPropositor' => $portfolio['dsTitle']
+        );
+
+        return $arrayPropositor;
+    }
+
+    function selecionarPortfoliosTurma(){
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+
+      $queryBuilderPortfolios = $this->em->createQueryBuilder();
+      $queryBuilderPortfolios
+              ->select('p')
+              ->from('AppBundle:TbPortfolio', "p")
+              ->innerJoin('p.idPortfolio', 'pc', 'WITH', 'pc.idPortfolio =  p.idPortfolio')
+              ->where($queryBuilderAluno->expr()->eq('pc.idClass', $idClass))
+              ->getQuery()
+              ->execute();
+      $alunosTurma = $queryBuilderPortfolios->getQuery()->getArrayResult();
+
+      return $alunosTurma;
+    } 
 }

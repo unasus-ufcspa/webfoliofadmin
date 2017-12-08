@@ -16,22 +16,22 @@ function editarAtividade(id, dsTitle, dsDescription, idAtividade) {
         }
     });
 
-    if (flagEditar == false) {
+    // if (flagEditar == false) {
         openEditar(id);
-    } else {
-        idAbrirEdicao = id;
-        closeEditar(idAberto);
-    }
+    // } else {
+    //     idAbrirEdicao = id;
+    //     closeEditar(idAberto);
+    // }
 }
 
 function openEditar(id) {
     var $formulario = $("#editarAtividade");
-    document.getElementById("editAtiv_DsTitle").value = titleForm;
-    document.getElementById("editAtiv_DsDescription").value = descriptionForm;
-    document.getElementById("editAtiv_IdActivity").value = idAtividadeForm;
-    $('#closeEditar').click(function () {
-        closeEditar(id);
-    });
+    document.getElementById("editarAtiv_DsTitle").value = titleForm;
+    document.getElementById("editarAtiv_DsDescription").value = descriptionForm;
+    document.getElementById("editarAtiv_IdActivity").value = idAtividadeForm;
+    // $('#closeEditar').click(function () {
+    //     closeEditar(id);
+    // });
     $("#" + id + ".editarEachAtividade").append($formulario);
     $formulario.css("display", "block");
     $("#" + id + ".editarEachAtividade").show();
