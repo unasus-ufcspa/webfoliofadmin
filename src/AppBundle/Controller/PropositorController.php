@@ -234,8 +234,10 @@ class PropositorController extends Controller {
               ->where($queryBuilderAluno->expr()->eq('pc.idClass', $idClass))
               ->getQuery()
               ->execute();
-      $alunosTurma = $queryBuilderPortfolios->getQuery()->getArrayResult();
+      $portfoliosTurma = $queryBuilderPortfolios->getQuery()->getArrayResult();
 
-      return $alunosTurma;
-    } 
+      return $portfoliosTurma;
+    }
+
+
 }
