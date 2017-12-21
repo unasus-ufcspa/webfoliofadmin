@@ -55,6 +55,14 @@
           </div>
           <input type="submit" class="salvarPortfolioPropositor" value="SALVAR">
         </div>
+
+        {{ form_start(formPortProp) }}
+
+            {{form_row(formPortProp.IdProposer)}}
+
+            {{form_row(formPortProp.IdPortfolios)}}
+
+        {{ form_end(formPortProp) }}
     </body>
 </html>
-<script src="../assets/js/portfolioPropositor.js"></script>
+<script src="{{web_dir}}../assets/js/portfolioPropositor.js"></script>

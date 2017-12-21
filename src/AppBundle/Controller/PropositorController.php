@@ -15,7 +15,7 @@ use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\TbClass;
-
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
@@ -186,42 +186,63 @@ class PropositorController extends Controller {
     /**
      * @Route("/portfolioPropositor", name="portfolioPropositor")
      */
-    function portfolioPropositorAction() {
+    function portfolioPropositorAction(Request $request) {
         $this->em = $this->getDoctrine()->getEntityManager();
         $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro(); //carrega dados do menu lateral, chamar em todas as telas que necessario e enviar nos parametros do render
 
-        $propositor = $this->selecionarPropositorSalvo();
+        // $propositor = $this->selecionarPropositorSalvo();
 
-        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'propositor' => $propositor));
+
+        // $this->em = $this->getDoctrine()->getManager();
+        $this->formPortProp = PropositorController::gerarFormPropositor("salvarPortfolioPropositor");
+        $this->formPortProp->handleRequest($request);
+
+        if ($request->request->has($this->formPortProp->getName())) {
+            if ($this->formPortProp->isSubmitted() && $this->formEditarPropositor->isValid()) {
+                $dadosFormEditarPropositor = $this->formPortProp->getData();
+                UsuarioController::editarUsuario($dadosFormEditarPropositor);
+            }
+        }
+
+        // return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'propositor' => $propositor));
+        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView()));
+
     }
 
-    function gerarFormPropositor(){
+    function gerarFormPropositor($nomeFormulario){
       $formularioTbClass = $this->get('form.factory')
               ->createNamedBuilder($nomeFormulario, FormType::class)
               ->add('IdProposer', HiddenType::class, array('label' => false))
               ->add('IdPortfolios', HiddenType::class, array('label' => false))
               ->getForm();
       return $formularioTbClass;
+
     }
 
-    function selecionarPropositorSalvo(){
-        $idClass = $this->get('session')->get('idTurmaEdicao');
-
-        $turma = $this->getDoctrine()
-                ->getRepository('AppBundle:TbClass')
-                ->findOneBy(array('idClass' => $idClass));
-
-        $propositor = $this->getDoctrine()
-                ->getRepository('AppBundle:TbUser')
-                ->findOneBy(array('idUser' => $turma['idProposer']));
-
-        $arrayPropositor[] = array(
-          'idPropositor' => $portfolio['idPortfolio'],
-          'nmPropositor' => $portfolio['dsTitle']
-        );
-
-        return $arrayPropositor;
-    }
+    // function selecionarPropositorSalvo(){
+    //     $idClass = $this->get('session')->get('idTurmaEdicao');
+    //
+    //     $turma = $this->getDoctrine()
+    //             ->getRepository('AppBundle:TbClass')
+    //             ->findOneBy(array('idClass' => $idClass));
+    //     $this->logControle->logAdmin(print_r($turma, true));
+    //
+    //     $propositor = $this->getDoctrine()
+    //             ->getRepository('AppBundle:TbUser')
+    //             ->findOneBy(array('idUser' => $turma));
+    //
+    //     if($propositor!=null){
+    //       foreach ($propositor as $prop) {
+    //         $arrayPropositor[] = array(
+    //           'idPropositor' => $prop['idUser'],
+    //           'nmPropositor' => $prop['nmUser']
+    //         );
+    //       }
+    //     }
+    //
+    //     return $arrayPropositor;
+    //
+    // }
 
     function selecionarPortfoliosTurma(){
       $idClass = $this->get('session')->get('idTurmaEdicao');
