@@ -34,7 +34,7 @@ function openEditar(id) {
     // });
     $("#" + id + ".editarEachAtividade").append($formulario);
     $formulario.css("display", "block");
-    $("#" + id + ".editarEachAtividade").show();
+    $("#" + id + ".editarEachAtividade").toggle();
 }
 function closeEditar(id) {
     $("#" + id + ".editarEachAtividade").hide();
@@ -42,4 +42,8 @@ function closeEditar(id) {
         flagEditar = false;
         // openEditar(idAbrirEdicao);
     }
+}
+
+function novaAtividade(){
+  $("#adicionarAtividade").toggle();
 }

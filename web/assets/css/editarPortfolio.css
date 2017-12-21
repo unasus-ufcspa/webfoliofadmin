@@ -21,8 +21,25 @@ html, body{
   right: 105px;
   top: 20px;
   cursor: pointer;
+  display: inline-block;
 }
-
+.btNovaAtividade{
+  width: 170px;
+  height: 40px;
+  border-radius: 100px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  position: relative;
+  left: 75%;
+  top: 15px;
+  background-color: #9187c7;
+  display: inline-block;
+}
 #header {
   width: 100%;
   height: 350px;
@@ -122,8 +139,6 @@ input:checked + label {
   padding-bottom: 0px;
   margin-bottom: 0px;
   overflow: hidden;
-}
-#editarAtividade{
   display: none;
 }
 @media screen and (max-width: 1500px){
@@ -203,4 +218,7 @@ input:checked + label {
 }
 #salvarEdicaoPortfolio{
   border: 1px solid white;
+}
+.editarEachAtividade{
+  display: none;
 }
