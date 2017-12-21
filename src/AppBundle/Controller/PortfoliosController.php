@@ -123,21 +123,24 @@ class PortfoliosController extends Controller {
                 if ($this->formEditarPortfolio->isSubmitted() && $this->formEditarPortfolio->isValid()) {
                     $dadosFormEditarPortfolio = $this->formEditarPortfolio->getData();
                     $this->editarPortfolio($dadosFormEditarPortfolio, $idPortfolio);
-                    return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    header("Refresh:0");
                 }
             }
             if ($request->request->has($this->formAdicionarAtividade->getName())) {
                 if ($this->formAdicionarAtividade->isSubmitted() && $this->formAdicionarAtividade->isValid()) {
                     $dadosFormAdicionarAtividade = $this->formAdicionarAtividade->getData();
                     $this->adicionarAtividade($dadosFormAdicionarAtividade, $idPortfolio);
-                    return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    header("Refresh:0");
                 }
             }
             if ($request->request->has($this->formEditarAtividade->getName())) {
                 if ($this->formEditarAtividade->isSubmitted() && $this->formEditarAtividade->isValid()) {
                     $dadosFormEditarAtividade = $this->formEditarAtividade->getData();
                     $this->editarAtividade($dadosFormEditarAtividade, $idPortfolio);
-                    return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
+                    header("Refresh:0");
                 }
             }
 
