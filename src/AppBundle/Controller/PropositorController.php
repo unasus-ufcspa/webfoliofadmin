@@ -55,11 +55,13 @@ class PropositorController extends Controller {
                 if ($this->formEditarPropositor->isSubmitted() && $this->formEditarPropositor->isValid()) {
                     $dadosFormEditarPropositor = $this->formEditarPropositor->getData();
                     UsuarioController::editarUsuario($dadosFormEditarPropositor);
+                    return $this->redirectToRoute('propositores');
                 }
             } else {
                 if ($this->formAdicionarPropositor->isSubmitted() && $this->formAdicionarPropositor->isValid()) {
                     $dadosFormAdicionarPropositor = $this->formAdicionarPropositor->getData();
                     $this->adicionarPropositor($dadosFormAdicionarPropositor);
+                    return $this->redirectToRoute('propositores');
                 }
             }
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,

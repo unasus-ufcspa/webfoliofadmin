@@ -52,12 +52,15 @@ class AdministradorController extends Controller {
                 if ($this->formEditarAdministrador->isSubmitted() && $this->formEditarAdministrador->isValid()) {
                     $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
                     UsuarioController::editarUsuario($dadosFormEditarAdministrador);
+                    // header("Refresh:0");
+                    return $this->redirectToRoute('administradores');
                 }
             } else {
                 if ($this->formAdicionarAdministrador->isSubmitted() && $this->formAdicionarAdministrador->isValid()) {
                     $dadosFormAdicionarAdministrador = $this->formAdicionarAdministrador->getData();
                     $this->adicionarAdministrador($dadosFormAdicionarAdministrador);
                     return $this->redirectToRoute('administradores');
+                    // header("Refresh:0");
                 }
             }
 

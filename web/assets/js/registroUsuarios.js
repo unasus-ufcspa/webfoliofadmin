@@ -321,10 +321,11 @@ function validatePasswordAdd() {
 
     if (pass.value != "" && pass.value == conf.value) {
         flagValidateAdd = true;
-        $(confirm).off("focusout");
+        $(conf).off("focusout");
         return true;
     } else {
         $('#salvarEdicao').attr('disabled', true);
+        $('#salvarAdd').attr('disabled', true);
         alert("Senhas diferentes");
         return false;
     }

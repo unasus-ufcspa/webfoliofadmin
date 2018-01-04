@@ -103,7 +103,7 @@
                         <img src="../assets/img/rg.png" class="iconesFormEditarRight">
                         {{form_row(formAddAmin.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
-                    <input type="submit" id="salvarEdicao" value="SALVAR" >
+                    <input type="submit" id="salvarAdd" value="SALVAR" >
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
 </html>
 <script>
     $('form').on('submit', function (e) {
-      e.preventDefault();
+      // e.preventDefault();
       var url = "{{ path('administradores') }}";
       var formData = new FormData(this);
       $.ajax({

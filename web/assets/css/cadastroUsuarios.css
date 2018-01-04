@@ -219,7 +219,7 @@ input:checked +  label {
   width:500px;
   padding-top: 35px;
 }
-#salvarEdicao{
+#salvarEdicao, #salvarAdd{
   width: 170px;
   height: 65px;
   border-radius: 100px;
