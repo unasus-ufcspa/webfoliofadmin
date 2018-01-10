@@ -83,65 +83,74 @@ function dropPort(ev) {
   return false;
 }
 
-function dropProp(ev) {
-  if (ev.stopPropagation) {
-    ev.stopPropagation(); // Stops some browsers from redirecting.
+// function dropProp(ev) {
+//   if (ev.stopPropagation) {
+//     ev.stopPropagation(); // Stops some browsers from redirecting.
+//   }
+//
+//   var data = ev.dataTransfer.getData("text");
+//   var node = document.createElement('div');
+//   node.innerHTML = ev.dataTransfer.getData("text/html");
+//
+//   if(hasClass(node.childNodes[0], 'subitemPropositor')){
+//     var flagItemPresente=false;
+//     for(var i = 0; i<arrayIdPropositor.length; i++){
+//       if(arrayIdPropositor[i]==node.childNodes[0].id){
+//         flagItemPresente=true;
+//       }
+//     }
+//
+//     if(flagItemPresente!=true){
+//       var nodeItem = document.createElement('div');
+//       nodeItem.className += "itemPropositor";
+//       nodeItem.id = node.childNodes[0].id;
+//       arrayIdPropositor.push(node.childNodes[0].id);
+//
+//       $("a#"+nodeItem.id+".subitemPropositor").css("color", "gray");
+//
+//       var nodeItemInfo = document.createElement('div');
+//       nodeItemInfo.className += "infoPropositor";
+//
+//       if(node.textContent.length>35){
+//         nodeItemInfo.textContent = node.textContent.substr(0, 35)+"...";
+//       }else{
+//         nodeItemInfo.textContent = node.textContent;
+//       }
+//
+//       var nodeItemRemover = document.createElement('div');
+//       nodeItemRemover.innerHTML = "+";
+//       nodeItemRemover.className = "removerItemPortProp";
+//       nodeItemRemover.onclick = function() {
+//         $("div#"+nodeItem.id+".itemPropositor").remove();
+//         $("a#"+nodeItem.id+".subitemPropositor").css("color", "white");
+//         arrayIdPropositor.splice( arrayIdPropositor.indexOf(nodeItem.id), 1 );
+//         if(arrayIdPropositor.length==0){
+//           $( ".textArrastar:eq(1)" ).show();
+//           $( ".logoArrastar:eq(1)" ).show();
+//         }
+//       };
+//
+//       nodeItem.appendChild(nodeItemInfo);
+//       nodeItem.appendChild(nodeItemRemover);
+//       document.getElementsByClassName("boxPropositor")[0].appendChild(nodeItem);
+//     }
+//
+//     $( ".textArrastar:eq(1)" ).hide();
+//     $( ".logoArrastar:eq(1)" ).hide();
+//   }
+//
+//   return false;
+// }
+//   var area = document.getElementById("boxArrastar");
+//   area.addEventListener('dragenter', handleDragEnter, false);
+//   area.addEventListener('dragleave', handleDragLeave, false);
+//   area.addEventListener('dragend', handleDragEnd, false);
+
+  function salvarPortfolioPropositor(){
+    var propositor;
+    var portfolios = [];
+
+    $(".boxArrastar.boxPropositor");
+    $(".boxArrastar.boxPortfólios");
+
   }
-
-  var data = ev.dataTransfer.getData("text");
-  var node = document.createElement('div');
-  node.innerHTML = ev.dataTransfer.getData("text/html");
-
-  if(hasClass(node.childNodes[0], 'subitemPropositor')){
-    var flagItemPresente=false;
-    for(var i = 0; i<arrayIdPropositor.length; i++){
-      if(arrayIdPropositor[i]==node.childNodes[0].id){
-        flagItemPresente=true;
-      }
-    }
-
-    if(flagItemPresente!=true){
-      var nodeItem = document.createElement('div');
-      nodeItem.className += "itemPropositor";
-      nodeItem.id = node.childNodes[0].id;
-      arrayIdPropositor.push(node.childNodes[0].id);
-
-      $("a#"+nodeItem.id+".subitemPropositor").css("color", "gray");
-
-      var nodeItemInfo = document.createElement('div');
-      nodeItemInfo.className += "infoPropositor";
-
-      if(node.textContent.length>35){
-        nodeItemInfo.textContent = node.textContent.substr(0, 35)+"...";
-      }else{
-        nodeItemInfo.textContent = node.textContent;
-      }
-
-      var nodeItemRemover = document.createElement('div');
-      nodeItemRemover.innerHTML = "+";
-      nodeItemRemover.className = "removerItemPortProp";
-      nodeItemRemover.onclick = function() {
-        $("div#"+nodeItem.id+".itemPropositor").remove();
-        $("a#"+nodeItem.id+".subitemPropositor").css("color", "white");
-        arrayIdPropositor.splice( arrayIdPropositor.indexOf(nodeItem.id), 1 );
-        if(arrayIdPropositor.length==0){
-          $( ".textArrastar:eq(1)" ).show();
-          $( ".logoArrastar:eq(1)" ).show();
-        }
-      };
-
-      nodeItem.appendChild(nodeItemInfo);
-      nodeItem.appendChild(nodeItemRemover);
-      document.getElementsByClassName("boxPropositor")[0].appendChild(nodeItem);
-    }
-
-    $( ".textArrastar:eq(1)" ).hide();
-    $( ".logoArrastar:eq(1)" ).hide();
-  }
-
-  return false;
-}
-  var area = document.getElementById("boxArrastar");
-  area.addEventListener('dragenter', handleDragEnter, false);
-  area.addEventListener('dragleave', handleDragLeave, false);
-  area.addEventListener('dragend', handleDragEnd, false);
