@@ -53,16 +53,19 @@
               <img  class="logoArrastar" src="../assets/img/arraste.png">
             </div>
           </div>
-          <input type="submit" class="salvarPortfolioPropositor" value="SALVAR" onclick="salvarPortfolioPropositor();">
+          <!-- <input type="submit" class="salvarPortfolioPropositor" value="SALVAR" onclick="salvarPortfolioPropositor();"> -->
+          {{ form_start(formPortProp) }}
+
+              {{form_row(formPortProp.IdProposer)}}
+
+              {{form_row(formPortProp.IdPortfolios)}}
+                <input type="submit" class="salvarPortfolioPropositor" value="SALVAR" >
+          {{ form_end(formPortProp) }}
+
+
         </div>
 
-        {{ form_start(formPortProp) }}
 
-            {{form_row(formPortProp.IdProposer)}}
-
-            {{form_row(formPortProp.IdPortfolios)}}
-
-        {{ form_end(formPortProp) }}
     </body>
 </html>
 <script src="{{web_dir}}../assets/js/portfolioPropositor.js"></script>

@@ -39,7 +39,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        web_dir: "/webfolioAdmin/app_dev.php/"
+        web_dir: "/webfolioadmin/app_dev.php/"
 # Doctrine Configuration
 doctrine:
     dbal:

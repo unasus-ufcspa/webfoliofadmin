@@ -194,21 +194,18 @@ class PropositorController extends Controller {
 
         // $propositor = $this->selecionarPropositorSalvo();
 
-
         // $this->em = $this->getDoctrine()->getManager();
         $this->formPortProp = PropositorController::gerarFormPropositor("salvarPortfolioPropositor");
         $this->formPortProp->handleRequest($request);
 
         if ($request->request->has($this->formPortProp->getName())) {
-            if ($this->formPortProp->isSubmitted() && $this->formEditarPropositor->isValid()) {
-                $dadosFormEditarPropositor = $this->formPortProp->getData();
-                UsuarioController::editarUsuario($dadosFormEditarPropositor);
+            if ($this->formPortProp->isSubmitted() && $this->formPortProp->isValid()) {
+                $dadosFormPortProp = $this->formPortProp->getData();
+                PropositorController::editarPortProp($dadosFormPortProp);
             }
         }
 
-        // return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'propositor' => $propositor));
         return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView()));
-
     }
 
     function gerarFormPropositor($nomeFormulario){
@@ -262,5 +259,48 @@ class PropositorController extends Controller {
       return $portfoliosTurma;
     }
 
+    function editarPortProp($dadosForm){
+      $idClass = $this->get('session')->get('idTurmaEdicao');
 
+      $classEditar = $this->getDoctrine()
+              ->getRepository('AppBundle:TbClass')
+              ->findOneBy(array('idClass' => $idClass));
+
+      PropositorController::persistirObjetoTurma($classEditar, $dadosForm);
+      // PropositorController::persistirObjetoPortfolio($classEditar, $dadosForm);
+    }
+
+    function persistirObjetoTurma($classEditar, $dadosForm) {
+        $this->em = $this->getDoctrine()->getManager();
+        $classEditar->setIdProposer($dadosForm['IdProposer']);
+
+        $this->em->persist($classEditar);
+        // $idPortfolio = $objetoPortfolio->getIdPortfolio();
+
+        $this->em->flush();
+
+        // return $idPortfolio;
+    }
+
+    // function persistirObjetoPortfolio($classEditar, $dadosForm) {
+    //     $this->em = $this->getDoctrine()->getManager();
+    //     $idClass = $this->get('session')->get('idTurmaEdicao');
+    //
+    //     $classEditar = $this->getDoctrine()
+    //             ->getRepository('AppBundle:TbClass')
+    //             ->findOneBy(array('idClass' => $idClass));
+    //
+    //
+    //     $queryBuilderProposer = $this->em->createQueryBuilder();
+    //     $queryBuilderProposer
+    //             ->select('u')
+    //             ->from('AppBundle:TbUser', 'u')
+    //             ->where($queryBuilderProposer->expr()->eq('u.flProposer', "'T'"))
+    //             ->andWhere($queryBuilderProposer->expr()->neq('u.idUser', $idUser))
+    //             ->getQuery()
+    //             ->execute();
+    //     $propositores = $queryBuilderProposer->getQuery()->getArrayResult();
+    //
+    //     $this->em->flush();
+    // }
 }
