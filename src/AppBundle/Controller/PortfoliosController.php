@@ -51,7 +51,7 @@ class PortfoliosController extends Controller {
                 if ($this->formAdicionarPortfolio->isSubmitted() && $this->formAdicionarPortfolio->isValid()) {
                     $dadosFormAdicionarPortfolio = $this->formAdicionarPortfolio->getData();
                     $this->adicionarPortfolio($dadosFormAdicionarPortfolio);
-                    return $this->redirectToRoute('portfolios');
+                    header("Refresh:0");
                 }
             }
 

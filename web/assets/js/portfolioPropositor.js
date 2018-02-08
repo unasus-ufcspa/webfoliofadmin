@@ -65,10 +65,16 @@ function dropPort(ev) {
         $("div#"+nodeItem.id+".itemPortfolio").remove();
         $("a#"+nodeItem.id+".subitemPortfolio").css("color", "white");
         arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(nodeItem.id), 1 );
+
+        var novaString="";
+        for(var k=0; k<arrayIdPortfolio.length; k++){
+          novaString = novaString+";"+arrayIdPortfolio[k];
+        }
+        $("#salvarPortfolioPropositor_IdPortfolios").val(novaString);
+
         if(arrayIdPortfolio.length==0){
           $( ".textArrastar:first" ).show();
           $( ".logoArrastar:eq(0)" ).show();
-
         }
       };
 
@@ -79,7 +85,9 @@ function dropPort(ev) {
 
     $( ".textArrastar:first" ).hide();
     $( ".logoArrastar:eq(0)" ).hide();
-    $("#salvarPortfolioPropositor_IdPortfolios").val(arrayIdPortfolio[0]);
+
+    var stringPortfolios = $("#salvarPortfolioPropositor_IdPortfolios").val()+";"+arrayIdPortfolio[arrayIdPortfolio.length-1];
+    $("#salvarPortfolioPropositor_IdPortfolios").val(stringPortfolios);
   }
 
   return false;

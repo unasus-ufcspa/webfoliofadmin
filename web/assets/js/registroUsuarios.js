@@ -369,3 +369,8 @@ function validateFunctionEdit() {
         flagValidateEdit = false;
     }
 }
+
+function novoPortfolio(){
+  $("#formAddPortfolio").css("display", "block");
+  $("#header").css("height", "350px");
+}

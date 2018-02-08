@@ -44,8 +44,8 @@ class UsuarioController extends Controller {
                 ->add('DsEmail', EmailType::class, array('label' => false))
                 ->add('DsPassword', PasswordType::class, array('label' => false))
                 ->add('DsPasswordConfirm', PasswordType::class, array('label' => false))
-                ->add('NuCellphone', NumberType::class, array('label' => false))
-                ->add('NuIdentification', NumberType::class, array('label' => false))
+                ->add('NuCellphone', NumberType::class, array('label' => false, 'required' => false,))
+                ->add('NuIdentification', NumberType::class, array('label' => false, 'required' => false,))
                 ->getForm();
         return $formularioTbUser;
     }
@@ -68,7 +68,7 @@ class UsuarioController extends Controller {
                 $objetoUsuario->setFlProposer($valor);
             }
         }
-     
+
         $this->em->persist($objetoUsuario);
         $idUser = $objetoUsuario->getIdUser();
 

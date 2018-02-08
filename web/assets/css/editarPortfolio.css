@@ -5,7 +5,10 @@
 html, body{
   height: 100%;
 }
-
+#formAddPortfolio{
+  display: none;
+  /* visibility: hidden; */
+}
 #delete{
   height: 75px;
   width: 100%;
@@ -42,7 +45,7 @@ html, body{
 }
 #header {
   width: 100%;
-  height: 350px;
+  min-height: 100px;
   background-color: #9187c7;
   border: solid 1px #979797;
 }

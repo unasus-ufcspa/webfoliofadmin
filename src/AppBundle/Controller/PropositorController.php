@@ -15,6 +15,7 @@ use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\TbClass;
+use AppBundle\Entity\TbPortfolioClass;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -251,7 +252,7 @@ class PropositorController extends Controller {
               ->select('p')
               ->from('AppBundle:TbPortfolio', "p")
               ->innerJoin('p.idPortfolio', 'pc', 'WITH', 'pc.idPortfolio =  p.idPortfolio')
-              ->where($queryBuilderAluno->expr()->eq('pc.idClass', $idClass))
+              ->where($queryBuilderPortfolios->expr()->eq('pc.idClass', $idClass))
               ->getQuery()
               ->execute();
       $portfoliosTurma = $queryBuilderPortfolios->getQuery()->getArrayResult();
@@ -267,40 +268,72 @@ class PropositorController extends Controller {
               ->findOneBy(array('idClass' => $idClass));
 
       PropositorController::persistirObjetoTurma($classEditar, $dadosForm);
-      // PropositorController::persistirObjetoPortfolio($classEditar, $dadosForm);
+      PropositorController::persistirObjetoPortfolio($classEditar, $dadosForm);
     }
 
     function persistirObjetoTurma($classEditar, $dadosForm) {
         $this->em = $this->getDoctrine()->getManager();
-        $classEditar->setIdProposer($dadosForm['IdProposer']);
+
+        $propositor = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('idUser' => $dadosForm['IdProposer']));
+
+        $classEditar->setIdProposer($propositor);
 
         $this->em->persist($classEditar);
-        // $idPortfolio = $objetoPortfolio->getIdPortfolio();
 
         $this->em->flush();
-
-        // return $idPortfolio;
     }
 
-    // function persistirObjetoPortfolio($classEditar, $dadosForm) {
-    //     $this->em = $this->getDoctrine()->getManager();
-    //     $idClass = $this->get('session')->get('idTurmaEdicao');
-    //
-    //     $classEditar = $this->getDoctrine()
-    //             ->getRepository('AppBundle:TbClass')
-    //             ->findOneBy(array('idClass' => $idClass));
-    //
-    //
-    //     $queryBuilderProposer = $this->em->createQueryBuilder();
-    //     $queryBuilderProposer
-    //             ->select('u')
-    //             ->from('AppBundle:TbUser', 'u')
-    //             ->where($queryBuilderProposer->expr()->eq('u.flProposer', "'T'"))
-    //             ->andWhere($queryBuilderProposer->expr()->neq('u.idUser', $idUser))
-    //             ->getQuery()
-    //             ->execute();
-    //     $propositores = $queryBuilderProposer->getQuery()->getArrayResult();
-    //
-    //     $this->em->flush();
-    // }
+    function persistirObjetoPortfolio($classEditar, $dadosForm) {
+        $this->em = $this->getDoctrine()->getManager();
+
+        $idClass = $this->get('session')->get('idTurmaEdicao');
+
+        $queryBuilderPortClass = $this->em->createQueryBuilder();
+        $queryBuilderPortClass
+                ->select('pc,p')
+                ->from('AppBundle:TbPortfolioClass', "pc")
+                ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
+                ->where($queryBuilderPortClass->expr()->eq('pc.idClass', $idClass))
+                ->getQuery()
+                ->execute();
+        $portfoliosTurma = $queryBuilderPortClass->getQuery()->getArrayResult();
+
+        $portfoliosTurmaForm = explode(";", $dadosForm['IdPortfolios']);
+        // $portfoliosTurmaForm =$dadosForm['IdPortfolios'];
+
+
+        for ($i=0; $i < sizeof($portfoliosTurmaForm); $i++) {
+
+          $flag = false;
+          foreach ($portfoliosTurma as $pt) {
+            $this->logControle->logAdmin("PT  : " . print_r($pt, true));
+            if($portfoliosTurmaForm[$i]== $pt['idPortfolio']){
+              $flag = true;
+            }
+          }
+
+          if($flag == false){
+            $novoPortClass = new TbPortfolioClass();
+            $turma = $this->getDoctrine()
+                        ->getRepository('AppBundle:TbClass')
+                        ->findOneBy(array('idClass' => $idClass));
+
+            $portfolio = $this->getDoctrine()
+                        ->getRepository('AppBundle:TbPortfolio')
+                        ->findOneBy(array('idPortfolio' => $portfoliosTurmaForm[$i]));
+
+            $novoPortClass->setIdClass($turma);
+            $novoPortClass->setIdPortfolio($portfolio);
+
+            $this->em->persist($novoPortClass);
+            // $idPortfolio = $objetoPortfolio->getIdPortfolio();
+
+            $this->em->flush();
+          }
+        }
+
+        $this->em->flush();
+    }
 }
