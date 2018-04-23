@@ -49,8 +49,17 @@
           </div>
           <div class="arrastePropositor">
             <div class="boxArrastar boxPropositor" id="boxArrastar" ondrop="dropProp(event)" ondragover="allowDrop(event)">
-              <div class="textArrastar" >arraste e solte um<br>PROPOSITOR</div>
-              <img  class="logoArrastar" src="../assets/img/arraste.png">
+              {% if propositor is null %}
+                <div class="textArrastar" >arraste e solte um<br>PROPOSITOR</div>
+                <img  class="logoArrastar" src="../assets/img/arraste.png">
+              {% else %}
+                <div class="textArrastar" style="display: none;">arraste e solte um<br>PROPOSITOR</div>
+                <img class="logoArrastar" src="../assets/img/arraste.png" style="display: none;">
+                <div class="itemPropositor" id="{{propositor[0].idProposer}}">
+                  <div class="infoPropositor">{{propositor[0].nmProposer}}</div>
+                  <div class="removerItemPortProp">+</div>
+                </div>
+              {% endif %}
             </div>
           </div>
           <!-- <input type="submit" class="salvarPortfolioPropositor" value="SALVAR" onclick="salvarPortfolioPropositor();"> -->

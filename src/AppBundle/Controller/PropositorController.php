@@ -193,7 +193,7 @@ class PropositorController extends Controller {
         $this->em = $this->getDoctrine()->getEntityManager();
         $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro(); //carrega dados do menu lateral, chamar em todas as telas que necessario e enviar nos parametros do render
 
-        // $propositor = $this->selecionarPropositorSalvo();
+        $propositor = $this->selecionarPropositorSalvo();
 
         // $this->em = $this->getDoctrine()->getManager();
         $this->formPortProp = PropositorController::gerarFormPropositor("salvarPortfolioPropositor");
@@ -206,7 +206,7 @@ class PropositorController extends Controller {
             }
         }
 
-        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView()));
+        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView(), 'propositor' => $propositor));
     }
 
     function gerarFormPropositor($nomeFormulario){
@@ -219,30 +219,31 @@ class PropositorController extends Controller {
 
     }
 
-    // function selecionarPropositorSalvo(){
-    //     $idClass = $this->get('session')->get('idTurmaEdicao');
-    //
-    //     $turma = $this->getDoctrine()
-    //             ->getRepository('AppBundle:TbClass')
-    //             ->findOneBy(array('idClass' => $idClass));
-    //     $this->logControle->logAdmin(print_r($turma, true));
-    //
-    //     $propositor = $this->getDoctrine()
-    //             ->getRepository('AppBundle:TbUser')
-    //             ->findOneBy(array('idUser' => $turma));
-    //
-    //     if($propositor!=null){
-    //       foreach ($propositor as $prop) {
-    //         $arrayPropositor[] = array(
-    //           'idPropositor' => $prop['idUser'],
-    //           'nmPropositor' => $prop['nmUser']
-    //         );
-    //       }
-    //     }
-    //
-    //     return $arrayPropositor;
-    //
-    // }
+    function selecionarPropositorSalvo(){
+        $idClass = $this->get('session')->get('idTurmaEdicao');
+
+        $turma = $this->getDoctrine()
+                ->getRepository('AppBundle:TbClass')
+                ->findOneBy(array('idClass' => $idClass));
+        $this->logControle->logAdmin("Dados da turma  : " . print_r($turma, true));
+
+        $dadosPropositor = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('idUser' => $turma->getIdProposer()));
+        $this->logControle->logAdmin("Dados do Propositor : " . print_r($dadosPropositor, true));
+
+        if (count($dadosPropositor) > 0) {
+          $propositor[] = array(
+              'idProposer' => $dadosPropositor->getIdUser(),
+              'nmProposer' => $dadosPropositor->getNmUser()
+          );
+        }else{
+          $propositor[] = null;
+        }
+
+        $this->logControle->logAdmin("Dados do Propositor return : " . print_r($propositor, true));
+        return $propositor;
+    }
 
     function selecionarPortfoliosTurma(){
       $idClass = $this->get('session')->get('idTurmaEdicao');
