@@ -43,10 +43,24 @@
           </div>
           <div class="arrastePortfolio">
             <div class="boxArrastar boxPortfolio" id="boxArrastar" ondrop="dropPort(event)" ondragover="allowDrop(event)">
-              <div class="textArrastar">arraste e solte um<br>PORTFÓLIO</div>
-              <img  class="logoArrastar" src="../assets/img/arraste.png">
+              {% if propositor is null %}
+                <div class="textArrastar">arraste e solte um<br>PORTFÓLIO</div>
+                <img  class="logoArrastar" src="../assets/img/arraste.png">
+              {% else %}
+                {# dump(portfolios) #}
+                <div class="textArrastar" style="display: none;">arraste e solte um<br>PORTFÓLIO</div>
+                <img class="logoArrastar" src="../assets/img/arraste.png" style="display: none;">
+
+                {% for p in portfolios %}
+                  <div class="itemPortfolio" id="{{ p.idPortfolio }}">
+                    <div class="infoPortfolio">{{ p.nmPortfolio }}</div>
+                    <div class="removerItemPortProp">+</div>
+                  </div>
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
+
           <div class="arrastePropositor">
             <div class="boxArrastar boxPropositor" id="boxArrastar" ondrop="dropProp(event)" ondragover="allowDrop(event)">
               {% if propositor is null %}

@@ -16,6 +16,7 @@ use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\TbClass;
 use AppBundle\Entity\TbPortfolioClass;
+use AppBundle\Entity\TbPortfolio;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -194,8 +195,8 @@ class PropositorController extends Controller {
         $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro(); //carrega dados do menu lateral, chamar em todas as telas que necessario e enviar nos parametros do render
 
         $propositor = $this->selecionarPropositorSalvo();
+        $portfolios = $this->selecionarPortfoliosSalvos();
 
-        // $this->em = $this->getDoctrine()->getManager();
         $this->formPortProp = PropositorController::gerarFormPropositor("salvarPortfolioPropositor");
         $this->formPortProp->handleRequest($request);
 
@@ -206,7 +207,7 @@ class PropositorController extends Controller {
             }
         }
 
-        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView(), 'propositor' => $propositor));
+        return $this->render("portfolioPropositor.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'formPortProp' => $this->formPortProp->createView(), 'propositor' => $propositor, 'portfolios' => $portfolios));
     }
 
     function gerarFormPropositor($nomeFormulario){
@@ -245,18 +246,38 @@ class PropositorController extends Controller {
         return $propositor;
     }
 
+    function selecionarPortfoliosSalvos(){
+
+        $dadosPortfolios = $this->selecionarPortfoliosTurma();
+
+        $this->logControle->logAdmin("Portfólios da turma : " . print_r($dadosPortfolios, true));
+
+        if (count($dadosPortfolios) > 0) {
+          foreach ($dadosPortfolios as $p) {
+            $portfolios[] = array(
+                'idPortfolio' => $p['idPortfolio']['idPortfolio'],
+                'nmPortfolio' => $p['idPortfolio']['dsTitle']
+            );
+          }
+        }else{
+          $portfolios[] = null;
+        }
+
+        return $portfolios;
+    }
+
     function selecionarPortfoliosTurma(){
       $idClass = $this->get('session')->get('idTurmaEdicao');
 
-      $queryBuilderPortfolios = $this->em->createQueryBuilder();
-      $queryBuilderPortfolios
-              ->select('p')
-              ->from('AppBundle:TbPortfolio', "p")
-              ->innerJoin('p.idPortfolio', 'pc', 'WITH', 'pc.idPortfolio =  p.idPortfolio')
-              ->where($queryBuilderPortfolios->expr()->eq('pc.idClass', $idClass))
+      $queryBuilderPortClass = $this->em->createQueryBuilder();
+      $queryBuilderPortClass
+              ->select('pc,p')
+              ->from('AppBundle:TbPortfolioClass', "pc")
+              ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
+              ->where($queryBuilderPortClass->expr()->eq('pc.idClass', $idClass))
               ->getQuery()
               ->execute();
-      $portfoliosTurma = $queryBuilderPortfolios->getQuery()->getArrayResult();
+      $portfoliosTurma = $queryBuilderPortClass->getQuery()->getArrayResult();
 
       return $portfoliosTurma;
     }
