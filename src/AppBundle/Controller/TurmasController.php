@@ -14,6 +14,8 @@ use AppBundle\Entity\TbClass;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -22,6 +24,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\TurmasController;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Description of TurmasController
@@ -106,7 +109,7 @@ class TurmasController extends Controller {
      /**
      * @Route("/cadastroTurma/{idClass}")
      */
-    function cadastroTurma($idClass) {
+    function cadastroTurma(Request $request, $idClass) {
 
         $this->get('session')->set('idTurmaEdicao', $idClass);
         $this->em = $this->getDoctrine()->getManager();
@@ -114,8 +117,19 @@ class TurmasController extends Controller {
         if ($idClass > -1) {
             $dadosTurma = $this->carregarDadosTurma($idClass);
         }
+        $this->formAddClass = TurmasController::gerarFormularioTurma("addClass");
+        $this->formAddClass->handleRequest($request);
+
+        if ($request->request->has($this->formAddClass->getName())) {
+            if ($this->formAddClass->isSubmitted() && $this->formAddClass->isValid()) {
+                $dadosForm = $this->formAddClass->getData();
+                TurmasController::editClass($dadosForm);
+                // header("Refresh:0");
+            }
+        }
+
         $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
-        return $this->render("cadastroTurma.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'dadosTurma' => $dadosTurma));
+        return $this->render("cadastroTurma.html.twig", array('dadosMenuLateralCadastro' => $dadosMenuLateralCadastro, 'dadosTurma' => $dadosTurma, 'formClass' => $this->formAddClass->createView()));
     }
 
     function carregarDadosTurma($idClass) {
@@ -152,5 +166,44 @@ class TurmasController extends Controller {
         return $dadosTurma;
     }
 
+    function gerarFormularioTurma($formName){
+      $formTbClass = $this->get('form.factory')
+              ->createNamedBuilder($formName, FormType::class)
+              ->add('DsCode', HiddenType::class, array('label' => false))
+              ->add('DsDescription', HiddenType::class, array('label' => false))
+              ->add('StStatus', HiddenType::class, array('label' => false))
+              ->add('DtStart', HiddenType::class, array('label' => false))
+              ->add('DtFinish',  HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formTbClass;
+    }
 
+    function editClass($dadosForm){
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+
+      $classEditar = $this->getDoctrine()
+              ->getRepository('AppBundle:TbClass')
+              ->findOneBy(array('idClass' => $idClass));
+
+      TurmasController::persistirObjetoTurma($classEditar, $dadosForm);
+    }
+
+    function persistirObjetoTurma($classEditar, $dadosForm) {
+      $this->em = $this->getDoctrine()->getManager();
+
+      $classEditar->setDsCode($dadosForm['DsCode']);
+      $classEditar->setDsDescription($dadosForm['DsDescription']);
+      $classEditar->setStStatus($dadosForm['StStatus']);
+
+      $date = date_create_from_format('Y-m-d:H:i:s', $dadosForm['DtStart'] . ':00:00:00');
+      $date->getTimestamp();
+      $classEditar->setDtStart($date);
+
+      $date = date_create_from_format('Y-m-d:H:i:s', $dadosForm['DtFinish'] . ':00:00:00');
+      $date->getTimestamp();
+      $classEditar->setDtFinish($date);
+
+      $this->em->persist($classEditar);
+      $this->em->flush();
+    }
 }

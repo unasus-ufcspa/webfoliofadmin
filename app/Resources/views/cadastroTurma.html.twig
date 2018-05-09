@@ -8,8 +8,8 @@
 
         <title>Cadastro Turma</title>
 
-        <script src="/webfolioAdmin/node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/webfolioAdmin/semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}../semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{web_dir}}../assets/css/cadastro.css">
@@ -35,7 +35,7 @@
 
         <div class="cadastroTurma">
           <div class="tituloCadastro">Nova turma</div>
-          <form id='formCadastroTurma'>
+          <!-- <form id='formCadastroTurma'> -->
           <div class="campoCadastro">
             <div class="colunaEsquerda">
               <img  id="logoCodTurma" src="{{web_dir}}../assets/img/codTurma.png"><input type="text"  class="inputCod" {%if dadosTurma is not empty %}value='{{dadosTurma.dsCode}}'{%else%}placeholder="Código:"{%endif%}><br>
@@ -52,8 +52,16 @@
               </div>
             </div>
           </div>
-          <input type="submit" id="salvarEdicao" value="SALVAR" onClick='cadastroTurma("{{web_dir}}")'>
-          </form>
+          {{ form_start(formClass) }}
+              {{form_row(formClass.DsCode)}}
+              {{form_row(formClass.DsDescription)}}
+              {{form_row(formClass.StStatus)}}
+              {{form_row(formClass.DtStart)}}
+              {{form_row(formClass.DtFinish)}}
+              <input type="submit" id="salvarEdicao" value="SALVAR">
+          {{ form_end(formClass) }}
+          <!-- </form> -->
         </div>
     </body>
 </html>
+<script src="{{web_dir}}../assets/js/cadastroTurma.js"></script>

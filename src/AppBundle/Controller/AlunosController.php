@@ -92,6 +92,8 @@ class AlunosController extends Controller {
     public function gerarArrayAlunos() {
         $arrayAlunos = array();
         $alunos = AlunosController::selecionarAlunosTurma();
+        $this->logControle->logAdmin("Alunos : " . print_r($alunos, true));
+
         foreach ($alunos as $aluno) {
             $arrayAlunos[] = array(
                 'idUser' => $aluno['idStudent']['idUser'],
