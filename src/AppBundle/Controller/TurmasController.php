@@ -123,8 +123,14 @@ class TurmasController extends Controller {
         if ($request->request->has($this->formAddClass->getName())) {
             if ($this->formAddClass->isSubmitted() && $this->formAddClass->isValid()) {
                 $dadosForm = $this->formAddClass->getData();
-                TurmasController::editClass($dadosForm);
-                // header("Refresh:0");
+                if ($idClass > -1) {
+                    TurmasController::editClass($dadosForm);
+                    $dadosTurma = $this->carregarDadosTurma($idClass);
+                }else{
+                    TurmasController::addClass($dadosForm);
+                    // header("Refresh:0");
+                    return $this->redirectToRoute('/turmas');
+                }
             }
         }
 
@@ -188,22 +194,27 @@ class TurmasController extends Controller {
       TurmasController::persistirObjetoTurma($classEditar, $dadosForm);
     }
 
-    function persistirObjetoTurma($classEditar, $dadosForm) {
+    function addClass($dadosForm){
+      $newClass = new TbPortfolio();
+      TurmasController::persistirObjetoTurma($newClass, $dadosForm);
+    }
+
+    function persistirObjetoTurma($classObj, $dadosForm) {
       $this->em = $this->getDoctrine()->getManager();
 
-      $classEditar->setDsCode($dadosForm['DsCode']);
-      $classEditar->setDsDescription($dadosForm['DsDescription']);
-      $classEditar->setStStatus($dadosForm['StStatus']);
+      $classObj->setDsCode($dadosForm['DsCode']);
+      $classObj->setDsDescription($dadosForm['DsDescription']);
+      $classObj->setStStatus($dadosForm['StStatus']);
 
       $date = date_create_from_format('Y-m-d:H:i:s', $dadosForm['DtStart'] . ':00:00:00');
       $date->getTimestamp();
-      $classEditar->setDtStart($date);
+      $classObj->setDtStart($date);
 
       $date = date_create_from_format('Y-m-d:H:i:s', $dadosForm['DtFinish'] . ':00:00:00');
       $date->getTimestamp();
-      $classEditar->setDtFinish($date);
+      $classObj->setDtFinish($date);
 
-      $this->em->persist($classEditar);
+      $this->em->persist($classObj);
       $this->em->flush();
     }
 }
