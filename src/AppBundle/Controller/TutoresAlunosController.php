@@ -38,17 +38,11 @@ class TutoresAlunosController extends Controller {
         } else {
             $this->em = $this->getDoctrine()->getManager();
 
-            $arrayTutores = TutoresAlunosController::carregarTutoresTurma();
+            $arrayTutores = TutorController::gerarArrayTutores();
             $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
 
             return $this->render('tutoresAlunos.html.twig', array('arrayTutores' => $arrayTutores, 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
         }
-    }
-
-    function carregarTutoresTurma() {
-
-        $arrayTutores = TutorController::gerarArrayTutores();
-        return $arrayTutores;
     }
 
     function registrarAlunosTutor(){

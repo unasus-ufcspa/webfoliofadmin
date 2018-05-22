@@ -1,28 +1,7 @@
-// $("#formCadastroTurma").submit(function(e) {
-//     var dataString = {
-//         arrayAdministradoresDesativar: usuariosExcecao.usuariosExcecao,
-//
-//     };
-//     console.log(dataString);
-//     $.ajax({
-//         type: 'post',
-//         data: $("#formCadastroTurma").serialize(),
-//         contentType: 'application/json',
-//         dataType: 'json',
-//         url: '' + caminho + 'efetuarCadastroTurma',
-//         cache: false,
-//         processData: false,
-//         async: false,
-//         success: function (response) {
-//             console.log(response);
-//             location.reload();
-//         }
-//     });
-// });
 function getDate(){
   var today = new Date();
   var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
+  var mm = today.getMonth()+1;
 
   var yyyy = today.getFullYear();
   if(dd<10){
