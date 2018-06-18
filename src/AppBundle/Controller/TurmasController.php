@@ -11,6 +11,8 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\TbClass;
+use AppBundle\Entity\TbPortfolio;
+use AppBundle\Entity\TbPortfolioClass;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -195,7 +197,7 @@ class TurmasController extends Controller {
     }
 
     function addClass($dadosForm){
-      $newClass = new TbPortfolio();
+      $newClass = new TbClass();
       TurmasController::persistirObjetoTurma($newClass, $dadosForm);
     }
 
