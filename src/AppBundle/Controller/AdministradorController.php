@@ -76,7 +76,11 @@ class AdministradorController extends Controller {
         $novoAdministrador = new TbUser();
         $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
         if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
+          if($this->usuarioRegistrado($dadosFormAdicionarAdministrador['DsEmail'])){
+            UsuarioController::editarUsuarioAdmin($dadosFormAdicionarAdministrador);
+          }else{
             UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
+          }
         }
     }
 
@@ -108,6 +112,18 @@ class AdministradorController extends Controller {
         $administradores = $queryBuilderAdmin->getQuery()->getArrayResult();
 
         return $administradores;
+    }
+
+    public function usuarioRegistrado($email){
+
+      $usuarioEditavel = $this->getDoctrine()
+              ->getRepository('AppBundle:TbUser')
+              ->findOneBy(array('dsEmail' => $email));
+      if($usuarioEditavel == null){
+        return false;
+      }else{
+        return true;
+      }
     }
 
     /**

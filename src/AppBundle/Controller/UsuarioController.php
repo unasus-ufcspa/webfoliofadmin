@@ -86,4 +86,26 @@ class UsuarioController extends Controller {
         UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'T', 'F');
     }
 
+    function editarUsuarioAdmin($dadosFormEditar) {
+        $this->logControle->logAdmin(print_r($dadosFormEditar, true));
+
+        $usuarioEditavel = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('dsEmail' => $dadosFormEditar['DsEmail']));
+        $this->logControle->logAdmin("Tornar usuario Admin");
+        $this->logControle->logAdmin(print_r($usuarioEditavel, true));
+        UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'flAdmin', 'T');
+    }
+
+    function editarUsuarioPropositor($dadosFormEditar) {
+        $this->logControle->logAdmin(print_r($dadosFormEditar, true));
+
+        $usuarioEditavel = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('dsEmail' => $dadosFormEditar['DsEmail']));
+        $this->logControle->logAdmin("Tornar usuario Propositor");
+        $this->logControle->logAdmin(print_r($usuarioEditavel, true));
+        UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'flProposer', 'T');
+    }
+
 }

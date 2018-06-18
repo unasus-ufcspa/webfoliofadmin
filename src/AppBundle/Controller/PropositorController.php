@@ -107,8 +107,24 @@ class PropositorController extends Controller {
         $novoPropositor = new TbUser();
         $this->logControle->logAdmin(($dadosFormAdicionarPropositor['DsPassword']));
         if ($dadosFormAdicionarPropositor['DsPassword'] == $dadosFormAdicionarPropositor['DsPasswordConfirm']) {
+          if($this->usuarioRegistrado($dadosFormAdicionarPropositor['DsEmail'])){
+            UsuarioController::editarUsuarioPropositor($dadosFormAdicionarPropositor);
+          }else{
             UsuarioController::persistirObjetoUsuario($novoPropositor, $dadosFormAdicionarPropositor, 'flProposer', 'T');
+          }
         }
+    }
+
+    public function usuarioRegistrado($email){
+
+      $usuarioEditavel = $this->getDoctrine()
+              ->getRepository('AppBundle:TbUser')
+              ->findOneBy(array('dsEmail' => $email));
+      if($usuarioEditavel == null){
+        return false;
+      }else{
+        return true;
+      }
     }
 
     /**

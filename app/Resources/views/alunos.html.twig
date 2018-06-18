@@ -153,30 +153,30 @@
                 {% for aluno in alunos %}
                     {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                         <div class="itemUserA itemUsuario">
-                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                            <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="A{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                            <label for="A{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                             <div class="nomeUser">{{aluno.nmUser}}</div>
                             <div class="emailUser">{{aluno.dsEmail}}</div>
                             <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
-                                  onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                  onclick='editarUser("A{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
                                              "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
                                              "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
                                              "{{aluno.idUser}}")'>
                         </div>
                     {% else %}
                         <div class="itemUserB itemUsuario">
-                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="{{i}}" class="checkboxUser">
-                            <label for="{{i}}"></label>
+                            <input type="checkbox" name="Aluno" value="{{aluno.idUser}}" id="A{{i}}" class="checkboxUser">
+                            <label for="A{{i}}"></label>
                             <div class="nomeUser">{{aluno.nmUser}}</div>
                             <div class="emailUser">{{aluno.dsEmail}}</div>
                             <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
-                                 onclick='editarUser("{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
+                                 onclick='editarUser("A{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
                                              "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
                                              "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
                                              "{{aluno.idUser}}")'>
                         </div>
                     {% endif %}
-                    <div class="editarUser" id="{{i}}">
+                    <div class="editarUser" id="A{{i}}">
                     </div>
                     {% set i = i+1 %}
                 {% endfor %}

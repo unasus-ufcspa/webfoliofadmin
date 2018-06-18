@@ -136,7 +136,7 @@
                           <img src="../assets/img/rg.png" class="iconesFormEditarRight">
                           {{form_row(formAddTutor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                       </div>
-                      <input type="submit" id="salvarEdicao" value="SALVAR" >
+                      <input type="submit" id="salvarAdd" value="SALVAR" >
                       <div id="closeAdd" onclick="closeaddUser();">+</div>
                   </div>
               </div>
@@ -150,30 +150,30 @@
               {% for tutor in tutores %}
                   {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                       <div class="itemUserA itemUsuario">
-                          <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                          <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                          <input type="checkbox" name="Tutor[]" value="{{tutor.idUser}}" id="T{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                          <label for="T{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                           <div class="nomeUser">{{tutor.nmUser}}</div>
                           <div class="emailUser">{{tutor.dsEmail}}</div>
                           <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                                onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
+                                onclick='editarUser("T{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
                                            "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
                                            "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
                                            "{{tutor.idUser}}")'>
                       </div>
                   {% else %}
                       <div class="itemUserB itemUsuario">
-                          <input type="checkbox" name="Tutor" value="{{tutor.idUser}}" id="{{i}}" class="checkboxUser">
-                          <label for="{{i}}"></label>
+                          <input type="checkbox" name="Tutor[]" value="{{tutor.idUser}}" id="T{{i}}" class="checkboxUser">
+                          <label for="T{{i}}"></label>
                           <div class="nomeUser">{{tutor.nmUser}}</div>
                           <div class="emailUser">{{tutor.dsEmail}}</div>
                           <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
-                               onclick='editarUser("{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
+                               onclick='editarUser("T{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
                                            "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
                                            "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
                                            "{{tutor.idUser}}")'>
                       </div>
                   {% endif %}
-                  <div class="editarUser" id="{{i}}">
+                  <div class="editarUser" id="T{{i}}">
                   </div>
                   {% set i = i+1 %}
               {% endfor %}
