@@ -156,8 +156,8 @@
                           <div class="emailUser">{{tutor.dsEmail}}</div>
                           <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
                                 onclick='editarUser("T{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                           "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                           "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
+                                           "{{tutor.nuIdentification  is empty ? '' :  tutor.nuIdentification}}",
+                                           "{{tutor.nuCellphone is empty ? '' :  tutor.nuCellphone}}",
                                            "{{tutor.idUser}}")'>
                       </div>
                   {% else %}
@@ -168,8 +168,8 @@
                           <div class="emailUser">{{tutor.dsEmail}}</div>
                           <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar tutor"
                                onclick='editarUser("T{{i}}", "{{tutor.nmUser}}", "{{tutor.dsEmail}}",
-                                           "{{tutor.nuIdentification  is empty ? 'null' :  tutor.nuIdentification}}",
-                                           "{{tutor.nuCellphone is empty ? 'null' :  tutor.nuCellphone}}",
+                                           "{{tutor.nuIdentification  is empty ? '' :  tutor.nuIdentification}}",
+                                           "{{tutor.nuCellphone is empty ? '' :  tutor.nuCellphone}}",
                                            "{{tutor.idUser}}")'>
                       </div>
                   {% endif %}

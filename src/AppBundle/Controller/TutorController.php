@@ -51,6 +51,7 @@ class TutorController extends Controller {
                 if ($this->formEditarTutor->isSubmitted() && $this->formEditarTutor->isValid()) {
                     $dadosFormEditarTutor = $this->formEditarTutor->getData();
                     UsuarioController::editarUsuario($dadosFormEditarTutor);
+                    return $this->redirectToRoute('tutores');
                 }
             } else {
                 if ($this->formAdicionarTutor->isSubmitted() && $this->formAdicionarTutor->isValid()) {

@@ -51,6 +51,7 @@ class AlunosController extends Controller {
                 if ($this->formEditarAluno->isSubmitted() && $this->formEditarAluno->isValid()) {
                     $dadosFormEditarAluno= $this->formEditarAluno->getData();
                     UsuarioController::editarUsuario($dadosFormEditarAluno);
+                    return $this->redirectToRoute('alunos');
                 }
             } else {
                 if ($this->formAdicionarAluno->isSubmitted() && $this->formAdicionarAluno->isValid()) {

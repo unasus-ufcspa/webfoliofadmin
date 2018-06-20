@@ -124,8 +124,8 @@
                         <div class="emailUser">{{propositor.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
                               onclick='editarUser("{{i}}", "{{propositor.nmUser}}", "{{propositor.dsEmail}}",
-                                         "{{propositor.nuIdentification  is empty ? 'null' :  propositor.nuIdentification}}",
-                                         "{{propositor.nuCellphone is empty ? 'null' :  propositor.nuCellphone}}",
+                                         "{{propositor.nuIdentification  is empty ? '' :  propositor.nuIdentification}}",
+                                         "{{propositor.nuCellphone is empty ? '' :  propositor.nuCellphone}}",
                                          "{{propositor.idUser}}")'>
                     </div>
                 {% else %}
@@ -136,8 +136,8 @@
                         <div class="emailUser">{{propositor.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
                              onclick='editarUser("{{i}}", "{{propositor.nmUser}}", "{{propositor.dsEmail}}",
-                                         "{{propositor.nuIdentification  is empty ? 'null' :  propositor.nuIdentification}}",
-                                         "{{propositor.nuCellphone is empty ? 'null' :  propositor.nuCellphone}}",
+                                         "{{propositor.nuIdentification  is empty ? '' :  propositor.nuIdentification}}",
+                                         "{{propositor.nuCellphone is empty ? '' :  propositor.nuCellphone}}",
                                          "{{propositor.idUser}}")'>
                     </div>
                 {% endif %}

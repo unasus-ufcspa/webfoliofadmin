@@ -123,8 +123,8 @@
                         <div class="emailUser">{{administrador.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
                               onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
-                                         "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
-                                         "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
+                                         "{{administrador.nuIdentification  is empty ? '' :  administrador.nuIdentification}}",
+                                         "{{administrador.nuCellphone is empty ? '' :  administrador.nuCellphone}}",
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% else %}
@@ -135,8 +135,8 @@
                         <div class="emailUser">{{administrador.dsEmail}}</div>
                         <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar administrador"
                              onclick='editarUser("{{i}}", "{{administrador.nmUser}}", "{{administrador.dsEmail}}",
-                                         "{{administrador.nuIdentification  is empty ? 'null' :  administrador.nuIdentification}}",
-                                         "{{administrador.nuCellphone is empty ? 'null' :  administrador.nuCellphone}}",
+                                         "{{administrador.nuIdentification  is empty ? '' :  administrador.nuIdentification}}",
+                                         "{{administrador.nuCellphone is empty ? '' :  administrador.nuCellphone}}",
                                          "{{administrador.idUser}}")'>
                     </div>
                 {% endif %}
@@ -178,10 +178,10 @@
         </div>
     </body>
 </html>
-<script>
+<!-- <script>
     $('form').on('submit', function (e) {
       // e.preventDefault();
-      var url = "{{ path('administradores') }}";
+      var url = "{# path('administradores') #}";
       var formData = new FormData(this);
       $.ajax({
         type: 'POST',
@@ -207,6 +207,6 @@
                   console.log(errorThrown);
                 }
               });
-    });</script>
+    });</script> -->
 
 <script src="../assets/js/registroUsuarios.js"></script>

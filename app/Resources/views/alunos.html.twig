@@ -159,8 +159,8 @@
                             <div class="emailUser">{{aluno.dsEmail}}</div>
                             <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
                                   onclick='editarUser("A{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
-                                             "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
-                                             "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                             "{{aluno.nuIdentification  is empty ? '' :  aluno.nuIdentification}}",
+                                             "{{aluno.nuCellphone is empty ? '' :  aluno.nuCellphone}}",
                                              "{{aluno.idUser}}")'>
                         </div>
                     {% else %}
@@ -171,8 +171,8 @@
                             <div class="emailUser">{{aluno.dsEmail}}</div>
                             <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar aluno"
                                  onclick='editarUser("A{{i}}", "{{aluno.nmUser}}", "{{aluno.dsEmail}}",
-                                             "{{aluno.nuIdentification  is empty ? 'null' :  aluno.nuIdentification}}",
-                                             "{{aluno.nuCellphone is empty ? 'null' :  aluno.nuCellphone}}",
+                                             "{{aluno.nuIdentification  is empty ? '' :  aluno.nuIdentification}}",
+                                             "{{aluno.nuCellphone is empty ? '' :  aluno.nuCellphone}}",
                                              "{{aluno.idUser}}")'>
                         </div>
                     {% endif %}
