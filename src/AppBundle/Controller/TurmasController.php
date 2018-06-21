@@ -198,6 +198,20 @@ class TurmasController extends Controller {
 
     function addClass($dadosForm){
       $newClass = new TbClass();
+      //
+      $usuarioLogado = $this->get('session')->get('idUser');
+      $usuarioProposer = $this->getDoctrine()
+                        ->getRepository('AppBundle:TbUser')
+                        ->findOneBy(array('idUser' => $usuarioLogado));
+
+      $usuarioProposer->setFlProposer('T');
+
+      $this->em->persist($usuarioProposer);
+      $this->em->flush();
+      //
+
+      $newClass->setIdProposer($usuarioProposer);
+
       TurmasController::persistirObjetoTurma($newClass, $dadosForm);
     }
 

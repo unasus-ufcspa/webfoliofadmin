@@ -43,7 +43,7 @@
           </div>
           <div class="arrastePortfolio">
             <div class="boxArrastar boxPortfolio" id="boxArrastar" ondrop="dropPort(event)" ondragover="allowDrop(event)">
-              {% if propositor is null %}
+              {% if portfolios[0] is null %}
                 <div class="textArrastar">arraste e solte um<br>PORTFÓLIO</div>
                 <img  class="logoArrastar" src="../assets/img/arraste.png">
               {% else %}

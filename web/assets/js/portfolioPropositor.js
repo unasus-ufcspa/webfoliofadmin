@@ -159,14 +159,3 @@ function dropProp(ev) {
   area.addEventListener('dragenter', handleDragEnter, false);
   area.addEventListener('dragleave', handleDragLeave, false);
   area.addEventListener('dragend', handleDragEnd, false);
-
-  // function salvarPortfolioPropositor(){
-  //   var idsPortfolios= arrayIdPortfolio.join(',');
-  //   // for(var i=0;i<arrayIdPortfolio; i++){
-  //   //   idsPortfolios+=arrayIdPortfolio[i]+";";
-  //   // }
-  //
-  //   $("#salvarPortfolioPropositor_IdProposer").val(arrayIdPropositor[0]);
-  //   $("#salvarPortfolioPropositor_IdPortfolios").val(idsPortfolios);
-  //
-  // }
