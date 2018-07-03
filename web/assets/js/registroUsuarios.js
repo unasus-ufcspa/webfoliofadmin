@@ -186,7 +186,7 @@ function confirmarExcluirPropositor(caminho) {
         url: '' + caminho + 'excluirPropositores',
         cache: false,
         processData: false,
-        async: false,
+        async: true,
         success: function (response) {
             console.debug(response);
             if (response.usuariosExcecao.length > 0) {

@@ -54,7 +54,7 @@
                 {% for p in portfolios %}
                   <div class="itemPortfolio" id="{{ p.idPortfolio }}">
                     <div class="infoPortfolio">{{ p.nmPortfolio }}</div>
-                    <div class="removerItemPortProp">+</div>
+                    <div class="removerItemPort" id="{{ p.idPortfolio }}">+</div>
                   </div>
                 {% endfor %}
               {% endif %}
@@ -71,7 +71,7 @@
                 <img class="logoArrastar" src="../assets/img/arraste.png" style="display: none;">
                 <div class="itemPropositor" id="{{propositor[0].idProposer}}">
                   <div class="infoPropositor">{{propositor[0].nmProposer}}</div>
-                  <div class="removerItemPortProp">+</div>
+                  <div class="removerItemProp" id="{{propositor[0].idProposer}}">+</div>
                 </div>
               {% endif %}
             </div>

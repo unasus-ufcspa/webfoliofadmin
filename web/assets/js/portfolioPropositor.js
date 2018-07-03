@@ -60,7 +60,7 @@ function dropPort(ev) {
 
       var nodeItemRemover = document.createElement('div');
       nodeItemRemover.innerHTML = "+";
-      nodeItemRemover.className = "removerItemPortProp";
+      nodeItemRemover.className = "removerItemPort";
       nodeItemRemover.onclick = function() {
         $("div#"+nodeItem.id+".itemPortfolio").remove();
         $("a#"+nodeItem.id+".subitemPortfolio").css("color", "white");
@@ -131,7 +131,7 @@ function dropProp(ev) {
 
       var nodeItemRemover = document.createElement('div');
       nodeItemRemover.innerHTML = "+";
-      nodeItemRemover.className = "removerItemPortProp";
+      nodeItemRemover.className = "removerItemProp";
       nodeItemRemover.onclick = function() {
         $("div#"+nodeItem.id+".itemPropositor").remove();
         $("a#"+nodeItem.id+".subitemPropositor").css("color", "white");
@@ -155,7 +155,55 @@ function dropProp(ev) {
 }
   return false;
 }
+
   var area = document.getElementById("boxArrastar");
   area.addEventListener('dragenter', handleDragEnter, false);
   area.addEventListener('dragleave', handleDragLeave, false);
   area.addEventListener('dragend', handleDragEnd, false);
+
+//carregar propositor registrado para arrayIdPropositor
+var idPropositor = $(".itemPropositor").attr('id');
+arrayIdPropositor.push(idPropositor);
+
+//carregar portfólios registrados para arrayIdPortfolio
+$( ".itemPortfolio" ).each(function() {
+    arrayIdPortfolio.push( $(this).attr('id') );
+  });
+
+//função de remover ao carregar portfólios
+$( ".removerItemPort" ).each(function() {
+  var idItem = $(this).attr('id');
+    $(this).click(function(){
+
+      $("div#"+idItem+".itemPortfolio").remove();
+      $("a#"+idItem+".subitemPortfolio").css("color", "white");
+      arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(idItem), 1 );
+
+      var novaString="";
+      for(var k=0; k<arrayIdPortfolio.length; k++){
+        novaString = novaString+";"+arrayIdPortfolio[k];
+      }
+      $("#salvarPortfolioPropositor_IdPortfolios").val(novaString);
+
+      if(arrayIdPortfolio.length==0){
+        $( ".textArrastar:first" ).show();
+        $( ".logoArrastar:eq(0)" ).show();
+      }
+
+    });
+  });
+
+
+  $( ".removerItemProp" ).each(function() {
+    var idItem = $(this).attr('id');
+    $(this).click(function(){
+      $("div#"+idItem+".itemPropositor").remove();
+      $("a#"+idItem+".subitemPropositor").css("color", "white");
+      arrayIdPropositor.splice( arrayIdPropositor.indexOf(idItem), 1 );
+      if(arrayIdPropositor.length==0){
+        $( ".textArrastar:eq(1)" ).show();
+        $( ".logoArrastar:eq(1)" ).show();
+        $("#salvarPortfolioPropositor_IdProposer").val(" ");
+      }
+    });
+  });

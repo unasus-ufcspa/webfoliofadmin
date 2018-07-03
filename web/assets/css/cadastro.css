@@ -485,7 +485,7 @@ input.toggle-round-flat:checked + label:after {
   width: 450px;
 }
 
-.removerAluno, .removerItemPortProp{
+.removerAluno, .removerItemPort, .removerItemProp{
   float: right;
   font-weight: 300;
   width: 5%;
