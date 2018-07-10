@@ -63,7 +63,7 @@ class TbClass
     public function setDsCode($dsCode)
     {
         $this->dsCode = $dsCode;
-    
+
         return $this;
     }
 
@@ -87,7 +87,7 @@ class TbClass
     public function setDsDescription($dsDescription)
     {
         $this->dsDescription = $dsDescription;
-    
+
         return $this;
     }
 
@@ -111,7 +111,7 @@ class TbClass
     public function setStStatus($stStatus)
     {
         $this->stStatus = $stStatus;
-    
+
         return $this;
     }
 
@@ -135,7 +135,7 @@ class TbClass
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
-    
+
         return $this;
     }
 
@@ -159,7 +159,7 @@ class TbClass
     public function setDtFinish($dtFinish)
     {
         $this->dtFinish = $dtFinish;
-    
+
         return $this;
     }
 
@@ -183,7 +183,7 @@ class TbClass
     public function setIdProposer(\AppBundle\Entity\TbUser $idProposer = null)
     {
         $this->idProposer = $idProposer;
-    
+
         return $this;
     }
 

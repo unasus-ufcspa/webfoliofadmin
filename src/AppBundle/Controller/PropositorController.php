@@ -317,6 +317,7 @@ class PropositorController extends Controller {
                 ->findOneBy(array('idUser' => $dadosForm['IdProposer']));
 
         $classEditar->setIdProposer($propositor);
+        $this->logControle->logAdmin("Portfólio Propositor  : " . print_r($classEditar, true));
 
         $this->em->persist($classEditar);
 
@@ -339,8 +340,6 @@ class PropositorController extends Controller {
         $portfoliosTurma = $queryBuilderPortClass->getQuery()->getArrayResult();
 
         $portfoliosTurmaForm = explode(";", $dadosForm['IdPortfolios']);
-        // $portfoliosTurmaForm =$dadosForm['IdPortfolios'];
-
 
         for ($i=0; $i < sizeof($portfoliosTurmaForm); $i++) {
 
@@ -366,7 +365,6 @@ class PropositorController extends Controller {
             $novoPortClass->setIdPortfolio($portfolio);
 
             $this->em->persist($novoPortClass);
-            // $idPortfolio = $objetoPortfolio->getIdPortfolio();
 
             $this->em->flush();
           }

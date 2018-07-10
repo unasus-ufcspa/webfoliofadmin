@@ -286,7 +286,7 @@ function confirmarExcluirExcecaoPropositor(caminho, usuariosExcecao) {
         url: '' + caminho + 'desativarPropositorExcecao',
         cache: false,
         processData: false,
-        async: false,
+        async: true,
         success: function (response) {
             console.log(response);
             location.reload();

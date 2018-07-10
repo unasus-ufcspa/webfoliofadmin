@@ -164,11 +164,21 @@ function dropProp(ev) {
 //carregar propositor registrado para arrayIdPropositor
 var idPropositor = $(".itemPropositor").attr('id');
 arrayIdPropositor.push(idPropositor);
+$("#salvarPortfolioPropositor_IdProposer").val(arrayIdPropositor[0]);
 
 //carregar portfólios registrados para arrayIdPortfolio
 $( ".itemPortfolio" ).each(function() {
     arrayIdPortfolio.push( $(this).attr('id') );
   });
+var novaStringPort = "";
+for(var k = 0; k<arrayIdPortfolio.length; k++){
+  if(k == 0){
+    novaStringPort = novaStringPort + "" + arrayIdPortfolio[k];
+  }else{
+    novaStringPort = novaStringPort + ";" + arrayIdPortfolio[k];
+  }
+}
+$("#salvarPortfolioPropositor_IdPortfolios").val(novaStringPort);
 
 //função de remover ao carregar portfólios
 $( ".removerItemPort" ).each(function() {
@@ -180,8 +190,12 @@ $( ".removerItemPort" ).each(function() {
       arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(idItem), 1 );
 
       var novaString="";
-      for(var k=0; k<arrayIdPortfolio.length; k++){
-        novaString = novaString+";"+arrayIdPortfolio[k];
+      for(var k = 0; k<arrayIdPortfolio.length; k++){
+        if(k == 0){
+          novaString = novaString + "" + arrayIdPortfolio[k];
+        }else{
+          novaString = novaString + ";" + arrayIdPortfolio[k];
+        }
       }
       $("#salvarPortfolioPropositor_IdPortfolios").val(novaString);
 
@@ -193,17 +207,16 @@ $( ".removerItemPort" ).each(function() {
     });
   });
 
-
-  $( ".removerItemProp" ).each(function() {
-    var idItem = $(this).attr('id');
-    $(this).click(function(){
-      $("div#"+idItem+".itemPropositor").remove();
-      $("a#"+idItem+".subitemPropositor").css("color", "white");
-      arrayIdPropositor.splice( arrayIdPropositor.indexOf(idItem), 1 );
-      if(arrayIdPropositor.length==0){
-        $( ".textArrastar:eq(1)" ).show();
-        $( ".logoArrastar:eq(1)" ).show();
-        $("#salvarPortfolioPropositor_IdProposer").val(" ");
-      }
-    });
+$( ".removerItemProp" ).each(function() {
+  var idItem = $(this).attr('id');
+  $(this).click(function(){
+    $("div#"+idItem+".itemPropositor").remove();
+    $("a#"+idItem+".subitemPropositor").css("color", "white");
+    arrayIdPropositor.splice( arrayIdPropositor.indexOf(idItem), 1 );
+    if(arrayIdPropositor.length==0){
+      $( ".textArrastar:eq(1)" ).show();
+      $( ".logoArrastar:eq(1)" ).show();
+      $("#salvarPortfolioPropositor_IdProposer").val(" ");
+    }
   });
+});
