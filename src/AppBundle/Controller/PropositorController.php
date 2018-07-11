@@ -326,32 +326,17 @@ class PropositorController extends Controller {
 
     function persistirObjetoPortfolio($classEditar, $dadosForm) {
         $this->em = $this->getDoctrine()->getManager();
-
         $idClass = $this->get('session')->get('idTurmaEdicao');
-
-        $queryBuilderPortClass = $this->em->createQueryBuilder();
-        $queryBuilderPortClass
-                ->select('pc,p')
-                ->from('AppBundle:TbPortfolioClass', "pc")
-                ->innerJoin('pc.idPortfolio', 'p', 'WITH', 'p.idPortfolio= pc.idPortfolio')
-                ->where($queryBuilderPortClass->expr()->eq('pc.idClass', $idClass))
-                ->getQuery()
-                ->execute();
-        $portfoliosTurma = $queryBuilderPortClass->getQuery()->getArrayResult();
 
         $portfoliosTurmaForm = explode(";", $dadosForm['IdPortfolios']);
 
         for ($i=0; $i < sizeof($portfoliosTurmaForm); $i++) {
+          $ptClass = $this->getDoctrine()
+                  ->getRepository('AppBundle:TbPortfolioClass')
+                  ->findOneBy(array('idClass' => $idClass, 'idPortfolio' => $portfoliosTurmaForm[$i]));
+          $this->logControle->logAdmin("ptClass : " . print_r($ptClass, true));
 
-          $flag = false;
-          foreach ($portfoliosTurma as $pt) {
-            $this->logControle->logAdmin("PT  : " . print_r($pt, true));
-            if($portfoliosTurmaForm[$i]== $pt['idPortfolio']){
-              $flag = true;
-            }
-          }
-
-          if($flag == false){
+          if($ptClass == null){
             $novoPortClass = new TbPortfolioClass();
             $turma = $this->getDoctrine()
                         ->getRepository('AppBundle:TbClass')
@@ -370,6 +355,7 @@ class PropositorController extends Controller {
           }
         }
 
+        //excluirPortfolioClass
         $this->em->flush();
     }
 }
