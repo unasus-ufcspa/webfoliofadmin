@@ -129,9 +129,10 @@ class TurmasController extends Controller {
                     TurmasController::editClass($dadosForm);
                     $dadosTurma = $this->carregarDadosTurma($idClass);
                 }else{
-                    TurmasController::addClass($dadosForm);
+                    $idClass = TurmasController::addClass($dadosForm);
                     // header("Refresh:0");
-                    return $this->redirectToRoute('/turmas');
+                    // return $this->redirectToRoute('/turmas');
+                    $dadosTurma = $this->carregarDadosTurma($idClass);
                 }
             }
         }
@@ -198,7 +199,7 @@ class TurmasController extends Controller {
 
     function addClass($dadosForm){
       $newClass = new TbClass();
-      //
+
       $usuarioLogado = $this->get('session')->get('idUser');
       $usuarioProposer = $this->getDoctrine()
                         ->getRepository('AppBundle:TbUser')
@@ -208,11 +209,11 @@ class TurmasController extends Controller {
 
       $this->em->persist($usuarioProposer);
       $this->em->flush();
-      //
 
       $newClass->setIdProposer($usuarioProposer);
 
-      TurmasController::persistirObjetoTurma($newClass, $dadosForm);
+      $idClass = TurmasController::persistirObjetoTurma($newClass, $dadosForm);
+      return $idClass;
     }
 
     function persistirObjetoTurma($classObj, $dadosForm) {
@@ -231,6 +232,10 @@ class TurmasController extends Controller {
       $classObj->setDtFinish($date);
 
       $this->em->persist($classObj);
+      $idClass = $classObj->getIdClass();
+
       $this->em->flush();
+
+      return $idClass;
     }
 }

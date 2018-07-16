@@ -67,7 +67,7 @@ function dropPort(ev) {
         arrayIdPortfolio.splice( arrayIdPortfolio.indexOf(nodeItem.id), 1 );
 
         var novaString="";
-        for(var k=0; k<arrayIdPortfolio.length; k++){
+        for(var k = 0; k < arrayIdPortfolio.length; k++){
           novaString = novaString+";"+arrayIdPortfolio[k];
         }
         $("#salvarPortfolioPropositor_IdPortfolios").val(novaString);
@@ -86,7 +86,12 @@ function dropPort(ev) {
     $( ".textArrastar:first" ).hide();
     $( ".logoArrastar:eq(0)" ).hide();
 
-    var stringPortfolios = $("#salvarPortfolioPropositor_IdPortfolios").val()+";"+arrayIdPortfolio[arrayIdPortfolio.length-1];
+    if(arrayIdPortfolio.length == 1){
+      var stringPortfolios = $("#salvarPortfolioPropositor_IdPortfolios").val()+""+arrayIdPortfolio[arrayIdPortfolio.length-1];
+    }else{
+      var stringPortfolios = $("#salvarPortfolioPropositor_IdPortfolios").val()+";"+arrayIdPortfolio[arrayIdPortfolio.length-1];
+    }
+
     $("#salvarPortfolioPropositor_IdPortfolios").val(stringPortfolios);
   }
 
@@ -170,6 +175,7 @@ $("#salvarPortfolioPropositor_IdProposer").val(arrayIdPropositor[0]);
 $( ".itemPortfolio" ).each(function() {
     arrayIdPortfolio.push( $(this).attr('id') );
   });
+
 var novaStringPort = "";
 for(var k = 0; k<arrayIdPortfolio.length; k++){
   if(k == 0){

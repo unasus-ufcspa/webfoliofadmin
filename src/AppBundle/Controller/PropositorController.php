@@ -220,6 +220,8 @@ class PropositorController extends Controller {
             if ($this->formPortProp->isSubmitted() && $this->formPortProp->isValid()) {
                 $dadosFormPortProp = $this->formPortProp->getData();
                 PropositorController::editarPortProp($dadosFormPortProp);
+                $propositor = $this->selecionarPropositorSalvo();
+                $portfolios = $this->selecionarPortfoliosSalvos();
             }
         }
 
