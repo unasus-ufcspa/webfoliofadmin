@@ -1,6 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 192.168.0.9
+    database_host: 192.168.0.8
     database_port: 5432
     database_name: webfolio
     database_user: postgres

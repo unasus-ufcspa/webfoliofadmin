@@ -25,6 +25,7 @@ function editarUser(id, nmUser, dsEmail, nuIdentification, nuCellphone, idUser) 
         closeEditar(idAberto);
     }
 }
+
 function openEditar(id) {
     var $formulario = $("#formEditUser");
     document.getElementById("editar_NmUser").value = nomeForm;
@@ -39,6 +40,7 @@ function openEditar(id) {
     $formulario.css("display", "block");
     $("#" + id + ".editarUser").show();
 }
+
 function closeEditar(id) {
     $("#alertEditar").show();
     document.getElementById("sairEditar").onclick = "confirmarFechar(" + id + ")";
@@ -51,6 +53,7 @@ function cancelarFechar() {
     $("#alertEditar").hide();
     flagEditar = true;
 }
+
 function confirmarFechar(id) {
     $("#alertEditar").hide();
     $("#" + id + ".editarUser").hide();
@@ -85,15 +88,18 @@ var fazerBusca = function () {
         document.getElementById("naoEncontrado").style.visibility = "hidden";
     }
 };
+
 var limparBusca = function () {
     $('.nomeUser').each(function () {
         $(this).closest('.itemUsuario').show();
     });
 };
+
 $("#inputPesquisa").keydown(function (e) {
     limparBusca();
     fazerBusca();
 });
+
 $('#iconLupa').click(function () {
     if ($('#inputPesquisa').val() != "") {
         limparBusca();
@@ -108,6 +114,7 @@ $('#iconLupa').click(function () {
 function addUser() {
     $(".divAddUser").show();
 }
+
 function closeaddUser() {
     $(".divAddUser").hide();
 }
@@ -116,9 +123,11 @@ function closeaddUser() {
 function excluirUser() {
     $("#excluirUsuario").show();
 }
+
 function cancelarExcluir() {
     $("#excluirUsuario").hide();
 }
+
 function cancelarAlertExcluir() {
     $("#alertExcluirUsuario").hide();
     location.reload();
@@ -238,6 +247,7 @@ function confirmarRemoverTutoresTurma(caminho) {
 
     return false;
 }
+
 function confirmarRemoverAlunosTurma(caminho) {
     $("#excluirUsuario").hide();
     var checkbox = document.getElementsByName('Aluno');

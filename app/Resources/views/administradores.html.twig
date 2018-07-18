@@ -70,7 +70,7 @@
       </div>
 
         <div class="divAddUser">
-            {{ form_start(formAddAmin) }}
+          {{ form_start(formAddAmin) }}
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
@@ -107,7 +107,7 @@
                     <div id="closeAdd" onclick="closeaddUser();">+</div>
                 </div>
             </div>
-            {{ form_end(formAddAmin) }}
+          {{ form_end(formAddAmin) }}
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -178,35 +178,5 @@
         </div>
     </body>
 </html>
-<!-- <script>
-    $('form').on('submit', function (e) {
-      // e.preventDefault();
-      var url = "{# path('administradores') #}";
-      var formData = new FormData(this);
-      $.ajax({
-        type: 'POST',
-                url: url,
-                data: formData,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-      }).done(function (data) {
-                if (typeof data.message !== 'undefined') {
-                  alert(data.message);
-                }
-              })
-              .fail(function (jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
-                if (typeof jqXHR.responseJSON !== 'undefined') {
-                  if (jqXHR.responseJSON.hasOwnProperty('form')) {
-                    $('#form_body').html(jqXHR.responseJSON.form);
-                  }
-                  $('.form_error').html(jqXHR.responseJSON.message);
-                } else {
-                  console.log(errorThrown);
-                }
-              });
-    });</script> -->
 
 <script src="../assets/js/registroUsuarios.js"></script>

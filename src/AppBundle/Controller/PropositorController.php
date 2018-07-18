@@ -11,12 +11,13 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\TbUser;
 use AppBundle\Entity\TbClass;
-use AppBundle\Entity\TbPortfolioClass;
 use AppBundle\Entity\TbPortfolio;
+use AppBundle\Entity\TbPortfolioClass;
+use AppBundle\Entity\TbPortfolioStudent;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -357,7 +358,63 @@ class PropositorController extends Controller {
           }
         }
 
-        //excluirPortfolioClass
+        PropositorController::removerPortfolios($portfoliosTurmaForm);
         $this->em->flush();
+    }
+
+    function removerPortfolios($listaPortfolios){
+      $this->em = $this->getDoctrine()->getManager();
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+
+      $portfoliosSalvos = PropositorController::selecionarPortfoliosSalvos();
+
+      foreach ($portfoliosSalvos as $ps) {
+        $flag = false;
+        for($i = 0; $i < sizeof($listaPortfolios); $i++){
+          if($ps['idPortfolio'] == $listaPortfolios[$i]){
+            $flag = true;
+          }
+        }
+        // $this->logControle->logAdmin(print_r("PS : " . $ps['idPortfolio'], true));
+        // $this->logControle->logAdmin(print_r("listaPortfolios : " . sizeof($listaPortfolios), true));
+        // $this->logControle->logAdmin(print_r("flag : " . $flag, true));
+        if($flag == false){ // Não encontrou nenhum id na lista igual ao do portfólio salvo
+          $entity = $this->em->getRepository('AppBundle:TbPortfolioClass')
+                  ->findOneBy(array('idClass' => $idClass, 'idPortfolio' => $ps['idPortfolio']));
+          // $this->logControle->logAdmin(print_r("entity: ", true));
+          if ($entity != null) {
+              // PropositorController::removerPortfolioStudent($ps);
+              $this->em->remove($entity);
+              $this->em->flush();
+          }
+        }
+      }
+
+      $this->em->flush();
+    }
+
+    function removerPortfolioStudent($ps){
+      $this->logControle->logAdmin(print_r("entity: ", true));
+      $queryBuilderPortStudent = $this->em->createQueryBuilder();
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+      $entity = $this->em->getRepository('AppBundle:TbPortfolioClass')
+              ->findOneBy(array('idClass' => $idClass, 'idPortfolio' => $ps['idPortfolio']));
+
+      $queryBuilderPortStudent
+              ->select('ps,pc')
+              ->from('AppBundle:TbPortfolioStudent', "ps")
+              ->innerJoin('ps.idPortfolioClass', 'pc', 'WITH', 'pc.idPortfolioClass = pc.idPortfolioClass')
+              ->where($queryBuilderPortStudent->expr()->eq('ps.idPortfolioClass', $entity))
+              ->getQuery()
+              ->execute();
+      $portfolioStudent = $queryBuilderPortStudent->getQuery()->getArrayResult();
+      // $this->logControle->logAdmin(print_r("Teste Portfólio Student"));
+      $this->logControle->logAdmin(print_r($portfolioStudent, true));
+      foreach ($portfolioStudent as $ps) {
+        if($entity != null){
+          $this->em->remove($ps);
+          $this->em->flush();
+        }
+      }
     }
 }
