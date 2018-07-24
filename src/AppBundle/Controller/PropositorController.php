@@ -72,7 +72,8 @@ class PropositorController extends Controller {
               if ($this->formExcluirPropositor->isSubmitted() && $this->formExcluirPropositor->isValid()) {
                   $dadosFormExcluirPropositor = $this->formExcluirPropositor->getData();
                   $this->excluirPropositor($dadosFormExcluirPropositor);
-                  return $this->redirectToRoute('propositores');
+                  // return $this->redirectToRoute('propositores');
+                  $arrayPropositores = $this->gerarArrayPropositores();
               }
             }
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,
@@ -154,7 +155,7 @@ class PropositorController extends Controller {
         $prop = $this->getDoctrine()
                 ->getRepository('AppBundle:TbUser')
                 ->findOneBy(array('idUser' => $propositores[$i]));
-        // $this->logControle->logAdmin("ptClass : " . print_r($ptClass, true));
+        $this->logControle->logAdmin("propositores[i] : " . print_r($propositores[$i], true));
         if ($prop != null) {
             $this->em->remove($prop);
             $this->em->flush();
