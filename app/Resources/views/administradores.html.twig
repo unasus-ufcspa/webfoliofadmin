@@ -117,7 +117,7 @@
             {% for administrador in administradores %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{administrador.idUser}}); atualizaFormAdministrador();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{administrador.nmUser}}</div>
                         <div class="emailUser">{{administrador.dsEmail}}</div>
@@ -129,7 +129,7 @@
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser">
+                        <input type="checkbox" name="Administrador[]" value="{{administrador.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{administrador.idUser}}); atualizaFormAdministrador();">
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{administrador.nmUser}}</div>
                         <div class="emailUser">{{administrador.dsEmail}}</div>
@@ -154,15 +154,21 @@
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse administrador?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir" onclick='confirmarExcluirAdministrador("{{web_dir}}");'>SIM</div>
+              {{ form_start(formExcluirUser) }}
+                  {{form_row(formExcluirUser.IdUsers)}}
+                  <input type="submit" id="confirmarExcluir" value="SIM" >
+              {{ form_end(formExcluirUser) }}
             </div>
         </div>
-        <div id="alertExcluirUsuario">
+        {% if deleteException == false %}
+          <div id="alertExcluirUsuario">
+        {% else %}
+          <div id="alertExcluirUsuario" style="display: block;">
+        {% endif %}
             <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluído, pois está relacionado a outros perfis. Você pode deletar apenas o perfil de administrador deste usuário.</div>
+            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluído, pois está relacionado a outros registros.</div>
             <div id="optionExcluir">
-              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">CANCELAR</div>
-              <div id="alertConfirmarExcluir">SIM</div>
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">OK</div>
             </div>
         </div>
         <div id="alertEditar">
@@ -180,3 +186,4 @@
 </html>
 
 <script src="../assets/js/registroUsuarios.js"></script>
+<script src="../assets/js/deletarRegistro.js"></script>

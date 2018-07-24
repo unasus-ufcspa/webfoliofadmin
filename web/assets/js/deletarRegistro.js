@@ -1,31 +1,43 @@
-var listaPropositores = [];
+var listaUsers = [];
 
 function addListaProp(id){
   var flagExiste = false;
-  if(listaPropositores.indexOf(id) != -1){
-    var index = listaPropositores.indexOf(id);
-    listaPropositores.splice(index, 1);
+  if(listaUsers.indexOf(id) != -1){
+    var index = listaUsers.indexOf(id);
+    listaUsers.splice(index, 1);
   }else{
-    listaPropositores.push(id);
+    listaUsers.push(id);
   }
-
-  atualizaFormPropositor();
 }
 
 function atualizaFormPropositor(){
-  if (listaPropositores == null){
+  if (listaUsers == null){
     $("#excluir_IdProposers").val("");
   }else{
     var novaString = "";
-    for(var i = 0; i < listaPropositores.length; i++){
+    for(var i = 0; i < listaUsers.length; i++){
       if(i == 0){
-        novaString = novaString + "" + listaPropositores[i];
+        novaString = novaString + "" + listaUsers[i];
       }else{
-        novaString = novaString + ";" + listaPropositores[i];
+        novaString = novaString + ";" + listaUsers[i];
       }
     }
     $("#excluir_IdProposers").val(novaString);
   }
-  console.log(listaPropositores);
-  console.log($("#excluir_IdProposers").val());
+}
+
+function atualizaFormAdministrador(){
+  if (listaUsers == null){
+    $("#excluir_IdUsers").val("");
+  }else{
+    var novaString = "";
+    for(var i = 0; i < listaUsers.length; i++){
+      if(i == 0){
+        novaString = novaString + "" + listaUsers[i];
+      }else{
+        novaString = novaString + ";" + listaUsers[i];
+      }
+    }
+    $("#excluir_IdUsers").val(novaString);
+  }
 }

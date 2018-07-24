@@ -118,7 +118,7 @@
             {% for propositor in propositores %}
                 {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaProp({{propositor.idUser}});"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{propositor.idUser}}); atualizaFormPropositor();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
@@ -130,7 +130,7 @@
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaProp({{propositor.idUser}});">
+                        <input type="checkbox" name="Propositor[]" value="{{propositor.idUser}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{propositor.idUser}}); atualizaFormPropositor();">
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
@@ -158,17 +158,19 @@
               <!-- <div id="confirmarExcluir"  onclick='confirmarExcluirPropositor("{#web_dir#}");'>SIM</div> -->
               {{ form_start(formExcluirPropositor) }}
                   {{form_row(formExcluirPropositor.IdProposers)}}
-
-                    <input type="submit" id="confirmarExcluir" value="SIM" >
+                  <input type="submit" id="confirmarExcluir" value="SIM" >
               {{ form_end(formExcluirPropositor) }}
             </div>
         </div>
-        <div id="alertExcluirUsuario">
+        {% if deleteException == false %}
+          <div id="alertExcluirUsuario">
+        {% else %}
+          <div id="alertExcluirUsuario" style="display: block;">
+        {% endif %}
             <div id="titleExcluir">Excluir</div>
-            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluido, pois está relacionado a outros perfis. Você pode deletar apenas o perfil de propositor deste usuário.</div>
+            <div id="mensagemExcluir">Um dos usuários para deleção não pode ser excluído, pois está relacionado a outros registros.</div>
             <div id="optionExcluir">
-              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">CANCELAR</div>
-              <div id="alertConfirmarExcluir">SIM</div>
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">OK</div>
             </div>
         </div>
         <div id="alertEditar">

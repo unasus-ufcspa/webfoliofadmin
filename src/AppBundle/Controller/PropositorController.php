@@ -55,6 +55,7 @@ class PropositorController extends Controller {
             $this->formEditarPropositor->handleRequest($request);
             $this->formAdicionarPropositor->handleRequest($request);
             $this->formExcluirPropositor->handleRequest($request);
+            $deleteException = false;
 
             if ($request->request->has($this->formEditarPropositor->getName())) {
                 if ($this->formEditarPropositor->isSubmitted() && $this->formEditarPropositor->isValid()) {
@@ -71,15 +72,15 @@ class PropositorController extends Controller {
             }else{
               if ($this->formExcluirPropositor->isSubmitted() && $this->formExcluirPropositor->isValid()) {
                   $dadosFormExcluirPropositor = $this->formExcluirPropositor->getData();
-                  $this->excluirPropositor($dadosFormExcluirPropositor);
-                  // return $this->redirectToRoute('propositores');
+                  $deleteException = $this->excluirPropositor($dadosFormExcluirPropositor);
                   $arrayPropositores = $this->gerarArrayPropositores();
               }
             }
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,
                         'formPropositor' => $this->formEditarPropositor->createView(),
                         'formAddPropositor' => $this->formAdicionarPropositor->createView(),
-                        'formExcluirPropositor' => $this->formExcluirPropositor->createView()));
+                        'formExcluirPropositor' => $this->formExcluirPropositor->createView(),
+                        'deleteException' => $deleteException));
         }
     }
 
@@ -152,13 +153,19 @@ class PropositorController extends Controller {
       $propositores = explode(";", $dadosForm['IdProposers']);
 
       for ($i = 0; $i < sizeof($propositores); $i++) {
-        $prop = $this->getDoctrine()
-                ->getRepository('AppBundle:TbUser')
-                ->findOneBy(array('idUser' => $propositores[$i]));
-        $this->logControle->logAdmin("propositores[i] : " . print_r($propositores[$i], true));
-        if ($prop != null) {
+        try{
+          $prop = $this->getDoctrine()
+          ->getRepository('AppBundle:TbUser')
+          ->findOneBy(array('idUser' => $propositores[$i]));
+          // $this->logControle->logAdmin("propositores[i] : " . print_r($propositores[$i], true));
+          if ($prop != null) {
             $this->em->remove($prop);
             $this->em->flush();
+          }
+        } catch (\Exception $exception) {
+            $this->logControle->logAdmin("Exception  : " . print_r($exception->getMessage(), true));
+            $deleteException = true;
+            return $deleteException;
         }
       }
       $this->em->flush();

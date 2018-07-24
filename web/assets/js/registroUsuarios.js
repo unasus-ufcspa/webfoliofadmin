@@ -130,46 +130,46 @@ function cancelarExcluir() {
 
 function cancelarAlertExcluir() {
     $("#alertExcluirUsuario").hide();
-    location.reload();
+    // location.reload();
 }
 
-function confirmarExcluirAdministrador(caminho) {
-    $("#excluirUsuario").hide();
-    var checkbox = document.getElementsByName('Administrador[]');
-    var arrayValuesChecked = [];
-    var ln = 0;
-    for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-            ln++;
-            arrayValuesChecked.push(checkbox[i].value);
-        }
-    }
-    console.log(arrayValuesChecked);
-    var dataString = {
-        arrayAdministradores: arrayValuesChecked
-    };
-
-    $.ajax({
-        type: 'post',
-        data: JSON.stringify(dataString),
-        contentType: 'application/json',
-        dataType: 'json',
-        url: '' + caminho + 'excluirAdministradores',
-        cache: false,
-        processData: false,
-        async: false,
-        success: function (response) {
-            console.log(response);
-            if (response.usuariosExcecao.length > 0) {
-                console.log(response.usuariosExcecao);
-
-                $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecao('" + caminho + "', " + JSON.stringify(response) + ")");
-                $("#alertExcluirUsuario").show();
-            }
-        }
-    });
-    return false;
-}
+// function confirmarExcluirAdministrador(caminho) {
+//     $("#excluirUsuario").hide();
+//     var checkbox = document.getElementsByName('Administrador[]');
+//     var arrayValuesChecked = [];
+//     var ln = 0;
+//     for (var i = 0; i < checkbox.length; i++) {
+//         if (checkbox[i].checked) {
+//             ln++;
+//             arrayValuesChecked.push(checkbox[i].value);
+//         }
+//     }
+//     console.log(arrayValuesChecked);
+//     var dataString = {
+//         arrayAdministradores: arrayValuesChecked
+//     };
+//
+//     $.ajax({
+//         type: 'post',
+//         data: JSON.stringify(dataString),
+//         contentType: 'application/json',
+//         dataType: 'json',
+//         url: '' + caminho + 'excluirAdministradores',
+//         cache: false,
+//         processData: false,
+//         async: false,
+//         success: function (response) {
+//             console.log(response);
+//             if (response.usuariosExcecao.length > 0) {
+//                 console.log(response.usuariosExcecao);
+//
+//                 $("#alertConfirmarExcluir").attr("onClick", "confirmarExcluirExcecao('" + caminho + "', " + JSON.stringify(response) + ")");
+//                 $("#alertExcluirUsuario").show();
+//             }
+//         }
+//     });
+//     return false;
+// }
 
 // function confirmarExcluirPropositor(caminho) {
 //     $("#excluirUsuario").hide();
@@ -283,26 +283,26 @@ function confirmarRemoverAlunosTurma(caminho) {
     return false;
 }
 
-function confirmarExcluirExcecaoPropositor(caminho, usuariosExcecao) {
-    var dataString = {
-        arrayPropositoresDesativar: usuariosExcecao.usuariosExcecao
-    };
-    console.log(dataString);
-    $.ajax({
-        type: 'post',
-        data: JSON.stringify(dataString),
-        contentType: 'application/json',
-        dataType: 'json',
-        url: '' + caminho + 'desativarPropositorExcecao',
-        cache: false,
-        processData: false,
-        async: true,
-        success: function (response) {
-            console.log(response);
-            location.reload();
-        }
-    });
-}
+// function confirmarExcluirExcecaoPropositor(caminho, usuariosExcecao) {
+//     var dataString = {
+//         arrayPropositoresDesativar: usuariosExcecao.usuariosExcecao
+//     };
+//     console.log(dataString);
+//     $.ajax({
+//         type: 'post',
+//         data: JSON.stringify(dataString),
+//         contentType: 'application/json',
+//         dataType: 'json',
+//         url: '' + caminho + 'desativarPropositorExcecao',
+//         cache: false,
+//         processData: false,
+//         async: true,
+//         success: function (response) {
+//             console.log(response);
+//             location.reload();
+//         }
+//     });
+// }
 
 function confirmarExcluirExcecao(caminho, usuariosExcecao) {
     var dataString = {

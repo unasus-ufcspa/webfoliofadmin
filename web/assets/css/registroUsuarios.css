@@ -329,6 +329,10 @@ input:checked +  label {
   border-bottom-left-radius: 0px;
   background-color: #9187c7;
 }
+#alertCancelarExcluir{
+  width: 100%;
+  border-bottom-right-radius: 25px;
+}
 #confirmarExcluir{
   width: 215px;
   height: 100%;
