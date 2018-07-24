@@ -51,8 +51,10 @@ class PropositorController extends Controller {
             $arrayPropositores = $this->gerarArrayPropositores();
             $this->formEditarPropositor = UsuarioController::gerarFormulario("editar");
             $this->formAdicionarPropositor = UsuarioController::gerarFormulario("adicionar");
+            $this->formExcluirPropositor = PropositorController::gerarFormExcluir("excluir");
             $this->formEditarPropositor->handleRequest($request);
             $this->formAdicionarPropositor->handleRequest($request);
+            $this->formExcluirPropositor->handleRequest($request);
 
             if ($request->request->has($this->formEditarPropositor->getName())) {
                 if ($this->formEditarPropositor->isSubmitted() && $this->formEditarPropositor->isValid()) {
@@ -60,16 +62,23 @@ class PropositorController extends Controller {
                     UsuarioController::editarUsuario($dadosFormEditarPropositor);
                     return $this->redirectToRoute('propositores');
                 }
-            } else {
+            } else if ($request->request->has($this->formAdicionarPropositor->getName())){
                 if ($this->formAdicionarPropositor->isSubmitted() && $this->formAdicionarPropositor->isValid()) {
                     $dadosFormAdicionarPropositor = $this->formAdicionarPropositor->getData();
                     $this->adicionarPropositor($dadosFormAdicionarPropositor);
                     return $this->redirectToRoute('propositores');
                 }
+            }else{
+              if ($this->formExcluirPropositor->isSubmitted() && $this->formExcluirPropositor->isValid()) {
+                  $dadosFormExcluirPropositor = $this->formExcluirPropositor->getData();
+                  $this->excluirPropositor($dadosFormExcluirPropositor);
+                  return $this->redirectToRoute('propositores');
+              }
             }
             return $this->render('propositores.html.twig', array('propositores' => $arrayPropositores,
                         'formPropositor' => $this->formEditarPropositor->createView(),
-                        'formAddPropositor' => $this->formAdicionarPropositor->createView()));
+                        'formAddPropositor' => $this->formAdicionarPropositor->createView(),
+                        'formExcluirPropositor' => $this->formExcluirPropositor->createView()));
         }
     }
 
@@ -128,50 +137,74 @@ class PropositorController extends Controller {
       }
     }
 
+    function gerarFormExcluir($nomeFormulario){
+      $formularioExcluirPropositores = $this->get('form.factory')
+              ->createNamedBuilder($nomeFormulario, FormType::class)
+              ->add('IdProposers', HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formularioExcluirPropositores;
+    }
+
+    function excluirPropositor($dadosForm){
+      $this->em = $this->getDoctrine()->getManager();
+
+      $propositores = explode(";", $dadosForm['IdProposers']);
+
+      for ($i = 0; $i < sizeof($propositores); $i++) {
+        $prop = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('idUser' => $propositores[$i]));
+        // $this->logControle->logAdmin("ptClass : " . print_r($ptClass, true));
+        if ($prop != null) {
+            $this->em->remove($prop);
+            $this->em->flush();
+        }
+      }
+      $this->em->flush();
+    }
+    // function excluirPropositores(){
+    //
+    // }
     /**
      * @Route("/excluirPropositores")
      */
-    function excluirPropositores(Request $request) {
-        $this->em = $this->getDoctrine()->getEntityManager();
-        $flagGerouExcecao = false;
-        $usuariosExcecao = array();
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->getContent(), true);
-            $request->request->replace(is_array($data) ? $data : array());
-            $this->logControle->logAdmin("Excluir propositores : " . print_r($data, true));
-
-            foreach ($data['arrayPropositores'] as $idsAdministradoresExclusao) {
-                $this->em = $this->getDoctrine()->resetManager();
-                $this->logControle->logAdmin("Excluir  : " . print_r($idsAdministradoresExclusao, true));
-
-                try {
-
-                    $entity = $this->em->getRepository('AppBundle:TbUser')
-                            ->findOneBy(array('idUser' => $idsAdministradoresExclusao));
-
-                    if ($entity != null) {
-                        $this->em->remove($entity);
-                        $this->em->flush();
-                    }
-                } catch (\Exception $excpetion) {
-                    $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
-                    $flagGerouExcecao = true;
-                    $usuariosExcecao[] = $idsAdministradoresExclusao;
-                }
-            }
-
-            $retornoRequest = array(
-                "sucesso" => true,
-                "usuariosExcecao" => $usuariosExcecao
-            );
-        } else {
-            $retornoRequest = array(
-                "sucesso" => false,
-                "usuariosExcecao" => NULL
-            );
-        }
-        return new JsonResponse($retornoRequest);
-    }
+    // function excluirPropositores(Request $request) {
+    //     $this->em = $this->getDoctrine()->getEntityManager();
+    //     $flagGerouExcecao = false;
+    //     $usuariosExcecao = array();
+    //     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+    //         $data = json_decode($request->getContent(), true);
+    //         $request->request->replace(is_array($data) ? $data : array());
+    //         $this->logControle->logAdmin("Excluir propositores : " . print_r($data, true));
+    //
+    //         foreach ($data['arrayPropositores'] as $idsAdministradoresExclusao) {
+    //             $this->em = $this->getDoctrine()->resetManager();
+    //             $this->logControle->logAdmin("Excluir  : " . print_r($idsAdministradoresExclusao, true));
+    //
+    //             try {
+    //                 $entity = $this->em->getRepository('AppBundle:TbUser')
+    //                         ->findOneBy(array('idUser' => $idsAdministradoresExclusao));
+    //
+    //                 if ($entity != null) {
+    //                     $this->em->remove($entity);
+    //                     $this->em->flush();
+    //                 }
+    //             } catch (\Exception $excpetion) {
+    //                 $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
+    //                 $flagGerouExcecao = true;
+    //                 $usuariosExcecao[] = $idsAdministradoresExclusao;
+    //             }
+    //         }
+    //         $retornoRequest = array(
+    //             "sucesso" => true,
+    //             "usuariosExcecao" => $usuariosExcecao);
+    //     } else {
+    //         $retornoRequest = array(
+    //             "sucesso" => false,
+    //             "usuariosExcecao" => NULL);
+    //     }
+    //     return new JsonResponse($retornoRequest);
+    // }
 
     /**
      * @Route("/desativarPropositorExcecao")
@@ -375,15 +408,27 @@ class PropositorController extends Controller {
             $flag = true;
           }
         }
-        // $this->logControle->logAdmin(print_r("PS : " . $ps['idPortfolio'], true));
-        // $this->logControle->logAdmin(print_r("listaPortfolios : " . sizeof($listaPortfolios), true));
-        // $this->logControle->logAdmin(print_r("flag : " . $flag, true));
+        $this->logControle->logAdmin(print_r("PS : " . $ps['idPortfolio'], true));
+
         if($flag == false){ // Não encontrou nenhum id na lista igual ao do portfólio salvo
           $entity = $this->em->getRepository('AppBundle:TbPortfolioClass')
                   ->findOneBy(array('idClass' => $idClass, 'idPortfolio' => $ps['idPortfolio']));
-          // $this->logControle->logAdmin(print_r("entity: ", true));
+          $this->logControle->logAdmin(print_r($entity, true));
           if ($entity != null) {
-              // PropositorController::removerPortfolioStudent($ps);
+              $queryBuilderPortStudent = $this->em->createQueryBuilder();
+              $queryBuilderPortStudent
+                            ->select('ps')
+                            ->from('AppBundle:TbPortfolioStudent', "ps")
+                            ->where($queryBuilderPortStudent->expr()->eq('ps.idPortfolioClass', $entity))
+                            ->getQuery()
+                            ->execute();
+                    $portfolioStudent = $queryBuilderPortStudent->getQuery()->getArrayResult();
+                    $this->logControle->logAdmin(print_r("Teste Portfólio Student", true));
+                    foreach ($portfolioStudent as $ps) {
+                        $this->em->remove($ps);
+                        $this->em->flush();
+                    }
+
               $this->em->remove($entity);
               $this->em->flush();
           }
@@ -391,30 +436,5 @@ class PropositorController extends Controller {
       }
 
       $this->em->flush();
-    }
-
-    function removerPortfolioStudent($ps){
-      $this->logControle->logAdmin(print_r("entity: ", true));
-      $queryBuilderPortStudent = $this->em->createQueryBuilder();
-      $idClass = $this->get('session')->get('idTurmaEdicao');
-      $entity = $this->em->getRepository('AppBundle:TbPortfolioClass')
-              ->findOneBy(array('idClass' => $idClass, 'idPortfolio' => $ps['idPortfolio']));
-
-      $queryBuilderPortStudent
-              ->select('ps,pc')
-              ->from('AppBundle:TbPortfolioStudent', "ps")
-              ->innerJoin('ps.idPortfolioClass', 'pc', 'WITH', 'pc.idPortfolioClass = pc.idPortfolioClass')
-              ->where($queryBuilderPortStudent->expr()->eq('ps.idPortfolioClass', $entity))
-              ->getQuery()
-              ->execute();
-      $portfolioStudent = $queryBuilderPortStudent->getQuery()->getArrayResult();
-      // $this->logControle->logAdmin(print_r("Teste Portfólio Student"));
-      $this->logControle->logAdmin(print_r($portfolioStudent, true));
-      foreach ($portfolioStudent as $ps) {
-        if($entity != null){
-          $this->em->remove($ps);
-          $this->em->flush();
-        }
-      }
     }
 }

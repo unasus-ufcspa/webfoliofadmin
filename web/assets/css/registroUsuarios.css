@@ -311,7 +311,7 @@ input:checked +  label {
   position: absolute;
   bottom:0px;
 }
-#cancelarExcluir, #confirmarExcluir, #sairEditar, #voltarEditar, #alertCancelarExcluir, #alertConfirmarExcluir{
+#cancelarExcluir, #sairEditar, #voltarEditar, #alertCancelarExcluir, #alertConfirmarExcluir{
   width: 50%;
   height: 100%;
   border-bottom-left-radius: 25px;
@@ -324,10 +324,23 @@ input:checked +  label {
   text-align: center;
   color: #ffffff;
 }
-#confirmarExcluir, #voltarEditar, #alertConfirmarExcluir{
+#voltarEditar, #alertConfirmarExcluir{
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 0px;
   background-color: #9187c7;
+}
+#confirmarExcluir{
+  width: 215px;
+  height: 100%;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #9187c7;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border: solid 1px #979797;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 0px;
 }
 
 @media screen and (max-width: 1500px){
