@@ -8,11 +8,11 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\TbUser;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\TbUser;
 use AppBundle\Controller\UsuarioController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -57,7 +57,6 @@ class AdministradorController extends Controller {
                 if ($this->formEditarAdministrador->isSubmitted() && $this->formEditarAdministrador->isValid()) {
                     $dadosFormEditarAdministrador = $this->formEditarAdministrador->getData();
                     UsuarioController::editarUsuario($dadosFormEditarAdministrador);
-                    // header("Refresh:0");
                     return $this->redirectToRoute('administradores');
                 }
             } else  if ($request->request->has($this->formAdicionarAdministrador->getName())){
@@ -74,25 +73,11 @@ class AdministradorController extends Controller {
               }
             }
 
-
             return $this->render('administradores.html.twig', array('administradores' => $arrayAdministradores,
                         'formAdmin' => $this->formEditarAdministrador->createView(),
                         'formAddAmin' => $this->formAdicionarAdministrador->createView(),
                         'formExcluirUser' => $this->formExcluirAdministrador->createView(),
                         'deleteException' => $deleteException));
-        }
-    }
-
-    function adicionarAdministrador($dadosFormAdicionarAdministrador) {
-        $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
-        $novoAdministrador = new TbUser();
-        $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
-        if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
-          if($this->usuarioRegistrado($dadosFormAdicionarAdministrador['DsEmail'])){
-            UsuarioController::editarUsuarioAdmin($dadosFormAdicionarAdministrador);
-          }else{
-            UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
-          }
         }
     }
 
@@ -111,7 +96,7 @@ class AdministradorController extends Controller {
         return $arrayAdministradores;
     }
 
-    public function selecionarAdministradores() {
+    function selecionarAdministradores() {
         $idUser = $this->get('session')->get('idUser');
         $queryBuilderAdmin = $this->em->createQueryBuilder();
         $queryBuilderAdmin
@@ -124,6 +109,19 @@ class AdministradorController extends Controller {
         $administradores = $queryBuilderAdmin->getQuery()->getArrayResult();
 
         return $administradores;
+    }
+
+    function adicionarAdministrador($dadosFormAdicionarAdministrador) {
+        $this->logControle->logAdmin(print_r($dadosFormAdicionarAdministrador, true));
+        $novoAdministrador = new TbUser();
+        $this->logControle->logAdmin(($dadosFormAdicionarAdministrador['DsPassword']));
+        if ($dadosFormAdicionarAdministrador['DsPassword'] == $dadosFormAdicionarAdministrador['DsPasswordConfirm']) {
+          if($this->usuarioRegistrado($dadosFormAdicionarAdministrador['DsEmail'])){
+            UsuarioController::editarUsuarioAdmin($dadosFormAdicionarAdministrador);
+          }else{
+            UsuarioController::persistirObjetoUsuario($novoAdministrador, $dadosFormAdicionarAdministrador, 'flAdmin', 'T');
+          }
+        }
     }
 
     public function usuarioRegistrado($email){

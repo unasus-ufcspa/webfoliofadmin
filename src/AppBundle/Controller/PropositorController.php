@@ -155,8 +155,8 @@ class PropositorController extends Controller {
       for ($i = 0; $i < sizeof($propositores); $i++) {
         try{
           $prop = $this->getDoctrine()
-          ->getRepository('AppBundle:TbUser')
-          ->findOneBy(array('idUser' => $propositores[$i]));
+                  ->getRepository('AppBundle:TbUser')
+                  ->findOneBy(array('idUser' => $propositores[$i]));
           // $this->logControle->logAdmin("propositores[i] : " . print_r($propositores[$i], true));
           if ($prop != null) {
             $this->em->remove($prop);

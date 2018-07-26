@@ -10,12 +10,14 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\TbUser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\ManipularArquivoController;
+use AppBundle\Entity\TbUser;
 use AppBundle\Entity\TbClassStudent;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class AlunosController extends Controller {
 
@@ -40,12 +42,14 @@ class AlunosController extends Controller {
         } else {
             $this->em = $this->getDoctrine()->getManager();
 
-
             $arrayAlunos = $this->gerarArrayAlunos(); //$idClass da rota
             $this->formEditarAluno = UsuarioController::gerarFormulario("editar");
             $this->formAdicionarAluno = UsuarioController::gerarFormulario("adicionar");
+            $this->formExcluirAluno = AlunosController::gerarFormExcluir("excluir");
             $this->formEditarAluno->handleRequest($request);
             $this->formAdicionarAluno->handleRequest($request);
+            $this->formExcluirAluno->handleRequest($request);
+            $deleteException = false;
 
             if ($request->request->has($this->formEditarAluno->getName())) {
                 if ($this->formEditarAluno->isSubmitted() && $this->formEditarAluno->isValid()) {
@@ -53,19 +57,27 @@ class AlunosController extends Controller {
                     UsuarioController::editarUsuario($dadosFormEditarAluno);
                     return $this->redirectToRoute('alunos');
                 }
-            } else {
+            } else if($request->request->has($this->formAdicionarAluno->getName())){
                 if ($this->formAdicionarAluno->isSubmitted() && $this->formAdicionarAluno->isValid()) {
                     $dadosFormAdicionarAluno = $this->formAdicionarAluno->getData();
                     $this->adicionarAlunoTurma($dadosFormAdicionarAluno);
                     return $this->redirectToRoute('alunos');
                 }
+            } else {
+              if ($this->formExcluirAluno->isSubmitted() && $this->formExcluirAluno->isValid()) {
+                  $dadosFormExcluirAluno = $this->formExcluirAluno->getData();
+                  $deleteException = $this->excluirAluno($dadosFormExcluirAluno);
+                  $arrayAlunos = $this->gerarArrayAlunos();
+              }
             }
 
             $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
 
             return $this->render('alunos.html.twig', array('alunos' => $arrayAlunos,
                         'formAluno' => $this->formEditarAluno->createView(),
-                        'formAddAluno' => $this->formAdicionarAluno->createView(), 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro));
+                        'formAddAluno' => $this->formAdicionarAluno->createView(), 'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro,
+                        'formExcluirUser' => $this->formExcluirAluno->createView(),
+                        'deleteException' => $deleteException));
         }
     }
 
@@ -121,6 +133,52 @@ class AlunosController extends Controller {
         $alunosTurma = $queryBuilderAluno->getQuery()->getArrayResult();
         $this->logControle->logAdmin(print_r($alunosTurma, true));
         return $alunosTurma;
+    }
+
+    function gerarFormExcluir($nomeFormulario){
+      $formularioExcluirAlunos = $this->get('form.factory')
+              ->createNamedBuilder($nomeFormulario, FormType::class)
+              ->add('IdUsers', HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formularioExcluirAlunos;
+    }
+
+    function excluirClassStudent($aluno){
+      $this->em = $this->getDoctrine()->getManager();
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+
+      $csExcluir = $this->getDoctrine()
+                ->getRepository('AppBundle:TbClassStudent')
+                ->findOneBy(array('idStudent' => $aluno, 'idClass' => $idClass));
+      if ($csExcluir != null) {
+        $this->em->remove($csExcluir);
+        $this->em->flush();
+      }
+    }
+
+    function excluirAluno($dadosForm){
+      $this->em = $this->getDoctrine()->getManager();
+
+      $alunos = explode(";", $dadosForm['IdUsers']);
+
+      for ($i = 0; $i < sizeof($alunos); $i++) {
+        try{
+          $al = $this->getDoctrine()
+                    ->getRepository('AppBundle:TbUser')
+                    ->findOneBy(array('idUser' => $alunos[$i]));
+
+          if ($al != null) {
+            $this->excluirClassStudent($al);
+            $this->em->remove($al);
+            $this->em->flush();
+          }
+        } catch (\Exception $exception) {
+            $this->logControle->logAdmin("Exception  : " . print_r($exception->getMessage(), true));
+            $deleteException = true;
+            return $deleteException;
+        }
+      }
+      $this->em->flush();
     }
 
     /**
@@ -191,40 +249,40 @@ class AlunosController extends Controller {
     /**
      * @Route("/removerAlunoTurma")
      */
-    function removerAlunoTurma(Request $request) {
-        $this->em = $this->getDoctrine()->getEntityManager();
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->getContent(), true);
-            $request->request->replace(is_array($data) ? $data : array());
-            $this->logControle->logAdmin("Excluir alunos turma : " . print_r($data, true));
-            $idClass =  $this->get('session')->get('idTurmaEdicao');
-
-            foreach ($data['arrayAlunos'] as $idTutorRemover) {
-                $this->em = $this->getDoctrine()->resetManager();
-                $this->logControle->logAdmin("Remover  : " . print_r($idTutorRemover, true));
-
-                try {
-                    $entity = $this->em->getRepository('AppBundle:TbClassStudent')
-                            ->findOneBy(array('idStudent' => $idTutorRemover));
-                    if ($entity != null) {
-                        $this->em->remove($entity);
-                        $this->em->flush();
-                    }
-                } catch (\Exception $excpetion) {
-                    $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
-                }
-            }
-
-            $retornoRequest = array(
-                "sucesso" => true,
-            );
-        } else {
-            $retornoRequest = array(
-                "sucesso" => false,
-            );
-        }
-        return new JsonResponse($retornoRequest);
-    }
+    // function removerAlunoTurma(Request $request) {
+    //     $this->em = $this->getDoctrine()->getEntityManager();
+    //     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+    //         $data = json_decode($request->getContent(), true);
+    //         $request->request->replace(is_array($data) ? $data : array());
+    //         $this->logControle->logAdmin("Excluir alunos turma : " . print_r($data, true));
+    //         $idClass =  $this->get('session')->get('idTurmaEdicao');
+    //
+    //         foreach ($data['arrayAlunos'] as $idTutorRemover) {
+    //             $this->em = $this->getDoctrine()->resetManager();
+    //             $this->logControle->logAdmin("Remover  : " . print_r($idTutorRemover, true));
+    //
+    //             try {
+    //                 $entity = $this->em->getRepository('AppBundle:TbClassStudent')
+    //                         ->findOneBy(array('idStudent' => $idTutorRemover));
+    //                 if ($entity != null) {
+    //                     $this->em->remove($entity);
+    //                     $this->em->flush();
+    //                 }
+    //             } catch (\Exception $excpetion) {
+    //                 $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
+    //             }
+    //         }
+    //
+    //         $retornoRequest = array(
+    //             "sucesso" => true,
+    //         );
+    //     } else {
+    //         $retornoRequest = array(
+    //             "sucesso" => false,
+    //         );
+    //     }
+    //     return new JsonResponse($retornoRequest);
+    // }
 
     /**
      * @Route("/desativarAdministradorExcecao")
