@@ -57,3 +57,19 @@ function atualizaFormAluno(){
     $("#excluir_IdUsers").val(novaString);
   }
 }
+
+function atualizaFormTutor(){
+  if (listaUsers == null){
+    $("#excluir_IdUsers").val("");
+  }else{
+    var novaString = "";
+    for(var i = 0; i < listaUsers.length; i++){
+      if(i == 0){
+        novaString = novaString + "" + listaUsers[i];
+      }else{
+        novaString = novaString + ";" + listaUsers[i];
+      }
+    }
+    $("#excluir_IdUsers").val(novaString);
+  }
+}
