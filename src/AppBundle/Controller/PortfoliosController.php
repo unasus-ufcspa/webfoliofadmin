@@ -101,7 +101,7 @@ class PortfoliosController extends Controller {
             $arrayAtividades = array();
             if ($idPortfolio > -1) {
               $dadosPortfolio = $this->carregarDadosPortfolio($idPortfolio);
-              $arrayAtividades= $this->carregarAtividadesPortfolio($idPortfolio);
+              $arrayAtividades = $this->carregarAtividadesPortfolio($idPortfolio);
             }else{
               $dadosPortfolio = array(
                   'dsTitle' => null,
@@ -119,11 +119,15 @@ class PortfoliosController extends Controller {
             $this->formEditarAtividade = PortfoliosController::gerarFormularioAddAtividade("editarAtiv");
             $this->formEditarAtividade->handleRequest($request);
 
+            $this->formExcluirAtividade = PortfoliosController::gerarFormExcluir("excluir");
+            $this->formExcluirAtividade->handleRequest($request);
+
+            $deleteException = false;
+
             if ($request->request->has($this->formEditarPortfolio->getName())) {
                 if ($this->formEditarPortfolio->isSubmitted() && $this->formEditarPortfolio->isValid()) {
                     $dadosFormEditarPortfolio = $this->formEditarPortfolio->getData();
                     $this->editarPortfolio($dadosFormEditarPortfolio, $idPortfolio);
-                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
                     header("Refresh:0");
                 }
             }
@@ -131,7 +135,6 @@ class PortfoliosController extends Controller {
                 if ($this->formAdicionarAtividade->isSubmitted() && $this->formAdicionarAtividade->isValid()) {
                     $dadosFormAdicionarAtividade = $this->formAdicionarAtividade->getData();
                     $this->adicionarAtividade($dadosFormAdicionarAtividade, $idPortfolio);
-                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
                     header("Refresh:0");
                 }
             }
@@ -139,14 +142,60 @@ class PortfoliosController extends Controller {
                 if ($this->formEditarAtividade->isSubmitted() && $this->formEditarAtividade->isValid()) {
                     $dadosFormEditarAtividade = $this->formEditarAtividade->getData();
                     $this->editarAtividade($dadosFormEditarAtividade, $idPortfolio);
-                    // return $this->redirectToRoute('cadastroPortfolio/'+$idPortfolio);
                     header("Refresh:0");
                 }
             }
+            if ($request->request->has($this->formExcluirAtividade->getName())) {
+              if ($this->formExcluirAtividade->isSubmitted() && $this->formExcluirAtividade->isValid()) {
+                  $dadosFormExcluirAtividade = $this->formExcluirAtividade->getData();
+                  $deleteException = $this->excluirAtividade($dadosFormExcluirAtividade);
+                  $arrayAlunos = $this->carregarAtividadesPortfolio($idPortfolio);
+                  header("Refresh:0");
+              }
+            }
 
-            return $this->render('cadastroPortfolio.html.twig', array('atividades' => $arrayAtividades, 'portfolio' => $dadosPortfolio, 'formPort' => $this->formEditarPortfolio->createView(), 'formAtiv' => $this->formAdicionarAtividade->createView(), 'editAtiv' => $this->formEditarAtividade->createView()));
+            return $this->render('cadastroPortfolio.html.twig', array('atividades' => $arrayAtividades,
+                                                                      'portfolio' => $dadosPortfolio,
+                                                                      'formPort' => $this->formEditarPortfolio->createView(),
+                                                                      'formAtiv' => $this->formAdicionarAtividade->createView(),
+                                                                      'editAtiv' => $this->formEditarAtividade->createView(),
+                                                                      'formExcluirItem' => $this->formExcluirAtividade->createView(),
+                                                                      'deleteException' => $deleteException));
         }
     }
+
+    function gerarFormExcluir($nomeFormulario){
+      $formularioExcluirAtividade = $this->get('form.factory')
+              ->createNamedBuilder($nomeFormulario, FormType::class)
+              ->add('IdItem', HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formularioExcluirAtividade;
+    }
+
+    function excluirAtividade($dadosForm){
+      $this->em = $this->getDoctrine()->getManager();
+
+      $atividades = explode(";", $dadosForm['IdItem']);
+
+      for ($i = 0; $i < sizeof($atividades); $i++) {
+        try{
+          $atividade = $this->getDoctrine()
+                    ->getRepository('AppBundle:TbActivity')
+                    ->findOneBy(array('idActivity' => $atividades[$i]));
+
+          if ($atividade != null) {
+            $this->em->remove($atividade);
+            $this->em->flush();
+          }
+        } catch (\Exception $exception) {
+            $this->logControle->logAdmin("Exception  : " . print_r($exception->getMessage(), true));
+            $deleteException = true;
+            return $deleteException;
+        }
+      }
+      $this->em->flush();
+    }
+
 
     function carregarDadosPortfolio($idPortfolio) {
         $queryBuilder = $this->em->createQueryBuilder();

@@ -87,7 +87,7 @@
           {% for atividade in atividades %}
             {% if i is odd %}
               <div class="itemAtividadeA itemAtividade">
-                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem" onclick="addListaUser({{atividade.id}}); atualizaFormAtividade();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
@@ -97,7 +97,7 @@
               </div>
             {% else %}
               <div class="itemAtividadeB itemAtividade">
-                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                  <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem" onclick="addListaUser({{atividade.id}}); atualizaFormAtividade();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription}}</div>
@@ -112,10 +112,34 @@
           {% endfor %}
         </div>
 
+        <div id="excluirItem">
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Tem certeza que deseja excluir essa atividade?</div>
+            <div id="optionExcluir">
+              <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
+              {{ form_start(formExcluirItem) }}
+                  {{form_row(formExcluirItem.IdItem)}}
+                  <input type="submit" id="confirmarExcluir" value="SIM" >
+              {{ form_end(formExcluirItem) }}
+            </div>
+        </div>
+        {% if deleteException == false %}
+          <div id="alertExcluirItem">
+        {% else %}
+          <div id="alertExcluirItem" style="display: block;">
+        {% endif %}
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Um dos itens para deleção não pode ser excluído, pois está relacionado a outros registros.</div>
+            <div id="optionExcluir">
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">OK</div>
+            </div>
+        </div>
+
         <div id="delete">
               <div class="btNovaAtividade" onclick="novaAtividade();">NOVA ATIVIDADE</div>
-            <img src="{{web_dir}}../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirAtividade()">
+            <img src="{{web_dir}}../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirItem()">
         </div>
     </body>
 </html>
 <script src="{{web_dir}}../assets/js/cadastroPortfolio.js"></script>
+<script src="{{web_dir}}../assets/js/deletarRegistro.js"></script>

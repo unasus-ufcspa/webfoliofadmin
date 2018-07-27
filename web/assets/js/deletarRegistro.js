@@ -73,3 +73,19 @@ function atualizaFormTutor(){
     $("#excluir_IdUsers").val(novaString);
   }
 }
+
+function atualizaFormAtividade(){
+  if (listaUsers == null){
+    $("#excluir_IdItem").val("");
+  }else{
+    var novaString = "";
+    for(var i = 0; i < listaUsers.length; i++){
+      if(i == 0){
+        novaString = novaString + "" + listaUsers[i];
+      }else{
+        novaString = novaString + ";" + listaUsers[i];
+      }
+    }
+    $("#excluir_IdItem").val(novaString);
+  }
+}

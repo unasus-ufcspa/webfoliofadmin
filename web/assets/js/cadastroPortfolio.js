@@ -47,3 +47,16 @@ function closeEditar(id) {
 function novaAtividade(){
   $("#adicionarAtividade").toggle();
 }
+
+//EXCLUIR ATIVIDADE
+function excluirItem() {
+    $("#excluirItem").show();
+}
+
+function cancelarExcluir() {
+    $("#excluirItem").hide();
+}
+
+function cancelarAlertExcluir() {
+    $("#alertExcluirItem").hide();
+}
