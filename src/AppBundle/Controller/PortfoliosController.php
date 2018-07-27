@@ -47,6 +47,11 @@ class PortfoliosController extends Controller {
             $this->formAdicionarPortfolio = PortfoliosController::gerarFormularioPortfolio("adicionarPort");
             $this->formAdicionarPortfolio->handleRequest($request);
 
+            $this->formExcluirPortfolio = PortfoliosController::gerarFormExcluir("excluir");
+            $this->formExcluirPortfolio->handleRequest($request);
+
+            $deleteException = false;
+
             if ($request->request->has($this->formAdicionarPortfolio->getName())) {
                 if ($this->formAdicionarPortfolio->isSubmitted() && $this->formAdicionarPortfolio->isValid()) {
                     $dadosFormAdicionarPortfolio = $this->formAdicionarPortfolio->getData();
@@ -54,8 +59,19 @@ class PortfoliosController extends Controller {
                     header("Refresh:0");
                 }
             }
+            if ($request->request->has($this->formExcluirPortfolio->getName())) {
+                if ($this->formExcluirPortfolio->isSubmitted() && $this->formExcluirPortfolio->isValid()) {
+                    $dadosFormExcluirPortfolio = $this->formExcluirPortfolio->getData();
+                    $deleteException = $this->excluirPortfolio($dadosFormExcluirPortfolio);
+                    // header("Refresh:0");
+                    $arrayPortfolios = $this->gerarArrayPortfolios();
+                }
+            }
 
-            return $this->render('portfolios.html.twig', array('portfolios' => $arrayPortfolios,  'formPort' => $this->formAdicionarPortfolio->createView()));
+            return $this->render('portfolios.html.twig', array('portfolios' => $arrayPortfolios,
+                                                               'formPort' => $this->formAdicionarPortfolio->createView(),
+                                                               'formExcluirItem' => $this->formExcluirPortfolio->createView(),
+                                                               'deleteException' => $deleteException));
         }
     }
 
@@ -85,6 +101,30 @@ class PortfoliosController extends Controller {
             );
         }
         return $arrayPortfolios;
+    }
+
+    function excluirPortfolio($dadosForm){
+      $this->em = $this->getDoctrine()->getManager();
+
+      $portfolios = explode(";", $dadosForm['IdItem']);
+
+      for ($i = 0; $i < sizeof($portfolios); $i++) {
+        try{
+          $port = $this->getDoctrine()
+                    ->getRepository('AppBundle:TbPortfolio')
+                    ->findOneBy(array('idPortfolio' => $portfolios[$i]));
+
+          if ($port != null) {
+            $this->em->remove($port);
+            $this->em->flush();
+          }
+        } catch (\Exception $exception) {
+            $this->logControle->logAdmin("Exception  : " . print_r($exception->getMessage(), true));
+            $deleteException = true;
+            return $deleteException;
+        }
+      }
+      $this->em->flush();
     }
 
     /**

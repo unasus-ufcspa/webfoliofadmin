@@ -55,7 +55,7 @@
             {% for portfolio in portfolios %}
                 {% if i is even %}
                     <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                        <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{portfolio.idPortfolio}}); atualizaFormPortfolio();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
                         <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
@@ -63,7 +63,7 @@
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser">
+                        <input type="checkbox" name="Portfolio[]" value="{{portfolio.idPortfolio}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{portfolio.idPortfolio}}); atualizaFormPortfolio();">
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{portfolio.dsTitle}}</div>
                         <div class="emailUser">{{portfolio.nmAtividades}} atividades</div>
@@ -77,19 +77,34 @@
                 <h2 id="userEmpty">Não há portfólios cadastrados</h2>
             {%endif%}
         </div>
-        <div id="excluirUsuario">
+        <div id="excluirItem">
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse portfólio?</div>
             <div id="optionExcluir">
               <div id="cancelarExcluir" onclick="cancelarExcluir();">CANCELAR</div>
-              <div id="confirmarExcluir" onclick='confirmarExcluirPortfolio("{{web_dir}}");'>SIM</div>
+              {{ form_start(formExcluirItem) }}
+                  {{form_row(formExcluirItem.IdItem)}}
+                  <input type="submit" id="confirmarExcluir" value="SIM" >
+              {{ form_end(formExcluirItem) }}
+            </div>
+        </div>
+        {% if deleteException == false %}
+          <div id="alertExcluirItem">
+        {% else %}
+          <div id="alertExcluirItem" style="display: block;">
+        {% endif %}
+            <div id="titleExcluir">Excluir</div>
+            <div id="mensagemExcluir">Um dos itens para deleção não pode ser excluído, pois está relacionado a outros registros.</div>
+            <div id="optionExcluir">
+              <div id="alertCancelarExcluir" onclick="cancelarAlertExcluir();">OK</div>
             </div>
         </div>
 
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
+            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirItem()">
         </div>
     </body>
 </html>
-
 <script src="../assets/js/registroUsuarios.js"></script>
+<script src="../assets/js/cadastroPortfolio.js"></script>
+<script src="../assets/js/deletarRegistro.js"></script>
