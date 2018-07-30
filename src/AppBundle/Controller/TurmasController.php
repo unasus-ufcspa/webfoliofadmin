@@ -54,7 +54,21 @@ class TurmasController extends Controller {
             $this->em = $this->getDoctrine()->getManager();
             $arrayTurmas = $this->gerarArrayTurmas();
 
-            return $this->render('turmas.html.twig', array('turmas' => $arrayTurmas));
+            $this->formExcluirTurma = TurmasController::gerarFormExcluir("excluir");
+            $this->formExcluirTurma->handleRequest($request);
+            $deleteException = false;
+
+            if ($request->request->has($this->formExcluirTurma->getName())) {
+              if ($this->formExcluirTurma->isSubmitted() && $this->formExcluirTurma->isValid()) {
+                  $dadosFormExcluirTurma = $this->formExcluirTurma->getData();
+                  $deleteException = $this->excluirTurma($dadosFormExcluirTurma);
+                  $arrayTurmas = $this->gerarArrayTurmas();
+              }
+            }
+
+            return $this->render('turmas.html.twig', array('turmas' => $arrayTurmas,
+                                                          'formExcluirItem' => $this->formExcluirTurma->createView(),
+                                                          'deleteException' => $deleteException));
         }
     }
 
@@ -106,6 +120,38 @@ class TurmasController extends Controller {
         }
         $this->logControle->logAdmin(print_r($arrayTurmas, true));
         return $arrayTurmas;
+    }
+
+    function gerarFormExcluir($nomeFormulario){
+      $formularioExcluirTurma = $this->get('form.factory')
+              ->createNamedBuilder($nomeFormulario, FormType::class)
+              ->add('IdItem', HiddenType::class, array('label' => false))
+              ->getForm();
+      return $formularioExcluirTurma;
+    }
+
+    function excluirTurma($dadosForm){
+      $this->em = $this->getDoctrine()->getManager();
+
+      $turmas = explode(";", $dadosForm['IdItem']);
+
+      for ($i = 0; $i < sizeof($turmas); $i++) {
+        try{
+          $turma = $this->getDoctrine()
+                    ->getRepository('AppBundle:TbClass')
+                    ->findOneBy(array('idClass' => $turmas[$i]));
+
+          if ($turma != null) {
+            $this->em->remove($turma);
+            $this->em->flush();
+          }
+        } catch (\Exception $exception) {
+            $this->logControle->logAdmin("Exception  : " . print_r($exception->getMessage(), true));
+            $deleteException = true;
+            return $deleteException;
+        }
+      }
+      $this->em->flush();
     }
 
      /**
