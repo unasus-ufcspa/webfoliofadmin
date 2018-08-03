@@ -32,7 +32,7 @@
                         <div class="rowEditar">
                             {{form_row(formPort.DsDescription, { 'attr' : { 'placeholder' : 'Descrição' , 'class': 'formEditar textAreaDescricao' }})}}
                             <script>
-                              var description = "{{ portfolio.dsDescription }}";
+                              var description = "{{ portfolio.dsDescription | escape('js') }}";
                               $(".formEditar.textAreaDescricao").html(description);
                             </script>
                         </div>
@@ -90,7 +90,7 @@
                   <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem" onclick="addListaUser({{atividade.id}}); atualizaFormAtividade();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
-                  <div class="dsAtividade">{{atividade.dsDescription}}</div>
+                  <div class="dsAtividade">{{atividade.dsDescription | raw }}</div>
                   <div class="divEditarAtividade">
                     <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>
@@ -100,7 +100,7 @@
                   <input type="checkbox" name="Atividade[]" value="{{atividade.id}}" id="{{i}}" class="checkboxItem" onclick="addListaUser({{atividade.id}}); atualizaFormAtividade();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
                   <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
-                  <div class="dsAtividade">{{atividade.dsDescription}}</div>
+                  <div class="dsAtividade">{{atividade.dsDescription | raw }}</div>
                   <div class="divEditarAtividade">
                     <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>

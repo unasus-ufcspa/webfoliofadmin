@@ -236,7 +236,6 @@ class PortfoliosController extends Controller {
       $this->em->flush();
     }
 
-
     function carregarDadosPortfolio($idPortfolio) {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
@@ -263,6 +262,7 @@ class PortfoliosController extends Controller {
                 ->select('a')
                 ->from('AppBundle:TbActivity', 'a')
                 ->where($queryBuilderPort->expr()->eq('a.idPortfolio', $idPortfolio))
+                ->orderBy('a.nuOrder', 'ASC')
                 ->getQuery()
                 ->execute();
         $atividades = $queryBuilderPort->getQuery()->getArrayResult();
@@ -345,6 +345,10 @@ class PortfoliosController extends Controller {
         $objetoAtividade->setIdPortfolio($objetoPort);
         $objetoAtividade->setDsTitle($dadosAtividade['DsTitle']);
         $objetoAtividade->setDsDescription($dadosAtividade['DsDescription']);
+
+        $atividades = PortfoliosController::carregarAtividadesPortfolio($idPortfolio);
+        $nuOrder = sizeof($atividades) + 1;
+        $objetoAtividade->setNuOrder($nuOrder);
 
         $this->em->persist($objetoAtividade);
 

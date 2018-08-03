@@ -53,7 +53,7 @@ class TbActivity
     public function setNuOrder($nuOrder)
     {
         $this->nuOrder = $nuOrder;
-    
+
         return $this;
     }
 
@@ -77,7 +77,7 @@ class TbActivity
     public function setDsTitle($dsTitle)
     {
         $this->dsTitle = $dsTitle;
-    
+
         return $this;
     }
 
@@ -101,7 +101,7 @@ class TbActivity
     public function setDsDescription($dsDescription)
     {
         $this->dsDescription = $dsDescription;
-    
+
         return $this;
     }
 
@@ -125,7 +125,7 @@ class TbActivity
     public function setIdPortfolio(\AppBundle\Entity\TbPortfolio $idPortfolio = null)
     {
         $this->idPortfolio = $idPortfolio;
-    
+
         return $this;
     }
 

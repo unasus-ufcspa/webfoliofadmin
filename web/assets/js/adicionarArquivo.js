@@ -21,25 +21,58 @@ Array.prototype.forEach.call( inputs, function( input )
 	});
 });
 
-  function handleFileSelect(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
+  // function handleFileSelect(evt) {
+  //   evt.stopPropagation();
+  //   evt.preventDefault();
+	//
+  //   var dt = evt.dataTransfer; // FileList object.
+	// 	var files = dt.files;
+	// 	console.log(files);
+	// 	console.log(files[0]);
+  //   // files is a FileList of File objects. List some properties.
+  //   var output = [];
+  //   if(files.length>1){
+  //     output.push(files.length+" arquivos selecionados");
+  //   }else{
+  //      output.push(escape(files[0].name));
+  //   }
+  //   document.getElementsByClassName('nomeArquivo')[0].innerHTML = output.join('');
+	//
+	// 	// e.preventDefault();
+	//
+	// 	  // var ajaxData = new FormData($form.get(0));
+	// 		//
+	// 	  // if (droppedFiles) {
+	// 	  //   $.each( droppedFiles, function(i, file) {
+	// 	  //     ajaxData.append( $input.attr('name'), file );
+	// 	  //   });
+	// 	  // }
+	//
+	// 	  $.ajax({
+	// 	    url: '{{web_dir}}carregarTutoresArquivo',
+	// 	    type: 'post',
+	// 	    data: files,
+	// 	    dataType: 'json',
+	// 	    cache: false,
+	// 	    contentType: false,
+	// 	    processData: false,
+	// 	    complete: function() {
+	// 	      // $form.removeClass('is-uploading');
+	// 	    },
+	// 	    success: function(data) {
+	// 	      // $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+	// 	      // if (!data.success) $errorMsg.text(data.error);
+	// 	    },
+	// 	    error: function() {
+	// 	      // Log the error, show an alert, whatever works for you
+	// 	    }
+	// 	  });
+	//
+  //   $('.buttonCarregar').prop('disabled', false);
+  //   $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
+  //   $('.box').css( "border", "dashed 3px rgba(255, 255, 255, 0.6)");
+  // }
 
-    var files = evt.dataTransfer.files; // FileList object.
-		files = evt.dataTransfer.files;
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    if(files.length>1){
-      output.push(files.length+" arquivos selecionados");
-    }else{
-       output.push(escape(files[0].name));
-    }
-    document.getElementsByClassName('nomeArquivo')[0].innerHTML = output.join('');
-    $('.buttonCarregar').prop('disabled', false);
-
-    $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
-    $('.box').css( "border", "dashed 3px rgba(255, 255, 255, 0.6)");
-  }
 
   function handleDragOver(evt) {
     $('.box').css( "background-color", "#9187c7");

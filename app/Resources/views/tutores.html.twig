@@ -49,7 +49,7 @@
             <form class="box" method="post" action="{{web_dir}}carregarTutoresArquivo" enctype="multipart/form-data">
               <div class="boxInput">
                 <label for="file" class="labelArquivos"><div id="divLabelArquivos">selecione</strong><span class="dragndropSpan"> ou arraste</span> um arquivo</div><img id="iconArrastar"src="../assets/img/arraste.png"/></label>
-                <input class="selectArquivos" type="file" name="tutores" id="file"  accept=".csv"/>
+                <input class="selectArquivos" type="file" name="tutores" id="file"  accept=".csv" onchange="handleFileSelect(this.files)"/>
                 <div class="nomeArquivo"></div>
                 <div id="divButtonArquivos"><button class="buttonCarregar" type="submit" disabled >CARREGAR</button></div>
               </div>
@@ -59,7 +59,7 @@
             </form>
           </div>
 
-         <div id="formEditUser" style="display:none;">
+        <div id="formEditUser" style="display:none;">
             {{ form_start(formTutor) }}
                 <div class="ui grid" >
                     <div class="ten wide column grid">
@@ -98,8 +98,8 @@
                       <div id="closeEditar">+</div>
                   </div>
               </div>
-              {{ form_end(formTutor) }}
-          </div>
+            {{ form_end(formTutor) }}
+        </div>
 
           <div class="divAddUser">
               {{ form_start(formAddTutor) }}
@@ -217,6 +217,37 @@
         </div>
     </body>
 </html>
+<script>
+function handleFileSelect(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+
+  var dt = evt.dataTransfer; // FileList object.
+  var files = dt.files;
+  console.log(files);
+  console.log(files[0]);
+  // files is a FileList of File objects. List some properties.
+  uploadFile(files[0]);
+
+  $('.buttonCarregar').prop('disabled', false);
+  $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
+  $('.box').css( "border", "dashed 3px rgba(255, 255, 255, 0.6)");
+}
+
+function uploadFile(file) {
+    var url = '{{web_dir}}carregarTutoresArquivo';
+    var formData = new FormData();
+
+    formData.append('file', file);
+
+    fetch(url, {
+      method: 'POST',
+      body: formData
+    })
+    .then(() => { /* Done. Inform the user */ })
+    .catch(() => { /* Error. Inform the user */ })
+}
+</script>
 <script src="../assets/js/registroUsuarios.js"></script>
 <script src="../assets/js/adicionarArquivo.js"></script>
 <script src="../assets/js/deletarRegistro.js"></script>
