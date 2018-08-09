@@ -5,6 +5,7 @@ var idTutores = document.getElementsByClassName("nomeTutor");
 for(var i=0; i<idTutores.length; i++){
   arrayIdTutorAluno.push([idTutores[i].id, ]);
 }
+// console.log(arrayIdTutorAluno);
 
 function handleDragEnter(e) {
   this.classList.add('over');
@@ -41,7 +42,7 @@ function dropAluno(ev) {
     var idBoxTutor = $(event.target).attr('id');
 
     for(var j = 0; j<arrayIdTutorAluno.length; j++){
-      if(arrayIdTutorAluno[j][0]==idBoxTutor){
+      if(arrayIdTutorAluno[j][0] == idBoxTutor){
         var posicaoArrayTutor = j;
       }
     }
@@ -53,11 +54,12 @@ function dropAluno(ev) {
     }
 
     if(flagItemPresente!=true){
-
       var nodeItem = document.createElement('div');
       nodeItem.className += "itemAlunoTutor";
       nodeItem.id = node.childNodes[0].id;
-      arrayIdTutorAluno[posicaoArrayTutor].push(node.childNodes[0].id);
+      // console.log("Child Node "+  node.childNodes[0].id);
+      // console.log("Pos Array  "+  posicaoArrayTutor);
+      arrayIdTutorAluno[posicaoArrayTutor].push(nodeItem.id);
 
       var nodeItemInfo = document.createElement('div');
       nodeItemInfo.className += "infoAluno";
@@ -77,6 +79,17 @@ function dropAluno(ev) {
         if(arrayIdTutorAluno[posicaoArrayTutor].length==1){
           $( ".textArrastarAluno:eq("+posicaoArrayTutor+")" ).show();
           $( ".logoArrastar:eq("+posicaoArrayTutor+")" ).show();
+
+          var clone = arrayIdTutorAluno.slice(0);
+          for(x in clone) {
+              if(clone[x] instanceof Array) {
+                  clone[x] = clone[x].join(".");
+              }
+          }
+          var novaString = clone.join(";");
+          // console.log(novaString);
+          $("#alunoTutor_IdAlunosTutores").val(novaString);
+
         }
       };
 
@@ -87,8 +100,19 @@ function dropAluno(ev) {
 
     $( ".textArrastarAluno:eq("+posicaoArrayTutor+")" ).hide();
     $( ".logoArrastar:eq("+posicaoArrayTutor+")" ).hide();
-  }
 
+    var clone = arrayIdTutorAluno.slice(0);
+    for(x in clone) {
+        if(clone[x] instanceof Array) {
+            clone[x] = clone[x].join(".");
+        }
+    }
+    var novaString = clone.join(";");
+    // console.log(novaString);
+    $("#alunoTutor_IdAlunosTutores").val(novaString);
+  }
+  // console.log("Log 3");
+  // console.log(arrayIdTutorAluno);
   return false;
 }
 

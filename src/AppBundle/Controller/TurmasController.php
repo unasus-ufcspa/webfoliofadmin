@@ -178,6 +178,7 @@ class TurmasController extends Controller {
                     $idClass = TurmasController::addClass($dadosForm);
                     // header("Refresh:0");
                     // return $this->redirectToRoute('/turmas');
+                    $this->get('session')->set('idTurmaEdicao', $idClass);
                     $dadosTurma = $this->carregarDadosTurma($idClass);
                 }
             }

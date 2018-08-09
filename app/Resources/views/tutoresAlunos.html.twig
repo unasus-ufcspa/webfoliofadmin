@@ -52,7 +52,13 @@
               </div>
             </div>
           {% endfor %}
-          <input type="submit" class="salvarTutoresAlunos" value="SALVAR" onclick="salvarTutoresAlunos();">
+
+          {{ form_start(formAlunoTutor) }}
+
+              {{form_row(formAlunoTutor.IdAlunosTutores)}}
+
+                <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
+          {{ form_end(formAlunoTutor) }}
         {% endif %}
       </div>
     </body>

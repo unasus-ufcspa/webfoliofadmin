@@ -156,9 +156,9 @@ function dropProp(ev) {
     $( ".logoArrastar:eq(1)" ).hide();
 
     $("#salvarPortfolioPropositor_IdProposer").val(arrayIdPropositor[0]);
+    }
   }
-}
-  return false;
+    return false;
 }
 
   var area = document.getElementById("boxArrastar");

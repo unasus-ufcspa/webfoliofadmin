@@ -219,15 +219,18 @@
 </html>
 <script>
 function handleFileSelect(evt) {
+  // console.log($('.selectArquivos').files[0]);
+  var f = document.getElementsByClassName('selectArquivos')[0].files;
+  console.log(f);
   evt.stopPropagation();
   evt.preventDefault();
 
   var dt = evt.dataTransfer; // FileList object.
   var files = dt.files;
-  console.log(files);
-  console.log(files[0]);
+  // console.log(files);
+  // console.log(files[0]);
   // files is a FileList of File objects. List some properties.
-  uploadFile(files[0]);
+  // uploadFile(files[0]);
 
   $('.buttonCarregar').prop('disabled', false);
   $('.box').css( "background-color", "rgba(255, 255, 255, 0.0)");
@@ -235,17 +238,37 @@ function handleFileSelect(evt) {
 }
 
 function uploadFile(file) {
+    // var url = '{#web_dir#}carregarTutoresArquivo';
+    // var formData = new FormData();
+    //
+    // formData.append('file', file);
+    //
+    // fetch(url, {
+    //   method: 'POST',
+    //   body: formData
+    // })
+    // .then(() => { /* Done. Inform the user */ })
+    // .catch(() => { /* Error. Inform the user */ });
+
     var url = '{{web_dir}}carregarTutoresArquivo';
+    var xhr = new XMLHttpRequest();
     var formData = new FormData();
+    xhr.open('POST', url, true);
 
     formData.append('file', file);
+    xhr.send(formData);
 
-    fetch(url, {
-      method: 'POST',
-      body: formData
-    })
-    .then(() => { /* Done. Inform the user */ })
-    .catch(() => { /* Error. Inform the user */ })
+    xhr.addEventListener('readystatechange', function(e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // Done. Inform the user
+        console.log("Congrats");
+      }
+      else if (xhr.readyState == 4 && xhr.status != 200) {
+        // Error. Inform the user
+        console.log("Oh No!");
+      }
+    });
+
 }
 </script>
 <script src="../assets/js/registroUsuarios.js"></script>
