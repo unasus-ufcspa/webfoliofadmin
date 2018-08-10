@@ -16,6 +16,7 @@ use AppBundle\Controller\UsuarioController;
 use AppBundle\Controller\ManipularArquivoController;
 use AppBundle\Entity\TbUser;
 use AppBundle\Entity\TbClassStudent;
+use AppBundle\Entity\TbPortfolioStudent;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -89,8 +90,8 @@ class AlunosController extends Controller {
         if ($dadosFormAdicionarAluno['DsPassword'] == $dadosFormAdicionarAluno['DsPasswordConfirm']) {
 
             UsuarioController::persistirObjetoUsuario($novoAluno, $dadosFormAdicionarAluno, null, null);
-            $validaTutorTurmaExistente = ManipularArquivoController::verificarTutorTurmaExistente($novoAluno->getIdUser(), $idClass);
-            if (!$validaTutorTurmaExistente) {
+            $validaAlunoTurmaExistente = ManipularArquivoController::verificarAlunoTurmaExistente($novoAluno->getIdUser(), $idClass);
+            if (!$validaAlunoTurmaExistente) {
                 $classAluno = new TbClassStudent();
                 $objetoClass = $this->em->getRepository('AppBundle:TbClass')
                         ->findOneBy(array('idClass' => $idClass));
@@ -98,6 +99,28 @@ class AlunosController extends Controller {
                 $classAluno->setIdStudent($novoAluno);
                 $this->em->persist($classAluno);
                 $this->em->flush();
+            }
+
+            $queryBuilderPortStudent = $this->em->createQueryBuilder();
+            $queryBuilderPortStudent
+                    ->select('pc')
+                    ->from('AppBundle:TbPortfolioClass', "pc")
+                    ->where($queryBuilderPortStudent->expr()->eq('pc.idClass', $idClass))
+                    ->getQuery()
+                    ->execute();
+            $portfolioClass = $queryBuilderPortStudent->getQuery()->getResult();
+
+            foreach ($portfolioClass as $pc) {
+              $portStudent = new TbPortfolioStudent();
+
+              $objetoClass = $this->em->getRepository('AppBundle:TbClass')
+                      ->findOneBy(array('idClass' => $idClass));
+
+              $portStudent->setIdPortfolioClass($pc);
+              $portStudent->setIdStudent($novoAluno);
+
+              $this->em->persist($portStudent);
+              $this->em->flush();
             }
         }
     }
@@ -246,43 +269,7 @@ class AlunosController extends Controller {
         return $this->redirectToRoute('alunos');
     }
 
-    /**
-     * @Route("/removerAlunoTurma")
-     */
-    // function removerAlunoTurma(Request $request) {
-    //     $this->em = $this->getDoctrine()->getEntityManager();
-    //     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-    //         $data = json_decode($request->getContent(), true);
-    //         $request->request->replace(is_array($data) ? $data : array());
-    //         $this->logControle->logAdmin("Excluir alunos turma : " . print_r($data, true));
-    //         $idClass =  $this->get('session')->get('idTurmaEdicao');
-    //
-    //         foreach ($data['arrayAlunos'] as $idTutorRemover) {
-    //             $this->em = $this->getDoctrine()->resetManager();
-    //             $this->logControle->logAdmin("Remover  : " . print_r($idTutorRemover, true));
-    //
-    //             try {
-    //                 $entity = $this->em->getRepository('AppBundle:TbClassStudent')
-    //                         ->findOneBy(array('idStudent' => $idTutorRemover));
-    //                 if ($entity != null) {
-    //                     $this->em->remove($entity);
-    //                     $this->em->flush();
-    //                 }
-    //             } catch (\Exception $excpetion) {
-    //                 $this->logControle->logAdmin("exception  : " . print_r($excpetion->getMessage(), true));
-    //             }
-    //         }
-    //
-    //         $retornoRequest = array(
-    //             "sucesso" => true,
-    //         );
-    //     } else {
-    //         $retornoRequest = array(
-    //             "sucesso" => false,
-    //         );
-    //     }
-    //     return new JsonResponse($retornoRequest);
-    // }
+
 
     /**
      * @Route("/desativarAdministradorExcecao")
