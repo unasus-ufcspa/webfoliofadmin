@@ -45,6 +45,7 @@ class TutoresAlunosController extends Controller {
 
             $arrayTutores = TutorController::gerarArrayTutores();
             $dadosMenuLateralCadastro = MenuLateralCadastroController::carregarDadosMenuLateralCadastro();
+            $alunosTutores = $this->selecionarAlunosTutores($arrayTutores);
 
             $this->formAlunoTutor = TutoresAlunosController::gerarFormAlunoTutor("alunoTutor");
             $this->formAlunoTutor->handleRequest($request);
@@ -97,7 +98,6 @@ class TutoresAlunosController extends Controller {
           $portfolioStudent = $queryBuilderPortStudent->getQuery()->getArrayResult();
 
           if ($portfolioStudent != null) {
-            $this->logControle->logAdmin("Point 2");
             $queryBuilderTutorPort = $this->em->createQueryBuilder();
             $queryBuilderTutorPort
                     ->select('tp')
@@ -110,7 +110,7 @@ class TutoresAlunosController extends Controller {
             if($tutorPort == null){
               $ps = $this->getDoctrine()
                       ->getRepository('AppBundle:TbPortfolioStudent')
-                      ->findOneBy(array('idPortfolioStudent' => $portfolioStudent[$i]));
+                      ->findOneBy(array('idPortfolioStudent' => $portfolioStudent[0]));
 
               $novoTutorPort = new TbTutorPortfolio();
               $novoTutorPort->setIdTutor($tutor);
@@ -123,4 +123,44 @@ class TutoresAlunosController extends Controller {
       }
       $this->em->flush();
     }
+
+    function selecionarAlunosTutores($tutores){
+      $idClass = $this->get('session')->get('idTurmaEdicao');
+      $stringAlunosTutores = "";
+
+      foreach ($tutores as $tutor) {
+        $stringAlunosTutores = $stringAlunosTutores . $tutor['idUser'];
+
+        $queryBuilderTutorPort = $this->em->createQueryBuilder();
+        $queryBuilderTutorPort
+            ->select('tp,ps,pc')
+            ->from('AppBundle:TbTutorPortfolio', "tp")
+            ->innerJoin('tp.idPortfolioStudent', 'ps', 'WITH', 'ps.idPortfolioStudent = tp.idPortfolioStudent')
+            ->innerJoin('ps.idPortfolioClass', 'pc', 'WITH', 'ps.idPortfolioClass = pc.idPortfolioClass')
+            ->where($queryBuilderTutorPort->expr()->eq('tp.idTutor', $tutor['idUser']))
+            ->andWhere($queryBuilderTutorPort->expr()->eq('pc.idClass', $idClass))
+            ->getQuery()
+            ->execute();
+        $tutorPort = $queryBuilderTutorPort->getQuery()->getArrayResult();
+$this->logControle->logAdmin("Tutor Port: " . print_r($tutorPort, true));
+        for ($i=0; $i < sizeof($tutorPort); $i++) {
+          foreach ($tutorPort[$i] as $tp) {
+            $aluno = $this->getDoctrine()
+                    ->getRepository('AppBundle:TbPortfolioStudent')
+                    ->findOneBy(array('idPortfolioStudent' => $tp['idPortfolioStudent']));
+
+            if($aluno != null){
+              $stringAlunosTutores = $stringAlunosTutores . ".";
+              $stringAlunosTutores = $stringAlunosTutores . print_r($aluno->getIdStudent()->getIdUser(),true);
+            }
+          }
+        }
+
+        $stringAlunosTutores = $stringAlunosTutores .";";
+        // $this->logControle->logAdmin("String 1: " . print_r($stringAlunosTutores, true));
+      }
+      $this->logControle->logAdmin("String 2: " . print_r($stringAlunosTutores, true));
+      return $stringAlunosTutores;
+    }
+
 }
