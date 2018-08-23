@@ -8,14 +8,14 @@
 
         <title>Fólio Administrador</title>
 
-        <script src="node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-        <script src="semantic/dist/components/form.js"></script>
-        <script src="semantic/dist/components/popup.js"></script>
+        <script src="{{web_dir}}node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}semantic/dist/components/form.js"></script>
+        <script src="{{web_dir}}semantic/dist/components/popup.js"></script>
 
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/login.css">
     </head>
     <body>
         <div class="ui middle aligned center aligned grid">
@@ -28,7 +28,7 @@
               <div class="row">
                 <form class="ui form" {{ form_start(form) }}
                   <div class="row">
-                    <img src="../assets/img/person-roxo.png" class="Person-Roxo">
+                    <img src="{{web_dir}}assets/img/person-roxo.png" class="Person-Roxo">
                       <div class="ui input">
                        {{form_row(form.DsEmail, { 'attr' : { 'placeholder' : 'usuário'   }})}}
                       </div>
