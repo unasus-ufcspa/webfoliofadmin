@@ -8,23 +8,23 @@
 
         <title>Turmas</title>
 
-        <script src="../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../assets/css/registroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/registroUsuarios.css">
     </head>
 
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
-            <img src="../assets/img/person-branco.png" id="iconPessoa">
+            <img src="{{web_dir}}assets/img/person-branco.png" id="iconPessoa">
             <span id="titulo">TURMAS</span>
         </div>
         <div id="pesquisa">
-            <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+            <img src="{{web_dir}}assets/img/lupa.png" id="iconLupa" title="Pesquisar">
             <input type="text" placeholder="Procurar Turma" id="inputPesquisa">
-            <div class="ui medium button" id="addUser" onclick="window.location = '{{web_dir}}cadastroTurma/-1';">NOVA TURMA</div>
+            <div class="ui medium button" id="addUser" onclick="window.location = '{{rota_dir}}cadastroTurma/-1';">NOVA TURMA</div>
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
@@ -37,7 +37,7 @@
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser"> {%if turma.idPortfolio >-1 %} {{turma. dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';">
+                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
                     </div>
                 {% else %}
                     <div class="itemUserB itemUsuario">
@@ -45,7 +45,7 @@
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
                         <div class="emailUser">{%if turma.idPortfolio >-1 %} {{turma.dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{web_dir}}cadastroTurma/{{turma.idClass}}';">
+                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
                     </div>
                 {% endif %}
                 <div class="editarUser" id="{{i}}">
@@ -80,9 +80,9 @@
             </div>
         </div>
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
+            <img src="{{web_dir}}assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
         </div>
     </body>
 </html>
-<script src="../assets/js/registroUsuarios.js"></script>
-<script src="../assets/js/deletarRegistro.js"></script>
+<script src="{{web_dir}}assets/js/registroUsuarios.js"></script>
+<script src="{{web_dir}}assets/js/deletarRegistro.js"></script>

@@ -8,11 +8,11 @@
 
         <title>Fólio Administrador</title>
 
-        <script src="node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="assets/css/home.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/home.css">
 
     </head>
     <body>
@@ -20,17 +20,17 @@
 
         <div class="ui middle aligned center aligned grid">
             <div class="three wide column grid center aligned">
-              <div class="row icone" onclick="window.location='{{web_dir}}turmas'">
-                <img src="../assets/img/turma.svg">
+              <div class="row icone" onclick="window.location='{{rota_dir}}turmas'">
+                <img src="{{web_dir}}assets/img/turma.svg">
               </div>
               <div class="row">
-                <span class="label" onclick="window.location='{{web_dir}}turmas'">TURMAS</span>
+                <span class="label" onclick="window.location='{{rota_dir}}turmas'">TURMAS</span>
               </div>
             </div>
 
             <div class="three wide column grid center aligned" >
               <div class="row icone" onclick="submenuUsuario();">
-                <img src="../assets/img/user.svg">
+                <img src="{{web_dir}}assets/img/user.svg">
               </div>
               <div class="row">
                 <span class="label">USUÁRIOS</span>
@@ -42,10 +42,10 @@
               <div class="row" >
                 <div id="divSubmenuUsuarios">
                   <div id="seta"></div>
-                  <a href="{{web_dir}}administradores" >
+                  <a href="{{rota_dir}}administradores" >
                     <div class="ui medium button" id="botaoSubmenu">ADMIN</div>
                   </a>
-                  <a href="{{web_dir}}propositores">
+                  <a href="{{rota_dir}}propositores">
                     <div class="ui medium button" id="botaoSubmenu">PROPOSITOR</div>
                   </a>
                 </div>
@@ -54,10 +54,10 @@
 
             <div class="three wide column grid center aligned">
               <div class="row icone">
-                <img src="../assets/img/portfolio.svg" onclick="window.location='{{web_dir}}portfolios'">
+                <img src="{{web_dir}}assets/img/portfolio.svg" onclick="window.location='{{rota_dir}}portfolios'">
               </div>
               <div class="row">
-                <span class="label" onclick="window.location='{{web_dir}}portfolios'">PORTFÓLIOS</span>
+                <span class="label" onclick="window.location='{{rota_dir}}portfolios'">PORTFÓLIOS</span>
               </div>
             </div>
         </div>

@@ -8,21 +8,21 @@
 
         <title>Propositores</title>
 
-        <script src="../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../assets/css/registroUsuarios.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/registroUsuarios.css">
     </head>
 
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
-            <img src="../assets/img/person-branco.png" id="iconPessoa">
+            <img src="{{web_dir}}assets/img/person-branco.png" id="iconPessoa">
             <span id="titulo">PROPOSITORES</span>
         </div>
         <div id="pesquisa">
-          <img src="../assets/img/lupa.png" id="iconLupa" title="Pesquisar">
+          <img src="{{web_dir}}assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Propositor" id="inputPesquisa">
           <div class="ui medium button" id="addUser" onclick="addUser();" style="font-size: 14px;">NOVO PROPOSITOR</div>
         </div>
@@ -32,33 +32,33 @@
               <div class="ui grid">
                   <div class="twelve wide column grid">
                     <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/person-branco.png" class="iconesFormEditar">
                         {{form_row(formPropositor.NmUser, { 'attr' : { 'placeholder' : 'Nome' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/arroba.png" class="iconesFormEditar">
                         {{form_row(formPropositor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}{#TO-DO: precisa de ajustes para o formulario do controller#}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/lock.png" class="iconesFormEditar">
                         {{form_row(formPropositor.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/lock.png" class="iconesFormEditar">
                         {{form_row(formPropositor.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar',  'oninput' : 'validateFunctionEdit();'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                        <img src="{{web_dir}}assets/img/phone.png" class="iconesFormEditarRight">
                         {{form_row(formPropositor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                        <img src="{{web_dir}}assets/img/rg.png" class="iconesFormEditarRight">
                         {{form_row(formPropositor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     {{form_row(formPropositor.IdUser, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
@@ -75,33 +75,33 @@
             <div class="ui grid">
                 <div class="twelve wide column grid">
                     <div class="rowEditar">
-                        <img src="../assets/img/person-branco.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/person-branco.png" class="iconesFormEditar">
                         {{form_row(formAddPropositor.NmUser, { 'attr' : { 'placeholder' : 'Nome', 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/arroba.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/arroba.png" class="iconesFormEditar">
                         {{form_row(formAddPropositor.DsEmail, { 'attr' : { 'placeholder' : 'E-mail' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/lock.png" class="iconesFormEditar">
                         {{form_row(formAddPropositor.DsPassword, { 'attr' : { 'placeholder' : 'Senha' , 'class': 'formEditar'  }})}}
                     </div>
 
                     <div class="rowEditar">
-                        <img src="../assets/img/lock.png" class="iconesFormEditar">
+                        <img src="{{web_dir}}assets/img/lock.png" class="iconesFormEditar">
                         {{form_row(formAddPropositor.DsPasswordConfirm, { 'attr' : { 'placeholder' : 'Confirmar Senha' , 'class': 'formEditar', 'oninput' : 'validateFunctionAdd();'  }})}}
                     </div>
                 </div>
 
                 <div class="four wide column grid"  id="colunaDireita">
                     <div class="rowEditar">
-                        <img src="../assets/img/phone.png" class="iconesFormEditarRight">
+                        <img src="{{web_dir}}assets/img/phone.png" class="iconesFormEditarRight">
                         {{form_row(formAddPropositor.NuCellphone, { 'attr' : { 'placeholder' : 'Celular' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <div class="rowEditar">
-                        <img src="../assets/img/rg.png" class="iconesFormEditarRight">
+                        <img src="{{web_dir}}assets/img/rg.png" class="iconesFormEditarRight">
                         {{form_row(formAddPropositor.NuIdentification, { 'attr' : { 'placeholder' : 'RG' , 'class': 'formEditarRight'  }})}}
                     </div>
                     <input type="submit" id="salvarAdd" value="SALVAR" >
@@ -122,7 +122,7 @@
                         <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
+                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
                               onclick='editarUser("{{i}}", "{{propositor.nmUser}}", "{{propositor.dsEmail}}",
                                          "{{propositor.nuIdentification  is empty ? '' :  propositor.nuIdentification}}",
                                          "{{propositor.nuCellphone is empty ? '' :  propositor.nuCellphone}}",
@@ -134,7 +134,7 @@
                         <label for="{{i}}"></label>
                         <div class="nomeUser">{{propositor.nmUser}}</div>
                         <div class="emailUser">{{propositor.dsEmail}}</div>
-                        <img src="../assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
+                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar propositor"
                              onclick='editarUser("{{i}}", "{{propositor.nmUser}}", "{{propositor.dsEmail}}",
                                          "{{propositor.nuIdentification  is empty ? '' :  propositor.nuIdentification}}",
                                          "{{propositor.nuCellphone is empty ? '' :  propositor.nuCellphone}}",
@@ -181,9 +181,9 @@
             </div>
         </div>
         <div id="delete">
-            <img src="../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
+            <img src="{{web_dir}}assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirUser()">
         </div>
     </body>
 </html>
-<script src="../assets/js/registroUsuarios.js"></script>
-<script src="../assets/js/deletarRegistro.js"></script>
+<script src="{{web_dir}}assets/js/registroUsuarios.js"></script>
+<script src="{{web_dir}}assets/js/deletarRegistro.js"></script>

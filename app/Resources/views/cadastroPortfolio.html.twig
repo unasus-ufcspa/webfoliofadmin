@@ -8,17 +8,17 @@
 
         <title>Editar Portfólio</title>
 
-        <script src="{{web_dir}}../node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="{{web_dir}}../semantic/dist/semantic.min.css">
+        <script src="{{web_dir}}node_modules/semantic-ui/node_modules/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}semantic/dist/semantic.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{web_dir}}../assets/css/editarPortfolio.css">
+        <link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/editarPortfolio.css">
     </head>
 
     <body>
         {{ include('menuLateral.html.twig') }}
         <div id="header">
-            <img src="{{web_dir}}../assets/img/iconePortfolio.png" id="iconPortfolio">
+            <img src="{{web_dir}}assets/img/iconePortfolio.png" id="iconPortfolio">
             <span id="titulo">PORTFÓLIO:</span>
 
              {{ form_start(formPort) }}
@@ -92,7 +92,7 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription | raw }}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
+                    <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>
               </div>
             {% else %}
@@ -102,7 +102,7 @@
                   <div class="nomeAtividade">{{atividade.dsTitle}}</div>
                   <div class="dsAtividade">{{atividade.dsDescription | raw }}</div>
                   <div class="divEditarAtividade">
-                    <img src="{{web_dir}}../assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
+                    <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar atividade" onclick='editarAtividade("{{i}}", "{{atividade.dsTitle}}", "{{atividade.dsDescription}}", "{{atividade.id}}");'>
                   </div>
               </div>
             {% endif %}
@@ -137,9 +137,9 @@
 
         <div id="delete">
               <div class="btNovaAtividade" onclick="novaAtividade();">NOVA ATIVIDADE</div>
-            <img src="{{web_dir}}../assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirItem()">
+            <img src="{{web_dir}}assets/img/lixo.png" id="iconDelete" title="Excluir item" onclick="excluirItem()">
         </div>
     </body>
 </html>
-<script src="{{web_dir}}../assets/js/cadastroPortfolio.js"></script>
-<script src="{{web_dir}}../assets/js/deletarRegistro.js"></script>
+<script src="{{web_dir}}assets/js/cadastroPortfolio.js"></script>
+<script src="{{web_dir}}assets/js/deletarRegistro.js"></script>

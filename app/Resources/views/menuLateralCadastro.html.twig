@@ -1,5 +1,4 @@
-<link rel="stylesheet" type="text/css" href="{{web_dir}}../assets/css/menuLateralCadastro.css">
-
+<link rel="stylesheet" type="text/css" href="{{web_dir}}assets/css/menuLateralCadastro.css">
 
 <div class="bodyMenuCadastro">
     <!-- <div id="pesquisa">
@@ -7,7 +6,6 @@
     <input type="text" placeholder="conteúdo cadastrado" id="inputPesquisa">
   </div> -->
 
-      {#dump(dadosMenuLateralCadastro)#}
     <div class="arrowCadastro"></div><a class="itemCadastro" onclick="submenuCadastro('port')">Portfólios<div class="arrow"></div></a>
     <div class="submenuCadastro" id="subMPortfolios">
         {% for portfolio in dadosMenuLateralCadastro.arrayDadosPortfolios %}
@@ -36,4 +34,4 @@
         {%endfor%}
     </div>
 </div>
-<script src="{{web_dir}}../assets/js/menuLateralCadastro.js"></script>
+<script src="{{web_dir}}assets/js/menuLateralCadastro.js"></script>
