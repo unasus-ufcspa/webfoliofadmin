@@ -43,7 +43,21 @@
         {% if arrayTutores is empty %}
           <h2 id="userEmpty" style="top: 55%;">Não há tutores cadastrados</h2>
         {% else %}
+
+        {% set stringTutores = listaAlunosTutores|split(';') %}
+
+
+        {% for t in stringTutores %}
+          {% set stringsAlunos = t|split('.') %}
+          {% for a in stringsAlunos %}
+            {% set nomeAluno = a|split('-') %}
+          {% endfor %}
+        {% endfor %}
+
+
+
           {% for tutores in arrayTutores %}
+          {{ dump(stringTutores[loop.index - 1]) }}
             <div class="arrastarAluno">
               <div class="nomeTutor" id="{{tutores.idUser}}">{{tutores.nmUser}}</div>
               <div class="boxArrastarAluno" id="{{tutores.idUser}}" ondrop="dropAluno(event)" ondragover="allowDrop(event)">

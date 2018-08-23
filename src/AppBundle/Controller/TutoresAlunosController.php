@@ -60,7 +60,8 @@ class TutoresAlunosController extends Controller {
 
             return $this->render('tutoresAlunos.html.twig', array('arrayTutores' => $arrayTutores,
                                                                   'dadosMenuLateralCadastro' => $dadosMenuLateralCadastro,
-                                                                  'formAlunoTutor' => $this->formAlunoTutor->createView(),));
+                                                                  'formAlunoTutor' => $this->formAlunoTutor->createView(),
+                                                                  'listaAlunosTutores' => $alunosTutores));
         }
     }
 
@@ -142,16 +143,20 @@ class TutoresAlunosController extends Controller {
             ->getQuery()
             ->execute();
         $tutorPort = $queryBuilderTutorPort->getQuery()->getArrayResult();
-$this->logControle->logAdmin("Tutor Port: " . print_r($tutorPort, true));
+
         for ($i=0; $i < sizeof($tutorPort); $i++) {
           foreach ($tutorPort[$i] as $tp) {
-            $aluno = $this->getDoctrine()
+            $portAluno = $this->getDoctrine()
                     ->getRepository('AppBundle:TbPortfolioStudent')
                     ->findOneBy(array('idPortfolioStudent' => $tp['idPortfolioStudent']));
-
-            if($aluno != null){
-              $stringAlunosTutores = $stringAlunosTutores . ".";
-              $stringAlunosTutores = $stringAlunosTutores . print_r($aluno->getIdStudent()->getIdUser(),true);
+            if($portAluno != null){
+                $aluno = $this->getDoctrine()
+                ->getRepository('AppBundle:TbUser')
+                ->findOneBy(array('idUser' => $portAluno->getIdStudent()));
+              if($aluno != null){
+                $stringAlunosTutores = $stringAlunosTutores . ".";
+                $stringAlunosTutores = $stringAlunosTutores . print_r($aluno->getIdUser(),true) . "-" . print_r($aluno->getNmUser(),true) ;
+              }
             }
           }
         }
@@ -159,7 +164,7 @@ $this->logControle->logAdmin("Tutor Port: " . print_r($tutorPort, true));
         $stringAlunosTutores = $stringAlunosTutores .";";
         // $this->logControle->logAdmin("String 1: " . print_r($stringAlunosTutores, true));
       }
-      $this->logControle->logAdmin("String 2: " . print_r($stringAlunosTutores, true));
+      // $this->logControle->logAdmin("String 2: " . print_r($stringAlunosTutores, true));
       return $stringAlunosTutores;
     }
 
