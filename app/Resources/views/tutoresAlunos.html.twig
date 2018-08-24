@@ -46,23 +46,27 @@
 
         {% set stringTutores = listaAlunosTutores|split(';') %}
 
-
-        {% for t in stringTutores %}
-          {% set stringsAlunos = t|split('.') %}
-          {% for a in stringsAlunos %}
-            {% set nomeAluno = a|split('-') %}
-          {% endfor %}
-        {% endfor %}
-
-
-
           {% for tutores in arrayTutores %}
-          {{ dump(stringTutores[loop.index - 1]) }}
             <div class="arrastarAluno">
               <div class="nomeTutor" id="{{tutores.idUser}}">{{tutores.nmUser}}</div>
               <div class="boxArrastarAluno" id="{{tutores.idUser}}" ondrop="dropAluno(event)" ondragover="allowDrop(event)">
-                <div class="textArrastarAluno" id="{{tutores.idUser}}">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
-                <img class="logoArrastar" id="{{tutores.idUser}}" style="margin-top:0%;" src="{{web_dir}}assets/img/arraste.png">
+                {% set stringsAlunos = stringTutores[loop.index - 1]|split('.') %}
+
+                {% if stringsAlunos|length > 1 %}
+                  {% for a in stringsAlunos %}
+                    {% if loop.first != true %}
+                      {% set nomeIdAluno = a|split('-') %}
+
+                      <div class="itemAlunoTutor" id="{{ nomeIdAluno[0] }}">
+                        <div class="infoAluno">{{ nomeIdAluno[1] }}</div>
+                        <div class="removerAluno">+</div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <div class="textArrastarAluno" id="{{tutores.idUser}}">arraste e solte os<br>ALUNOS DESTE TUTOR</div>
+                  <img class="logoArrastar" id="{{tutores.idUser}}" style="margin-top:0%;" src="{{web_dir}}assets/img/arraste.png">
+                {% endif %}
               </div>
             </div>
           {% endfor %}
