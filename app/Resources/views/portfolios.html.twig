@@ -73,9 +73,9 @@
                 {% set i = i+1 %}
             {% endfor %}
 
-            {%if portfolios is empty %}
+            {% if portfolios is empty %}
                 <h2 id="userEmpty">Não há portfólios cadastrados</h2>
-            {%endif%}
+            {% endif %}
         </div>
         <div id="excluirItem">
             <div id="titleExcluir">Excluir</div>

@@ -146,9 +146,9 @@
                 {% set i = i+1 %}
             {% endfor %}
 
-            {%if propositores is empty %}
+            {% if propositores is empty %}
                 <h2 id="userEmpty">Não há propositores cadastrados</h2>
-            {%endif%}
+            {% endif %}
         </div>
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
