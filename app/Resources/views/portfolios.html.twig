@@ -51,7 +51,12 @@
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
         <div id="listaUsers">
+
+          {% if portfolios is empty %}
+              <h2 id="userEmpty">Não há portfólios cadastrados</h2>
+          {% else %}
             {% set i=0 %}
+            
             {% for portfolio in portfolios %}
                 {% if i is even %}
                     <div class="itemUserA itemUsuario">
@@ -72,10 +77,7 @@
                 {% endif %}
                 {% set i = i+1 %}
             {% endfor %}
-
-            {% if portfolios is empty %}
-                <h2 id="userEmpty">Não há portfólios cadastrados</h2>
-            {% endif %}
+          {% endif %}
         </div>
         <div id="excluirItem">
             <div id="titleExcluir">Excluir</div>

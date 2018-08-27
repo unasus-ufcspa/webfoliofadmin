@@ -28,35 +28,37 @@
         </div>
 
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
-        <div id="listaUsers">
-            {% set i=0 %}
-            {% for turma in turmas %}
-                {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
-                    <div class="itemUserA itemUsuario">
-                        <input type="checkbox" name="Turma" value="{{turma.idClass}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{turma.idClass}}); atualizaFormTurma();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
-                        <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
-                        <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
-                        <div class="emailUser"> {%if turma.idPortfolio >-1 %} {{turma. dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
-                    </div>
-                {% else %}
-                    <div class="itemUserB itemUsuario">
-                        <input type="checkbox" name="Turma" value="{{turma.idClass}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{turma.idClass}}); atualizaFormTurma();">
-                        <label for="{{i}}"></label>
-                        <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
-                        <div class="emailUser">{%if turma.idPortfolio >-1 %} {{turma.dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
-                        <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
-                    </div>
-                {% endif %}
-                <div class="editarUser" id="{{i}}">
-                </div>
-                {% set i = i+1 %}
-            {% endfor %}
 
-            {%if turmas is empty %}
+        <div id="listaUsers">
+            {% if turmas is empty %}
                 <h2 id="userEmpty">Não há turmas cadastradas</h2>
-            {%endif%}
+            {% else %}
+              {% set i=0 %}
+              {% for turma in turmas %}
+                  {% if i is even %}                                              <!--Testa se é par ou ímpar só pra poder aplicar o CSS no item da lista-->
+                      <div class="itemUserA itemUsuario">
+                          <input type="checkbox" name="Turma" value="{{turma.idClass}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{turma.idClass}}); atualizaFormTurma();"> <!--O id desse item tem que ser o contador pra que o checkbox funcione-->
+                          <label for="{{i}}"></label>                             <!--Dentro desse for vai o id que foi colocado no checkbox pra que um fique ligado ao outro-->
+                          <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
+                          <div class="emailUser"> {%if turma.idPortfolio >-1 %} {{turma. dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
+                          <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
+                      </div>
+                  {% else %}
+                      <div class="itemUserB itemUsuario">
+                          <input type="checkbox" name="Turma" value="{{turma.idClass}}" id="{{i}}" class="checkboxUser" onclick="addListaUser({{turma.idClass}}); atualizaFormTurma();">
+                          <label for="{{i}}"></label>
+                          <div class="nomeUser">{{turma.dsCode}}  -  {{ turma.dsDescription}}</div>
+                          <div class="emailUser">{%if turma.idPortfolio >-1 %} {{turma.dsTitlePortfolio }} {%else%} SEM PORTFÓLIO VINCULADO {%endif%} </div>
+                          <img src="{{web_dir}}assets/img/buttonPencil.png" class="iconEditar" title="Editar turma" onclick="window.location = '{{rota_dir}}cadastroTurma/{{turma.idClass}}';">
+                      </div>
+                  {% endif %}
+                  <div class="editarUser" id="{{i}}">
+                  </div>
+                  {% set i = i+1 %}
+              {% endfor %}
+            {% endif %}
         </div>
+
         <div id="excluirUsuario">
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir essa turma?</div>

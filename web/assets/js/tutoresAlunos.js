@@ -110,9 +110,10 @@ function dropAluno(ev) {
     var novaString = clone.join(";");
     // console.log(novaString);
     $("#alunoTutor_IdAlunosTutores").val(novaString);
+    console.log(arrayIdTutorAluno);
   }
   // console.log("Log 3");
-  // console.log(arrayIdTutorAluno);
+  console.log($("#alunoTutor_IdAlunosTutores").val());
   return false;
 }
 
