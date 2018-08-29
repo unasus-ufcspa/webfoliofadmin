@@ -63,11 +63,38 @@ class UsuarioController extends Controller {
 
         if ($flag == "flAdmin") {
             $objetoUsuario->setFlAdmin($valor);
+
+            if($objetoUsuario->getFlProposer() == null){
+              $objetoUsuario->setFlProposer('F');
+            }
         } else {
             if ($flag == "flProposer") {
                 $objetoUsuario->setFlProposer($valor);
+                if($objetoUsuario->getFlAdmin() == null){
+                  $objetoUsuario->setFlAdmin('F');
+                }
             }
         }
+
+        $this->em->persist($objetoUsuario);
+        $idUser = $objetoUsuario->getIdUser();
+
+        $this->em->flush();
+    }
+
+    function persistirObjetoUsuarioAlunoTutor($objetoUsuario, $dadosUsuario) {
+
+        $this->em = $this->getDoctrine()->getManager();
+        $this->logControle->logAdmin(print_r($dadosUsuario, true));
+        $senhaFormatada = hash('sha256', $dadosUsuario['DsPassword']);
+        $objetoUsuario->setDsEmail($dadosUsuario['DsEmail']);
+        $objetoUsuario->setNmUser($dadosUsuario['NmUser']);
+        $objetoUsuario->setDsPassword($senhaFormatada);
+        $objetoUsuario->setNuCellphone($dadosUsuario['NuCellphone']);
+        $objetoUsuario->setNuIdentification($dadosUsuario['NuIdentification']);
+
+        $objetoUsuario->setFlAdmin('F');
+        $objetoUsuario->setFlProposer('F');
 
         $this->em->persist($objetoUsuario);
         $idUser = $objetoUsuario->getIdUser();

@@ -89,7 +89,7 @@ class AlunosController extends Controller {
         $this->logControle->logAdmin(($dadosFormAdicionarAluno['DsPassword']));
         if ($dadosFormAdicionarAluno['DsPassword'] == $dadosFormAdicionarAluno['DsPasswordConfirm']) {
 
-            UsuarioController::persistirObjetoUsuario($novoAluno, $dadosFormAdicionarAluno, null, null);
+            UsuarioController::persistirObjetoUsuarioAlunoTutor($novoAluno, $dadosFormAdicionarAluno);
             $validaAlunoTurmaExistente = ManipularArquivoController::verificarAlunoTurmaExistente($novoAluno->getIdUser(), $idClass);
             if (!$validaAlunoTurmaExistente) {
                 $classAluno = new TbClassStudent();
