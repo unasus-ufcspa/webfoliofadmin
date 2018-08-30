@@ -42,8 +42,8 @@ class UsuarioController extends Controller {
                 ->add('NmUser', TextType::class, array('label' => false))
                 ->add('IdUser', HiddenType::class, array('label' => false))
                 ->add('DsEmail', EmailType::class, array('label' => false))
-                ->add('DsPassword', PasswordType::class, array('label' => false))
-                ->add('DsPasswordConfirm', PasswordType::class, array('label' => false))
+                ->add('DsPassword', PasswordType::class, array('label' => false, 'required' => false))
+                ->add('DsPasswordConfirm', PasswordType::class, array('label' => false, 'required' => false))
                 ->add('NuCellphone', NumberType::class, array('label' => false, 'required' => false,))
                 ->add('NuIdentification', NumberType::class, array('label' => false, 'required' => false,))
                 ->getForm();
@@ -51,13 +51,15 @@ class UsuarioController extends Controller {
     }
 
     function persistirObjetoUsuario($objetoUsuario, $dadosUsuario, $flag, $valor) {
-
         $this->em = $this->getDoctrine()->getManager();
         $this->logControle->logAdmin(print_r($dadosUsuario, true));
+
         $senhaFormatada = hash('sha256', $dadosUsuario['DsPassword']);
         $objetoUsuario->setDsEmail($dadosUsuario['DsEmail']);
         $objetoUsuario->setNmUser($dadosUsuario['NmUser']);
-        $objetoUsuario->setDsPassword($senhaFormatada);
+        if($dadosUsuario['DsPassword'] != null){
+          $objetoUsuario->setDsPassword($senhaFormatada);
+        }
         $objetoUsuario->setNuCellphone($dadosUsuario['NuCellphone']);
         $objetoUsuario->setNuIdentification($dadosUsuario['NuIdentification']);
 
@@ -103,14 +105,14 @@ class UsuarioController extends Controller {
     }
 
     function editarUsuario($dadosFormEditar) {
-        $this->logControle->logAdmin(print_r($dadosFormEditar, true));
+      $this->logControle->logAdmin(print_r($dadosFormEditar, true));
 
-        $usuarioEditavel = $this->getDoctrine()
-                ->getRepository('AppBundle:TbUser')
-                ->findOneBy(array('idUser' => $dadosFormEditar['IdUser']));
-         $this->logControle->logAdmin("editar usuario");
-        $this->logControle->logAdmin(print_r($usuarioEditavel, true));
-        UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'T', 'F');
+      $usuarioEditavel = $this->getDoctrine()
+              ->getRepository('AppBundle:TbUser')
+              ->findOneBy(array('idUser' => $dadosFormEditar['IdUser']));
+      $this->logControle->logAdmin("editar usuario");
+      $this->logControle->logAdmin(print_r($usuarioEditavel, true));
+      UsuarioController::persistirObjetoUsuario($usuarioEditavel, $dadosFormEditar, 'T', 'F');
     }
 
     function editarUsuarioAdmin($dadosFormEditar) {

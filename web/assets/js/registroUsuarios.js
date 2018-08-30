@@ -166,7 +166,8 @@ function validatePasswordEdit() {
 
     if (pass.value != "" && pass.value == conf.value) {
         flagValidateEdit = true;
-        $(confirm).off("focusout");
+        $(conf).off("focusout");
+        $('#salvarEdicao').attr('disabled', false);
         return true;
     } else {
         $('#salvarEdicao').attr('disabled', true);
@@ -183,6 +184,7 @@ function validateFunctionEdit() {
         $(confirm).focusout(function () {
             validatePasswordEdit();
         });
+
         flagValidateEdit = false;
     }
 }
