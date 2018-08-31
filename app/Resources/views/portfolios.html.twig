@@ -41,7 +41,7 @@
              {{ form_end(formPort) }}
             </div>
         </div>
-
+        
         <div id="pesquisa">
           <img src="{{web_dir}}assets/img/lupa.png" id="iconLupa" title="Pesquisar">
           <input type="text" placeholder="Procurar Portfólio" id="inputPesquisa">
@@ -51,12 +51,11 @@
         <h2 id="naoEncontrado">Nenhum resultado encontrado</h2>
 
         <div id="listaUsers">
-
           {% if portfolios is empty %}
               <h2 id="userEmpty">Não há portfólios cadastrados</h2>
           {% else %}
             {% set i=0 %}
-            
+
             {% for portfolio in portfolios %}
                 {% if i is even %}
                     <div class="itemUserA itemUsuario">
@@ -79,6 +78,7 @@
             {% endfor %}
           {% endif %}
         </div>
+
         <div id="excluirItem">
             <div id="titleExcluir">Excluir</div>
             <div id="mensagemExcluir">Tem certeza que deseja excluir esse portfólio?</div>
@@ -90,6 +90,7 @@
               {{ form_end(formExcluirItem) }}
             </div>
         </div>
+
         {% if deleteException == false %}
           <div id="alertExcluirItem">
         {% else %}

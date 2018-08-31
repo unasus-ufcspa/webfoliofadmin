@@ -275,32 +275,32 @@ class AlunosController extends Controller {
      * @Route("/desativarAdministradorExcecao")
      */
     //TO-DO: APLICAR PARA TUTOR
-    function desativarAdministradorExcecao(Request $request) {
-        $this->em = $this->getDoctrine()->getEntityManager();
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->getContent(), true);
-            $request->request->replace(is_array($data) ? $data : array());
-            $this->logControle->logAdmin("desativar admnistradores : " . print_r($data, true));
-            foreach ($data['arrayAdministradoresDesativar'] as $idsAdministradoresDesativar) {
-                $this->em = $this->getDoctrine()->resetManager();
-                $this->logControle->logAdmin("desativar  : " . print_r($idsAdministradoresDesativar, true));
-
-                $objetoUsuario = $this->em->getRepository('AppBundle:TbUser')
-                        ->findOneBy(array('idUser' => $idsAdministradoresDesativar));
-                if ($objetoUsuario != null) {
-                    $objetoUsuario->setFlAdmin('F');
-                    $this->em->flush();
-                }
-            }
-            $retornoRequest = array(
-                "sucesso" => true
-            );
-        } else {
-            $retornoRequest = array(
-                "sucesso" => false
-            );
-        }
-        return new JsonResponse($retornoRequest);
-    }
+    // function desativarAdministradorExcecao(Request $request) {
+    //     $this->em = $this->getDoctrine()->getEntityManager();
+    //     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+    //         $data = json_decode($request->getContent(), true);
+    //         $request->request->replace(is_array($data) ? $data : array());
+    //         $this->logControle->logAdmin("desativar admnistradores : " . print_r($data, true));
+    //         foreach ($data['arrayAdministradoresDesativar'] as $idsAdministradoresDesativar) {
+    //             $this->em = $this->getDoctrine()->resetManager();
+    //             $this->logControle->logAdmin("desativar  : " . print_r($idsAdministradoresDesativar, true));
+    //
+    //             $objetoUsuario = $this->em->getRepository('AppBundle:TbUser')
+    //                     ->findOneBy(array('idUser' => $idsAdministradoresDesativar));
+    //             if ($objetoUsuario != null) {
+    //                 $objetoUsuario->setFlAdmin('F');
+    //                 $this->em->flush();
+    //             }
+    //         }
+    //         $retornoRequest = array(
+    //             "sucesso" => true
+    //         );
+    //     } else {
+    //         $retornoRequest = array(
+    //             "sucesso" => false
+    //         );
+    //     }
+    //     return new JsonResponse($retornoRequest);
+    // }
 
 }

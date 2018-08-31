@@ -54,7 +54,7 @@ class TutoresAlunosController extends Controller {
                 if ($this->formAlunoTutor->isSubmitted() && $this->formAlunoTutor->isValid()) {
                     $dadosFormAlunoTutor = $this->formAlunoTutor->getData();
                     TutoresAlunosController::registrarAlunosTutor($dadosFormAlunoTutor);
-                    // return $this->redirectToRoute('propositores');
+                    $alunosTutores = $this->selecionarAlunosTutores($arrayTutores);
                 }
             }
 
