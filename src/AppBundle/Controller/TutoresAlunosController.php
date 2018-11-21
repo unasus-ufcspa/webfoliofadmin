@@ -69,6 +69,7 @@ class TutoresAlunosController extends Controller {
       $formularioAlunoTutor = $this->get('form.factory')
               ->createNamedBuilder($nomeFormulario, FormType::class)
               ->add('IdAlunosTutores', HiddenType::class, array('label' => false))
+              ->add('DeleteAlunos', HiddenType::class, array('label' => false))
               ->getForm();
       return $formularioAlunoTutor;
 

@@ -59,7 +59,7 @@
 
                       <div class="itemAlunoTutor" id="{{ nomeIdAluno[0] }}">
                         <div class="infoAluno">{{ nomeIdAluno[1] }}</div>
-                        <div class="removerAluno">+</div>
+                        <div class="removerAluno" onclick="removerAluno(this, {{ tutores.idUser }}, {{ nomeIdAluno[0] }});">+</div>
                       </div>
                     {% endif %}
                   {% endfor %}
@@ -74,8 +74,9 @@
           {{ form_start(formAlunoTutor) }}
 
               {{form_row(formAlunoTutor.IdAlunosTutores)}}
+              {{form_row(formAlunoTutor.DeleteAlunos)}}
 
-                <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
+              <input type="submit" class="salvarTutoresAlunos" value="SALVAR">
           {{ form_end(formAlunoTutor) }}
         {% endif %}
       </div>

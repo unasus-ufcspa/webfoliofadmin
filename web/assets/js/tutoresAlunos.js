@@ -1,9 +1,11 @@
 var dragSrcEl = null;
 var arrayIdTutorAluno = [];
+var arrayExcluirAluno = [];
 
 var idTutores = document.getElementsByClassName("nomeTutor");
 for(var i=0; i<idTutores.length; i++){
   arrayIdTutorAluno.push([idTutores[i].id, ]);
+  arrayExcluirAluno.push(parseInt([idTutores[i].id, ]));
 }
 // console.log(arrayIdTutorAluno);
 
@@ -123,3 +125,27 @@ function dropAluno(ev) {
     area[i].addEventListener('dragleave', handleDragLeave, false);
     area[i].addEventListener('dragend', handleDragEnd, false);
   }
+
+function removerAluno(el, idTutor, idAluno){
+
+  $(el).parent().remove();
+  var posicao = arrayExcluirAluno.indexOf(parseInt(idTutor, 10));
+  console.log(arrayExcluirAluno);
+  console.log(typeof idTutor);
+  console.log(typeof arrayExcluirAluno[0]);
+  console.log(typeof posicao);
+  arrayExcluirAluno[posicao].push(idAluno);
+
+  // arrayExcluirAluno.splice(posicao+1, 0, idAluno);
+
+  var clone = arrayExcluirAluno.slice(0);
+  for(x in clone) {
+      if(clone[x] instanceof Array) {
+          clone[x] = clone[x].join(".");
+      }
+  }
+  var novaString = clone.join(";");
+  console.log(novaString);
+  $("#alunoTutor_DeleteAlunos").val(novaString);
+
+}
